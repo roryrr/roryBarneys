@@ -1,0 +1,26 @@
+{
+  "name": "messenger-bot",
+  "version": "1.0.0",
+  "description": "Messenger Platform QuickStart Demo",
+  "main": "index.js",
+  "scripts": {
+    "start": "node bot.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/PavanUlichi/chatbot.git"
+  },
+  "keywords": [
+    "messenger",
+    "bot",
+    "quickstart"
+  ],
+  "author": "Pavan Ulichi <pulichi@richrelevance.com>",
+  "license": "MIT",
+  "dependencies": {
+    "body-parser": "*",
+    "dotenv": "^4.0.0",
+    "express": "*",
+    "request": "^2.72.0"
+  }
+}
