@@ -9,7 +9,7 @@ const path = require('path');
 require('dotenv').config();
 var messengerButton = "<html><head><title>Facebook Messenger Bot</title></head><body><h1>Facebook Messenger Bot</h1>This is a bot based on Messenger Platform QuickStart. For more details, see their <a href=\"https://developers.facebook.com/docs/messenger-platform/guides/quick-start\">docs</a>.<script src=\"https://button.glitch.me/button.js\" data-style=\"glitch\"></script><div class=\"glitchButton\" style=\"position:fixed;top:20px;right:20px;\"></div></body></html>";
 //Declaring variables that store data from the response of RR API
-//var rr_array = [];
+var rr_array = [];
 // The rest of the code implements the routes for our Express server.
 let app = express();
 
@@ -122,9 +122,9 @@ function callRrApi(sid){
         }, function (error, response, body) {
           if (!error && response.statusCode == 200) {
             body = JSON.parse(body);
-
+            rr_array[] = body.placements[0].recommendedProducts;
             // The Description is:  "descriptive string"
-            console.log("Got a response scofield: ", body.placements[0].recommendedProducts[0].clickURL);
+            console.log("Got a response newark: ", rr_array[0].clickURL);
             sendTextMessage(sid, 'Pavan check logs');
           } else {
             console.log('Google log start golden');
