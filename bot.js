@@ -107,7 +107,7 @@ function receivedMessage(event) {
 }
 function callRrApi(sid){
   request({
-    uri: 'https://recs.richrelevance.com/rrserver/api/rrPlatform/recsForPlacements',
+    uri: 'https://integration.richrelevance.com/rrserver/api/rrPlatform/recsForPlacements',
     qs: { apiKey: process.env.API_KEY,
           apiClientKey: process.env.API_CLIENT_KEY,
           userId: process.env.USER_ID,
@@ -121,12 +121,9 @@ function callRrApi(sid){
         }, function (error, response, body) {
           if (!error && response.statusCode == 200) {
             body = JSON.parse(body);
-            var text = '';
-            for (var key in body) {
-              text += '\nIndex is: ' + key + '\tDescription is:  ' + body[key]
-            }
+
             // The Description is:  "descriptive string"
-            console.log("Got a response kingkong: ", text);
+            console.log("Got a response mummy: ", body.rcs);
             sendTextMessage(sid, 'Pavan check logs');
           } else {
             console.log('Google log start golden');
