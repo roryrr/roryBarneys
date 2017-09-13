@@ -121,10 +121,11 @@ function callRrApi(sid){
 
         }, function (error, response, body) {
           if (!error && response.statusCode == 200) {
+            //parsing the json response from RR cloud
             body = JSON.parse(body);
             rr_array = body.placements[0].recommendedProducts;
             // The Description is:  "descriptive string"
-            console.log("Got a response newark: ", rr_array[0].clickURL);
+            console.log("Got a response dhoni: ", rr_array[0].clickURL);
             sendTextMessage(sid, 'Pavan check logs');
           } else {
             console.log('Google log start golden');
@@ -185,6 +186,7 @@ function sendTextMessage(recipientId, messageText) {
 }
 
 function sendGenericMessage(recipientId) {
+  callRrApi(recipientId);
   var messageData = {
     recipient: {
       id: recipientId
@@ -195,10 +197,10 @@ function sendGenericMessage(recipientId) {
         payload: {
           template_type: "generic",
           elements: [{
-            title: "rift",
-            subtitle: "Next-generation virtual reality",
-            item_url: "https://www.oculus.com/en-us/rift/",
-            image_url: "https://external-lga3-1.xx.fbcdn.net/safe_image.php?d=AQDUUW6fimr9ZuPQ&url=https%3A%2F%2Fscontent.oculuscdn.com%2Fv%2Ft64.5771-25%2F12727726_260257514396959_4582648530518147072_n.jpg%3Foh%3Da26dd5f6c8434607575d39b64c12049f%26oe%3D59E3594A&_nc_hash=AQCP2Nl7pLxh5Sdn",
+            title: rr_array[0].name,
+            subtitle: rr_array[0].brand,
+            item_url: rr_array[0].productURL,
+            image_url: rr_array[0].imageURL,
             buttons: [{
               type: "web_url",
               url: "https://www.oculus.com/en-us/rift/",
@@ -209,10 +211,10 @@ function sendGenericMessage(recipientId) {
               payload: "Payload for first bubble",
             }],
           }, {
-            title: "touch",
-            subtitle: "Your Hands, Now in VR",
-            item_url: "https://www.oculus.com/en-us/touch/",
-            image_url: "https://external-lga3-1.xx.fbcdn.net/safe_image.php?d=AQBJI4Fdao_BXpGf&url=https%3A%2F%2Fscontent.oculuscdn.com%2Fv%2Ft64.5771-25%2F12533983_274907789592476_6510796530947981312_n.jpg%3Foh%3Db47e1e9e40864af371d816ccdd985e00%26oe%3D59E489A3&_nc_hash=AQDW9ho0dOMMtK3I",
+            title: rr_array[1].name,
+            subtitle: rr_array[1].brand,
+            item_url: rr_array[1].productURL,
+            image_url: rr_array[1].imageURL,
             buttons: [{
               type: "web_url",
               url: "https://www.oculus.com/en-us/touch/",
