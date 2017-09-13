@@ -120,9 +120,13 @@ function callRrApi(sid){
 
         }, function (error, response, body) {
           if (!error && response.statusCode == 200) {
-            console.log('Google log start golden');
-            console.log(body) // Print the google web page.
-            console.log('Google log end golden');
+            body = JSON.parse(body);
+            var text = '';
+            for (var key in body) {
+              text += '\nIndex is: ' + key + '\tDescription is:  ' + body[key]
+            }
+            // The Description is:  "descriptive string"
+            console.log("Got a response kingkong: ", text);
             sendTextMessage(sid, 'Pavan check logs');
           } else {
             console.log('Google log start golden');
