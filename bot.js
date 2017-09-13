@@ -122,7 +122,7 @@ function callRrApi(sid){
         }, function (error, response, body) {
           if (!error && response.statusCode == 200) {
             body = JSON.parse(body);
-            rr_array[] = body.placements[0].recommendedProducts;
+            rr_array = body.placements[0].recommendedProducts;
             // The Description is:  "descriptive string"
             console.log("Got a response newark: ", rr_array[0].clickURL);
             sendTextMessage(sid, 'Pavan check logs');
