@@ -201,21 +201,10 @@ function sendAvailableOptionList(recipientId) {
                 payload: "browse"
               },
               {
-                type: "postback",
-                title: "Search for items",
-                payload: "search"
-              },
-              {
                 type: "web_url",
                 url: "http://labs.richrelevance.com/storre/",
                 title: "Visit our Website"
-              }
-            ]
-          },
-            {
-              title: "Have you found what you are looking for?",
-              subtitle: "Swipe for more options",
-              buttons:[
+              },
               {
                 type: "postback",
                 title: "Leave experience",
