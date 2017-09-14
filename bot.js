@@ -235,18 +235,18 @@ function sayGoodBye(recipientId){
     recipient: {
       id: recipientId
     },
+    sender_action: "typing_on",
     message:{
     attachment:{
       type: "image",
       payload: {
-        template_type: "generic",
         url: "https://media1.giphy.com/media/aMeoYTJm7dwuQ/giphy.gif"
       }
     }
   }
 };
 callSendAPI(messageData);
-sendTextMessage(recipientId, "Here’s looking at you, kid. \n Come back any time to start shopping!");
+sendTextMessage(recipientId, "Here’s looking at you, kid. \nCome back any time to start shopping!");
 }
 
 function sendGenericMessage(recipientId) {
