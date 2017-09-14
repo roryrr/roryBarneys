@@ -239,11 +239,10 @@ function sayGoodBye(recipientId){
     attachment:{
       type: "image",
       payload: {
-        url: "https://media1.giphy.com/media/aMeoYTJm7dwuQ/giphy.gif"
+        url: "https://lh5.googleusercontent.com/fWZeBJPW1HzOGWarbh8KTNBL_1R7hG6GGLw0RpFWP9Nw6nDsk2oe5udlaWVfVMxx6FEd0-Os=w2880-h1400"
       }
     }
-  },
-  sender_action: "typing_on"
+  }
 };
 sendTextMessage(recipientId, "Here’s looking at you, kid.");
 callSendAPI(messageData);
