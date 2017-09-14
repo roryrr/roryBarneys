@@ -235,7 +235,6 @@ function sayGoodBye(recipientId){
     recipient: {
       id: recipientId
     },
-    sender_action: "typing_on",
     message:{
     attachment:{
       type: "image",
@@ -243,10 +242,12 @@ function sayGoodBye(recipientId){
         url: "https://media1.giphy.com/media/aMeoYTJm7dwuQ/giphy.gif"
       }
     }
-  }
+  },
+  sender_action: "typing_on"
 };
+sendTextMessage(recipientId, "Here’s looking at you, kid.");
 callSendAPI(messageData);
-sendTextMessage(recipientId, "Here’s looking at you, kid. \nCome back any time to start shopping!");
+sendTextMessage(recipientId, "Come back any time to start shopping!");
 }
 
 function sendGenericMessage(recipientId) {
