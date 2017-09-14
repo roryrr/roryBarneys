@@ -192,7 +192,8 @@ function sendAvailableOptionList(recipientId) {
         payload: {
           template_type: "generic",
           elements: [{
-            title: "Swipe left/right for more options.",
+            title: "Great! Here’s a summary of what we can do",
+            subtitle: "Swipe for more options",
             buttons:[
               {
                 type: "postback",
@@ -212,7 +213,8 @@ function sendAvailableOptionList(recipientId) {
             ]
           },
             {
-              title: "Swipe left/right for more options.",
+              title: "Have you found what you are looking for?",
+              subtitle: "Swipe for more options",
               buttons:[
               {
                 type: "postback",
