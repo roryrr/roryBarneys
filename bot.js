@@ -18,7 +18,7 @@ app.use(bodyParser.urlencoded({
   extended: true
 }));
 
-// Webhook validation
+// Webhook validation for Facebook developer platform
 app.get('/webhook', function(req, res) {
   if (req.query['hub.mode'] === 'subscribe' &&
       req.query['hub.verify_token'] === process.env.VERIFY_TOKEN) {
@@ -40,7 +40,7 @@ app.get('/', function(req, res) {
 
 // Message processing
 app.post('/webhook', function (req, res) {
-  console.log(req.body);
+  // console.log(req.body);
   var data = req.body;
 
   // Make sure this is a page subscription
@@ -125,31 +125,15 @@ function callRrApi(sid){
             body = JSON.parse(body);
             rr_array = body.placements[0].recommendedProducts;
             // The Description is:  "descriptive string"
-            console.log("Got a response dhoni: ", rr_array[0].clickURL);
-            sendTextMessage(sid, 'Pavan check logs');
+            // console.log("Got a response dhoni: ", rr_array[0].clickURL);
+            // sendTextMessage(sid, 'Pavan check logs');
           } else {
-            console.log('Google log start golden');
-            console.log(body) // Print the google web page.
-            console.log('Google log end golden');
+            // console.log('Google log start golden');
+            // console.log(body) // Print the google web page.
+            // console.log('Google log end golden');
             sendTextMessage(sid, 'Pavan, ERROR');
           }
         });
-        //   var request = require('request');
-        //   request('https://recs.richrelevance.com/rrserver/api/rrPlatform/recsForPlacements?apiKey=showcaseparent&apiClientKey=85e8da71946f5bdd&userId=1&sessionId=1&placements=generic_page.panda_test', function (error, response, body) {
-        //   if (!error && response.statusCode == 200) {
-        //     console.log('Google log start boomer');
-        //     console.log(body) // Print the google web page.
-        //     console.log('Google log end boomer');
-        //     sendTextMessage(sid, 'Pavan check logs');
-        //   }
-        //   else {
-        //     console.log('Google log start boomer');
-        //     console.log(body) // Print the google web page.
-        //     console.log('Google log end boomer');
-        //     sendTextMessage(sid, 'Pavan, ERROR');
-        //   }
-        // });
-
       }
 
 function receivedPostback(event) {
@@ -161,7 +145,7 @@ function receivedPostback(event) {
   // button for Structured Messages.
   var payload = event.postback.payload;
 
-  console.log("Received postback for user %d and page %d with payload '%s' " +
+  console.log("Received postback talpa for user %d and page %d with payload '%s' " +
     "at %d", senderID, recipientID, payload, timeOfPostback);
 
   // When a postback is called, we'll send a message back to the sender to
