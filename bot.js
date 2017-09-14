@@ -189,12 +189,9 @@ function sendAvailableOptionList(recipientId) {
       attachment: {
         type: "template",
         payload: {
-          template_type: "generic",
-          elements: [{
-            title: "Great! Here’s a summary of what we can do",
-            subtitle: "View",
-            image_url: "https://image.ibb.co/dUoZKQ/cartoon_1769064_640.png",
-            buttons: [{
+          template_type: "button",
+          text:"Great! Here’s a summary of what we can do:",
+              buttons: [{
               type: "postback",
               title: "Browse the Store",
               payload: "browse"
@@ -210,13 +207,11 @@ function sendAvailableOptionList(recipientId) {
               type: "postback",
               title: "Leave experience",
               payload: "bye"
-            }],
-          }]
+            }]
+          }
         }
       }
-    }
-  };
-
+    };
     callSendAPI(messageData);
   }
 
