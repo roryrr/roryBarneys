@@ -153,10 +153,10 @@ function receivedPostback(event) {
   if(payload == 'start')
   sendAvailableOptionList(senderID);
   else if (payload == 'categories') {
-    sendTextMessage(senderID, 'About to send categories')
+    sendTextMessage(senderID, 'About to send categories');
   }
   else if (payload == 'bye') {
-    sendTextMessage(senderID, 'Good Bye brother!')
+    sayGoodBye(senderID);
   }
 }
 
@@ -176,7 +176,7 @@ function sendTextMessage(recipientId, messageText) {
   callSendAPI(messageData);
 }
 
-
+//sending basic menu
 function sendAvailableOptionList(recipientId) {
   var messageData = {
     recipient: {
@@ -229,6 +229,23 @@ function sendAvailableOptionList(recipientId) {
     callSendAPI(messageData);
   }
 
+//Goodbye response
+function sayGoodBye(recipientId){
+  var messageData = {
+    recipient: {
+      id: recipientId
+    },
+    message:{
+    attachment:{
+      type: "image",
+      payload: {
+        url: "https://media1.giphy.com/media/aMeoYTJm7dwuQ/giphy.gif"
+      }
+    }
+  }
+};
+callSendAPI(messageData);
+}
 
 function sendGenericMessage(recipientId) {
   callRrApi(recipientId);
