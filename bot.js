@@ -190,29 +190,41 @@ function sendAvailableOptionList(recipientId) {
       attachment: {
         type: "template",
         payload: {
-          template_type: "button",
-          text:"Great! Here’s a summary of what we can do:",
-          buttons: [
-          {
-          type: "postback",
-          title: "Browse the Store",
-          payload: "browse"
+          template_type: "generic",
+          elements: [{
+            title: "Swipe left/right for more options.",
+            buttons:[
+              {
+                type: "postback",
+                title: "Browse the Store",
+                payload: "browse"
+              },
+              {
+                type: "postback",
+                title: "Search for items",
+                payload: "search"
+              },
+              {
+                type: "web_url",
+                url: "http://labs.richrelevance.com/storre/",
+                title: "Visit our Website"
+              }
+            ]
           },
-          {
-          type: "postback",
-          title: "Search for items",
-          payload: "search"
-          },
-          {
-          type: "web_url",
-          url: "http://labs.richrelevance.com/storre/",
-          title: "Visit our Website"
-          }
-        ]
+            {
+              title: "Swipe left/right for more options.",
+              buttons:[
+              {
+                type: "postback",
+                title: "Leave experience",
+                payload: "bye"
+              }
+            ]
           }
         }
       }
-    };
+    }
+  };
     callSendAPI(messageData);
   }
 
