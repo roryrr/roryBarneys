@@ -150,8 +150,9 @@ function receivedPostback(event) {
 
   // When a postback is called, we'll send a message back to the sender to
   // let them know it was successful
-  if(payload == 'start')
-  sendAvailableOptionList(senderID);
+  if(payload == 'start'){
+  sendGenericMessage(senderID);
+  }
   else if (payload == 'browse') {
     sendTextMessage(senderID, 'About to send categories');
   }
@@ -191,23 +192,23 @@ function sendAvailableOptionList(recipientId) {
         payload: {
           template_type: "button",
           text:"Great! Here’s a summary of what we can do:",
-              buttons: [{
-              type: "postback",
-              title: "Browse the Store",
-              payload: "browse"
-            }, {
-              type: "postback",
-              title: "Search for items",
-              payload: "search"
-            }, {
-              type: "web_url",
-              url: "http://labs.richrelevance.com/storre/",
-              title: "Visit our Website"
-            }, {
-              type: "postback",
-              title: "Leave experience",
-              payload: "bye"
-            }]
+          buttons: [{
+          type: "postback",
+          title: "Browse the Store",
+          payload: "browse"
+          }, {
+          type: "postback",
+          title: "Search for items",
+          payload: "search"
+          }, {
+          type: "web_url",
+          url: "http://labs.richrelevance.com/storre/",
+          title: "Visit our Website"
+          }, {
+          type: "postback",
+          title: "Leave experience",
+          payload: "bye"
+          }]
           }
         }
       }
