@@ -244,18 +244,18 @@ function sayGoodBye(recipientId){
     }
   }
 };
-// sendTextMessage(recipientId, "Here’s looking at you, kid.");
-// callSendAPI(messageData);
-// sendTextMessage(recipientId, "Come back any time to start shopping!");
+sendTextMessage(recipientId, "Here’s looking at you, kid.");
+callSendAPI(messageData);
+sendTextMessage(recipientId, "Come back any time to start shopping!");
 
-
-sendTextMessage(recipientId, "Here’s looking at you, kid.", function() {
-  callSendAPI(messageData, function() {
-    sendTextMessage(recipientId, "Come back any time to start shopping!", function() {
-      //All three functions have completed, in order.
-    });
-  });
-});
+//
+// sendTextMessage(recipientId, "Here’s looking at you, kid.", function() {
+//   callSendAPI(messageData, function() {
+//     sendTextMessage(recipientId, "Come back any time to start shopping!", function() {
+//       //All three functions have completed, in order.
+//     });
+//   });
+// });
 }
 
 function sendGenericMessage(recipientId) {
