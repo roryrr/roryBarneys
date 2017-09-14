@@ -150,7 +150,7 @@ function receivedPostback(event) {
 
   // When a postback is called, we'll send a message back to the sender to
   // let them know it was successful
-  sendGenericMessage(senderID);
+  sendAvailableOptionList(senderID);
 }
 
 //////////////////////////
@@ -168,6 +168,60 @@ function sendTextMessage(recipientId, messageText) {
 
   callSendAPI(messageData);
 }
+
+
+function sendAvailableOptionList(recipientId) {
+  var messageData = {
+    recipient: {
+      id: recipientId
+    },
+    message: {
+      attachment: {
+        type: "template",
+        payload: {
+          template_type: "generic",
+          elements: [{
+            title: "Browse the Store",
+            subtitle: "View our wide range of Catalog",
+            item_url: "http://labs.richrelevance.com/storre/",
+            image_url: "https://image.ibb.co/kWSKKQ/Categories.png",
+            buttons: [{
+              type: "web_url",
+              url: "http://labs.richrelevance.com/storre/",
+              title: "View on our Website"
+            }, {
+              type: "postback",
+              title: "Interested",
+              payload: "categories",
+            }],
+          }, {
+            title: "Visit our Website",
+            subtitle: "Start exploring on our Website",
+            item_url: "http://labs.richrelevance.com/storre/",
+            image_url: "https://image.ibb.co/cOYFtk/adventure_1846437_640.jpg",
+            buttons: [{
+              type: "web_url",
+              url: "http://labs.richrelevance.com/storre/",
+              title: "Interested"
+            }, {
+              type: "postback",
+              title: "Call Postback",
+              payload: "Payload for second bubble",
+            }]
+          }]
+        }
+      }
+    }
+  };
+
+    callSendAPI(messageData);
+  }
+
+
+
+
+
+
 
 function sendGenericMessage(recipientId) {
   callRrApi(recipientId);
@@ -218,10 +272,10 @@ function sendGenericMessage(recipientId) {
 }
 
 function callSendAPI(messageData) {
-  console.log("Dunkirk start");
-  console.log(process.env.PAGE_ACCESS_TOKEN);
-  console.log(process.env.VERIFY_TOKEN);
-  console.log("Dunkirk end");
+  // console.log("Dunkirk start");
+  // console.log(process.env.PAGE_ACCESS_TOKEN);
+  // console.log(process.env.VERIFY_TOKEN);
+  // console.log("Dunkirk end");
   request({
     uri: 'https://graph.facebook.com/v2.6/me/messages',
     qs: { access_token: process.env.PAGE_ACCESS_TOKEN },
