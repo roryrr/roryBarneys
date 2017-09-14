@@ -245,6 +245,7 @@ function sayGoodBye(recipientId){
   }
 };
 callSendAPI(messageData);
+sendTextMessage(recipientId, "Here’s looking at you, kid. \n Come back any time to start shopping!");
 }
 
 function sendGenericMessage(recipientId) {
