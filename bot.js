@@ -239,6 +239,7 @@ function sayGoodBye(recipientId){
     attachment:{
       type: "image",
       payload: {
+        template_type: "generic",
         url: "https://media1.giphy.com/media/aMeoYTJm7dwuQ/giphy.gif"
       }
     }
