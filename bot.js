@@ -152,8 +152,11 @@ function receivedPostback(event) {
   // let them know it was successful
   if(payload == 'start')
   sendAvailableOptionList(senderID);
-  else if (payload == 'categories') {
+  else if (payload == 'browse') {
     sendTextMessage(senderID, 'About to send categories');
+  }
+  else if (payload == 'search') {
+    sendTextMessage(senderID, 'Please enter your query')
   }
   else if (payload == 'bye') {
     sayGoodBye(senderID);
@@ -188,38 +191,26 @@ function sendAvailableOptionList(recipientId) {
         payload: {
           template_type: "generic",
           elements: [{
-            title: "Browse the Store",
-            subtitle: "View our wide range of Catalog",
-            item_url: "http://labs.richrelevance.com/storre/",
+            title: "Great! Here’s a summary of what we can do",
+            subtitle: "View",
             image_url: "https://image.ibb.co/dUoZKQ/cartoon_1769064_640.png",
             buttons: [{
-              type: "web_url",
-              url: "http://labs.richrelevance.com/storre/",
-              title: "View on our Website"
+              type: "postback",
+              title: "Browse the Store",
+              payload: "browse"
             }, {
               type: "postback",
-              title: "Interested",
-              payload: "categories"
-            }],
-          }, {
-            title: "Visit our Website",
-            subtitle: "Start exploring on our Website",
-            item_url: "http://labs.richrelevance.com/storre/",
-            image_url: "https://image.ibb.co/cOYFtk/adventure_1846437_640.jpg",
-            buttons: [{
+              title: "Search for items",
+              payload: "search"
+            }, {
               type: "web_url",
               url: "http://labs.richrelevance.com/storre/",
-              title: "Take me there"
-            }]
-          },{
-            title: "Leave experience",
-            subtitle: "Not ready to shop? come back later",
-            image_url: "https://image.ibb.co/jQpGzQ/man_303962_640.png",
-            buttons: [{
+              title: "Visit our Website"
+            }, {
               type: "postback",
-              title: "Say GoodBye!",
+              title: "Leave experience",
               payload: "bye"
-            }]
+            }],
           }]
         }
       }
@@ -245,19 +236,9 @@ function sayGoodBye(recipientId){
   }
 };
 sendTextMessage(recipientId, "Here’s looking at you, kid.");
-sendTextMessage(recipientId, "");
 callSendAPI(messageData);
-sendTextMessage(recipientId, "");
 setTimeout(function() { sendTextMessage(recipientId, "Come back any time to start shopping!") }, 4000);
 
-//
-// sendTextMessage(recipientId, "Here’s looking at you, kid.", function() {
-//   callSendAPI(messageData, function() {
-//     sendTextMessage(recipientId, "Come back any time to start shopping!", function() {
-//       //All three functions have completed, in order.
-//     });
-//   });
-// });
 }
 
 function sendGenericMessage(recipientId) {
