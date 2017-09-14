@@ -207,11 +207,6 @@ function sendAvailableOptionList(recipientId) {
           type: "web_url",
           url: "http://labs.richrelevance.com/storre/",
           title: "Visit our Website"
-          },
-          {
-          type: "postback",
-          title: "Leave experience",
-          payload: "bye"
           }
         ]
           }
