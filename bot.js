@@ -246,7 +246,7 @@ function sayGoodBye(recipientId){
 };
 sendTextMessage(recipientId, "Here’s looking at you, kid.");
 callSendAPI(messageData);
-sendTextMessage(recipientId, "Come back any time to start shopping!");
+setTimeout(function() { sendTextMessage(recipientId, "Come back any time to start shopping!") }, 4);
 
 //
 // sendTextMessage(recipientId, "Here’s looking at you, kid.", function() {
