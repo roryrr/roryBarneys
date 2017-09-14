@@ -221,6 +221,7 @@ function sendAvailableOptionList(recipientId) {
               }
             ]
           }
+        ]
         }
       }
     }
