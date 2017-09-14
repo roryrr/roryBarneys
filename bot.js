@@ -239,7 +239,7 @@ function sayGoodBye(recipientId){
     attachment:{
       type: "image",
       payload: {
-        url: "https://drive.google.com/open?id=0B34ki5o4tkodcDR3RGtmaFRLNDA"
+        url: "https://media1.giphy.com/media/aMeoYTJm7dwuQ/giphy.gif"
       }
     }
   }
