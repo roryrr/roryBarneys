@@ -150,7 +150,14 @@ function receivedPostback(event) {
 
   // When a postback is called, we'll send a message back to the sender to
   // let them know it was successful
+  if(payload == 'start')
   sendAvailableOptionList(senderID);
+  else if (payload == 'categories') {
+    sendTextMessage(senderID, 'About to send categories')
+  }
+  else if (payload == 'bye') {
+    sendTextMessage(senderID, 'Good Bye brother!')
+  }
 }
 
 //////////////////////////
@@ -184,7 +191,7 @@ function sendAvailableOptionList(recipientId) {
             title: "Browse the Store",
             subtitle: "View our wide range of Catalog",
             item_url: "http://labs.richrelevance.com/storre/",
-            image_url: "https://image.ibb.co/kWSKKQ/Categories.png",
+            image_url: "https://image.ibb.co/dUoZKQ/cartoon_1769064_640.png",
             buttons: [{
               type: "web_url",
               url: "http://labs.richrelevance.com/storre/",
@@ -192,7 +199,7 @@ function sendAvailableOptionList(recipientId) {
             }, {
               type: "postback",
               title: "Interested",
-              payload: "categories",
+              payload: "categories"
             }],
           }, {
             title: "Visit our Website",
@@ -202,11 +209,16 @@ function sendAvailableOptionList(recipientId) {
             buttons: [{
               type: "web_url",
               url: "http://labs.richrelevance.com/storre/",
-              title: "Interested"
-            }, {
+              title: "Take me there"
+            }]
+          },{
+            title: "Leave experience",
+            subtitle: "Not ready to shop? come back later",
+            image_url: "https://image.ibb.co/jQpGzQ/man_303962_640.png",
+            buttons: [{
               type: "postback",
-              title: "Call Postback",
-              payload: "Payload for second bubble",
+              title: "Say GoodBye!",
+              payload: "bye"
             }]
           }]
         }
@@ -216,11 +228,6 @@ function sendAvailableOptionList(recipientId) {
 
     callSendAPI(messageData);
   }
-
-
-
-
-
 
 
 function sendGenericMessage(recipientId) {
