@@ -154,10 +154,7 @@ function receivedPostback(event) {
   sendAvailableOptionList(senderID);
   }
   else if (payload == 'browse') {
-    sendTextMessage(senderID, 'About to send categories');
-  }
-  else if (payload == 'search') {
-    sendTextMessage(senderID, 'Please enter your query')
+    sendCategoryOptions(senderID);
   }
   else if (payload == 'bye') {
     sayGoodBye(senderID);
@@ -193,7 +190,6 @@ function sendAvailableOptionList(recipientId) {
           template_type: "generic",
           elements: [{
             title: "Great! Here’s a summary of what we can do",
-            subtitle: "Swipe for more options",
             buttons:[
               {
                 type: "postback",
@@ -220,6 +216,66 @@ function sendAvailableOptionList(recipientId) {
     callSendAPI(messageData);
   }
 
+  //Sending categories options
+  function sendCategoryOptions(recipientId) {
+    var messageData = {
+      recipient: {
+        id: recipientId
+      },
+      message: {
+        attachment: {
+          type: "template",
+          payload: {
+            template_type: "generic",
+            elements: [{
+              title: "Select a category",
+              subtitle: "Swipe right/left for more options",
+              buttons:[
+                {
+                  type: "postback",
+                  title: "Women",
+                  payload: "women"
+                },
+                {
+                  type: "postback",
+                  title: "Men",
+                  payload: "men"
+                },
+                {
+                  type: "postback",
+                  title: "Beauty",
+                  payload: "beauty"
+                }
+              ]
+            },
+            {
+              title: "Select a category",
+              subtitle: "Swipe right/left for more options",
+              buttons:[
+                {
+                  type: "postback",
+                  title: "Home",
+                  payload: "home"
+                },
+                {
+                  type: "postback",
+                  title: "Kids",
+                  payload: "kids"
+                },
+                {
+                  type: "web_url",
+                  url: "http://labs.richrelevance.com/storre/",
+                  title: "Visit our Website"
+                }
+              ]
+            }
+          ]
+          }
+        }
+      }
+    };
+      callSendAPI(messageData);
+    }
 //Goodbye response
 function sayGoodBye(recipientId){
   var messageData = {
