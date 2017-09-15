@@ -10,7 +10,6 @@ require('dotenv').config();
 var messengerButton = "<html><head><title>Facebook Messenger Bot</title></head><body><h1>Facebook Messenger Bot</h1>This is a bot based on Messenger Platform QuickStart. For more details, see their <a href=\"https://developers.facebook.com/docs/messenger-platform/guides/quick-start\">docs</a>.<script src=\"https://button.glitch.me/button.js\" data-style=\"glitch\"></script><div class=\"glitchButton\" style=\"position:fixed;top:20px;right:20px;\"></div></body></html>";
 //Declaring variables that store data from the response of RR API
 var rr_array = [];
-var queryParameters
 // The rest of the code implements the routes for our Express server.
 let app = express();
 
@@ -272,6 +271,22 @@ setTimeout(function() { sendTextMessage(recipientId, "Come back any time to star
 }
 
 function sendGenericMessage(recipientId) {
+  var itemList = [];
+  for(var i = 0; i<10; i++){
+    itemList.title = rr_array[i].name,
+    itemList.subtitle = rr_array[i].brand,
+    itemList.item_url = rr_array[i].productURL,
+    itemList.image_url = rr_array[i].imageURL,
+    itemList.buttons = [{
+      type: "web_url",
+      url: "https://www.oculus.com/en-us/rift/",
+      title: "Open Web URL"
+    }, {
+      type: "postback",
+      title: "Call Postback",
+      payload: "Payload for first bubble",
+    }]
+}
   var messageData = {
     recipient: {
       id: recipientId
@@ -281,35 +296,7 @@ function sendGenericMessage(recipientId) {
         type: "template",
         payload: {
           template_type: "generic",
-          elements: [{
-            title: rr_array[0].name,
-            subtitle: rr_array[0].brand,
-            item_url: rr_array[0].productURL,
-            image_url: rr_array[0].imageURL,
-            buttons: [{
-              type: "web_url",
-              url: "https://www.oculus.com/en-us/rift/",
-              title: "Open Web URL"
-            }, {
-              type: "postback",
-              title: "Call Postback",
-              payload: "Payload for first bubble",
-            }],
-          }, {
-            title: rr_array[1].name,
-            subtitle: rr_array[1].brand,
-            item_url: rr_array[1].productURL,
-            image_url: rr_array[1].imageURL,
-            buttons: [{
-              type: "web_url",
-              url: "https://www.oculus.com/en-us/touch/",
-              title: "Open Web URL"
-            }, {
-              type: "postback",
-              title: "Call Postback",
-              payload: "Payload for second bubble",
-            }]
-          }]
+          elements: itemList
         }
       }
     }
@@ -320,14 +307,14 @@ function sendGenericMessage(recipientId) {
 //block that makes a call to RR api
 function callRrApi(sid, queryString){
   if(queryString == "default"){
-    queryParameters = { apiKey: process.env.API_KEY,
+    var queryParameters = { apiKey: process.env.API_KEY,
           apiClientKey: process.env.API_CLIENT_KEY,
           userId: process.env.USER_ID,
           sessionId: process.env.SESSION_ID,
           placements: process.env.PLACEMENTS_ID};
   }
   else if(queryString.match(/(BNY-)/g)){
-    queryParameters = { apiKey: process.env.API_KEY,
+    var queryParameters = { apiKey: process.env.API_KEY,
           apiClientKey: process.env.API_CLIENT_KEY,
           userId: process.env.USER_ID,
           sessionId: process.env.SESSION_ID,
@@ -344,10 +331,6 @@ function callRrApi(sid, queryString){
     }, function (error, response, body) {
           if (!error && response.statusCode == 200) {
             //parsing the json response from RR cloud
-            console.log("Titanic");
-            console.log(queryParameters.categoryId);
-            // console.log(request.query.userId);
-            console.log("Titanic");
             body = JSON.parse(body);
             rr_array = body.placements[0].recommendedProducts;
             sendGenericMessage(sid);
