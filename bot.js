@@ -72,7 +72,7 @@ app.post('/webhook', function (req, res) {
   }
 });
 
-// Incoming events handling
+// Incoming events handling (this handles both user text input and also text from payload that comes from FB api)
 function receivedMessage(event) {
   var senderID = event.sender.id;
   var recipientID = event.recipient.id;
@@ -159,6 +159,10 @@ function receivedPostback(event) {
   else if (payload == 'bye') {
     sayGoodBye(senderID);
   }
+  else if (payload == 'men') {
+
+
+  }
 }
 
 //////////////////////////
@@ -234,17 +238,17 @@ function sendAvailableOptionList(recipientId) {
                 {
                   type: "postback",
                   title: "Women",
-                  payload: "women"
+                  payload: "BNY-women"
                 },
                 {
                   type: "postback",
                   title: "Men",
-                  payload: "men"
+                  payload: "BNY-men"
                 },
                 {
                   type: "postback",
                   title: "Beauty",
-                  payload: "beauty"
+                  payload: "BNY-womens-beauty"
                 }
               ]
             },
@@ -255,12 +259,12 @@ function sendAvailableOptionList(recipientId) {
                 {
                   type: "postback",
                   title: "Home",
-                  payload: "home"
+                  payload: "BNY-home"
                 },
                 {
                   type: "postback",
                   title: "Kids",
-                  payload: "kids"
+                  payload: "BNY-kids"
                 },
                 {
                   type: "web_url",
