@@ -106,35 +106,6 @@ function receivedMessage(event) {
     sendTextMessage(senderID, "Message with attachment received");
   }
 }
-function callRrApi(sid){
-  request({
-    uri: 'https://qa.richrelevance.com/rrserver/api/rrPlatform/recsForPlacements',
-    qs: { apiKey: process.env.API_KEY,
-          apiClientKey: process.env.API_CLIENT_KEY,
-          userId: process.env.USER_ID,
-          sessionId: process.env.SESSION_ID,
-          placements: process.env.PLACEMENTS_ID},
-          headers: {
-            'User-Agent': 'Super Agent/0.0.1'
-          },
-          method: 'GET',
-
-        }, function (error, response, body) {
-          if (!error && response.statusCode == 200) {
-            //parsing the json response from RR cloud
-            body = JSON.parse(body);
-            rr_array = body.placements[0].recommendedProducts;
-            // The Description is:  "descriptive string"
-            // console.log("Got a response dhoni: ", rr_array[0].clickURL);
-            // sendTextMessage(sid, 'Pavan check logs');
-          } else {
-            // console.log('Google log start golden');
-            // console.log(body) // Print the google web page.
-            // console.log('Google log end golden');
-            sendTextMessage(sid, 'Pavan, ERROR');
-          }
-        });
-      }
 
 function receivedPostback(event) {
   var senderID = event.sender.id;
@@ -162,7 +133,7 @@ function receivedPostback(event) {
   else if (payload == 'bye') {
     sayGoodBye(senderID);
   }
-  else if (payload == 'men') {
+  else if (payload == 'BNY-women') {
 
 
   }
@@ -305,7 +276,7 @@ setTimeout(function() { sendTextMessage(recipientId, "Come back any time to star
 }
 
 function sendGenericMessage(recipientId) {
-  callRrApi(recipientId);
+  callRrApi(recipientId, "sample");
   var messageData = {
     recipient: {
       id: recipientId
@@ -351,7 +322,45 @@ function sendGenericMessage(recipientId) {
 
   callSendAPI(messageData);
 }
-
+//block that makes a call to RR api
+function callRrApi(sid, queryString){
+  if(sid == "sample"){
+    var queryParameters = { apiKey: process.env.API_KEY,
+          apiClientKey: process.env.API_CLIENT_KEY,
+          userId: process.env.USER_ID,
+          sessionId: process.env.SESSION_ID,
+          placements: process.env.PLACEMENTS_ID};
+  }
+  else {
+    var queryParameters = { apiKey: process.env.API_KEY,
+          apiClientKey: process.env.API_CLIENT_KEY,
+          userId: process.env.USER_ID,
+          sessionId: process.env.SESSION_ID,
+          placements: process.env.PLACEMENTS_ID};
+  }
+  request({
+    uri: 'https://qa.richrelevance.com/rrserver/api/rrPlatform/recsForPlacements',
+    qs: queryParameters,
+    headers: {
+      'User-Agent': 'Super Agent/0.0.1'
+      },
+    method: 'GET',
+    }, function (error, response, body) {
+          if (!error && response.statusCode == 200) {
+            //parsing the json response from RR cloud
+            body = JSON.parse(body);
+            rr_array = body.placements[0].recommendedProducts;
+            // The Description is:  "descriptive string"
+            // console.log("Got a response dhoni: ", rr_array[0].clickURL);
+            // sendTextMessage(sid, 'Pavan check logs');
+          } else {
+            // console.log('Google log start golden');
+            // console.log(body) // Print the google web page.
+            // console.log('Google log end golden');
+            sendTextMessage(sid, 'Pavan, ERROR');
+          }
+        });
+      }
 function callSendAPI(messageData) {
   // console.log("Dunkirk start");
   // console.log(process.env.PAGE_ACCESS_TOKEN);
