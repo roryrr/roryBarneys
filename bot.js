@@ -299,7 +299,7 @@ console.log("dabang");
         type: "template",
         payload: {
           template_type: "generic",
-          elements: itemList[]
+          elements: itemList
         }
       }
     }
