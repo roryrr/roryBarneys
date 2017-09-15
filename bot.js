@@ -344,7 +344,8 @@ function callRrApi(sid, queryString){
           if (!error && response.statusCode == 200) {
             //parsing the json response from RR cloud
             console.log("Titanic");
-            console.log(request.originalUrl);
+            console.log(request.query.categoryId);
+            console.log(request.query.userId);
             console.log("Titanic");
             body = JSON.parse(body);
             rr_array = body.placements[0].recommendedProducts;
