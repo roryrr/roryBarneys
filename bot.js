@@ -129,7 +129,7 @@ function receivedPostback(event) {
   else if (payload == 'bye') {
     sayGoodBye(senderID);
   }
-  else if (payload.match('BNY-women')) {
+  else if (payload.match('/(BNY-)/')) {
     callRrApi(senderID, payload);
   }
 }
@@ -212,7 +212,7 @@ function sendAvailableOptionList(recipientId) {
                 {
                   type: "postback",
                   title: "Men",
-                  payload: "BNY-men"
+                  payload: "BNY"
                 },
                 {
                   type: "postback",
@@ -325,7 +325,7 @@ function callRrApi(sid, queryString){
           sessionId: process.env.SESSION_ID,
           placements: process.env.PLACEMENTS_ID};
   }
-  else if(queryString.match("BNY-women")){
+  else if(queryString.match("/(BNY-)/")){
     var queryParameters = { apiKey: process.env.API_KEY,
           apiClientKey: process.env.API_CLIENT_KEY,
           userId: process.env.USER_ID,
