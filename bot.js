@@ -10,6 +10,7 @@ require('dotenv').config();
 var messengerButton = "<html><head><title>Facebook Messenger Bot</title></head><body><h1>Facebook Messenger Bot</h1>This is a bot based on Messenger Platform QuickStart. For more details, see their <a href=\"https://developers.facebook.com/docs/messenger-platform/guides/quick-start\">docs</a>.<script src=\"https://button.glitch.me/button.js\" data-style=\"glitch\"></script><div class=\"glitchButton\" style=\"position:fixed;top:20px;right:20px;\"></div></body></html>";
 //Declaring variables that store data from the response of RR API
 var rr_array = [];
+var queryParameters
 // The rest of the code implements the routes for our Express server.
 let app = express();
 
@@ -319,14 +320,14 @@ function sendGenericMessage(recipientId) {
 //block that makes a call to RR api
 function callRrApi(sid, queryString){
   if(queryString == "default"){
-    var queryParameters = { apiKey: process.env.API_KEY,
+    queryParameters = { apiKey: process.env.API_KEY,
           apiClientKey: process.env.API_CLIENT_KEY,
           userId: process.env.USER_ID,
           sessionId: process.env.SESSION_ID,
           placements: process.env.PLACEMENTS_ID};
   }
   else if(queryString.match(/(BNY-)/g)){
-    var queryParameters = { apiKey: process.env.API_KEY,
+    queryParameters = { apiKey: process.env.API_KEY,
           apiClientKey: process.env.API_CLIENT_KEY,
           userId: process.env.USER_ID,
           sessionId: process.env.SESSION_ID,
@@ -344,7 +345,7 @@ function callRrApi(sid, queryString){
           if (!error && response.statusCode == 200) {
             //parsing the json response from RR cloud
             console.log("Titanic");
-            console.log(qs.categoryId);
+            console.log(queryParameters.categoryId);
             // console.log(request.query.userId);
             console.log("Titanic");
             body = JSON.parse(body);
