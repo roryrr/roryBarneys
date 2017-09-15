@@ -93,12 +93,11 @@ function receivedMessage(event) {
     // and send back the template example. Otherwise, just echo the text we received.
     switch (messageText) {
       case 'generic':
-        sendGenericMessage(senderID);
+        callRrApi(senderID, "default");
         break;
-      case 'show':
-        callRrApi(senderID);
-        break;
-
+      // case 'show':
+      //   callRrApi(senderID);
+      //   break;
       default:
         sendTextMessage(senderID, messageText);
     }
@@ -124,18 +123,14 @@ function receivedPostback(event) {
   if(payload == 'start'){
   sendAvailableOptionList(senderID);
   }
-  else if (payload == 'generic') {
-    sendGenericMessage(senderID);
-  }
   else if (payload == 'browse') {
     sendCategoryOptions(senderID);
   }
   else if (payload == 'bye') {
     sayGoodBye(senderID);
   }
-  else if (payload == 'BNY-women') {
-
-
+  else if (payload.match("/(BNY-)/g")) {
+    callRrApi(senderID, payload);
   }
 }
 
@@ -276,7 +271,6 @@ setTimeout(function() { sendTextMessage(recipientId, "Come back any time to star
 }
 
 function sendGenericMessage(recipientId) {
-  callRrApi(recipientId, "sample");
   var messageData = {
     recipient: {
       id: recipientId
@@ -324,19 +318,20 @@ function sendGenericMessage(recipientId) {
 }
 //block that makes a call to RR api
 function callRrApi(sid, queryString){
-  if(sid == "sample"){
+  if(queryString == "default"){
     var queryParameters = { apiKey: process.env.API_KEY,
           apiClientKey: process.env.API_CLIENT_KEY,
           userId: process.env.USER_ID,
           sessionId: process.env.SESSION_ID,
           placements: process.env.PLACEMENTS_ID};
   }
-  else {
+  else if(queryString.match("/(BNY-)/g")){
     var queryParameters = { apiKey: process.env.API_KEY,
           apiClientKey: process.env.API_CLIENT_KEY,
           userId: process.env.USER_ID,
           sessionId: process.env.SESSION_ID,
-          placements: process.env.PLACEMENTS_ID};
+          placements: process.env.PLACEMENTS_ID,
+          categoryId: queryString};
   }
   request({
     uri: 'https://qa.richrelevance.com/rrserver/api/rrPlatform/recsForPlacements',
@@ -350,6 +345,7 @@ function callRrApi(sid, queryString){
             //parsing the json response from RR cloud
             body = JSON.parse(body);
             rr_array = body.placements[0].recommendedProducts;
+            sendGenericMessage(sid);
             // The Description is:  "descriptive string"
             // console.log("Got a response dhoni: ", rr_array[0].clickURL);
             // sendTextMessage(sid, 'Pavan check logs');
