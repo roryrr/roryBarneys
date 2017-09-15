@@ -287,6 +287,9 @@ function sendGenericMessage(recipientId) {
       payload: "Payload for first bubble",
     }]
 }
+console.log("dabang");
+console.log(itemList);
+console.log("dabang");
   var messageData = {
     recipient: {
       id: recipientId
@@ -296,7 +299,7 @@ function sendGenericMessage(recipientId) {
         type: "template",
         payload: {
           template_type: "generic",
-          elements: itemList
+          elements: itemList[]
         }
       }
     }
