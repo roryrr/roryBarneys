@@ -334,7 +334,7 @@ function callRrApi(sid, queryString){
           categoryId: queryString};
   }
   request({
-    uri: 'https://integration.richrelevance.com/rrserver/api/rrPlatform/recsForPlacements',
+    uri: 'https://qa.richrelevance.com/rrserver/api/rrPlatform/recsForPlacements',
     qs: queryParameters,
     headers: {
       'User-Agent': 'Super Agent/0.0.1'
