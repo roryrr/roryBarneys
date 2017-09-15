@@ -297,12 +297,16 @@ rr_array.forEach(i=>{
     "image_url":i.imageURL,
     "buttons" : [{
           "type": "web_url",
-          "url": "https://www.oculus.com/en-us/rift/",
-          "title": "Open Web URL"
+          "url": i.productURL,
+          "title": "View details"
         }, {
           "type": "postback",
-          "title": "Call Postback",
-          "payload": "Payload for first bubble",
+          "title": "Try something similar",
+          "payload": i.id
+        }, {
+          "type": "postback",
+          "title": "Add to favorites",
+          "payload": "fav"
         }]
    });
 });
