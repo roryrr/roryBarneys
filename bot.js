@@ -334,7 +334,7 @@ function callRrApi(sid, queryString){
           categoryId: queryString};
   }
   request({
-    uri: 'https://qa.richrelevance.com/rrserver/api/rrPlatform/recsForPlacements',
+    uri: 'https://integration.richrelevance.com/rrserver/api/rrPlatform/recsForPlacements',
     qs: queryParameters,
     headers: {
       'User-Agent': 'Super Agent/0.0.1'
@@ -343,10 +343,10 @@ function callRrApi(sid, queryString){
     }, function (error, response, body) {
           if (!error && response.statusCode == 200) {
             //parsing the json response from RR cloud
-            console.log("Titanic");
-            console.log(request.query.categoryId);
-            console.log(request.query.userId);
-            console.log("Titanic");
+            // console.log("Titanic");
+            // console.log(request.query.categoryId);
+            // console.log(request.query.userId);
+            // console.log("Titanic");
             body = JSON.parse(body);
             rr_array = body.placements[0].recommendedProducts;
             sendGenericMessage(sid);
