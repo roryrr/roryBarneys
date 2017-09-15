@@ -108,7 +108,7 @@ function receivedMessage(event) {
 }
 function callRrApi(sid){
   request({
-    uri: 'https://integration.richrelevance.com/rrserver/api/rrPlatform/recsForPlacements',
+    uri: 'https://qa.richrelevance.com/rrserver/api/rrPlatform/recsForPlacements',
     qs: { apiKey: process.env.API_KEY,
           apiClientKey: process.env.API_CLIENT_KEY,
           userId: process.env.USER_ID,
@@ -152,6 +152,9 @@ function receivedPostback(event) {
   // let them know it was successful
   if(payload == 'start'){
   sendAvailableOptionList(senderID);
+  }
+  else if (payload == 'generic') {
+    sendGenericMessage(senderID);
   }
   else if (payload == 'browse') {
     sendCategoryOptions(senderID);
