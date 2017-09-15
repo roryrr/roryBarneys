@@ -273,11 +273,11 @@ setTimeout(function() { sendTextMessage(recipientId, "Come back any time to star
 function sendGenericMessage(recipientId) {
   var itemList = [];
   for(var i = 0; i<10; i++){
-    itemList.title = rr_array[i].name,
-    itemList.subtitle = rr_array[i].brand,
-    itemList.item_url = rr_array[i].productURL,
-    itemList.image_url = rr_array[i].imageURL,
-    itemList.buttons = [{
+    itemList[i].title = rr_array[i].name,
+    itemList[i].subtitle = rr_array[i].brand,
+    itemList[i].item_url = rr_array[i].productURL,
+    itemList[i].image_url = rr_array[i].imageURL,
+    itemList[i].buttons = [{
       type: "web_url",
       url: "https://www.oculus.com/en-us/rift/",
       title: "Open Web URL"
