@@ -172,7 +172,7 @@ function sendLoginOption(recipientId){
                 type: "account_link",
                 // title: "Login",
                 // payload: "login"
-                url: "https://www.example.com/authorize"
+                url: "https://www.barneys.com/account/login?loginFromHeader=yes"
               },
               {
                 type: "postback",
