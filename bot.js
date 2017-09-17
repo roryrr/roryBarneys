@@ -169,9 +169,10 @@ function sendLoginOption(recipientId){
             image_url:"https://res.cloudinary.com/goodsearch/image/upload/v1436553720/hi_resolution_merchant_logos/barneys-new-york_coupons.jpg",
             buttons:[
               {
-                type: "postback",
-                title: "Login",
-                payload: "login"
+                type: "account_link",
+                // title: "Login",
+                // payload: "login"
+                url: "https://www.example.com/authorize"
               },
               {
                 type: "postback",
