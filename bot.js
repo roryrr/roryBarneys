@@ -166,6 +166,7 @@ function sendLoginOption(recipientId){
           template_type: "generic",
           elements: [{
             title: "Welcome to Barneys! Please choose an option.",
+            image_url:"https://res.cloudinary.com/goodsearch/image/upload/v1436553720/hi_resolution_merchant_logos/barneys-new-york_coupons.jpg",
             buttons:[
               {
                 type: "postback",
