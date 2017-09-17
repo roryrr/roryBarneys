@@ -121,7 +121,7 @@ function receivedPostback(event) {
   // When a postback is called, we'll send a message back to the sender to
   // let them know it was successful
   if(payload == 'start'){
-  sendAvailableOptionList(senderID);
+  sendLoginOption(senderID);
   }
   else if (payload == 'browse') {
     sendCategoryOptions(senderID);
@@ -131,6 +131,9 @@ function receivedPostback(event) {
   }
   else if (payload.match(/(BNY-)/g)) {
     callRrApi(senderID, payload);
+  }
+  else if (payload == 'guest') {
+    sendAvailableOptionList(senderID);
   }
 }
 
@@ -150,6 +153,39 @@ function sendTextMessage(recipientId, messageText) {
   callSendAPI(messageData);
 }
 
+
+function sendLoginOption(recipientId){
+  var messageData = {
+    recipient: {
+      id: recipientId
+    },
+    message: {
+      attachment: {
+        type: "template",
+        payload: {
+          template_type: "generic",
+          elements: [{
+            title: "Welcome to Barneys! Please choose an option.",
+            buttons:[
+              {
+                type: "postback",
+                title: "Login",
+                payload: "login"
+              },
+              {
+                type: "postback",
+                title: "Continue as guest",
+                payload: "guest"
+              }
+            ]
+          }
+        ]
+        }
+      }
+    }
+  };
+    callSendAPI(messageData);
+}
 //sending basic menu
 function sendAvailableOptionList(recipientId) {
   var messageData = {
