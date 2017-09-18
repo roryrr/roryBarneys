@@ -136,7 +136,9 @@ function receivedPostback(event) {
     sendAvailableOptionList(senderID);
   }
   else if (payload.match(/(similar)/g)) {
-    payload.slice(7);
+    payload.slice(3);
+    console.log("Gulabi");
+    console.log(payload);
     sendTextMessage(senderID, "payload");
   }
 }
@@ -344,7 +346,7 @@ rr_array.forEach(i=>{
         }, {
           "type": "postback",
           "title": "Try something similar",
-          "payload": "similar"+i.id
+          "payload": "similar"
         }, {
           "type": "postback",
           "title": "Add to favorites",
