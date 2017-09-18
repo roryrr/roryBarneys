@@ -321,11 +321,11 @@ rr_array.forEach(i=>{
     "item_url":i.productURL,
     "image_url":i.imageURL,
     "buttons" : [
-      // {
-      //     "type": "web_url",
-      //     "url": i.productURL,
-      //     "title": "View details"
-      //   },
+      {
+          "type": "web_url",
+          "url": i.productURL,
+          "title": "View details"
+        },
         {
           "type": "postback",
           "title": "Try something similar",
