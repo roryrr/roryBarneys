@@ -175,7 +175,7 @@ function sendLoginOption(recipientId){
                 type: "account_link",
                 // title: "Login",
                 // payload: "login"
-                url: "https://www.barneys.com/"
+                url: "https://www.barneys.com"
               },
               {
                 type: "postback",
