@@ -135,6 +135,10 @@ function receivedPostback(event) {
   else if (payload == 'guest') {
     sendAvailableOptionList(senderID);
   }
+  else if (payload.match(/(similar)/g)) {
+    payload.slice(7);
+    sendTextMessage(senderID, payload);
+  }
 }
 
 //////////////////////////
@@ -340,7 +344,7 @@ rr_array.forEach(i=>{
         }, {
           "type": "postback",
           "title": "Try something similar",
-          "payload": i.id
+          "payload": "similar"+i.id
         }, {
           "type": "postback",
           "title": "Add to favorites",
