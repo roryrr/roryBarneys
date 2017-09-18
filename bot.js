@@ -137,7 +137,7 @@ function receivedPostback(event) {
   }
   else if (payload.match(/(similar)/g)) {
     payload.slice(7);
-    sendTextMessage(senderID, payload);
+    sendTextMessage(senderID, "payload");
   }
 }
 
