@@ -139,7 +139,7 @@ function receivedPostback(event) {
     payload.slice(3);
     console.log("Gulabi");
     console.log(payload);
-    sendTextMessage(senderID, payload);
+    sendTextMessage(senderID, payload.slice(7));
   }
 }
 
