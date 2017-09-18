@@ -139,7 +139,7 @@ function receivedPostback(event) {
     payload.slice(3);
     console.log("Gulabi");
     console.log(payload);
-    sendTextMessage(senderID, "payload");
+    sendTextMessage(senderID, payload);
   }
 }
 
@@ -346,7 +346,7 @@ rr_array.forEach(i=>{
         }, {
           "type": "postback",
           "title": "Try something similar",
-          "payload": "similar"
+          "payload": "similar"+i.id
         }, {
           "type": "postback",
           "title": "Add to favorites",
