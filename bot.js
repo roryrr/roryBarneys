@@ -250,7 +250,7 @@ function sendAvailableOptionList(recipientId) {
                 {
                   type: "postback",
                   title: "Men",
-                  payload: "BNY"
+                  payload: "BNY-men"
                 },
                 {
                   type: "postback",
