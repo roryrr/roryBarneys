@@ -385,7 +385,7 @@ function callRrApi(sid, queryString){
     uri: 'https://staging.richrelevance.com/rrserver/api/rrPlatform/recsForPlacements',
     qs: queryParameters,
     headers: {
-      'User-Agent': 'Super Agent/0.0.1'
+      'User-Agent': 'Mozilla/5.0 (Linux; Android 5.1.1; A1 Build/LMY47V) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/60.0.3112.116 Mobile Safari/537.36'
       },
     method: 'GET',
     }, function (error, response, body) {
