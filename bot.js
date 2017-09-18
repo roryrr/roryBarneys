@@ -136,10 +136,7 @@ function receivedPostback(event) {
     sendAvailableOptionList(senderID);
   }
   else if (payload.match(/(similar)/g)) {
-    payload.slice(3);
-    console.log("Gulabi");
-    console.log(payload);
-    sendTextMessage(senderID, payload.slice(7));
+    callRrApi(senderID, payload);
   }
 }
 
@@ -316,22 +313,6 @@ setTimeout(function() { sendTextMessage(recipientId, "Come back any time to star
 
 function sendGenericMessage(recipientId) {
   var itemList = [];
-//   for(var i = 0; i<10; i++){
-//     itemList.title = rr_array[i].name,
-//     itemList.subtitle = rr_array[i].brand,
-//     itemList.item_url = rr_array[i].productURL,
-//     itemList.image_url = rr_array[i].imageURL,
-//     itemList.buttons = [{
-//       type: "web_url",
-//       url: "https://www.oculus.com/en-us/rift/",
-//       title: "Open Web URL"
-//     }, {
-//       type: "postback",
-//       title: "Call Postback",
-//       payload: "Payload for first bubble",
-//     }]
-// }
-
 rr_array.forEach(i=>{
    itemList.push(
    {
@@ -389,6 +370,14 @@ function callRrApi(sid, queryString){
           sessionId: process.env.SESSION_ID,
           placements: process.env.PLACEMENTS_ID,
           categoryId: queryString};
+  }
+  else if (queryString.match(/(similar)/g)) {
+    var queryParameters = { apiKey: process.env.API_KEY,
+          apiClientKey: process.env.API_CLIENT_KEY,
+          userId: process.env.USER_ID,
+          sessionId: process.env.SESSION_ID,
+          placements: process.env.PLACEMENTS_ID_SIMILAR,
+          productId: queryString.slice(7)};
   }
   request({
     uri: 'https://staging.richrelevance.com/rrserver/api/rrPlatform/recsForPlacements',
