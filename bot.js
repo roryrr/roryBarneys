@@ -175,7 +175,7 @@ function sendLoginOption(recipientId){
                 type: "account_link",
                 // title: "Login",
                 // payload: "login"
-                url: "https://www.barneys.com/?locale=en_US&_requestid=1918060"
+                url: "https://www.barneys.com/"
               },
               {
                 type: "postback",
