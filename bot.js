@@ -323,15 +323,15 @@ setTimeout(function() { sendTextMessage(recipientId, "Come back any time to star
 function sendGenericMessage(recipientId) {
   var itemList = [];
 rr_array.forEach(i=>{
+  console.log('ranbir');
+  console.log(cloudinary.url(i.imageURL,{ type: 'fetch', width: 170, height: 170, crop: 'fill', fetch_format: 'jpg' }));
+  console.log('ranbir');
    itemList.push(
    {
     "title":i.name,
     "subtitle":i.brand,
     "item_url":i.productURL,
     //manipulating the image using Cloudinary
-    console.log('ranbir');
-    console.log(cloudinary.url(i.imageURL,{ type: 'fetch', width: 170, height: 170, crop: 'fill', fetch_format: 'jpg' }));
-    console.log('ranbir');
     "image_url":cloudinary.url(i.imageURL,{ type: 'fetch', width: 170, height: 170, crop: 'fill', fetch_format: 'jpg' }),
     "buttons" : [
       {
