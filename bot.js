@@ -320,7 +320,6 @@ rr_array.forEach(i=>{
     "subtitle":i.brand,
     "item_url":i.productURL,
     "image_url":i.imageURL,
-    "image_aspect_ratio":"square",
     "buttons" : [
       {
           "type": "web_url",
