@@ -6,7 +6,16 @@ const express = require('express');
 const bodyParser = require('body-parser');
 const request = require('request');
 const path = require('path');
+//dotenv library for maintaining credential and client secrets
 require('dotenv').config();
+
+//cloudinary library for image manipulation
+var cloudinary = require('cloudinary');
+cloudinary.config({
+  cloud_name: process.env.CLOUDINARY_CLOUD_NAME,
+  api_key: process.env.CLOUDINARY_API_KEY,
+  api_secret: process.env.CLOUDINARY_API_SECRET
+});
 var messengerButton = "<html><head><title>Facebook Messenger Bot</title></head><body><h1>Facebook Messenger Bot</h1>This is a bot based on Messenger Platform QuickStart. For more details, see their <a href=\"https://developers.facebook.com/docs/messenger-platform/guides/quick-start\">docs</a>.<script src=\"https://button.glitch.me/button.js\" data-style=\"glitch\"></script><div class=\"glitchButton\" style=\"position:fixed;top:20px;right:20px;\"></div></body></html>";
 //Declaring variables that store data from the response of RR API
 var rr_array = [];
@@ -319,7 +328,8 @@ rr_array.forEach(i=>{
     "title":i.name,
     "subtitle":i.brand,
     "item_url":i.productURL,
-    "image_url":i.imageURL,
+    //manipulating the image using Cloudinary
+    "image_url":cloudinary.image(i.imageURL,{ type: 'fetch', width: 350, height: 350, crop: 'fit', fetch_format: 'jpg' }),
     "buttons" : [
       {
           "type": "web_url",
