@@ -332,7 +332,7 @@ rr_array.forEach(i=>{
     "subtitle":i.brand,
     "item_url":i.productURL,
     //manipulating the image using Cloudinary
-    "image_url":i.imageURL,//cloudinary.url(i.imageURL,{ type: 'fetch', width: 170, crop: 'scale', fetch_format: 'jpg' }),
+    "image_url":cloudinary.url(i.imageURL,{ type: 'fetch', height: 260, crop: 'scale', fetch_format: 'jpg' }),
     "buttons" : [
       {
           "type": "web_url",
