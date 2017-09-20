@@ -332,7 +332,7 @@ rr_array.forEach(i=>{
     "subtitle":i.brand,
     "item_url":i.productURL,
     //manipulating the image using Cloudinary
-    "image_url":cloudinary.url(i.imageURL,{ type: 'fetch', height: 88.39, crop: 'scale', fetch_format: 'jpg'}),
+    "image_url":cloudinary.url(i.imageURL,{ type: 'fetch', height: 150, crop: 'scale', fetch_format: 'jpg'}),
     "buttons" : [
       {
           "type": "web_url",
@@ -361,7 +361,7 @@ console.log(itemList);
         type: "template",
         payload: {
           template_type: "generic",
-          // image_aspect_ratio: "square",
+          image_aspect_ratio: "square",
           elements: itemList
         }
       }
