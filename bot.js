@@ -312,14 +312,14 @@ function sayGoodBye(recipientId){
     attachment:{
       type: "image",
       payload: {
-        url: cloudinary.url("https://media1.giphy.com/media/aMeoYTJm7dwuQ/giphy.gif",{ type: 'fetch', height: 170, width: 170, crop: 'scale', quality: 100, fetch_format: 'auto'})
+        url: cloudinary.url("https://media1.giphy.com/media/aMeoYTJm7dwuQ/giphy.gif",{ type: 'fetch', height: 130, width: 130, crop: 'scale', quality: 60, fetch_format: 'auto'})
       }
     }
   }
 };
 sendTextMessage(recipientId, "Here’s looking at you, kid.");
 callSendAPI(messageData);
-setTimeout(function() { sendTextMessage(recipientId, "Come back any time to start shopping!") }, 4000);
+setTimeout(function() { sendTextMessage(recipientId, "Come back any time to start shopping!") }, 2500);
 
 }
 
