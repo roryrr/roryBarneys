@@ -541,9 +541,9 @@ function dataBuilder(d, myArray){
             }
             console.log("Deepika start");
             console.log(rr_array);
+            sendGenericMessage(d, rr_array_fav);
           });
     });
-    sendGenericMessage(d, rr_array_fav);
 }
 
 function callSendAPI(messageData) {
