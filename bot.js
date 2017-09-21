@@ -517,6 +517,9 @@ function dataBuilder(d){
               body = JSON.parse(body);
               console.log("Imran");
               console.log(body);
+              rr_array.push(body.placements[0].recommendedProducts[0]);
+              console.log("yeshvitha");
+              console.log(rr_array);
               // rr_array.push(body);
               // sendTextMessage(d, 'warming up');
               // The Description is:  "descriptive string"
