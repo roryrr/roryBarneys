@@ -147,8 +147,8 @@ function receivedPostback(event) {
   else if (payload.match(/(similar)/g)) {
     callRrApi(senderID, payload);
   }
-  else if (payload == 'fav') {
-    callRrApi(senderID, payload);
+  else if (payload.match(/(fav)/g)) {
+    callRrFavApi(senderID, payload);
   }
 }
 
@@ -312,7 +312,7 @@ function sayGoodBye(recipientId){
     attachment:{
       type: "image",
       payload: {
-        url: cloudinary.url("https://media1.giphy.com/media/aMeoYTJm7dwuQ/giphy.gif",{ type: 'fetch', height: 130, width: 130, crop: 'scale', quality: 60, fetch_format: 'auto'})
+        url: cloudinary.url("https://media1.giphy.com/media/aMeoYTJm7dwuQ/giphy.gif",{ type: 'fetch', height: 170, width: 170, crop: 'scale', quality: 50, fetch_format: 'auto'})
       }
     }
   }
@@ -349,7 +349,7 @@ rr_array.forEach(i=>{
         }, {
           "type": "postback",
           "title": "Add to favorites",
-          "payload": "fav"
+          "payload": "fav"+i.id
         }]
    });
 });
@@ -375,6 +375,7 @@ console.log(itemList);
 }
 //block that makes a call to RR api
 function callRrApi(sid, queryString){
+  var req_url = process.env.STAGING_URL;
   if(queryString == "default"){
     var queryParameters = { apiKey: process.env.API_KEY,
           apiClientKey: process.env.API_CLIENT_KEY,
@@ -398,8 +399,17 @@ function callRrApi(sid, queryString){
           placements: process.env.PLACEMENTS_ID_SIMILAR,
           productId: queryString.slice(7)};
   }
+  else if (queryString.match(/(fav)/g)) {
+    req_url = process.env.PROD_URL;
+    var queryParameters = { apiKey: process.env.BY_FAV_API_KEY,
+          userId: process.env.USER_ID,
+          sessionId: process.env.SESSION_ID,
+          productId: queryString.slice(3),
+          targetType: process.env.BY_FAV_TARGETTYPE,
+          actionType: process.env.BY_FAV_ACTIONTYPE};
+  }
   request({
-    uri: 'https://staging.richrelevance.com/rrserver/api/rrPlatform/recsForPlacements',
+    uri: req_url,
     qs: queryParameters,
     headers: {
       'User-Agent': 'Mozilla/5.0 (Linux; Android 5.1.1; A1 Build/LMY47V) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/60.0.3112.116 Mobile Safari/537.36'
@@ -422,6 +432,38 @@ function callRrApi(sid, queryString){
           }
         });
       }
+
+      //Block that calls RR api(add to favorites)
+      //block that makes a call to RR api
+      function callRrFavApi(sid, queryString){
+          var req_url = process.env.PROD_URL;
+          var queryParameters = { apiKey: process.env.BY_FAV_API_KEY,
+                userId: process.env.USER_ID,
+                sessionId: process.env.SESSION_ID,
+                productId: queryString.slice(3),
+                targetType: process.env.BY_FAV_TARGETTYPE,
+                actionType: process.env.BY_FAV_ACTIONTYPE};
+        request({
+          uri: req_url,
+          qs: queryParameters,
+          headers: {
+            'User-Agent': 'Mozilla/5.0 (Linux; Android 5.1.1; A1 Build/LMY47V) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/60.0.3112.116 Mobile Safari/537.36'
+            },
+          method: 'GET',
+          }, function (error, response, body) {
+                if (!error && response.statusCode == 200) {
+                  sendTextMessage(sid, 'Item added to favorites');
+                  // The Description is:  "descriptive string"
+                  // console.log("Got a response dhoni: ", rr_array[0].clickURL);
+                  // sendTextMessage(sid, 'Pavan check logs');
+                } else {
+                  // console.log('Google log start golden');
+                  // console.log(body) // Print the google web page.
+                  // console.log('Google log end golden');
+                  sendTextMessage(sid, 'Pavan, ERROR');
+                }
+              });
+            }
 function callSendAPI(messageData) {
   // console.log("Dunkirk start");
   // console.log(process.env.PAGE_ACCESS_TOKEN);
