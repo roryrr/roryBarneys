@@ -151,6 +151,9 @@ function receivedPostback(event) {
     console.log("Anushka %s", payload);
     callRrFavApi(senderID, payload);
   }
+  else if (payload == 'fvList') {
+    returnFavList(senderID);
+  }
 }
 
 //////////////////////////
@@ -426,7 +429,6 @@ function callRrApi(sid, queryString){
       }
 
       //Block that calls RR api(add to favorites)
-      //block that makes a call to RR api
       function callRrFavApi(sid, queryString){
         console.log("Favorite anushka called");
           var req_url = process.env.PROD_URL;
@@ -458,6 +460,36 @@ function callRrApi(sid, queryString){
                 }
               });
             }
+
+            //Block that returns Favorite List
+            function returnFavList(sid){
+                var queryParameters = { apiKey: process.env.BY_FAV_API_KEY,
+                      fields: process.env.BY_FAV_FIELDS,
+                      };
+              request({
+                uri: process.env.PROD_FAV_URL,
+                qs: queryParameters,
+                headers: {
+                  'User-Agent': 'Mozilla/5.0 (Linux; Android 5.1.1; A1 Build/LMY47V) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/60.0.3112.116 Mobile Safari/537.36'
+                  },
+                method: 'GET',
+                }, function (error, response, body) {
+                  console.log("anushka inside function");
+                      if (!error && response.statusCode == 200) {
+                        sendTextMessage(sid, 'about to return favorites');
+                        // The Description is:  "descriptive string"
+                        // console.log("Got a response dhoni: ", rr_array[0].clickURL);
+                        // sendTextMessage(sid, 'Pavan check logs');
+                      } else {
+                        // console.log('Google log start golden');
+                        // console.log(body) // Print the google web page.
+                        // console.log('Google log end golden');
+                        sendTextMessage(sid, 'Anushka, ERROR');
+                      }
+                    });
+                  }
+
+
 function callSendAPI(messageData) {
   // console.log("Dunkirk start");
   // console.log(process.env.PAGE_ACCESS_TOKEN);
