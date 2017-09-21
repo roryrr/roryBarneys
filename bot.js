@@ -18,9 +18,9 @@ cloudinary.config({
 });
 var messengerButton = "<html><head><title>Facebook Messenger Bot</title></head><body><h1>Facebook Messenger Bot</h1>This is a bot based on Messenger Platform QuickStart. For more details, see their <a href=\"https://developers.facebook.com/docs/messenger-platform/guides/quick-start\">docs</a>.<script src=\"https://button.glitch.me/button.js\" data-style=\"glitch\"></script><div class=\"glitchButton\" style=\"position:fixed;top:20px;right:20px;\"></div></body></html>";
 //Declaring variables that store data from the response of RR API
-var rr_array = [];
-var rr_array_temp = [];
-var rr_array_fav = [];
+// var rr_array = [];
+// var rr_array_temp = [];
+// var rr_array_fav = [];
 // The rest of the code implements the routes for our Express server.
 let app = express();
 
@@ -329,15 +329,9 @@ setTimeout(function() { sendTextMessage(recipientId, "Come back any time to star
 
 }
 
-function sendGenericMessage(recipientId, param) {
+function sendGenericMessage(recipientId, arrayHere) {
   var itemList = [];
-if (param == 'normal') {
-  var genData = rr_array;
-}
-else if (param == 'fav') {
-  var genData = rr_array_fav;
-}
-genData.forEach(i=>{
+arrayHere.forEach(i=>{
   // console.log('ranbir');
   // console.log(cloudinary.url(i.imageURL,{ type: 'fetch', width: 170, height: 170, crop: 'fit', fetch_format: 'jpg' }));
   // console.log('ranbir');
@@ -387,6 +381,7 @@ console.log(itemList);
 }
 //block that makes a call to RR api
 function callRrApi(sid, queryString){
+  var rr_array =[];
   var req_url = process.env.STAGING_URL;
   if(queryString == "default"){
     var queryParameters = { apiKey: process.env.API_KEY,
@@ -423,7 +418,7 @@ function callRrApi(sid, queryString){
             //parsing the json response from RR cloud
             body = JSON.parse(body);
             rr_array = body.placements[0].recommendedProducts;
-            sendGenericMessage(sid, 'normal');
+            sendGenericMessage(sid, rr_array);
             // The Description is:  "descriptive string"
             // console.log("Got a response dhoni: ", rr_array[0].clickURL);
             // sendTextMessage(sid, 'Pavan check logs');
@@ -471,6 +466,7 @@ function callRrApi(sid, queryString){
 
             //Block that returns Favorite List
             function returnFavList(sid){
+              var rr_array_temp = [];
                 var queryParameters = { apiKey: process.env.BY_FAV_API_KEY,
                       fields: process.env.BY_FAV_FIELDS,
                       };
@@ -490,7 +486,7 @@ function callRrApi(sid, queryString){
                         rr_array_temp = body.pref_product.LIKE;
                         console.log("Rajinikanth");
                         console.log(rr_array_temp);
-                        dataBuilder(sid);
+                        dataBuilder(sid, rr_array_temp);
                         // // The Description is:  "descriptive string"
                         // console.log("Got a response dhoni: ", rr_array[0].clickURL);
                         // sendTextMessage(sid, 'Pavan check logs');
@@ -503,9 +499,10 @@ function callRrApi(sid, queryString){
                     });
                   }
 
-function dataBuilder(d){
+function dataBuilder(d, myArray){
   var j = 0;
-    rr_array_temp.forEach(i=>{
+  var rr_array_fav = [];
+    myArray.forEach(i=>{
       var req_url = process.env.STAGING_URL;
       var queryParameters = { apiKey: process.env.BY_FAV_API_KEY,
             apiClientKey: process.env.API_CLIENT_KEY,
@@ -544,9 +541,9 @@ function dataBuilder(d){
             }
             console.log("Deepika start");
             console.log(rr_array);
-            sendGenericMessage(d, 'fav');
           });
     });
+    sendGenericMessage(d, rr_array_fav);
 }
 
 function callSendAPI(messageData) {
