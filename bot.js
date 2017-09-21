@@ -476,8 +476,9 @@ function callRrApi(sid, queryString){
                 method: 'GET',
                 }, function (error, response, body) {
                       if (!error && response.statusCode == 200) {
-                        console.log("samantha1 inside function");
-                        console.log(body.pref_product["LIKE"]);
+                        body = JSON.parse(body);
+                        console.log("samantha2 inside function");
+                        console.log(body.pref_product.LIKE);
                         // body = JSON.parse(body);
                         // rr_array_temp = body.pref_product.LIKE;
                         // console.log("Rajinikanth");
