@@ -20,6 +20,7 @@ var messengerButton = "<html><head><title>Facebook Messenger Bot</title></head><
 //Declaring variables that store data from the response of RR API
 var rr_array = [];
 var rr_array_temp = [];
+var rr_array_fav = [];
 // The rest of the code implements the routes for our Express server.
 let app = express();
 
@@ -328,9 +329,15 @@ setTimeout(function() { sendTextMessage(recipientId, "Come back any time to star
 
 }
 
-function sendGenericMessage(recipientId) {
+function sendGenericMessage(recipientId, param) {
   var itemList = [];
-rr_array.forEach(i=>{
+if (param == 'normal') {
+  var genData = rr_array;
+}
+else if (param == 'fav') {
+  var genData = rr_array_fav;
+}
+genData.forEach(i=>{
   // console.log('ranbir');
   // console.log(cloudinary.url(i.imageURL,{ type: 'fetch', width: 170, height: 170, crop: 'fit', fetch_format: 'jpg' }));
   // console.log('ranbir');
@@ -416,7 +423,7 @@ function callRrApi(sid, queryString){
             //parsing the json response from RR cloud
             body = JSON.parse(body);
             rr_array = body.placements[0].recommendedProducts;
-            sendGenericMessage(sid);
+            sendGenericMessage(sid, 'normal');
             // The Description is:  "descriptive string"
             // console.log("Got a response dhoni: ", rr_array[0].clickURL);
             // sendTextMessage(sid, 'Pavan check logs');
@@ -518,7 +525,7 @@ function dataBuilder(d){
               body = JSON.parse(body);
               console.log("Imran");
               console.log(body);
-              rr_array[j] = body.placements[0].recommendedProducts[0];
+              rr_array_fav[j] = body.placements[0].recommendedProducts[0];
                console.log("yeshvitha");
                console.log("talpa");
                console.log(rr_array[j]);
@@ -537,7 +544,7 @@ function dataBuilder(d){
             }
             console.log("Deepika start");
             console.log(rr_array);
-            sendGenericMessage(d);
+            sendGenericMessage(d, 'fav');
           });
     });
 }
