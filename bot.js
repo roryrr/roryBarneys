@@ -497,7 +497,7 @@ function dataBuilder(d){
       var req_url = process.env.STAGING_URL;
       var queryParameters = { apiKey: process.env.BY_FAV_API_KEY,
             apiClientKey: process.env.API_CLIENT_KEY,
-            placements: generic_page.rory_echo_product,
+            placements: process.env.PLACEMENTS_ID_ECHO,
             productId: i,
             };
     request({
