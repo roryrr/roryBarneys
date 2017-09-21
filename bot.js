@@ -537,6 +537,7 @@ function dataBuilder(d){
             }
             console.log("Deepika start");
             console.log(rr_array);
+            sendGenericMessage(d);
           });
     });
 }
