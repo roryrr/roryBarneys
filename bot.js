@@ -19,6 +19,7 @@ cloudinary.config({
 var messengerButton = "<html><head><title>Facebook Messenger Bot</title></head><body><h1>Facebook Messenger Bot</h1>This is a bot based on Messenger Platform QuickStart. For more details, see their <a href=\"https://developers.facebook.com/docs/messenger-platform/guides/quick-start\">docs</a>.<script src=\"https://button.glitch.me/button.js\" data-style=\"glitch\"></script><div class=\"glitchButton\" style=\"position:fixed;top:20px;right:20px;\"></div></body></html>";
 //Declaring variables that store data from the response of RR API
 var rr_array = [];
+var rr_array_temp = [];
 // The rest of the code implements the routes for our Express server.
 let app = express();
 
@@ -327,7 +328,8 @@ setTimeout(function() { sendTextMessage(recipientId, "Come back any time to star
 
 }
 
-function sendGenericMessage(recipientId) {
+function sendGenericMessage(recipientId, listId) {
+  if(listId == 'list1'){
   var itemList = [];
 rr_array.forEach(i=>{
   // console.log('ranbir');
@@ -357,6 +359,40 @@ rr_array.forEach(i=>{
         }]
    });
 });
+}
+else if (listId == 'list2') {
+  rr_array_temp.forEach(i=>{
+    var req_url = process.env.STAGING_URL;
+    var queryParameters = { apiKey: process.env.BY_FAV_API_KEY,
+          apiClientKey: process.env.API_CLIENT_KEY,
+          placements: generic_page.rory_echo_product,
+          productId: i,
+          };
+  request({
+    uri: req_url,
+    qs: queryParameters,
+    headers: {
+      'User-Agent': 'Mozilla/5.0 (Linux; Android 5.1.1; A1 Build/LMY47V) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/60.0.3112.116 Mobile Safari/537.36'
+      },
+    method: 'GET',
+    }, function (error, response, body) {
+      console.log("ash inside function");
+          if (!error && response.statusCode == 200) {
+            rr_array.push(body);
+            // The Description is:  "descriptive string"
+            // console.log("Got a response dhoni: ", rr_array[0].clickURL);
+            // sendTextMessage(sid, 'Pavan check logs');
+          } else {
+            // console.log('Google log start golden');
+            // console.log(body) // Print the google web page.
+            // console.log('Google log end golden');
+            sendTextMessage(sid, 'Anushka, ERROR');
+          }
+        });
+  });
+  console.log('Ash');
+  console.log(rr_array);
+}
 console.log("dabang");
 console.log(itemList);
   var messageData = {
@@ -415,7 +451,7 @@ function callRrApi(sid, queryString){
             //parsing the json response from RR cloud
             body = JSON.parse(body);
             rr_array = body.placements[0].recommendedProducts;
-            sendGenericMessage(sid);
+            sendGenericMessage(sid, "list1");
             // The Description is:  "descriptive string"
             // console.log("Got a response dhoni: ", rr_array[0].clickURL);
             // sendTextMessage(sid, 'Pavan check logs');
@@ -476,7 +512,9 @@ function callRrApi(sid, queryString){
                 }, function (error, response, body) {
                   console.log("anushka inside function");
                       if (!error && response.statusCode == 200) {
-                        sendTextMessage(sid, 'about to return favorites');
+                        body = JSON.parse(body);
+                        rr_array_temp = body.pref_product.LIKE;
+                        sendGenericMessage(sid, "list2");
                         // The Description is:  "descriptive string"
                         // console.log("Got a response dhoni: ", rr_array[0].clickURL);
                         // sendTextMessage(sid, 'Pavan check logs');
