@@ -91,7 +91,7 @@ function receivedMessage(event) {
 
   console.log("Received message for user %d and page %d at %d with message:",
     senderID, recipientID, timeOfMessage);
-  //console.log(JSON.stringify(message));
+  console.log(JSON.stringify(message));
 
   var messageId = message.mid;
 
@@ -359,7 +359,7 @@ rr_array.forEach(i=>{
    });
 });
 console.log("dabang");
-//console.log(itemList);
+console.log(itemList);
   var messageData = {
     recipient: {
       id: recipientId
@@ -510,7 +510,7 @@ function dataBuilder(d){
       }, function (error, response, body) {
         console.log("ash inside function");
             if (!error && response.statusCode == 200) {
-              //rr_array.push(body);
+              // rr_array.push(body);
               sendTextMessage(d, 'warming up');
               // The Description is:  "descriptive string"
               // console.log("Got a response dhoni: ", rr_array[0].clickURL);
@@ -524,7 +524,7 @@ function dataBuilder(d){
           });
     });
     console.log("Deepika start");
-    //console.log(rr_array);
+    // console.log(rr_array);
 }
 
 function callSendAPI(messageData) {
