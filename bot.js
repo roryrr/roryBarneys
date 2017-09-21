@@ -525,7 +525,7 @@ function dataBuilder(d, myArray){
               rr_array_fav[j] = body.placements[0].recommendedProducts[0];
                console.log("yeshvitha");
                console.log("talpa");
-               console.log(rr_array[j]);
+               //console.log(rr_array[j]);
                j++;
               // console.log(rr_array);
               // rr_array.push(body);
