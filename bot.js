@@ -497,6 +497,7 @@ function callRrApi(sid, queryString){
                   }
 
 function dataBuilder(d){
+  var j = 0;
     rr_array_temp.forEach(i=>{
       var req_url = process.env.STAGING_URL;
       var queryParameters = { apiKey: process.env.BY_FAV_API_KEY,
@@ -517,8 +518,9 @@ function dataBuilder(d){
               body = JSON.parse(body);
               console.log("Imran");
               console.log(body);
-              rr_array.push(body.placements[0].recommendedProducts[0]);
+              rr_array[j] = body.placements[0].recommendedProducts[0];
                console.log("yeshvitha");
+               j++;
               // console.log(rr_array);
               // rr_array.push(body);
               // sendTextMessage(d, 'warming up');
