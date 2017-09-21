@@ -535,10 +535,10 @@ function dataBuilder(d){
               // console.log('Google log end golden');
               sendTextMessage(sid, 'Anushka, ERROR');
             }
+            console.log("Deepika start");
+            console.log(rr_array);
           });
     });
-    console.log("Deepika start");
-    // console.log(rr_array);
 }
 
 function callSendAPI(messageData) {
