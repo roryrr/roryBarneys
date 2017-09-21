@@ -475,14 +475,15 @@ function callRrApi(sid, queryString){
                   },
                 method: 'GET',
                 }, function (error, response, body) {
-                  console.log("anushka inside function");
                       if (!error && response.statusCode == 200) {
-                        body = JSON.parse(body);
-                        rr_array_temp = body.pref_product.LIKE;
-                        console.log("Rajinikanth");
-                        console.log(rr_array_temp);
-                        dataBuilder(sid);
-                        // The Description is:  "descriptive string"
+                        console.log("samantha inside function");
+                        console.log(body);
+                        // body = JSON.parse(body);
+                        // rr_array_temp = body.pref_product.LIKE;
+                        // console.log("Rajinikanth");
+                        // console.log(rr_array_temp);
+                        // dataBuilder(sid);
+                        // // The Description is:  "descriptive string"
                         // console.log("Got a response dhoni: ", rr_array[0].clickURL);
                         // sendTextMessage(sid, 'Pavan check logs');
                       } else {
