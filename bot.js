@@ -147,6 +147,9 @@ function receivedPostback(event) {
   else if (payload.match(/(similar)/g)) {
     callRrApi(senderID, payload);
   }
+  else if (payload == 'fav') {
+    callRrApi(senderID, payload);
+  }
 }
 
 //////////////////////////
@@ -309,7 +312,7 @@ function sayGoodBye(recipientId){
     attachment:{
       type: "image",
       payload: {
-        url: "https://media1.giphy.com/media/aMeoYTJm7dwuQ/giphy.gif"
+        url: cloudinary.url("https://media1.giphy.com/media/aMeoYTJm7dwuQ/giphy.gif",{ type: 'fetch', height: 170, width: 170, crop: 'scale', quality: 100, fetch_format: 'auto'})
       }
     }
   }
