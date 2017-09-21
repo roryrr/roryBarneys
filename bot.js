@@ -148,6 +148,7 @@ function receivedPostback(event) {
     callRrApi(senderID, payload);
   }
   else if (payload.match(/(fav)/g)) {
+    console.log("Anushka %s", payload);
     callRrFavApi(senderID, payload);
   }
 }
@@ -399,15 +400,6 @@ function callRrApi(sid, queryString){
           placements: process.env.PLACEMENTS_ID_SIMILAR,
           productId: queryString.slice(7)};
   }
-  else if (queryString.match(/(fav)/g)) {
-    req_url = process.env.PROD_URL;
-    var queryParameters = { apiKey: process.env.BY_FAV_API_KEY,
-          userId: process.env.USER_ID,
-          sessionId: process.env.SESSION_ID,
-          productId: queryString.slice(3),
-          targetType: process.env.BY_FAV_TARGETTYPE,
-          actionType: process.env.BY_FAV_ACTIONTYPE};
-  }
   request({
     uri: req_url,
     qs: queryParameters,
@@ -436,11 +428,12 @@ function callRrApi(sid, queryString){
       //Block that calls RR api(add to favorites)
       //block that makes a call to RR api
       function callRrFavApi(sid, queryString){
+        console.log("Favorite anushka called");
           var req_url = process.env.PROD_URL;
           var queryParameters = { apiKey: process.env.BY_FAV_API_KEY,
-                userId: process.env.USER_ID,
-                sessionId: process.env.SESSION_ID,
-                productId: queryString.slice(3),
+                u: process.env.USER_ID,
+                s: process.env.SESSION_ID,
+                p: queryString.slice(3),
                 targetType: process.env.BY_FAV_TARGETTYPE,
                 actionType: process.env.BY_FAV_ACTIONTYPE};
         request({
@@ -451,6 +444,7 @@ function callRrApi(sid, queryString){
             },
           method: 'GET',
           }, function (error, response, body) {
+            console.log("anushka inside function");
                 if (!error && response.statusCode == 200) {
                   sendTextMessage(sid, 'Item added to favorites');
                   // The Description is:  "descriptive string"
@@ -460,7 +454,7 @@ function callRrApi(sid, queryString){
                   // console.log('Google log start golden');
                   // console.log(body) // Print the google web page.
                   // console.log('Google log end golden');
-                  sendTextMessage(sid, 'Pavan, ERROR');
+                  sendTextMessage(sid, 'Anushka, ERROR');
                 }
               });
             }
