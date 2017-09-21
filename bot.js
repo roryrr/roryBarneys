@@ -537,11 +537,11 @@ function dataBuilder(d, myArray){
               // console.log('Google log start golden');
               // console.log(body) // Print the google web page.
               // console.log('Google log end golden');
-              sendTextMessage(sid, 'Anushka, ERROR');
+              sendTextMessage(d, 'Anushka, ERROR');
             }
             console.log("Deepika start");
             //console.log(rr_array);
-            sendTextMessage(sid, 'Hiii');
+            sendTextMessage(d, 'Hiii');
           });
           // sendGenericMessage(d, rr_array_fav);
     });
