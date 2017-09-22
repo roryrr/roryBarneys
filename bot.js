@@ -510,6 +510,7 @@ function callRrApi(sid, queryString){
 
 function dataBuilder(d, myArray){
   // var j = 0;
+  rr_array_fav.length = 0;
     myArray.forEach(i=>{
       var req_url = process.env.STAGING_URL;
       var queryParameters = { apiKey: process.env.BY_FAV_API_KEY,
