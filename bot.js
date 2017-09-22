@@ -482,19 +482,20 @@ function callRrApi(sid, queryString){
                       if (!error && response.statusCode == 200) {
                         body = JSON.parse(body);
                         console.log("samantha4 inside function");
-                        console.log(body.pref_product.LIKE);
+                        console.log(body.pref_product.NEUTRAL);
                         // body = JSON.parse(body);
-                        rr_array_temp = body.pref_product.LIKE;
+                        rr_array_temp = body.pref_product.NEUTRAL;
                         console.log("Rajinikanth");
                         console.log(rr_array_temp);
                         dataBuilder(sid, rr_array_temp);
-                        if(rr_array_fav.length > 0){
-                          console.log("Motorola array has data");
-                        }
-                        else {
-                          console.log("Xiomi no data");
-                        }
-                        setTimeout(function() {   sendGenericMessage(sid, rr_array_fav) }, 2500);
+                        setTimeout(function() {
+                          if(rr_array_fav.length > 0){
+                            sendGenericMessage(sid, rr_array_fav)
+                          }
+                          else {
+                            sendTextMessage(sid, "You don't have any items.")
+                          }
+                           }, 2500);
 
                         // // The Description is:  "descriptive string"
                         // console.log("Got a response dhoni: ", rr_array[0].clickURL);
