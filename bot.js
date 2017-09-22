@@ -459,8 +459,6 @@ function callRrApi(sid, queryString){
     var queryParameters = { apiKey: process.env.API_KEY,
           apiClientKey: process.env.API_CLIENT_KEY,
           productId: queryString.slice(8)};
-          console.log("Umaga wwe");
-          console.log(queryString.slice(8));
   }
   // else if (queryString.match(/(rrfinder)/g)) {
   //   this.req_url = process.env.FIND_URL;
