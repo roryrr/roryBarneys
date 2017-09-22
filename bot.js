@@ -455,8 +455,8 @@ function callRrApi(sid, queryString){
     this.req_url = process.env.FIND_URL;
     var queryParameters = { facet: '',
           lang: 'en',
-          start: '0',
-          rows: '5',
+          start: 0,
+          rows: 5,
           userId: process.env.USER_ID,
           sessionId: process.env.SESSION_ID,
           placements: process.env.PLACEMENTS_ID_FIND,
