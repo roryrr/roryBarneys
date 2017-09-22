@@ -345,11 +345,6 @@ arrayHere.forEach(i=>{
     //manipulating the image using Cloudinary
     "image_url":cloudinary.url(i.imageURL,{ type: 'fetch', height: 170, width: 170, crop: 'scale', quality: 100, fetch_format: 'jpg'}),
     "buttons" : [
-      {
-          "type": "web_url",
-          "url": i.productURL,
-          "title": "View details"
-        },
         {
           "type": "postback",
           "title": "Try something similar",
@@ -362,6 +357,53 @@ arrayHere.forEach(i=>{
    });
 });
 console.log("dabang");
+console.log(itemList);
+  var messageData = {
+    recipient: {
+      id: recipientId
+    },
+    message: {
+      attachment: {
+        type: "template",
+        payload: {
+          template_type: "generic",
+          image_aspect_ratio: "square",
+          elements: itemList
+        }
+      }
+    }
+  };
+
+  callSendAPI(messageData);
+}
+
+
+function sendGenericMessageForSearch(recipientId, arrayHere) {
+  var itemList = [];
+arrayHere.forEach(i=>{
+  // console.log('ranbir');
+  // console.log(cloudinary.url(i.imageURL,{ type: 'fetch', width: 170, height: 170, crop: 'fit', fetch_format: 'jpg' }));
+  // console.log('ranbir');
+   itemList.push(
+   {
+    "title":i.name,
+    "subtitle":i.brand,
+    "item_url":BNY_HOME + i.linkId,
+    //manipulating the image using Cloudinary
+    "image_url":cloudinary.url(i.imageId,{ type: 'fetch', height: 170, width: 170, crop: 'scale', quality: 100, fetch_format: 'jpg'}),
+    "buttons" : [
+        {
+          "type": "postback",
+          "title": "Try something similar",
+          "payload": "similar"+i.id
+        }, {
+          "type": "postback",
+          "title": "Add to favorites",
+          "payload": "fav"+i.id
+        }]
+   });
+});
+console.log("shahrukh");
 console.log(itemList);
   var messageData = {
     recipient: {
@@ -432,11 +474,12 @@ function callRrApi(sid, queryString){
             body = JSON.parse(body);
             if (queryString.match(/(rrfinder)/g)) {
                   rr_array = body.placements[0].docs;
+                  sendGenericMessageForSearch(sid, rr_array);
             }
             else {
                   rr_array = body.placements[0].recommendedProducts;
+                    sendGenericMessage(sid, rr_array);
             }
-            sendGenericMessage(sid, rr_array);
             // The Description is:  "descriptive string"
             // console.log("Got a response dhoni: ", rr_array[0].clickURL);
             // sendTextMessage(sid, 'Pavan check logs');
