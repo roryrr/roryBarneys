@@ -501,7 +501,7 @@ function callRrApi(sid, queryString){
 
 function dataBuilder(d, myArray){
   var j = 0;
-  rr_array_fav = [];
+  var rr_array_fav = [];
     myArray.forEach(i=>{
       var req_url = process.env.STAGING_URL;
       var queryParameters = { apiKey: process.env.BY_FAV_API_KEY,
@@ -522,6 +522,7 @@ function dataBuilder(d, myArray){
               body = JSON.parse(body);
               console.log("Imran");
               console.log(body);
+              var rr_array_fav = [];
               rr_array_fav[j] = body.placements[0].recommendedProducts[0];
                console.log("yeshvitha");
                console.log("talpa");
@@ -540,8 +541,8 @@ function dataBuilder(d, myArray){
               sendTextMessage(d, 'Anushka, ERROR');
             }
             console.log("Deepika start");
-            //console.log(rr_array);
-            //sendGenericMessage(d, rr_array_fav);
+            console.log(rr_array);
+            sendGenericMessage(d, rr_array_fav);
           });
     });
 
