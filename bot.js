@@ -453,8 +453,7 @@ function callRrApi(sid, queryString){
   }
   else if (queryString.match(/(rrfinder)/g)) {
     this.req_url = process.env.FIND_URL;
-    var queryParameters = { facet: '',
-          lang: 'en',
+    var queryParameters = { lang: 'en',
           start: 0,
           rows: 5,
           userId: process.env.USER_ID,
