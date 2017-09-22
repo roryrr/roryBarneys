@@ -544,7 +544,8 @@ function dataBuilder(d, myArray){
             // sendGenericMessage(d, rr_array_fav);
           });
     });
-    console.log("venkat suggest");
+    console.log("nagarjuna");
+    console.log(rr_array_fav);
  sendGenericMessage(d, rr_array_fav);
 }
 
