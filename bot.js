@@ -544,6 +544,7 @@ function dataBuilder(d, myArray){
             // sendGenericMessage(d, rr_array_fav);
           });
     });
+    console.log("venkat suggest");
  sendGenericMessage(d, rr_array_fav);
 }
 
