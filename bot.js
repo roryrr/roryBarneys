@@ -490,10 +490,10 @@ function callRrApi(sid, queryString){
                         dataBuilder(sid, rr_array_temp);
                         setTimeout(function() {
                           if(rr_array_fav.length > 0){
-                            sendGenericMessage(sid, rr_array_fav)
+                            sendGenericMessage(sid, rr_array_fav);
                           }
                           else {
-                            sendTextMessage(sid, "You don't have any items.")
+                            sendTextMessage(sid, "You don't have any items.");
                           }
                            }, 2500);
 
