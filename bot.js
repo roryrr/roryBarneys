@@ -1,7 +1,7 @@
 //
 // This is main file containing code implementing the Express server and functionality for the Express echo bot.
 //
-'use strict';
+// 'use strict';
 const express = require('express');
 const bodyParser = require('body-parser');
 const request = require('request');
@@ -21,6 +21,7 @@ var messengerButton = "<html><head><title>Facebook Messenger Bot</title></head><
 // var rr_array = [];
 // var rr_array_temp = [];
 // var rr_array_fav = [];
+rr_array_fav = [];
 // The rest of the code implements the routes for our Express server.
 let app = express();
 
@@ -501,7 +502,6 @@ function callRrApi(sid, queryString){
 
 function dataBuilder(d, myArray){
   var j = 0;
-  var rr_array_fav = [];
     myArray.forEach(i=>{
       var req_url = process.env.STAGING_URL;
       var queryParameters = { apiKey: process.env.BY_FAV_API_KEY,
@@ -522,7 +522,7 @@ function dataBuilder(d, myArray){
               body = JSON.parse(body);
               console.log("Imran");
               console.log(body);
-              var rr_array_fav = [];
+              // var rr_array_fav = [];
               rr_array_fav[j] = body.placements[0].recommendedProducts[0];
                console.log("yeshvitha");
                console.log("talpa");
@@ -546,7 +546,7 @@ function dataBuilder(d, myArray){
           });
     });
 
-    console.log("lvk" +rr_array_fav);
+    // console.log("lvk" +rr_array_fav);
  sendGenericMessage(d, rr_array_fav);
 }
 
