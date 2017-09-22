@@ -494,7 +494,8 @@ function callRrApi(sid, queryString){
                         else {
                           console.log("Xiomi no data");
                         }
-                        sendGenericMessage(sid, rr_array_fav);
+                        setTimeout(function() {   sendGenericMessage(sid, rr_array_fav) }, 2500);
+
                         // // The Description is:  "descriptive string"
                         // console.log("Got a response dhoni: ", rr_array[0].clickURL);
                         // sendTextMessage(sid, 'Pavan check logs');
