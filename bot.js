@@ -501,7 +501,7 @@ function callRrApi(sid, queryString){
 
 function dataBuilder(d, myArray){
   var j = 0;
-  let rr_array_fav = [];
+  rr_array_fav = [];
     myArray.forEach(i=>{
       var req_url = process.env.STAGING_URL;
       var queryParameters = { apiKey: process.env.BY_FAV_API_KEY,
@@ -541,10 +541,10 @@ function dataBuilder(d, myArray){
             }
             console.log("Deepika start");
             //console.log(rr_array);
-            // sendGenericMessage(d, rr_array_fav);
+            //sendGenericMessage(d, rr_array_fav);
           });
     });
-    console.log("nagarjuna");
+
     console.log(rr_array_fav);
  sendGenericMessage(d, rr_array_fav);
 }
