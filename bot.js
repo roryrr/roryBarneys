@@ -454,8 +454,8 @@ function callRrApi(sid, queryString){
   else if (queryString.match(/(rrfinder)/g)) {
     this.req_url = process.env.FIND_URL;
     var queryParameters = { lang: 'en',
-          start: 0,
-          rows: 5,
+          start: parseInt('0'),
+          rows: parseInt('5'),
           userId: process.env.USER_ID,
           sessionId: process.env.SESSION_ID,
           placements: process.env.PLACEMENTS_ID_FIND,
