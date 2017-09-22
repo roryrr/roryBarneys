@@ -494,8 +494,8 @@ function callRrApi(sid, queryString){
             }
             else {
                   rr_array = body.placements[0].recommendedProducts;
+                    sendGenericMessage(sid, rr_array);
                 }
-            sendGenericMessage(sid, rr_array);
             // }
             // The Description is:  "descriptive string"
             // console.log("Got a response dhoni: ", rr_array[0].clickURL);
