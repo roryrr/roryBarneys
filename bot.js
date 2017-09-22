@@ -113,7 +113,7 @@ function receivedMessage(event) {
     //   default:
     //     sendTextMessage(senderID, messageText);
     // }
-    console.log(senderID, "Buddha" + messageText);
+    callRrApi(senderID, "rrfinder" + messageText);
   } else if (messageAttachments) {
     sendTextMessage(senderID, "Message with attachment received");
   }
@@ -408,6 +408,17 @@ function callRrApi(sid, queryString){
           placements: process.env.PLACEMENTS_ID_SIMILAR,
           productId: queryString.slice(7)};
   }
+  else if (queryString.match(/(rrfinder)/g)) {
+    this.req_url = process.env.FIND_URL;
+    var queryParameters = { facet: '',
+          lang: 'en',
+          start: '0',
+          rows: '5',
+          userId: process.env.USER_ID,
+          sessionId: process.env.SESSION_ID,
+          placements: process.env.PLACEMENTS_ID_FIND,
+          query: queryString.slice(7)};
+  }
   request({
     uri: req_url,
     qs: queryParameters,
@@ -419,8 +430,12 @@ function callRrApi(sid, queryString){
           if (!error && response.statusCode == 200) {
             //parsing the json response from RR cloud
             body = JSON.parse(body);
-            console.log("Buddha " + queryString);
-            rr_array = body.placements[0].recommendedProducts;
+            if (queryString.match(/(rrfinder)/g)) {
+                  rr_array = body.placements[0].docs;
+            }
+            else {
+                  rr_array = body.placements[0].recommendedProducts;
+            }
             sendGenericMessage(sid, rr_array);
             // The Description is:  "descriptive string"
             // console.log("Got a response dhoni: ", rr_array[0].clickURL);
