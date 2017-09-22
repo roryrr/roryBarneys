@@ -20,7 +20,7 @@ var messengerButton = "<html><head><title>Facebook Messenger Bot</title></head><
 //Declaring variables that store data from the response of RR API
 // var rr_array = [];
 // var rr_array_temp = [];
-// var rr_array_fav = [];
+var rr_array_fav = [];
 // rr_array_fav = [];
 // The rest of the code implements the routes for our Express server.
 let app = express();
@@ -488,6 +488,7 @@ function callRrApi(sid, queryString){
                         console.log("Rajinikanth");
                         console.log(rr_array_temp);
                         dataBuilder(sid, rr_array_temp);
+                        sendGenericMessage(sid, rr_array_fav);
                         // // The Description is:  "descriptive string"
                         // console.log("Got a response dhoni: ", rr_array[0].clickURL);
                         // sendTextMessage(sid, 'Pavan check logs');
@@ -502,7 +503,6 @@ function callRrApi(sid, queryString){
 
 function dataBuilder(d, myArray){
   // var j = 0;
-  var rr_array_fav = [];
     myArray.forEach(i=>{
       var req_url = process.env.STAGING_URL;
       var queryParameters = { apiKey: process.env.BY_FAV_API_KEY,
@@ -551,7 +551,7 @@ if(rr_array_fav.length > 0){
 else {
   console.log("Xiomi no data");
 }
- // sendGenericMessage(d, rr_array_fav);
+ //
 }
 
 function callSendAPI(messageData) {
