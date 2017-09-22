@@ -486,6 +486,11 @@ function callRrApi(sid, queryString){
             //       sendGenericMessageForSearch(sid, rr_array);
             // }
             // else {
+            if(body.status == "error"){
+              console.log("nenu cheppala");
+            }
+            else {
+
             if (queryString.match(/(favorite)/g)) {
               console.log("undertaker wwe");
               console.log(body.products);
@@ -499,7 +504,7 @@ function callRrApi(sid, queryString){
             // The Description is:  "descriptive string"
             // console.log("Got a response dhoni: ", rr_array[0].clickURL);
             // sendTextMessage(sid, 'Pavan check logs');
-          } else {
+          } }else {
             // console.log('Google log start golden');
             // console.log(body) // Print the google web page.
             // console.log('Google log end golden');
