@@ -501,7 +501,7 @@ function callRrApi(sid, queryString){
 
 function dataBuilder(d, myArray){
   var j = 0;
-  var rr_array_fav = [];
+  let rr_array_fav = [];
     myArray.forEach(i=>{
       var req_url = process.env.STAGING_URL;
       var queryParameters = { apiKey: process.env.BY_FAV_API_KEY,
@@ -516,7 +516,7 @@ function dataBuilder(d, myArray){
         'User-Agent': 'Mozilla/5.0 (Linux; Android 5.1.1; A1 Build/LMY47V) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/60.0.3112.116 Mobile Safari/537.36'
         },
       method: 'GET',
-      }, function (error, response, body) {
+    },(error, response, body) => {
         console.log("ash inside function");
             if (!error && response.statusCode == 200) {
               body = JSON.parse(body);
