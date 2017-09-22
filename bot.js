@@ -459,6 +459,7 @@ function callRrApi(sid, queryString){
     var queryParameters = { apiKey: process.env.API_KEY,
           apiClientKey: process.env.API_CLIENT_KEY,
           productId: queryString.slice(8)};
+          console.log("Umaga wwe");
   }
   // else if (queryString.match(/(rrfinder)/g)) {
   //   this.req_url = process.env.FIND_URL;
@@ -487,6 +488,8 @@ function callRrApi(sid, queryString){
             // }
             // else {
             if (queryString.match(/(favorite)/g)) {
+              console.log("undertaker wwe");
+              console.log(body.products);
               rr_array = body.products;
             }
             else {
@@ -570,7 +573,7 @@ function callRrApi(sid, queryString){
 
             //Block that returns Favorite List
             function returnFavList(sid){
-              var rr_array_temp = [];
+              var rr_array_temp;
                 var queryParameters = { apiKey: process.env.BY_FAV_API_KEY,
                       fields: process.env.BY_FAV_FIELDS,
                       };
