@@ -541,7 +541,7 @@ function dataBuilder(d, myArray){
               sendTextMessage(d, 'Anushka, ERROR');
             }
             console.log("Deepika start");
-            console.log(rr_array);
+            console.log(rr_array_fav);
             sendGenericMessage(d, rr_array_fav);
           });
     });
