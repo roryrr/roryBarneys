@@ -388,7 +388,7 @@ arrayHere.forEach(i=>{
    {
     "title":i.name,
     "subtitle":i.brand,
-    "item_url":BNY_HOME + i.linkId,
+    "item_url":process.env.BNY_HOME + i.linkId,
     //manipulating the image using Cloudinary
     "image_url":cloudinary.url(i.imageId,{ type: 'fetch', height: 170, width: 170, crop: 'scale', quality: 100, fetch_format: 'jpg'}),
     "buttons" : [
