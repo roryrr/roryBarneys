@@ -103,8 +103,17 @@ function receivedMessage(event) {
   if (messageText) {
     // If we receive a text message, check to see if it matches a keyword
     // and send back the template example. Otherwise, just echo the text we received.
-        callRrApi(senderID, "rrfindapi" + messageText);
-    }
+    // switch (messageText) {
+    //   case 'generic':
+    //     callRrApi(senderID, "default");
+    //     break;
+    //   // case 'show':
+    //   //   callRrApi(senderID);
+    //   //   break;
+    //   default:
+    //     sendTextMessage(senderID, messageText);
+    // }
+    console.log(senderID, "Buddha" + messageText);
   } else if (messageAttachments) {
     sendTextMessage(senderID, "Message with attachment received");
   }
@@ -410,7 +419,6 @@ function callRrApi(sid, queryString){
           if (!error && response.statusCode == 200) {
             //parsing the json response from RR cloud
             body = JSON.parse(body);
-            console.log("Buddha" + queryString);
             rr_array = body.placements[0].recommendedProducts;
             sendGenericMessage(sid, rr_array);
             // The Description is:  "descriptive string"
