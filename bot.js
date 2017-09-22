@@ -488,6 +488,12 @@ function callRrApi(sid, queryString){
                         console.log("Rajinikanth");
                         console.log(rr_array_temp);
                         dataBuilder(sid, rr_array_temp);
+                        if(rr_array_fav.length > 0){
+                          console.log("Motorola array has data");
+                        }
+                        else {
+                          console.log("Xiomi no data");
+                        }
                         sendGenericMessage(sid, rr_array_fav);
                         // // The Description is:  "descriptive string"
                         // console.log("Got a response dhoni: ", rr_array[0].clickURL);
@@ -523,7 +529,7 @@ function dataBuilder(d, myArray){
               body = JSON.parse(body);
               console.log("Imran");
               console.log(body);
-              this.rr_array_fav.push(body.placements[0].recommendedProducts[0]);
+              rr_array_fav.push(body.placements[0].recommendedProducts[0]);
                console.log("yeshvitha");
                console.log("talpa");
                //console.log(rr_array[j]);
@@ -545,12 +551,6 @@ function dataBuilder(d, myArray){
             // sendGenericMessage(d, rr_array_fav);
           });
     });
-if(rr_array_fav.length > 0){
-  console.log("Motorola array has data");
-}
-else {
-  console.log("Xiomi no data");
-}
  //
 }
 
