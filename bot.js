@@ -438,9 +438,11 @@ function callRrApi(sid, queryString){
   else if(queryString.match(/(BNY-)/g)){
     var queryParameters = { apiKey: process.env.API_KEY,
           apiClientKey: process.env.API_CLIENT_KEY,
+          st: '0',
+          count: '5',
           userId: process.env.USER_ID,
           sessionId: process.env.SESSION_ID,
-          placements: process.env.PLACEMENTS_ID,
+          placements: process.env.PLACEMENTS_ID_CAT,
           categoryId: queryString};
   }
   else if (queryString.match(/(similar)/g)) {
