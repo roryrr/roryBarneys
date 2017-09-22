@@ -427,6 +427,7 @@ console.log(itemList);
 function callRrApi(sid, queryString){
   var rr_array =[];
   rr_array.length = 0;
+  var mySt = Math.floor((Math.random() * 50) + 1).toString();
   var req_url = process.env.STAGING_URL;
   if(queryString == "default"){
     var queryParameters = { apiKey: process.env.API_KEY,
@@ -438,7 +439,7 @@ function callRrApi(sid, queryString){
   else if(queryString.match(/(BNY-)/g)){
     var queryParameters = { apiKey: process.env.API_KEY,
           apiClientKey: process.env.API_CLIENT_KEY,
-          st: '0',
+          st: mySt,
           count: '5',
           userId: process.env.USER_ID,
           sessionId: process.env.SESSION_ID,
