@@ -523,7 +523,7 @@ function dataBuilder(d, myArray){
               body = JSON.parse(body);
               console.log("Imran");
               console.log(body);
-              rr_array_fav.push(body.placements[0].recommendedProducts[0]);
+              this.rr_array_fav.push(body.placements[0].recommendedProducts[0]);
                console.log("yeshvitha");
                console.log("talpa");
                //console.log(rr_array[j]);
