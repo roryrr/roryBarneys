@@ -493,7 +493,7 @@ function callRrApi(sid, queryString){
 
             if (queryString.match(/(favorite)/g)) {
               console.log("undertaker wwe");
-              console.log(body.products);
+              console.log(body);
               rr_array = body.products;
             }
             else {
