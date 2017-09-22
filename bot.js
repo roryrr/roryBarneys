@@ -426,6 +426,7 @@ console.log(itemList);
 //block that makes a call to RR api
 function callRrApi(sid, queryString){
   var rr_array =[];
+  rr_array.length = 0;
   var req_url = process.env.STAGING_URL;
   if(queryString == "default"){
     var queryParameters = { apiKey: process.env.API_KEY,
