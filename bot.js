@@ -545,9 +545,13 @@ function dataBuilder(d, myArray){
             // sendGenericMessage(d, rr_array_fav);
           });
     });
-
-    console.log("utspk" +rr_array_fav);
- sendGenericMessage(d, rr_array_fav);
+if(rr_array_fav.length > 0){
+  console.log("Motorola array has data");
+}
+else {
+  console.log("Xiomi no data");
+}
+ // sendGenericMessage(d, rr_array_fav);
 }
 
 function callSendAPI(messageData) {
