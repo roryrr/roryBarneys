@@ -454,6 +454,12 @@ function callRrApi(sid, queryString){
           placements: process.env.PLACEMENTS_ID_SIMILAR,
           productId: queryString.slice(7)};
   }
+  else if (queryString.match(/(favorite)/g)) {
+    this.req_url = process.env.GET_PRODUCTS_URL;
+    var queryParameters = { apiKey: process.env.API_KEY,
+          apiClientKey: process.env.API_CLIENT_KEY,
+          productId: queryString.slice(8)};
+  }
   // else if (queryString.match(/(rrfinder)/g)) {
   //   this.req_url = process.env.FIND_URL;
   //   var queryParameters = { lang: 'en',
@@ -480,8 +486,13 @@ function callRrApi(sid, queryString){
             //       sendGenericMessageForSearch(sid, rr_array);
             // }
             // else {
+            if (queryString.match(/(favorite)/g)) {
+              rr_array = body.products;
+            }
+            else {
                   rr_array = body.placements[0].recommendedProducts;
-                    sendGenericMessage(sid, rr_array);
+                }
+            sendGenericMessage(sid, rr_array);
             // }
             // The Description is:  "descriptive string"
             // console.log("Got a response dhoni: ", rr_array[0].clickURL);
@@ -576,18 +587,19 @@ function callRrApi(sid, queryString){
                         console.log("samantha4 inside function");
                         console.log(body.pref_product.NEUTRAL);
                         // body = JSON.parse(body);
-                        rr_array_temp = body.pref_product.NEUTRAL;
+                        rr_array_temp = "favorite" + body.pref_product.NEUTRAL.join("|");
                         console.log("Rajinikanth");
                         console.log(rr_array_temp);
-                        dataBuilder(sid, rr_array_temp);
-                        setTimeout(function() {
-                          if(rr_array_fav.length > 0){
-                            sendGenericMessage(sid, rr_array_fav);
-                          }
-                          else {
-                            sendTextMessage(sid, "You don't have any items.");
-                          }
-                           }, 2500);
+                        callRrApi(sid, rr_array_temp);
+                        // dataBuilder(sid, rr_array_temp);
+                        // setTimeout(function() {
+                        //   if(rr_array_fav.length > 0){
+                        //     sendGenericMessage(sid, rr_array_fav);
+                        //   }
+                        //   else {
+                        //     sendTextMessage(sid, "You don't have any items.");
+                        //   }
+                        //    }, 2500);
 
                         // // The Description is:  "descriptive string"
                         // console.log("Got a response dhoni: ", rr_array[0].clickURL);
@@ -601,53 +613,53 @@ function callRrApi(sid, queryString){
                     });
                   }
 
-function dataBuilder(d, myArray){
-  // var j = 0;
-  rr_array_fav.length = 0;
-    myArray.forEach(i=>{
-      var req_url = process.env.STAGING_URL;
-      var queryParameters = { apiKey: process.env.BY_FAV_API_KEY,
-            apiClientKey: process.env.API_CLIENT_KEY,
-            placements: process.env.PLACEMENTS_ID_ECHO,
-            productId: i,
-            };
-    request({
-      uri: req_url,
-      qs: queryParameters,
-      headers: {
-        'User-Agent': 'Mozilla/5.0 (Linux; Android 5.1.1; A1 Build/LMY47V) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/60.0.3112.116 Mobile Safari/537.36'
-        },
-      method: 'GET',
-    },(error, response, body) => {
-        console.log("ash inside function");
-            if (!error && response.statusCode == 200) {
-              body = JSON.parse(body);
-              console.log("Imran");
-              console.log(body);
-              rr_array_fav.push(body.placements[0].recommendedProducts[0]);
-               console.log("yeshvitha");
-               console.log("talpa");
-               //console.log(rr_array[j]);
-              //  j++;
-              // console.log(rr_array);
-              // rr_array.push(body);
-              // sendTextMessage(d, 'warming up');
-              // The Description is:  "descriptive string"
-              // console.log("Got a response dhoni: ", rr_array[0].clickURL);
-              // sendTextMessage(sid, 'Pavan check logs');
-            } else {
-              // console.log('Google log start golden');
-              // console.log(body) // Print the google web page.
-              // console.log('Google log end golden');
-              sendTextMessage(d, 'Anushka, ERROR');
-            }
-            console.log("Deepika start");
-            // console.log(rr_array_fav);
-            // sendGenericMessage(d, rr_array_fav);
-          });
-    });
- //
-}
+// function dataBuilder(d, myArray){
+//   // var j = 0;
+//   rr_array_fav.length = 0;
+//     myArray.forEach(i=>{
+//       var req_url = process.env.STAGING_URL;
+//       var queryParameters = { apiKey: process.env.BY_FAV_API_KEY,
+//             apiClientKey: process.env.API_CLIENT_KEY,
+//             placements: process.env.PLACEMENTS_ID_ECHO,
+//             productId: i,
+//             };
+//     request({
+//       uri: req_url,
+//       qs: queryParameters,
+//       headers: {
+//         'User-Agent': 'Mozilla/5.0 (Linux; Android 5.1.1; A1 Build/LMY47V) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/60.0.3112.116 Mobile Safari/537.36'
+//         },
+//       method: 'GET',
+//     },(error, response, body) => {
+//         console.log("ash inside function");
+//             if (!error && response.statusCode == 200) {
+//               body = JSON.parse(body);
+//               console.log("Imran");
+//               console.log(body);
+//               rr_array_fav.push(body.placements[0].recommendedProducts[0]);
+//                console.log("yeshvitha");
+//                console.log("talpa");
+//                //console.log(rr_array[j]);
+//               //  j++;
+//               // console.log(rr_array);
+//               // rr_array.push(body);
+//               // sendTextMessage(d, 'warming up');
+//               // The Description is:  "descriptive string"
+//               // console.log("Got a response dhoni: ", rr_array[0].clickURL);
+//               // sendTextMessage(sid, 'Pavan check logs');
+//             } else {
+//               // console.log('Google log start golden');
+//               // console.log(body) // Print the google web page.
+//               // console.log('Google log end golden');
+//               sendTextMessage(d, 'Anushka, ERROR');
+//             }
+//             console.log("Deepika start");
+//             // console.log(rr_array_fav);
+//             // sendGenericMessage(d, rr_array_fav);
+//           });
+//     });
+//  //
+// }
 
 function callSendAPI(messageData) {
   // console.log("Dunkirk start");
