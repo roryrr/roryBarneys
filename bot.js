@@ -419,6 +419,7 @@ function callRrApi(sid, queryString){
           if (!error && response.statusCode == 200) {
             //parsing the json response from RR cloud
             body = JSON.parse(body);
+            console.log("Buddha " + queryString);
             rr_array = body.placements[0].recommendedProducts;
             sendGenericMessage(sid, rr_array);
             // The Description is:  "descriptive string"
