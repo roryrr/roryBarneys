@@ -113,7 +113,7 @@ function receivedMessage(event) {
     //   default:
     //     sendTextMessage(senderID, messageText);
     // }
-    callRrApi(senderID, "rrfinder" + messageText);
+    callFindApi(senderID, messageText);
   } else if (messageAttachments) {
     sendTextMessage(senderID, "Message with attachment received");
   }
@@ -451,16 +451,16 @@ function callRrApi(sid, queryString){
           placements: process.env.PLACEMENTS_ID_SIMILAR,
           productId: queryString.slice(7)};
   }
-  else if (queryString.match(/(rrfinder)/g)) {
-    this.req_url = process.env.FIND_URL;
-    var queryParameters = { lang: 'en',
-          start: parseInt('0'),
-          rows: parseInt('5'),
-          userId: process.env.USER_ID,
-          sessionId: process.env.SESSION_ID,
-          placements: process.env.PLACEMENTS_ID_FIND,
-          query: queryString.slice(7)};
-  }
+  // else if (queryString.match(/(rrfinder)/g)) {
+  //   this.req_url = process.env.FIND_URL;
+  //   var queryParameters = { lang: 'en',
+  //         start: parseInt('0'),
+  //         rows: parseInt('5'),
+  //         userId: process.env.USER_ID,
+  //         sessionId: process.env.SESSION_ID,
+  //         placements: process.env.PLACEMENTS_ID_FIND,
+  //         query: queryString.slice(7)};
+  // }
   request({
     uri: req_url,
     qs: queryParameters,
@@ -472,14 +472,14 @@ function callRrApi(sid, queryString){
           if (!error && response.statusCode == 200) {
             //parsing the json response from RR cloud
             body = JSON.parse(body);
-            if (queryString.match(/(rrfinder)/g)) {
-                  rr_array = body.placements[0].docs;
-                  sendGenericMessageForSearch(sid, rr_array);
-            }
-            else {
+            // if (queryString.match(/(rrfinder)/g)) {
+            //       rr_array = body.placements[0].docs;
+            //       sendGenericMessageForSearch(sid, rr_array);
+            // }
+            // else {
                   rr_array = body.placements[0].recommendedProducts;
                     sendGenericMessage(sid, rr_array);
-            }
+            // }
             // The Description is:  "descriptive string"
             // console.log("Got a response dhoni: ", rr_array[0].clickURL);
             // sendTextMessage(sid, 'Pavan check logs');
@@ -491,6 +491,35 @@ function callRrApi(sid, queryString){
           }
         });
       }
+
+      //Block that call Find api
+
+      function callFindApi(sid, queryString){
+        var rr_array =[];
+        rr_array.length = 0;
+          request({
+          uri: "https://staging.richrelevance.com/rrserver/api/find/v1/dbeab3c977a08905?facet=&query=skirt&lang=en&start=0&rows=2&placement=generic_page.rory_search&userId=rory&sessionId=1",
+          headers: {
+            'User-Agent': 'Mozilla/5.0 (Linux; Android 5.1.1; A1 Build/LMY47V) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/60.0.3112.116 Mobile Safari/537.36'
+            },
+          method: 'GET',
+          }, function (error, response, body) {
+                if (!error && response.statusCode == 200) {
+                  //parsing the json response from RR cloud
+                  body = JSON.parse(body);
+                        rr_array = body.placements[0].docs;
+                        sendGenericMessageForSearch(sid, rr_array);
+                  // The Description is:  "descriptive string"
+                  // console.log("Got a response dhoni: ", rr_array[0].clickURL);
+                  // sendTextMessage(sid, 'Pavan check logs');
+                } else {
+                  // console.log('Google log start golden');
+                  // console.log(body) // Print the google web page.
+                  // console.log('Google log end golden');
+                  sendTextMessage(sid, 'Pavan, ERROR');
+                }
+              });
+            }
 
       //Block that calls RR api(add to favorites)
       function callRrFavApi(sid, queryString){
