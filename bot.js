@@ -428,8 +428,8 @@ function callRrApi(sid, queryString){
   var rr_array =[];
   rr_array.length = 0;
   var mySt = Math.floor((Math.random() * 50) + 1).toString();
-  var req_url = process.env.STAGING_URL;
   if(queryString == "default"){
+    var req_url = process.env.STAGING_URL;
     var queryParameters = { apiKey: process.env.API_KEY,
           apiClientKey: process.env.API_CLIENT_KEY,
           userId: process.env.USER_ID,
@@ -437,6 +437,7 @@ function callRrApi(sid, queryString){
           placements: process.env.PLACEMENTS_ID};
   }
   else if(queryString.match(/(BNY-)/g)){
+    var req_url = process.env.STAGING_URL;
     var queryParameters = { apiKey: process.env.API_KEY,
           apiClientKey: process.env.API_CLIENT_KEY,
           st: mySt,
@@ -447,6 +448,7 @@ function callRrApi(sid, queryString){
           categoryId: queryString};
   }
   else if (queryString.match(/(similar)/g)) {
+    var req_url = process.env.STAGING_URL;
     var queryParameters = { apiKey: process.env.API_KEY,
           apiClientKey: process.env.API_CLIENT_KEY,
           userId: process.env.USER_ID,
@@ -455,7 +457,7 @@ function callRrApi(sid, queryString){
           productId: queryString.slice(7)};
   }
   else if (queryString.match(/(favorite)/g)) {
-    this.req_url = process.env.GET_PRODUCTS_URL;
+    var req_url = process.env.GET_PRODUCTS_URL;
     var queryParameters = { apiKey: process.env.API_KEY,
           apiClientKey: process.env.API_CLIENT_KEY,
           productId: queryString.slice(8)};
