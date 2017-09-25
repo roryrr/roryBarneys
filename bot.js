@@ -112,9 +112,10 @@
           // Got a response from api.ai. Let's POST to Facebook Messenger
           let aiText = response.result.fulfillment.speech;
           console.log("kane wwe" + response.result.metadata.intentName);
-          if (response.result.metadata.intentName === 'weather') {
+          if (response.result.metadata.intentName === 'weather intent') {
             let city = req.body.result.parameters['geo-city'];
             let restUrl = 'http://api.openweathermap.org/data/2.5/weather?APPID='+WEATHER_API_KEY+'&q='+city;
+            console.log("inside weather api pavan");
 
             request.get(restUrl, (err, response, body) => {
               if (!err && response.statusCode == 200) {
