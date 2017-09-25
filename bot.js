@@ -6,7 +6,7 @@
 require('dotenv').config();
 
 const APIAI_TOKEN = process.env.APIAI_CLIENT_ACCESS_TOKEN;
-const WEATHER_API_KEY
+const WEATHER_API_KEY = process.env.WEATHER_API_KEY;
 const express = require('express');
 const bodyParser = require('body-parser');
 const request = require('request');
