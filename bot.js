@@ -111,16 +111,39 @@ function receivedMessage(event) {
       apiai.on('response', (response) => {
         // Got a response from api.ai. Let's POST to Facebook Messenger
         let aiText = response.result.fulfillment.speech;
-        var messageData = {
-          recipient: {
-            id: senderID
-          },
-          message: {
-            text: aiText
+        if (response.result.metadata.intentName === 'weather') {
+          let city = req.body.result.parameters['geo-city'];
+          let restUrl = 'http://api.openweathermap.org/data/2.5/weather?APPID='+WEATHER_API_KEY+'&q='+city;
+
+          request.get(restUrl, (err, response, body) => {
+            if (!err && response.statusCode == 200) {
+              let json = JSON.parse(body);
+              let msg = json.weather[0].description + ' and the temperature is ' + json.main.temp + ' ℉';
+              var messageData = {
+                recipient: {
+                  id: senderID
+                },
+                message: {
+                  text: msg
+                }
+              };
+
+          callSendAPI(messageData);
           }
-        };
+        });
+      }
+          else {
+            var messageData = {
+              recipient: {
+                id: senderID
+              },
+              message: {
+                text: aiText
+              }
+            };
 
         callSendAPI(messageData);
+      }
       });
 
       apiai.on('error', (error) => {
