@@ -110,7 +110,7 @@ function receivedMessage(event) {
       });
 
       apiai.on('error', (error) => {
-        console.log(error);
+        console.log("Pikachu" + error);
       });
 
       apiai.end();
