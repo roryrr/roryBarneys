@@ -106,7 +106,7 @@
       let apiai = apiaiApp.textRequest(messageText, {
           sessionId: 'tabby_cat' // use any arbitrary id
         });
-        console.log("aparichitudu" + apiai.body.result.parameters['geo-city']);
+        // console.log("aparichitudu" + apiai.body.result.parameters['geo-city']);
 
         // apiai.on('response', (response) => {
         //   // Got a response from api.ai. Let's POST to Facebook Messenger
@@ -125,7 +125,8 @@
         //           speech: msg,
         //           displayText: msg,
         //           source: 'weather'});
-        //     }else {
+            // }
+        //     else {
         //       return res.status(400).json({
         //         status: {
         //           code: 400,
@@ -133,25 +134,26 @@
         //         }
         //   });
         // }
-        //     else {
-        //       var messageData = {
-        //         recipient: {
-        //           id: senderID
-        //         },
-        //         message: {
-        //           text: aiText
-        //         }
-        //       };
-        //
-        //   callSendAPI(messageData);
+            // else {
+            apiai.on('response', (response) => {
+              let aiText = response.result.fulfillment.speech;
+            });
+            apiai.on('error', (error) => {
+              console.log("Pikachu" + error);
+            });
+
+            apiai.end();
+              var messageData = {
+                recipient: {
+                  id: senderID
+                },
+                message: {
+                  text: aiText
+                }
+              };
+
+          callSendAPI(messageData);
         // }
-        // });
-
-        apiai.on('error', (error) => {
-          console.log("Pikachu" + error);
-        });
-
-        apiai.end();
 
       // callFindApi(senderID, messageText);
     }
