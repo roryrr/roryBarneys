@@ -116,7 +116,7 @@ app.post('/ai', (req, res) => {
     })
   }
   else if (req.body.result.action === 'site-wide-general-top-products') {
-    console.log("hurray you are almost there");
+    console.log("hurray you are almost there" + req.body);
   }
 
 });
