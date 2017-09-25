@@ -116,7 +116,7 @@ app.post('/ai', (req, res) => {
     })
   }
   else if (req.body.result.action === 'site-wide-general-top-products') {
-    console.log("hurray you are almost there" + req.body);
+    console.log("hurray you are almost there" + req.body.result);
   }
 
 });
@@ -142,8 +142,15 @@ function receivedMessage(event) {
     // and send back the template example. Otherwise, just echo the text we received.
 
     let apiai = apiaiApp.textRequest(messageText, {
-        sessionId: 'tabby_cat' // use any arbitrary id
-
+        sessionId: 'tabby_cat', // use any arbitrary id
+        contexts: [
+          {
+            name: "generic",
+            parameters: {
+            facebook_user_id: senderID
+        }
+      }
+      ]
       });
 
       apiai.on('response', (response) => {
