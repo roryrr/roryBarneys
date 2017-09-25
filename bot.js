@@ -52,6 +52,26 @@ app.get('/', function(req, res) {
 app.post('/webhook', function (req, res) {
   var data = req.body;
   // Make sure this is a page subscription
+
+  if (req.body.result.action === 'weather') {
+    let city = req.body.result.parameters['geo-city'];
+    let restUrl = 'http://api.openweathermap.org/data/2.5/weather?APPID='+process.env.WEATHER_API_KEY+'&q='+city;
+    request.get(restUrl, (err, response, body) => {
+      if (!err && response.statusCode == 200) {
+        let json = JSON.parse(body);
+        let msg = json.weather[0].description + ' and the temperature is ' + json.main.temp + ' ℉';
+        return res.json({
+          speech: msg,
+          displayText: msg,
+          source: 'weather'});
+      } else {
+        return res.status(400).json({
+          status: {
+            code: 400,
+            errorType: 'I failed to look up the city name.'}});
+      }})
+  }
+
   if (data.object === 'page') {
 
     // Iterate over each entry - there may be multiple if batched
@@ -102,6 +122,7 @@ function receivedMessage(event) {
 
     let apiai = apiaiApp.textRequest(messageText, {
         sessionId: 'tabby_cat' // use any arbitrary id
+
       });
 
       apiai.on('response', (response) => {
