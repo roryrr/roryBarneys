@@ -107,6 +107,16 @@ function receivedMessage(event) {
       apiai.on('response', (response) => {
         // Got a response from api.ai. Let's POST to Facebook Messenger
         let aiText = response.result.fulfillment.speech;
+        var messageData = {
+          recipient: {
+            id: senderID
+          },
+          message: {
+            text: aiText
+          }
+        };
+
+        callSendAPI(messageData);
       });
 
       apiai.on('error', (error) => {
@@ -114,17 +124,6 @@ function receivedMessage(event) {
       });
 
       apiai.end();
-
-      var messageData = {
-        recipient: {
-          id: senderID
-        },
-        message: {
-          text: aiText
-        }
-      };
-
-      callSendAPI(messageData);
 
     // callFindApi(senderID, messageText);
   } else if (messageAttachments) {
