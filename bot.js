@@ -6,6 +6,9 @@ const express = require('express');
 const bodyParser = require('body-parser');
 const request = require('request');
 const path = require('path');
+//apiai for NLP
+
+const apiaiApp = require('apiai')(process.env.APIAI_CLIENT_ACCESS_TOKEN);
 //dotenv library for maintaining credential and client secrets
 require('dotenv').config();
 
@@ -96,7 +99,34 @@ function receivedMessage(event) {
   if (messageText) {
     // If we receive a text message, check to see if it matches a keyword
     // and send back the template example. Otherwise, just echo the text we received.
-    callFindApi(senderID, messageText);
+
+    let apiai = apiaiApp.textRequest(messageText, {
+        sessionId: 'tabby_cat' // use any arbitrary id
+      });
+
+      apiai.on('response', (response) => {
+        // Got a response from api.ai. Let's POST to Facebook Messenger
+        let aiText = response.result.fulfillment.speech;
+      });
+
+      apiai.on('error', (error) => {
+        console.log(error);
+      });
+
+      apiai.end();
+
+      var messageData = {
+        recipient: {
+          id: senderID
+        },
+        message: {
+          text: aiText
+        }
+      };
+
+      callSendAPI(messageData);
+
+    // callFindApi(senderID, messageText);
   } else if (messageAttachments) {
     sendTextMessage(senderID, "Message with attachment received");
   }

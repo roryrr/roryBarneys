@@ -18,6 +18,7 @@
   "author": "Pavan Ulichi <pulichi@richrelevance.com>",
   "license": "MIT",
   "dependencies": {
+    "apiai": "^4.0.3",
     "body-parser": "*",
     "cloudinary": "^1.9.0",
     "dotenv": "^4.0.0",
