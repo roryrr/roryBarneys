@@ -8,7 +8,7 @@ const request = require('request');
 const path = require('path');
 //apiai for NLP
 
-const apiaiApp = require('apiai')(process.env.APIAI_CLIENT_ACCESS_TOKEN);
+const apiaiApp = require('apiai')('0ccf898af8834a579632f9a028092060');
 //dotenv library for maintaining credential and client secrets
 require('dotenv').config();
 
