@@ -117,11 +117,17 @@ app.post('/ai', (req, res) => {
     })
   }
   else if (req.body.result.action === 'site-wide-general-top-products') {
-    console.log("hurray you are almost there" + req.body.result);
     var rr_array =[];
     rr_array.length = 0;
+    var req_url = process.env.STAGING_URL;
+    var queryParameters = { apiKey: process.env.API_KEY,
+          apiClientKey: process.env.API_CLIENT_KEY,
+          userId: process.env.USER_ID,
+          sessionId: process.env.SESSION_ID,
+          placements: process.env.PLACEMENTS_ID};
       request({
-      uri: "https://staging.richrelevance.com/rrserver/api/find/v1/dbeab3c977a08905?facet=&query=shoe&lang=en&start=0&rows=5&placement=generic_page.rory_search&userId=ulichi&sessionId=mysession",
+      uri: req_url,
+      qs: queryParameters,
       headers: {
         'User-Agent': 'Mozilla/5.0 (Linux; Android 5.1.1; A1 Build/LMY47V) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/60.0.3112.116 Mobile Safari/537.36'
         },
@@ -133,7 +139,7 @@ app.post('/ai', (req, res) => {
                     rr_array = body.placements[0].docs;
                     // return sendGenericMessageForApiAi(rr_array);
 
-                    sendGenericMessageForSearch(GLOBAL_ID, rr_array);
+                    sendGenericMessage(GLOBAL_ID, rr_array);
               // The Description is:  "descriptive string"
             } else {
             console.log('Pavan api.ai, ERROR');
