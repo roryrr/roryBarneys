@@ -136,7 +136,7 @@ app.post('/ai', (req, res) => {
             if (!error && response.statusCode == 200) {
               //parsing the json response from RR cloud
               body = JSON.parse(body);
-                    rr_array = body.placements[0].docs;
+                    rr_array = body.placements[0].recommendedProducts;
                     // return sendGenericMessageForApiAi(rr_array);
 
                     sendGenericMessage(GLOBAL_ID, rr_array);
