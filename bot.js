@@ -11,6 +11,7 @@ const express = require('express');
 const bodyParser = require('body-parser');
 const request = require('request');
 const path = require('path');
+var GLOBAL_ID;
 
 //apiai for NLP
 const apiaiApp = require('apiai')(APIAI_TOKEN);
@@ -132,7 +133,7 @@ app.post('/ai', (req, res) => {
                     rr_array = body.placements[0].docs;
                     // return sendGenericMessageForApiAi(rr_array);
 
-                    sendGenericMessageForSearch('1826443647395614', rr_array);
+                    sendGenericMessageForSearch(GLOBAL_ID, rr_array);
               // The Description is:  "descriptive string"
             } else {
             console.log('Pavan api.ai, ERROR');
@@ -190,7 +191,7 @@ function receivedMessage(event) {
   var recipientID = event.recipient.id;
   var timeOfMessage = event.timestamp;
   var message = event.message;
-
+  GLOBAL_ID = senderID;
   console.log("Received message for urmila user %d and page %d at %d with message:",
     senderID, recipientID, timeOfMessage);
   console.log(JSON.stringify(message));
