@@ -149,10 +149,12 @@ app.post('/ai', (req, res) => {
   }
 
   else if (req.body.result.action === 'user-searches-products') {
-    var findGender = req.body.result.parameters['user-gender'];
-    var findColor = req.body.result.parameters['color'];
-    var findProductName = req.body.result.parameters['product-name'];
+    var findGender="", findColor="", findProductName="";
+    findGender = req.body.result.parameters['user-gender'];
+    findColor = req.body.result.parameters['color'];
+    findProductName = req.body.result.parameters['product-name'];
     var rr_array =[];
+    console.log("salman");
     console.log("salman" + findColor + findProductName + findGender);
     var findMyStart = Math.floor((Math.random() * 50) + 1).toString();
     rr_array.length = 0;
