@@ -144,36 +144,38 @@ app.post('/ai', (req, res) => {
 function sendGenericMessageForApiAi(arrayHere){
   var itemList = [];
   arrayHere.forEach(i=>{
-   itemList.push(
-   {
-    "title":i.name,
-    "subtitle":i.brand,
-    "item_url":i.productURL,
-    //manipulating the image using Cloudinary
-    "image_url":cloudinary.url(i.imageURL,{ type: 'fetch', height: 170, width: 170, crop: 'scale', quality: 100, fetch_format: 'jpg'}),
-    "buttons" : [
-        {
-          "type": "postback",
-          "title": "Try something similar",
-          "payload": "similar"+i.id
-        }, {
-          "type": "postback",
-          "title": "Add to favorites",
-          "payload": "fav"+i.id
-        }]
-   });
+     itemList.push(
+     {
+      "title":i.name,
+      "subtitle":i.brand,
+      "item_url":process.env.BNY_HOME + i.linkId,
+      //manipulating the image using Cloudinary
+      "image_url":cloudinary.url(i.imageId,{ type: 'fetch', height: 170, width: 170, crop: 'scale', quality: 100, fetch_format: 'jpg'}),
+      "buttons" : [
+          {
+            "type": "postback",
+            "title": "Try something similar",
+            "payload": "similar"+i.id
+          }, {
+            "type": "postback",
+            "title": "Add to favorites",
+            "payload": "fav"+i.id
+          }]
+     });
   });
   console.log("api.ai dabang");
   console.log(itemList);
   var messageData = {
-      attachment: {
-        type: "template",
-        payload: {
-          template_type: "generic",
-          image_aspect_ratio: "square",
-          elements: itemList
+    "facebook": {
+      "attachment": {
+        "type": "template",
+        "payload": {
+          "template_type": "generic",
+          "image_aspect_ratio": "square",
+          "elements": itemList
         }
       }
+    }
   };
 
   return messageData;
