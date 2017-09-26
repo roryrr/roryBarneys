@@ -117,6 +117,9 @@ app.post('/ai', (req, res) => {
   }
   else if (req.body.result.action === 'site-wide-general-top-products') {
     console.log("hurray you are almost there" + req.body.result);
+    var foo = receivedMessage("{}");
+    foo = foo.dummyForReturn();
+    console.log("geetanjali" + foo);
     var rr_array =[];
     rr_array.length = 0;
       request({
@@ -192,7 +195,9 @@ function receivedMessage(event) {
   console.log("Received message for urmila user %d and page %d at %d with message:",
     senderID, recipientID, timeOfMessage);
   console.log(JSON.stringify(message));
-
+  function dummyForReturn(){
+    return senderID;
+  }
   var messageId = message.mid;
 
   var messageText = message.text;
