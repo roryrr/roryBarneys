@@ -117,9 +117,9 @@ app.post('/ai', (req, res) => {
   }
   else if (req.body.result.action === 'site-wide-general-top-products') {
     console.log("hurray you are almost there" + req.body.result);
-    var foo = receivedMessage("{}");
-    foo = foo.dummyForReturn();
-    console.log("geetanjali" + foo);
+    var foo = receivedMessage("");
+    foo1 = foo.dummyForReturn();
+    console.log("geetanjali" + foo1);
     var rr_array =[];
     rr_array.length = 0;
       request({
