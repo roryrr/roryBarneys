@@ -119,6 +119,7 @@ app.post('/ai', (req, res) => {
   else if (req.body.result.action === 'site-wide-general-top') {
     var rr_array =[];
     rr_array.length = 0;
+    console.log("nagma");
     var req_url = process.env.STAGING_URL;
     var queryParameters = { apiKey: process.env.API_KEY,
           apiClientKey: process.env.API_CLIENT_KEY,
