@@ -148,6 +148,45 @@ app.post('/ai', (req, res) => {
           });
   }
 
+  else if (req.body.result.action === 'user-searches-products') {
+    let findGender = req.body.result.parameters['user-gender'];
+    let findColor = req.body.result.parameters['color'];
+    let findProductName = req.body.result.parameters['product-name'];
+    var rr_array =[];
+    console.log("salman" + findColor + findProductName + findGender);
+    rr_array.length = 0;
+    console.log("nagma");
+    var req_url = process.env.FIND_URL;
+    var queryParameters = { apiKey: process.env.API_KEY,
+          apiClientKey: process.env.API_CLIENT_KEY,
+          userId: process.env.USER_ID,
+          sessionId: process.env.SESSION_ID,
+          placements: process.env.PLACEMENTS_ID_FIND,
+          lang: "en",
+          facet: "",
+          query: findProductName,
+          start: "0",
+          rows: "5"};
+        request({
+          uri: req_url,
+          qs: queryParameters,
+          headers: {
+            'User-Agent': 'Mozilla/5.0 (Linux; Android 5.1.1; A1 Build/LMY47V) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/60.0.3112.116 Mobile Safari/537.36'
+            },
+          method: 'GET',
+          }, function (error, response, body) {
+                if (!error && response.statusCode == 200) {
+                  //parsing the json response from RR cloud
+                  body = JSON.parse(body);
+                        rr_array = body.placements[0].docs;
+                        sendGenericMessageForSearch(GLOBAL_ID, rr_array);
+              // The Description is:  "descriptive string"
+            } else {
+            console.log('Pavan api.ai, ERROR');
+            }
+          });
+  }
+
 });
 
 //function to generate the payload for fb via api.ai
