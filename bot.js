@@ -117,9 +117,6 @@ app.post('/ai', (req, res) => {
   }
   else if (req.body.result.action === 'site-wide-general-top-products') {
     console.log("hurray you are almost there" + req.body.result);
-    var foo = receivedMessage("");
-    foo1 = foo.dummyForReturn();
-    console.log("geetanjali" + foo1);
     var rr_array =[];
     rr_array.length = 0;
       request({
@@ -133,7 +130,9 @@ app.post('/ai', (req, res) => {
               //parsing the json response from RR cloud
               body = JSON.parse(body);
                     rr_array = body.placements[0].docs;
-                    return sendGenericMessageForApiAi(rr_array);
+                    // return sendGenericMessageForApiAi(rr_array);
+
+                    sendGenericMessageForSearch('1826443647395614', rr_array);
               // The Description is:  "descriptive string"
             } else {
             console.log('Pavan api.ai, ERROR');
