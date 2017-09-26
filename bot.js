@@ -116,7 +116,7 @@ app.post('/ai', (req, res) => {
       }
     })
   }
-  else if (req.body.result.action === 'site-wide-general-top-products') {
+  else if (req.body.result.action === 'site-wide-general-top') {
     var rr_array =[];
     rr_array.length = 0;
     var req_url = process.env.STAGING_URL;
