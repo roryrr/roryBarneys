@@ -117,9 +117,68 @@ app.post('/ai', (req, res) => {
   }
   else if (req.body.result.action === 'site-wide-general-top-products') {
     console.log("hurray you are almost there" + req.body.result);
+    var rr_array =[];
+    rr_array.length = 0;
+      request({
+      uri: "https://staging.richrelevance.com/rrserver/api/find/v1/dbeab3c977a08905?facet=&query=shoe&lang=en&start=0&rows=5&placement=generic_page.rory_search&userId=ulichi&sessionId=mysession",
+      headers: {
+        'User-Agent': 'Mozilla/5.0 (Linux; Android 5.1.1; A1 Build/LMY47V) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/60.0.3112.116 Mobile Safari/537.36'
+        },
+      method: 'GET',
+      }, function (error, response, body) {
+            if (!error && response.statusCode == 200) {
+              //parsing the json response from RR cloud
+              body = JSON.parse(body);
+                    rr_array = body.placements[0].docs;
+                    return sendGenericMessageForApiAi(rr_array);
+              // The Description is:  "descriptive string"
+            } else {
+            console.log('Pavan api.ai, ERROR');
+            }
+          });
   }
 
 });
+
+//function to generate the payload for fb via api.ai
+function sendGenericMessageForApiAi(arrayHere){
+  var itemList = [];
+  arrayHere.forEach(i=>{
+   itemList.push(
+   {
+    "title":i.name,
+    "subtitle":i.brand,
+    "item_url":i.productURL,
+    //manipulating the image using Cloudinary
+    "image_url":cloudinary.url(i.imageURL,{ type: 'fetch', height: 170, width: 170, crop: 'scale', quality: 100, fetch_format: 'jpg'}),
+    "buttons" : [
+        {
+          "type": "postback",
+          "title": "Try something similar",
+          "payload": "similar"+i.id
+        }, {
+          "type": "postback",
+          "title": "Add to favorites",
+          "payload": "fav"+i.id
+        }]
+   });
+  });
+  console.log("api.ai dabang");
+  console.log(itemList);
+  var messageData = {
+      attachment: {
+        type: "template",
+        payload: {
+          template_type: "generic",
+          image_aspect_ratio: "square",
+          elements: itemList
+        }
+      }
+  };
+
+  return messageData;
+
+}
 
 // Incoming events handling (this handles both user text input and also text from payload that comes from FB api)
 function receivedMessage(event) {
