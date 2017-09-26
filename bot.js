@@ -154,6 +154,7 @@ app.post('/ai', (req, res) => {
     let findProductName = req.body.result.parameters['product-name'];
     var rr_array =[];
     console.log("salman" + findColor + findProductName + findGender);
+    var findMyStart = Math.floor((Math.random() * 50) + 1).toString();
     rr_array.length = 0;
     console.log("nagma");
     var req_url = process.env.FIND_URL;
@@ -165,7 +166,7 @@ app.post('/ai', (req, res) => {
           lang: "en",
           facet: "",
           query: findProductName,
-          start: "0",
+          start: findMyStart,
           rows: "5"};
         request({
           uri: req_url,
@@ -189,47 +190,47 @@ app.post('/ai', (req, res) => {
 
 });
 
-//function to generate the payload for fb via api.ai
-function sendGenericMessageForApiAi(arrayHere){
-  var itemList = [];
-  arrayHere.forEach(i=>{
-     itemList.push(
-     {
-      "title":i.name,
-      "subtitle":i.brand,
-      "item_url":process.env.BNY_HOME + i.linkId,
-      //manipulating the image using Cloudinary
-      "image_url":cloudinary.url(i.imageId,{ type: 'fetch', height: 170, width: 170, crop: 'scale', quality: 100, fetch_format: 'jpg'}),
-      "buttons" : [
-          {
-            "type": "postback",
-            "title": "Try something similar",
-            "payload": "similar"+i.id
-          }, {
-            "type": "postback",
-            "title": "Add to favorites",
-            "payload": "fav"+i.id
-          }]
-     });
-  });
-  console.log("api.ai dabang");
-  console.log(itemList);
-  var messageData = {
-    "facebook": {
-      "attachment": {
-        "type": "template",
-        "payload": {
-          "template_type": "generic",
-          "image_aspect_ratio": "square",
-          "elements": itemList
-        }
-      }
-    }
-  };
-
-  return messageData;
-
-}
+// //function to generate the payload for fb via api.ai
+// function sendGenericMessageForApiAi(arrayHere){
+//   var itemList = [];
+//   arrayHere.forEach(i=>{
+//      itemList.push(
+//      {
+//       "title":i.name,
+//       "subtitle":i.brand,
+//       "item_url":process.env.BNY_HOME + i.linkId,
+//       //manipulating the image using Cloudinary
+//       "image_url":cloudinary.url(i.imageId,{ type: 'fetch', height: 170, width: 170, crop: 'scale', quality: 100, fetch_format: 'jpg'}),
+//       "buttons" : [
+//           {
+//             "type": "postback",
+//             "title": "Try something similar",
+//             "payload": "similar"+i.id
+//           }, {
+//             "type": "postback",
+//             "title": "Add to favorites",
+//             "payload": "fav"+i.id
+//           }]
+//      });
+//   });
+//   console.log("api.ai dabang");
+//   console.log(itemList);
+//   var messageData = {
+//     "facebook": {
+//       "attachment": {
+//         "type": "template",
+//         "payload": {
+//           "template_type": "generic",
+//           "image_aspect_ratio": "square",
+//           "elements": itemList
+//         }
+//       }
+//     }
+//   };
+//
+//   return messageData;
+//
+// }
 
 // Incoming events handling (this handles both user text input and also text from payload that comes from FB api)
 function receivedMessage(event) {
