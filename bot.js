@@ -168,7 +168,7 @@ app.post('/ai', (req, res) => {
           lang: "en",
           facet: "",
           query: findProductName,
-          start: findMyStart,
+          start: "0",
           rows: "5"};
         request({
           uri: req_url,
