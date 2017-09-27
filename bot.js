@@ -277,7 +277,13 @@ function receivedMessage(event) {
   var messageText = message.text;
   var messageAttachments = message.attachments;
 
-  if (messageText) {
+  if(messageText.quick_replies){
+    var derivedPayload = messageText.quick_replies["payload"];
+    if (derivedPayload == "v2_find") {
+      v2_showFindList(senderID);
+    }
+  }
+  else if (messageText) {
     // If we receive a text message, check to see if it matches a keyword
     // and send back the template example. Otherwise, just echo the text we received.
 
@@ -425,19 +431,19 @@ function v2_initialOptions(recipientId){
     text: "Hey! What would you like to do?",
     quick_replies:[
       {
-        content_type:"text",
+        content_type:"payload",
         title:"Search",
         payload:"v2_find",
         image_url:"https://png.icons8.com/search/color/96"
       },
       {
-        content_type:"text",
+        content_type:"payload",
         title:"Browse",
         payload:"v2_discover",
         image_url:"https://png.icons8.com/internet/dusk/64"
       },
       {
-        content_type:"text",
+        content_type:"payload",
         title:"Favorites",
         payload:"v2_favorites",
         image_url:"https://png.icons8.com/love/color/96"
