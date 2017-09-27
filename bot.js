@@ -516,7 +516,7 @@ arrayHere.forEach(i=>{
     "subtitle":i.brand,
     "item_url":i.productURL,
     //manipulating the image using Cloudinary
-    "image_url":cloudinary.url(i.imageURL,{ type: 'fetch', height: 170, crop: 'fit', quality: 100, fetch_format: 'jpg'}),
+    "image_url":cloudinary.url(i.imageURL,{ type: 'fetch', height: 170, crop: 'fill', quality: 100, fetch_format: 'jpg'}),
     "buttons" : [
         {
           "type": "postback",
@@ -560,7 +560,7 @@ arrayHere.forEach(i=>{
     "subtitle":i.brand,
     "item_url":process.env.BNY_HOME + i.linkId,
     //manipulating the image using Cloudinary
-    "image_url":cloudinary.url(i.imageId,{ type: 'fetch', height: 170, crop: 'fit', quality: 100, fetch_format: 'jpg'}),
+    "image_url":cloudinary.url(i.imageId,{ type: 'fetch', height: 170, crop: 'fill', quality: 100, fetch_format: 'jpg'}),
     "buttons" : [
         {
           "type": "postback",
