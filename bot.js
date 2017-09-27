@@ -426,13 +426,13 @@ function v2_initialOptions(recipientId){
     quick_replies:[
       {
         content_type:"text",
-        title:"Find it",
+        title:"Search",
         payload:"v2_find",
         image_url:"https://png.icons8.com/search/color/96"
       },
       {
         content_type:"text",
-        title:"Just looking",
+        title:"Browse",
         payload:"v2_discover",
         image_url:"https://png.icons8.com/internet/dusk/64"
       },
