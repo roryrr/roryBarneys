@@ -189,6 +189,32 @@ app.post('/ai', (req, res) => {
             }
           });
   }
+  else if (req.body.result.action === 'showing-user-lists') {
+    var rr_array =[];
+    rr_array.length = 0;
+    var req_url = process.env.PROD_FAV_URL;
+    var queryParameters = { apiKey: process.env.BY_FAV_API_KEY,
+          fields: process.env.BY_FAV_FIELDS,
+          };
+        request({
+          uri: req_url,
+          qs: queryParameters,
+          headers: {
+            'User-Agent': 'Mozilla/5.0 (Linux; Android 5.1.1; A1 Build/LMY47V) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/60.0.3112.116 Mobile Safari/537.36'
+            },
+          method: 'GET',
+          }, function (error, response, body) {
+                if (!error && response.statusCode == 200) {
+                  //parsing the json response from RR cloud
+                  body = JSON.parse(body);
+                        rr_array = "favorite" + body.pref_product.NEUTRAL.join("|");
+                        callRrApi(GLOBAL_ID, rr_array);
+              // The Description is:  "descriptive string"
+            } else {
+            console.log('Pavan api.ai, ERROR');
+            }
+          });
+  }
 
 });
 
