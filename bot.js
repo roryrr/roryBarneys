@@ -190,8 +190,7 @@ app.post('/ai', (req, res) => {
           });
   }
   else if (req.body.result.action === 'showing-user-lists') {
-    var rr_array =[];
-    rr_array.length = 0;
+    var rr_array;
     var req_url = process.env.PROD_FAV_URL;
     var queryParameters = { apiKey: process.env.BY_FAV_API_KEY,
           fields: process.env.BY_FAV_FIELDS,
