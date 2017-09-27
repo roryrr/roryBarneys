@@ -359,6 +359,9 @@ function receivedPostback(event) {
   else if (payload == 'fvList') {
     returnFavList(senderID);
   }
+  else if (payload == 'v2_find') {
+    v2_showFindList(senderID);
+  }
 }
 
 //////////////////////////
@@ -412,7 +415,7 @@ function sendLoginOption(recipientId){
   };
     callSendAPI(messageData);
 }
-
+//Quick replies on start
 function v2_initialOptions(recipientId){
   var messageData = {
   recipient:{
@@ -423,14 +426,14 @@ function v2_initialOptions(recipientId){
     quick_replies:[
       {
         content_type:"text",
-        title:"Search",
-        payload:"v2_search",
+        title:"Find it",
+        payload:"v2_find",
         image_url:"https://png.icons8.com/search/color/96"
       },
       {
         content_type:"text",
-        title:"Browse",
-        payload:"v2_browse",
+        title:"Just looking",
+        payload:"v2_discover",
         image_url:"https://png.icons8.com/internet/dusk/64"
       },
       {
@@ -438,6 +441,51 @@ function v2_initialOptions(recipientId){
         title:"Favorites",
         payload:"v2_favorites",
         image_url:"https://png.icons8.com/love/color/96"
+      }
+    ]
+  }
+};
+callSendAPI(messageData);
+}
+
+//when the user chooses to search products
+function v2_showFindList(recipientId) {
+  var messageData = {
+  recipient:{
+    id: recipientId
+  },
+  message:{
+    text: "Great! Tell me what are looking for? You can either choose an option from below or enter a text like 'show me shirts'",
+    quick_replies:[
+      {
+        content_type:"text",
+        title:"Find it",
+        payload:"v2_find",
+      },
+      {
+        content_type:"text",
+        title:"Just looking",
+        payload:"v2_discover",
+      },
+      {
+        content_type:"text",
+        title:"Favorites",
+        payload:"v2_favorites",
+      },
+      {
+        content_type:"text",
+        title:"Find it",
+        payload:"v2_find",
+      },
+      {
+        content_type:"text",
+        title:"Just looking",
+        payload:"v2_discover",
+      },
+      {
+        content_type:"text",
+        title:"Favorites",
+        payload:"v2_favorites",
       }
     ]
   }
