@@ -335,7 +335,7 @@ function receivedPostback(event) {
   // When a postback is called, we'll send a message back to the sender to
   // let them know it was successful
   if(payload == 'start'){
-  sendLoginOption(senderID);
+  v2_initialOptions(senderID);
   }
   else if (payload == 'browse') {
     sendCategoryOptions(senderID);
@@ -411,6 +411,33 @@ function sendLoginOption(recipientId){
     }
   };
     callSendAPI(messageData);
+}
+
+function v2_initialOptions(recipientId){
+  var messageData = recipient:{
+    id: recipientId
+  },
+  message:{
+    text: "Hey! What would you like to do?",
+    quick_replies:[
+      {
+        content_type:"text",
+        title:"Search",
+        payload:"v2_search",
+        image_url:"https://coursesearch.uchicago.edu/cs/prdguest/cache/UC_SEARCH_ICON_170616.PNG"
+      },
+      {
+        content_type:"text",
+        title:"Browse",
+        payload:"v2_browse",
+      },
+      {
+        content_type:"text",
+        title:"Favorites",
+        payload:"v2_favorites"
+      }
+    ]
+  }
 }
 //sending basic menu
 function sendAvailableOptionList(recipientId) {
