@@ -455,23 +455,8 @@ function v2_showFindList(recipientId) {
     id: recipientId
   },
   message:{
-    text: "Great! Tell me what are looking for? You can either choose an option from below or enter a text like 'show me shirts'",
+    text: "Great! Tell me what are looking for? You can either choose an option from below or enter a text like show me shirts",
     quick_replies:[
-      {
-        content_type:"text",
-        title:"Find it",
-        payload:"v2_find",
-      },
-      {
-        content_type:"text",
-        title:"Just looking",
-        payload:"v2_discover",
-      },
-      {
-        content_type:"text",
-        title:"Favorites",
-        payload:"v2_favorites",
-      },
       {
         content_type:"text",
         title:"Find it",
