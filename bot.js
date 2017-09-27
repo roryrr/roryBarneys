@@ -414,7 +414,8 @@ function sendLoginOption(recipientId){
 }
 
 function v2_initialOptions(recipientId){
-  var messageData = recipient:{
+  var messageData = {
+  recipient:{
     id: recipientId
   },
   message:{
@@ -438,6 +439,7 @@ function v2_initialOptions(recipientId){
       }
     ]
   }
+}
 }
 //sending basic menu
 function sendAvailableOptionList(recipientId) {
