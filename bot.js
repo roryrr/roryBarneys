@@ -439,7 +439,8 @@ function v2_initialOptions(recipientId){
       }
     ]
   }
-}
+};
+callSendAPI(messageData);
 }
 //sending basic menu
 function sendAvailableOptionList(recipientId) {
