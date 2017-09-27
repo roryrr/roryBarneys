@@ -431,19 +431,19 @@ function v2_initialOptions(recipientId){
     text: "Hey! What would you like to do?",
     quick_replies:[
       {
-        content_type:"payload",
+        content_type:"text",
         title:"Search",
         payload:"v2_find",
         image_url:"https://png.icons8.com/search/color/96"
       },
       {
-        content_type:"payload",
+        content_type:"text",
         title:"Browse",
         payload:"v2_discover",
         image_url:"https://png.icons8.com/internet/dusk/64"
       },
       {
-        content_type:"payload",
+        content_type:"text",
         title:"Favorites",
         payload:"v2_favorites",
         image_url:"https://png.icons8.com/love/color/96"
