@@ -276,18 +276,16 @@ function receivedMessage(event) {
 
   var messageText = message.text;
   var messageAttachments = message.attachments;
-
-  if(message.quick_reply){
-    console.log("quick reply noted");
-    var derivedPayload = message.quick_reply["payload"];
-    if (derivedPayload == "v2_find") {
-      v2_showFindList(senderID);
-    }
-  }
-  else if (messageText) {
+  if (messageText) {
     // If we receive a text message, check to see if it matches a keyword
     // and send back the template example. Otherwise, just echo the text we received.
-    console.log("normal message");
+    if(message.quick_reply){
+      var derivedPayload = message.quick_reply["payload"];
+      if (derivedPayload == "v2_find") {
+        v2_showFindList(senderID);
+      }
+    }
+    else {
     let apiai = apiaiApp.textRequest(messageText, {
         sessionId: 'tabby_cat', // use any arbitrary id
         contexts: [
@@ -320,6 +318,8 @@ function receivedMessage(event) {
       });
 
       apiai.end();
+
+    }
 
     // callFindApi(senderID, messageText);
   } else if (messageAttachments) {
@@ -435,19 +435,19 @@ function v2_initialOptions(recipientId){
         content_type:"text",
         title:"Search",
         payload:"v2_find",
-        image_url:"https://png.icons8.com/search/color/96"
+        image_url:"https://png.icons8.com/search/color/24"
       },
       {
         content_type:"text",
         title:"Browse",
         payload:"v2_discover",
-        image_url:"https://png.icons8.com/internet/dusk/64"
+        image_url:"https://png.icons8.com/internet/dusk/24"
       },
       {
         content_type:"text",
         title:"Favorites",
         payload:"v2_favorites",
-        image_url:"https://png.icons8.com/love/color/96"
+        image_url:"https://png.icons8.com/love/color/24"
       }
     ]
   }
@@ -466,18 +466,39 @@ function v2_showFindList(recipientId) {
     quick_replies:[
       {
         content_type:"text",
-        title:"Find it",
+        title:"Shirts",
         payload:"v2_find",
+        image_url:"https://png.icons8.com/shirt/win8/32"
       },
       {
         content_type:"text",
-        title:"Just looking",
+        title:"Shoes",
         payload:"v2_discover",
+        image_url:"https://png.icons8.com/shoes/color/24"
       },
       {
         content_type:"text",
-        title:"Favorites",
+        title:"Sweatshirts",
         payload:"v2_favorites",
+        image_url:"https://png.icons8.com/jacket/color/24"
+      },
+      {
+        content_type:"text",
+        title:"Jeans",
+        payload:"v2_find",
+        image_url:"https://png.icons8.com/jeans/color/24"
+      },
+      {
+        content_type:"text",
+        title:"Beauty",
+        payload:"v2_discover",
+        image_url:"https://png.icons8.com/cosmetic-brush/color/24"
+      },
+      {
+        content_type:"text",
+        title:"Bags",
+        payload:"v2_favorites",
+        image_url:"https://png.icons8.com/backpack/color/24"
       }
     ]
   }
