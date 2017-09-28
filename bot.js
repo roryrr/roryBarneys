@@ -206,7 +206,7 @@ app.post('/ai', (req, res) => {
                 if (!error && response.statusCode == 200) {
                   //parsing the json response from RR cloud
                   body = JSON.parse(body);
-                        rr_array = "favorite" + body.pref_product.NEUTRAL.join("|");
+                        rr_array = "favorite" + body.pref_product.LIKE.join("|");
                         callRrApi(GLOBAL_ID, rr_array);
               // The Description is:  "descriptive string"
             } else {
@@ -861,8 +861,8 @@ function callRrApi(sid, queryString){
                       if (!error && response.statusCode == 200) {
                         body = JSON.parse(body);
                         console.log("samantha4 inside function");
-                        console.log(body.pref_product.NEUTRAL);
-                        rr_array_temp = "favorite" + body.pref_product.NEUTRAL.join("|");
+                        console.log(body.pref_product.LIKE);
+                        rr_array_temp = "favorite" + body.pref_product.LIKE.join("|");
                         console.log("Rajinikanth");
                         console.log(rr_array_temp);
                         callRrApi(sid, rr_array_temp);
