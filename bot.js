@@ -292,6 +292,9 @@ function receivedMessage(event) {
       else if (derivedPayload == "v2_favorites") {
         returnFavList(senderID);
       }
+      else if (derivedPayload == "v2_discover") {
+        v2_justLooking(senderID);
+      }
     }
     else {
     console.log("normal message");
@@ -468,6 +471,38 @@ function v2_initialOptions(recipientId){
 callSendAPI(messageData);
 }
 
+//Quick replies on Just looking option
+function v2_justLooking(recipientId){
+  var messageData = {
+  recipient:{
+    id: recipientId
+  },
+  message:{
+    text: "Cool! Enter a category, brand, or leave it up to me to choose.",
+    quick_replies:[
+      {
+        content_type:"text",
+        title:"Category",
+        payload:"v2_category",
+        image_url:"https://png.icons8.com/category-filled/ios7/25"
+      },
+      {
+        content_type:"text",
+        title:"Brand",
+        payload:"v2_brand",
+        image_url:"https://png.icons8.com/bag-brand-filled/ios7/25"
+      },
+      {
+        content_type:"text",
+        title:"You choose",
+        payload:"v2_youChoose",
+        image_url:"https://png.icons8.com/navigation-filled/ios7/25"
+      }
+    ]
+  }
+};
+callSendAPI(messageData);
+}
 //when the user chooses to search products
 function v2_showFindList(recipientId) {
   var messageData = {
