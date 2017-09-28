@@ -206,8 +206,13 @@ app.post('/ai', (req, res) => {
                 if (!error && response.statusCode == 200) {
                   //parsing the json response from RR cloud
                   body = JSON.parse(body);
-                        rr_array = "favorite" + body.pref_product.LIKE.join("|");
-                        callRrApi(GLOBAL_ID, rr_array);
+                  if ((typeof body.pref_product.LIKE) == "object") {
+                    rr_array = "favorite" + body.pref_product.LIKE.join("|");
+                    callRrApi(GLOBAL_ID, rr_array);
+                  }
+                  else {
+                    sendTextMessage(sid, "Oops! Looks like you don’t have anything saved.");
+                }
               // The Description is:  "descriptive string"
             } else {
             console.log('Pavan api.ai, ERROR');
