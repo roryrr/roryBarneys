@@ -371,7 +371,7 @@ function receivedPostback(event) {
   else if (payload == 'v2_find') {
     v2_showFindList(senderID);
   }
-  else if (payload == 'removeFav') {
+  else if (payload.match(/(removeFav)/g)) {
     callRrFavApi(senderID, payload);
   }
 }
