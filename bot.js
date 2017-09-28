@@ -284,6 +284,9 @@ function receivedMessage(event) {
       if (derivedPayload == "v2_find") {
         v2_showFindList(senderID);
       }
+      else if (derivedPayload == "v2_favorites") {
+        returnFavList(senderID);
+      }
     }
     else {
     console.log("normal message");
