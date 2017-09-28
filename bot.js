@@ -379,6 +379,9 @@ function receivedPostback(event) {
   else if (payload.match(/(removeFav)/g)) {
     callRrFavApi(senderID, payload);
   }
+  else if (payload.match(/(pairIt)/g)) {
+    callRrApi(senderID, payload);
+  }
 }
 
 //////////////////////////
@@ -813,6 +816,15 @@ function callRrApi(sid, queryString){
     var queryParameters = { apiKey: process.env.API_KEY,
           apiClientKey: process.env.API_CLIENT_KEY,
           productId: queryString.slice(8)};
+  }
+  else if (payload.match(/(pairIt)/g)) {
+    var req_url = process.env.STAGING_URL;
+    var queryParameters = { apiKey: process.env.API_KEY,
+          apiClientKey: process.env.API_CLIENT_KEY,
+          userId: process.env.USER_ID,
+          sessionId: process.env.SESSION_ID,
+          placements: process.env.PLACEMENTS_ID_COMPLEMENTARY,
+          productId: queryString.slice(6)};
   }
   request({
     uri: req_url,
