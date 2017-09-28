@@ -211,7 +211,7 @@ app.post('/ai', (req, res) => {
                     callRrApi(GLOBAL_ID, rr_array);
                   }
                   else {
-                    sendTextMessage(sid, "Oops! Looks like you don’t have anything saved.");
+                    sendTextMessage(GLOBAL_ID, "Oops! Looks like you don’t have anything saved.");
                 }
               // The Description is:  "descriptive string"
             } else {
