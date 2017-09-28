@@ -874,7 +874,7 @@ function callRrApi(sid, queryString){
           var queryParameters = { apiKey: process.env.BY_FAV_API_KEY,
                 u: process.env.USER_ID,
                 s: process.env.SESSION_ID,
-                p: queryString.slice(3),
+                p: queryString.slice(9),
                 targetType: process.env.BY_FAV_TARGETTYPE,
                 actionType: process.env.BY_FAV_ACTIONTYPE_NEUTRAL};
         }
@@ -896,7 +896,10 @@ function callRrApi(sid, queryString){
           }, function (error, response, body) {
             console.log("anushka inside function");
                 if (!error && response.statusCode == 200) {
-                  sendTextMessage(sid, 'Item added to favorites');
+                  if (queryString.match(/(removeFav)/g)) {
+                    sendTextMessage(sid, "Item removed from your list");
+                  }
+                  sendTextMessage(sid, "It's on the list");
                   // The Description is:  "descriptive string"
                 } else {
                   sendTextMessage(sid, 'Anushka, ERROR');
