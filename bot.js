@@ -817,7 +817,7 @@ function callRrApi(sid, queryString){
           apiClientKey: process.env.API_CLIENT_KEY,
           productId: queryString.slice(8)};
   }
-  else if (payload.match(/(pairIt)/g)) {
+  else if (queryString.match(/(pairIt)/g)) {
     var req_url = process.env.STAGING_URL;
     var queryParameters = { apiKey: process.env.API_KEY,
           apiClientKey: process.env.API_CLIENT_KEY,
