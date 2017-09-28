@@ -869,8 +869,9 @@ function callRrApi(sid, queryString){
       //Block that calls RR api(add to favorites)
       function callRrFavApi(sid, queryString){
         console.log("Favorite anushka called");
-        var req_url = process.env.PROD_URL;
         if (queryString.match(/(removeFav)/g)) {
+          console.log("rr remove fav");
+          var req_url = process.env.PROD_URL;
           var queryParameters = { apiKey: process.env.BY_FAV_API_KEY,
                 u: process.env.USER_ID,
                 s: process.env.SESSION_ID,
@@ -879,6 +880,8 @@ function callRrApi(sid, queryString){
                 actionType: process.env.BY_FAV_ACTIONTYPE_NEUTRAL};
         }
         else {
+          console.log("jindabad");
+          var req_url = process.env.PROD_URL;
           var queryParameters = { apiKey: process.env.BY_FAV_API_KEY,
                 u: process.env.USER_ID,
                 s: process.env.SESSION_ID,
