@@ -278,6 +278,7 @@ function receivedMessage(event) {
   var messageAttachments = message.attachments;
 
   if(messageText.quick_replies){
+    console.log("quick reply noted");
     var derivedPayload = messageText.quick_replies["payload"];
     if (derivedPayload == "v2_find") {
       v2_showFindList(senderID);
@@ -286,7 +287,7 @@ function receivedMessage(event) {
   else if (messageText) {
     // If we receive a text message, check to see if it matches a keyword
     // and send back the template example. Otherwise, just echo the text we received.
-
+    console.log("normal message");
     let apiai = apiaiApp.textRequest(messageText, {
         sessionId: 'tabby_cat', // use any arbitrary id
         contexts: [
