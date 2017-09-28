@@ -277,7 +277,7 @@ function receivedMessage(event) {
   var messageText = message.text;
   var messageAttachments = message.attachments;
 
-  if(message.quick_reply){
+  if(message.quick_reply["payload"] == "v2_find" || "v2_discover" || "v2_favorites"){
     var derivedPayload = message.quick_reply["payload"];
     if (derivedPayload == "v2_find") {
       v2_showFindList(senderID);
@@ -466,37 +466,37 @@ function v2_showFindList(recipientId) {
       {
         content_type:"text",
         title:"Shirts",
-        payload:"v2_find",
+        payload:"Shirts",
         image_url:"https://png.icons8.com/shirt/win8/32"
       },
       {
         content_type:"text",
         title:"Shoes",
-        payload:"v2_discover",
+        payload:"Shoes",
         image_url:"https://png.icons8.com/shoes/color/24"
       },
       {
         content_type:"text",
         title:"Sweatshirts",
-        payload:"v2_favorites",
+        payload:"Sweaters",
         image_url:"https://png.icons8.com/jacket/color/24"
       },
       {
         content_type:"text",
         title:"Jeans",
-        payload:"v2_find",
+        payload:"Jeans",
         image_url:"https://png.icons8.com/jeans/color/24"
       },
       {
         content_type:"text",
         title:"Beauty",
-        payload:"v2_discover",
+        payload:"Beauty",
         image_url:"https://png.icons8.com/cosmetic-brush/color/24"
       },
       {
         content_type:"text",
         title:"Bags",
-        payload:"v2_favorites",
+        payload:"Bags",
         image_url:"https://png.icons8.com/backpack/color/24"
       }
     ]
