@@ -929,7 +929,6 @@ function callRrApi(sid, queryString){
                       if (!error && response.statusCode == 200) {
                         body = JSON.parse(body);
                         console.log("samantha4 inside function");
-                        console.log(body.pref_product.LIKE);
                         if ((typeof body.pref_product.LIKE) == "undefined") {
                           sendTextMessage(sid, "Oops! Looks like you don’t have anything saved.");
                         }
