@@ -922,14 +922,14 @@ function callRrApi(sid, queryString){
                         body = JSON.parse(body);
                         console.log("samantha4 inside function");
                         console.log(body.pref_product.LIKE);
-                        if (body.pref_product.LIKE === undefined) {
-                          sendTextMessage(sid, "Oops! Looks like you don’t have anything saved.");
+                        if (body.pref_product.LIKE) {
+                          rr_array_temp = "favorite" + body.pref_product.LIKE.join("|");
+                          console.log("Rajinikanth");
+                          console.log(rr_array_temp);
+                          callRrApi(sid, rr_array_temp);
                         }
                         else {
-                        rr_array_temp = "favorite" + body.pref_product.LIKE.join("|");
-                        console.log("Rajinikanth");
-                        console.log(rr_array_temp);
-                        callRrApi(sid, rr_array_temp);
+                          sendTextMessage(sid, "Oops! Looks like you don’t have anything saved.");
                       }
                         } else {
                         // console.log('Google log start golden');
