@@ -640,11 +640,15 @@ arrayHere.forEach(i=>{
     "buttons" : [
         {
           "type": "postback",
-          "title": "Try something similar",
+          "title": "More like this",
           "payload": "similar"+i.id
         }, {
           "type": "postback",
-          "title": "Add to favorites",
+          "title": "Pair it with",
+          "payload": "fav"+i.id
+        }, {
+          "type": "postback",
+          "title": "Save it",
           "payload": "fav"+i.id
         }]
    });
@@ -684,11 +688,15 @@ arrayHere.forEach(i=>{
     "buttons" : [
         {
           "type": "postback",
-          "title": "Try something similar",
+          "title": "More like this",
           "payload": "similar"+i.id
         }, {
           "type": "postback",
-          "title": "Add to favorites",
+          "title": "Pair it with",
+          "payload": "fav"+i.id
+        }, {
+          "type": "postback",
+          "title": "Save it",
           "payload": "fav"+i.id
         }]
    });
