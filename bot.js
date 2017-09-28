@@ -277,9 +277,9 @@ function receivedMessage(event) {
   var messageText = message.text;
   var messageAttachments = message.attachments;
 
-  if(messageText.quick_reply){
+  if(message.quick_reply){
     console.log("quick reply noted");
-    var derivedPayload = messageText.quick_reply["payload"];
+    var derivedPayload = message.quick_reply["payload"];
     if (derivedPayload == "v2_find") {
       v2_showFindList(senderID);
     }
