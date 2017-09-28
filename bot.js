@@ -929,15 +929,16 @@ function callRrApi(sid, queryString){
                       if (!error && response.statusCode == 200) {
                         body = JSON.parse(body);
                         console.log("samantha4 inside function");
-                        console.log((typeof body.pref_product.LIKE));
-                        if ((typeof body.pref_product.LIKE) == "undefined") {
-                          sendTextMessage(sid, "Oops! Looks like you don’t have anything saved.");
-                        }
-                        else {
+                      //  console.log((typeof body.pref_product.LIKE));
+                        if ((typeof body.pref_product.LIKE) == "object") {
                           rr_array_temp = "favorite" + body.pref_product.LIKE.join("|");
                           console.log("Rajinikanth");
                           console.log(rr_array_temp);
                           callRrApi(sid, rr_array_temp);
+                          sendTextMessage(sid, "Oops! Looks like you don’t have anything saved.");
+                        }
+                        else {
+                          sendTextMessage(sid, "Oops! Looks like you don’t have anything saved.");
                       }
                         } else {
                         // console.log('Google log start golden');
