@@ -870,7 +870,7 @@ function callRrApi(sid, queryString){
       function callRrFavApi(sid, queryString){
         console.log("Favorite anushka called");
         var req_url = process.env.PROD_URL;
-        if (queryString == "removeFav") {
+        if (queryString.match(/(removeFav)/g)) {
           var queryParameters = { apiKey: process.env.BY_FAV_API_KEY,
                 u: process.env.USER_ID,
                 s: process.env.SESSION_ID,
