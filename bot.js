@@ -276,11 +276,11 @@ function receivedMessage(event) {
 
   var messageText = message.text;
   var messageAttachments = message.attachments;
+  var derivedPayload = message.quick_reply["payload"];
   if (messageText) {
     // If we receive a text message, check to see if it matches a keyword
     // and send back the template example. Otherwise, just echo the text we received.
-    if(message.quick_reply.payload == "v2_find" || "v2_discover" || "v2_favorites"){
-      var derivedPayload = message.quick_reply["payload"];
+    if(derivedPayload == "v2_find" || "v2_discover" || "v2_favorites"){
       if (derivedPayload == "v2_find") {
         v2_showFindList(senderID);
       }
