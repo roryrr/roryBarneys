@@ -952,7 +952,6 @@ function callRrApi(sid, queryString){
                           console.log("Rajinikanth");
                           console.log(rr_array_temp);
                           callRrApi(sid, rr_array_temp);
-                          sendTextMessage(sid, "Oops! Looks like you don’t have anything saved.");
                         }
                         else {
                           sendTextMessage(sid, "Oops! Looks like you don’t have anything saved.");
