@@ -371,6 +371,9 @@ function receivedPostback(event) {
   else if (payload == 'v2_find') {
     v2_showFindList(senderID);
   }
+  else if (payload == 'removeFav') {
+    callRrFavApi(senderID, payload);
+  }
 }
 
 //////////////////////////
@@ -645,7 +648,7 @@ arrayHere.forEach(i=>{
         }, {
           "type": "postback",
           "title": "Pair it with",
-          "payload": "fav"+i.id
+          "payload": "pairIt"+i.id
         }, {
           "type": "postback",
           "title": "Save it",
@@ -674,7 +677,6 @@ console.log(itemList);
   callSendAPI(messageData);
 }
 
-
 function sendGenericMessageForSearch(recipientId, arrayHere) {
   var itemList = [];
 arrayHere.forEach(i=>{
@@ -693,7 +695,7 @@ arrayHere.forEach(i=>{
         }, {
           "type": "postback",
           "title": "Pair it with",
-          "payload": "fav"+i.id
+          "payload": "pairIt"+i.id
         }, {
           "type": "postback",
           "title": "Save it",
@@ -702,6 +704,53 @@ arrayHere.forEach(i=>{
    });
 });
 console.log("shahrukh");
+console.log(itemList);
+  var messageData = {
+    recipient: {
+      id: recipientId
+    },
+    message: {
+      attachment: {
+        type: "template",
+        payload: {
+          template_type: "generic",
+          image_aspect_ratio: "horizontal",
+          elements: itemList
+        }
+      }
+    }
+  };
+
+  callSendAPI(messageData);
+}
+//Sending generic message with Favorite items
+function sendGenericMessageForFavoriteItems(recipientId, arrayHere) {
+  var itemList = [];
+arrayHere.forEach(i=>{
+   itemList.push(
+   {
+    "title":i.name,
+    "subtitle":i.brand,
+    "item_url":i.productURL,
+    //manipulating the image using Cloudinary
+    "image_url":cloudinary.url(i.imageURL,{ type: 'fetch', height: 500, width: 955, background: "white", crop: "pad", quality: 100, fetch_format: 'jpg'}),
+    "buttons" : [
+        {
+          "type": "postback",
+          "title": "More like this",
+          "payload": "similar"+i.id
+        }, {
+          "type": "postback",
+          "title": "Pair it with",
+          "payload": "pairIt"+i.id
+        }, {
+          "type": "postback",
+          "title": "Remove item",
+          "payload": "removeFav"+i.id
+        }]
+   });
+});
+console.log("dabang");
 console.log(itemList);
   var messageData = {
     recipient: {
@@ -780,11 +829,12 @@ function callRrApi(sid, queryString){
               console.log("undertaker wwe");
               console.log(body);
               rr_array = body.products;
+              sendGenericMessageForFavoriteItems(sid, rr_array);
             }
             else {
                   rr_array = body.placements[0].recommendedProducts;
+                  sendGenericMessage(sid, rr_array);
                 }
-            sendGenericMessage(sid, rr_array);
             // The Description is:  "descriptive string"
           } }else {
             sendTextMessage(sid, 'Pavan, ERROR');
@@ -819,13 +869,23 @@ function callRrApi(sid, queryString){
       //Block that calls RR api(add to favorites)
       function callRrFavApi(sid, queryString){
         console.log("Favorite anushka called");
-          var req_url = process.env.PROD_URL;
+        var req_url = process.env.PROD_URL;
+        if (queryString == "removeFav") {
+          var queryParameters = { apiKey: process.env.BY_FAV_API_KEY,
+                u: process.env.USER_ID,
+                s: process.env.SESSION_ID,
+                p: queryString.slice(3),
+                targetType: process.env.BY_FAV_TARGETTYPE,
+                actionType: process.env.BY_FAV_ACTIONTYPE_NEUTRAL};
+        }
+        else {
           var queryParameters = { apiKey: process.env.BY_FAV_API_KEY,
                 u: process.env.USER_ID,
                 s: process.env.SESSION_ID,
                 p: queryString.slice(3),
                 targetType: process.env.BY_FAV_TARGETTYPE,
                 actionType: process.env.BY_FAV_ACTIONTYPE};
+              }
         request({
           uri: req_url,
           qs: queryParameters,
@@ -862,10 +922,15 @@ function callRrApi(sid, queryString){
                         body = JSON.parse(body);
                         console.log("samantha4 inside function");
                         console.log(body.pref_product.LIKE);
+                        if (body.pref_product.LIKE === undefined) {
+                          sendTextMessage(sid, "Oops! Looks like you don’t have anything saved.");
+                        }
+                        else {
                         rr_array_temp = "favorite" + body.pref_product.LIKE.join("|");
                         console.log("Rajinikanth");
                         console.log(rr_array_temp);
                         callRrApi(sid, rr_array_temp);
+                      }
                         } else {
                         // console.log('Google log start golden');
                         // console.log(body) // Print the google web page.
