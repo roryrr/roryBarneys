@@ -902,7 +902,9 @@ function callRrApi(sid, queryString){
                   if (queryString.match(/(removeFav)/g)) {
                     sendTextMessage(sid, "Item removed from your list");
                   }
+                  else {
                   sendTextMessage(sid, "It's on the list");
+                }
                   // The Description is:  "descriptive string"
                 } else {
                   sendTextMessage(sid, 'Anushka, ERROR');
