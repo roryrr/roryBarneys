@@ -279,7 +279,7 @@ function receivedMessage(event) {
   if (messageText) {
     // If we receive a text message, check to see if it matches a keyword
     // and send back the template example. Otherwise, just echo the text we received.
-    if(message.quick_reply && messageText == ("Search" || "Browse" || "Favorites")){
+    if(message.quick_reply && messageText == ("Find it" || "Just looking" || "See favorites")){
       var derivedPayload = message.quick_reply["payload"];
       if (derivedPayload == "v2_find") {
         v2_showFindList(senderID);
@@ -432,19 +432,19 @@ function v2_initialOptions(recipientId){
     quick_replies:[
       {
         content_type:"text",
-        title:"Search",
+        title:"Find it",
         payload:"v2_find",
         image_url:"https://png.icons8.com/search/color/24"
       },
       {
         content_type:"text",
-        title:"Browse",
+        title:"Just looking",
         payload:"v2_discover",
         image_url:"https://png.icons8.com/internet/dusk/24"
       },
       {
         content_type:"text",
-        title:"Favorites",
+        title:"See favorites",
         payload:"v2_favorites",
         image_url:"https://png.icons8.com/love/color/24"
       }
