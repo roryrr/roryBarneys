@@ -276,16 +276,16 @@ function receivedMessage(event) {
 
   var messageText = message.text;
   var messageAttachments = message.attachments;
-
-  if(message.quick_reply["payload"] == "v2_find"){
-    var derivedPayload = message.quick_reply["payload"];
-    if (derivedPayload == "v2_find") {
-      v2_showFindList(senderID);
-    }
-  }
-  else if (messageText) {
+  if (messageText) {
     // If we receive a text message, check to see if it matches a keyword
     // and send back the template example. Otherwise, just echo the text we received.
+    if(message.quick_reply){
+      var derivedPayload = message.quick_reply["payload"];
+      if (derivedPayload == "v2_find") {
+        v2_showFindList(senderID);
+      }
+    }
+    else {
     console.log("normal message");
     let apiai = apiaiApp.textRequest(messageText, {
         sessionId: 'tabby_cat', // use any arbitrary id
@@ -319,7 +319,7 @@ function receivedMessage(event) {
       });
 
       apiai.end();
-
+    }
     // callFindApi(senderID, messageText);
   } else if (messageAttachments) {
     sendTextMessage(senderID, "Message with attachment received");
