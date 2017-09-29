@@ -391,6 +391,9 @@ function receivedPostback(event) {
   else if (payload.match(/(pairIt)/g)) {
     callRrApi(senderID, payload);
   }
+  else if (payload == "v2_brand") {
+    sendTextMessage(senderID, "Type in a brand you're looking for");
+  }
 }
 
 //////////////////////////
