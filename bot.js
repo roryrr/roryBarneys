@@ -154,8 +154,9 @@ app.post('/ai', (req, res) => {
     findGender = req.body.result.parameters['user-gender'];
     findColor = req.body.result.parameters['color'];
     findProductName = req.body.result.parameters['product-name'];
+    findProductName.replace(" ", +);
     var rr_array =[];
-    var findMyStart = Math.floor((Math.random() * 50) + 1).toString();
+    var findMyStart = Math.floor((Math.random() * 30) + 1).toString();
     rr_array.length = 0;
     console.log("nagma");
     var req_url = process.env.FIND_URL;
@@ -223,6 +224,7 @@ app.post('/ai', (req, res) => {
   }
   else if (req.body.result.action === 'user-requests-brands') {
     var findBrand = req.body.result.parameters['brand'];
+    findBrand.replace(" ", "+")
     var rr_array =[];
     var findMyStart = Math.floor((Math.random() * 50) + 1).toString();
     rr_array.length = 0;
@@ -968,7 +970,7 @@ console.log(itemList);
 function callRrApi(sid, queryString){
   var rr_array =[];
   rr_array.length = 0;
-  var mySt = Math.floor((Math.random() * 50) + 1).toString();
+  var mySt = Math.floor((Math.random() * 30) + 1).toString();
   if(queryString == "default"){
     var req_url = process.env.STAGING_URL;
     var queryParameters = { apiKey: process.env.API_KEY,
