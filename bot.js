@@ -306,6 +306,12 @@ function receivedMessage(event) {
       else if (derivedPayload == "v2_youChoose") {
         callRrApi(senderID, "default");
       }
+      else if (derivedPayload == "v2_restart") {
+        v2_initialOptions(senderID);
+      }
+      else if (derivedPayload == "v2_tips") {
+        sendTextMessage(senderID, "Tips coming soon!");
+      }
       else if (derivedPayload.match(/(v2_BNY-)/g)) {
         callRrApi(senderID, derivedPayload.slice(3));
       }
