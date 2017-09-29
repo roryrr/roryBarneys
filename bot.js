@@ -556,7 +556,7 @@ callSendAPI(messageData);
 }
 
 //sending categories
-v2_sendCategories(recipientId){
+function v2_sendCategories(recipientId){
   var messageData = {
   recipient:{
     id: recipientId
