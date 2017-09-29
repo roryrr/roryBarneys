@@ -819,7 +819,7 @@ console.log(itemList);
 }
 //Sending generic message with Favorite items
 function sendGenericMessageForFavoriteItems(recipientId, arrayHere) {
-  sendTextMessage(senderID, "Here’s what you’ve saved:");
+  sendTextMessage(recipientId, "Here’s what you’ve saved:");
   var itemList = [];
 arrayHere.forEach(i=>{
    itemList.push(
