@@ -284,7 +284,7 @@ function receivedMessage(event) {
   if (messageText) {
     // If we receive a text message, check to see if it matches a keyword
     // and send back the template example. Otherwise, just echo the text we received.
-    if(message.quick_reply && (message.quick_reply["payload"]).match(/(v2_)/g)){
+    if(message.quick_reply["payload"]){
       var derivedPayload = message.quick_reply["payload"];
       if (derivedPayload == "v2_find") {
         v2_showFindList(senderID);
@@ -300,6 +300,9 @@ function receivedMessage(event) {
       }
       else if (derivedPayload.match(/(v2_BNY-)/g)) {
         callRrApi(senderID, derivedPayload.slice(3));
+      }
+      else {
+        sendTextMessage(senderID, "Hello there!!!")
       }
     }
     else {
