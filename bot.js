@@ -141,7 +141,7 @@ app.post('/ai', (req, res) => {
                     // return sendGenericMessageForApiAi(rr_array);
 
                     sendGenericMessage(GLOBAL_ID, rr_array);
-                    // setTimeout(function() { v2_restartAnytime(GLOBAL_ID) }, 7000);
+                    setTimeout(function() { v2_restartAnytime(GLOBAL_ID) }, 5000);
               // The Description is:  "descriptive string"
             } else {
             console.log('Pavan api.ai, ERROR');
@@ -184,7 +184,7 @@ app.post('/ai', (req, res) => {
                   console.log(findProductName);
                         rr_array = body.placements[0].docs;
                         sendGenericMessageForSearch(GLOBAL_ID, rr_array);
-                        // setTimeout(function() { v2_restartAnytime(GLOBAL_ID) }, 7000);
+                        setTimeout(function() { v2_restartAnytime(GLOBAL_ID) }, 5000);
               // The Description is:  "descriptive string"
             } else {
             console.log('Pavan api.ai, ERROR');
@@ -618,7 +618,7 @@ function v2_restartAnytime(recipientId){
     id: recipientId
   },
   message:{
-    text: "",
+    text: "Need help? Click below:",
     quick_replies:[
       {
         content_type:"text",
@@ -790,8 +790,7 @@ console.log(itemList);
     recipient: {
       id: recipientId
     },
-    message: [
-      {
+    message: {
       attachment: {
         type: "template",
         payload: {
@@ -799,23 +798,8 @@ console.log(itemList);
           image_aspect_ratio: "horizontal",
           elements: itemList
         }
-      },
-      quick_replies:[
-        {
-          content_type:"text",
-          title:"Restart",
-          payload:"v2_restart",
-          image_url:"https://png.icons8.com/restart/color/48"
-        },
-        {
-          content_type:"text",
-          title:"Tips",
-          payload:"v2_tips",
-          image_url:"https://png.icons8.com/marker-filled/ios7/32"
-        }
-      ]
+      }
     }
-  ]
   };
 
   callSendAPI(messageData);
@@ -854,8 +838,7 @@ console.log(itemList);
     recipient: {
       id: recipientId
     },
-    message: [
-    {
+    message: {
       attachment: {
         type: "template",
         payload: {
@@ -863,23 +846,8 @@ console.log(itemList);
           image_aspect_ratio: "horizontal",
           elements: itemList
         }
-      },
-      quick_replies:[
-        {
-          content_type:"text",
-          title:"Restart",
-          payload:"v2_restart",
-          image_url:"https://png.icons8.com/restart/color/48"
-        },
-        {
-          content_type:"text",
-          title:"Tips",
-          payload:"v2_tips",
-          image_url:"https://png.icons8.com/marker-filled/ios7/32"
-        }
-      ]
+      }
     }
-  ]
   };
 
   callSendAPI(messageData);
@@ -919,8 +887,7 @@ console.log(itemList);
     recipient: {
       id: recipientId
     },
-    message: [
-      {
+    message: {
       attachment: {
         type: "template",
         payload: {
@@ -928,23 +895,8 @@ console.log(itemList);
           image_aspect_ratio: "horizontal",
           elements: itemList
         }
-      },
-      quick_replies:[
-        {
-          content_type:"text",
-          title:"Restart",
-          payload:"v2_restart",
-          image_url:"https://png.icons8.com/restart/color/48"
-        },
-        {
-          content_type:"text",
-          title:"Tips",
-          payload:"v2_tips",
-          image_url:"https://png.icons8.com/marker-filled/ios7/32"
-        }
-      ]
+      }
     }
-  ]
   };
 
   callSendAPI(messageData);
@@ -1023,7 +975,7 @@ function callRrApi(sid, queryString){
                   rr_array = body.placements[0].recommendedProducts;
                   sendGenericMessage(sid, rr_array);
                 }
-                // setTimeout(function() { v2_restartAnytime(sid) }, 7000);
+                setTimeout(function() { v2_restartAnytime(sid) }, 5000);
             // The Description is:  "descriptive string"
           } }else {
             sendTextMessage(sid, 'Pavan, ERROR');
@@ -1048,7 +1000,7 @@ function callRrApi(sid, queryString){
                   body = JSON.parse(body);
                         rr_array = body.placements[0].docs;
                         sendGenericMessageForSearch(sid, rr_array);
-                        // setTimeout(function() { v2_restartAnytime(sid) }, 7000);
+                        setTimeout(function() { v2_restartAnytime(sid) }, 5000);
                   // The Description is:  "descriptive string"
                 } else {
                   sendTextMessage(sid, 'Pavan, ERROR');
