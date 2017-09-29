@@ -284,7 +284,7 @@ function receivedMessage(event) {
   if (messageText) {
     // If we receive a text message, check to see if it matches a keyword
     // and send back the template example. Otherwise, just echo the text we received.
-    if(message.quick_reply && ((messageText == "See favorites") || (messageText == "Just looking") || (messageText == "Find it"))){
+    if(message.quick_reply && ((messageText == "See favorites") || (messageText == "Just looking") || (messageText == "Find it") || (messageText == "Category") || (messageText == "Brand") || (messageText == "You choose"))){
       var derivedPayload = message.quick_reply["payload"];
       if (derivedPayload == "v2_find") {
         v2_showFindList(senderID);
@@ -294,6 +294,9 @@ function receivedMessage(event) {
       }
       else if (derivedPayload == "v2_discover") {
         v2_justLooking(senderID);
+      }
+      else if (derivedPayload == "v2_category") {
+        v2_sendCategories(senderID);
       }
     }
     else {
@@ -483,20 +486,18 @@ function v2_justLooking(recipientId){
       {
         content_type:"text",
         title:"Category",
-        payload:"v2_category",
-        image_url:"https://png.icons8.com/category-filled/ios7/25"
+        payload:"v2_category"
       },
       {
         content_type:"text",
         title:"Brand",
-        payload:"v2_brand",
-        image_url:"https://png.icons8.com/bag-brand-filled/ios7/25"
+        payload:"v2_brand"
       },
       {
         content_type:"text",
         title:"You choose",
         payload:"v2_youChoose",
-        image_url:"https://png.icons8.com/navigation-filled/ios7/25"
+        image_url:"https://png.icons8.com/cursor/dusk/64"
       }
     ]
   }
@@ -547,6 +548,51 @@ function v2_showFindList(recipientId) {
         title:"Bags",
         payload:"Bags",
         image_url:"https://png.icons8.com/backpack/color/24"
+      }
+    ]
+  }
+};
+callSendAPI(messageData);
+}
+
+//sending categories
+v2_sendCategories(recipientId){
+  var messageData = {
+  recipient:{
+    id: recipientId
+  },
+  message:{
+    text: "Tell me which category you're looking for?",
+    quick_replies:[
+      {
+        content_type:"text",
+        title:"Women",
+        payload:"v2_women",
+        image_url:"https://png.icons8.com/female-profile/color/24"
+      },
+      {
+        content_type:"text",
+        title:"Men",
+        payload:"v2_men",
+        image_url:"https://png.icons8.com/user/color/24"
+      },
+      {
+        content_type:"text",
+        title:"Beauty",
+        payload:"v2_beauty",
+        image_url:"https://png.icons8.com/makeup/color/24"
+      },
+      {
+        content_type:"text",
+        title:"Kids",
+        payload:"v2_kids",
+        image_url:"https://png.icons8.com/children/ios7/25"
+      },
+      {
+        content_type:"text",
+        title:"Home",
+        payload:"v2_home",
+        image_url:"https://png.icons8.com/home/office/30"
       }
     ]
   }
