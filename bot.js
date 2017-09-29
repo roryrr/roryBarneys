@@ -790,7 +790,7 @@ console.log(itemList);
     recipient: {
       id: recipientId
     },
-    messages: [
+    message: [
       {
       attachment: {
         type: "template",
@@ -854,7 +854,7 @@ console.log(itemList);
     recipient: {
       id: recipientId
     },
-    messages: [
+    message: [
     {
       attachment: {
         type: "template",
@@ -919,7 +919,7 @@ console.log(itemList);
     recipient: {
       id: recipientId
     },
-    messages: [
+    message: [
       {
       attachment: {
         type: "template",
