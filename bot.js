@@ -298,6 +298,9 @@ function receivedMessage(event) {
       else if (derivedPayload == "v2_category") {
         v2_sendCategories(senderID);
       }
+      else if (derivedPayload.match(/(v2_BNY-)/g)) {
+        callRrApi(senderID, derivedPayload.slice(3));
+      }
     }
     else {
     console.log("normal message");
@@ -567,31 +570,31 @@ function v2_sendCategories(recipientId){
       {
         content_type:"text",
         title:"Women",
-        payload:"v2_women",
+        payload:"v2_BNY-women",
         image_url:"https://png.icons8.com/female-profile/color/24"
       },
       {
         content_type:"text",
         title:"Men",
-        payload:"v2_men",
+        payload:"v2_BNY-men",
         image_url:"https://png.icons8.com/user/color/24"
       },
       {
         content_type:"text",
         title:"Beauty",
-        payload:"v2_beauty",
+        payload:"v2_BNY-womens-beauty",
         image_url:"https://png.icons8.com/makeup/color/24"
       },
       {
         content_type:"text",
         title:"Kids",
-        payload:"v2_kids",
+        payload:"v2_BNY-kids",
         image_url:"https://png.icons8.com/children/ios7/25"
       },
       {
         content_type:"text",
         title:"Home",
-        payload:"v2_home",
+        payload:"v2_BNY-home",
         image_url:"https://png.icons8.com/home/office/30"
       }
     ]
