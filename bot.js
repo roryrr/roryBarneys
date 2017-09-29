@@ -298,6 +298,9 @@ function receivedMessage(event) {
       else if (derivedPayload == "v2_category") {
         v2_sendCategories(senderID);
       }
+      else if (derivedPayload == "v2_brand") {
+        sendTextMessage(senderID, "Type in a brand you're looking for");
+      }
       else if (derivedPayload.match(/(v2_BNY-)/g)) {
         callRrApi(senderID, derivedPayload.slice(3));
       }
@@ -390,9 +393,6 @@ function receivedPostback(event) {
   }
   else if (payload.match(/(pairIt)/g)) {
     callRrApi(senderID, payload);
-  }
-  else if (payload == "v2_brand") {
-    sendTextMessage(senderID, "Type in a brand you're looking for");
   }
 }
 
