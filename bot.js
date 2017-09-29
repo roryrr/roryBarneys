@@ -141,6 +141,7 @@ app.post('/ai', (req, res) => {
                     // return sendGenericMessageForApiAi(rr_array);
 
                     sendGenericMessage(GLOBAL_ID, rr_array);
+                    v2_restartAnytime(GLOBAL_ID);
               // The Description is:  "descriptive string"
             } else {
             console.log('Pavan api.ai, ERROR');
@@ -183,6 +184,7 @@ app.post('/ai', (req, res) => {
                   console.log(findProductName);
                         rr_array = body.placements[0].docs;
                         sendGenericMessageForSearch(GLOBAL_ID, rr_array);
+                        v2_restartAnytime(GLOBAL_ID);
               // The Description is:  "descriptive string"
             } else {
             console.log('Pavan api.ai, ERROR');
@@ -608,6 +610,32 @@ function v2_sendCategories(recipientId){
 };
 callSendAPI(messageData);
 }
+
+//function to send restart button and tips
+function v2_restartAnytime(recipientId){
+  var messageData = {
+  recipient:{
+    id: recipientId
+  },
+  message:{
+    quick_replies:[
+      {
+        content_type:"text",
+        title:"Restart",
+        payload:"v2_restart",
+        image_url:"https://png.icons8.com/restart/color/48"
+      },
+      {
+        content_type:"text",
+        title:"Tips",
+        payload:"v2_tips",
+        image_url:"https://png.icons8.com/marker-filled/ios7/32"
+      }
+    ]
+  }
+};
+callSendAPI(messageData);
+}
 //sending basic menu
 function sendAvailableOptionList(recipientId) {
   var messageData = {
@@ -946,6 +974,7 @@ function callRrApi(sid, queryString){
                   rr_array = body.placements[0].recommendedProducts;
                   sendGenericMessage(sid, rr_array);
                 }
+                v2_restartAnytime(sid);
             // The Description is:  "descriptive string"
           } }else {
             sendTextMessage(sid, 'Pavan, ERROR');
@@ -970,6 +999,7 @@ function callRrApi(sid, queryString){
                   body = JSON.parse(body);
                         rr_array = body.placements[0].docs;
                         sendGenericMessageForSearch(sid, rr_array);
+                        v2_restartAnytime(sid);
                   // The Description is:  "descriptive string"
                 } else {
                   sendTextMessage(sid, 'Pavan, ERROR');
