@@ -167,7 +167,7 @@ app.post('/ai', (req, res) => {
           facet: "",
           query: findProductName,
           start: findMyStart,
-          rows: "5"};
+          rows: "10"};
         request({
           uri: req_url,
           qs: queryParameters,
@@ -500,7 +500,7 @@ function v2_justLooking(recipientId){
         content_type:"text",
         title:"You choose",
         payload:"v2_youChoose",
-        image_url:"https://png.icons8.com/cursor/dusk/64"
+        image_url:"https://png.icons8.com/compass/ios7/50"
       }
     ]
   }
@@ -883,7 +883,7 @@ function callRrApi(sid, queryString){
     var queryParameters = { apiKey: process.env.API_KEY,
           apiClientKey: process.env.API_CLIENT_KEY,
           st: mySt,
-          count: '5',
+          count: '10',
           userId: process.env.USER_ID,
           sessionId: process.env.SESSION_ID,
           placements: process.env.PLACEMENTS_ID_CAT,
