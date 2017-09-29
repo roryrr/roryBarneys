@@ -420,6 +420,23 @@ function receivedPostback(event) {
   else if (payload == 'bye') {
     sayGoodBye(senderID);
   }
+  else if (payload == 'v3_findIt') {
+    v2_showFindList(senderID);
+  }
+  else if (payload == 'v3_justLooking') {
+    v2_justLooking(senderID);
+  }
+  else if (payload == "v3_favorites") {
+    returnFavList(senderID);
+  }
+  else if (payload == 'v3_tips') {
+    sendTextMessage(senderID, "-Type keywords to find items: e.g. 'shoes’/‘Gucci'/'Show me suits'\n-Type ‘favorites’ to bring up the favorites list\n-Hit the Restart button to return to the main menu");
+    setTimeout(function() { v2_restartAnytime(senderID) }, 7000);
+  }
+  else if (payload == 'v3_inspireMe') {
+    sendTextMessage(senderID, "Inspire me coming soon");
+    setTimeout(function() { v2_restartAnytime(senderID) }, 7000);
+  }
   else if (payload.match(/(BNY-)/g)) {
     callRrApi(senderID, payload);
   }

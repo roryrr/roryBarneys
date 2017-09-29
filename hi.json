@@ -4,54 +4,37 @@
     "locale":"default",
     "composer_input_disabled": false,
     "call_to_actions":[
+       {
+        "title":"Find it",
+        "type":"postback",
+        "payload":"v3_findIt"
+      },
+     {
+        "title":"Just looking",
+        "type":"postback",
+        "payload":"v3_justLooking"
+      },
       {
-        "title":"Browse the Store",
+        "title":"more >>",
         "type":"nested",
         "call_to_actions":[
           {
-            "title":"Women",
+            "title":"See favorites",
             "type":"postback",
-            "payload":"BNY-women"
+            "payload":"v3_favorites"
           },
           {
-            "title":"Men",
+            "title":"Inspire me",
             "type":"postback",
-            "payload":"BNY-men"
+            "payload":"v3_inspireMe"
           },
           {
-            "title":"more >>",
-            "type":"nested",
-            "call_to_actions":[
-              {
-                "title":"Beauty",
-                "type":"postback",
-                "payload":"BNY-womens-beauty"
-              },
-              {
-                "title":"Home",
-                "type":"postback",
-                "payload":"BNY-home"
-              },
-              {
-                "title":"Kids",
-                "type":"postback",
-                "payload":"BNY-kids"
-              }
-        ]
-      }
-    ]
-  },
-      {
-        "type":"web_url",
-        "title":"Visit our Website",
-        "url":"http://labs.richrelevance.com/storre/",
-        "webview_height_ratio":"full"
-      },
-      {
-        "title":"Your Favorites",
-        "type":"postback",
-        "payload":"fvList"
-      }
+            "title":"Tips",
+            "type":"postback",
+             "payload":"v3_tips"
+           }
+         ]
+       }
     ]
   },
   {
