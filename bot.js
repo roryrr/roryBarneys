@@ -301,6 +301,9 @@ function receivedMessage(event) {
       else if (derivedPayload == "v2_brand") {
         sendTextMessage(senderID, "Type in a brand you're looking for");
       }
+      else if (derivedPayload == "v2_youChoose") {
+        callRrApi(senderID, "default");
+      }
       else if (derivedPayload.match(/(v2_BNY-)/g)) {
         callRrApi(senderID, derivedPayload.slice(3));
       }
