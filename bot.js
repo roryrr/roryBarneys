@@ -222,7 +222,7 @@ app.post('/ai', (req, res) => {
           });
   }
   else if (req.body.result.action === 'user-requests-brands') {
-    findBrand = req.body.result.parameters['brand'];
+    var findBrand = req.body.result.parameters['brand'];
     var rr_array =[];
     var findMyStart = Math.floor((Math.random() * 50) + 1).toString();
     rr_array.length = 0;
