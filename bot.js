@@ -284,9 +284,8 @@ function receivedMessage(event) {
   if (messageText) {
     // If we receive a text message, check to see if it matches a keyword
     // and send back the template example. Otherwise, just echo the text we received.
-    if(message.quick_reply){
+    if(message.quick_reply && (message.quick_reply["payload"]).match(/(v2_)/g)){
       var derivedPayload = message.quick_reply["payload"];
-      if (derivedPayload.match(/(v2_)/g)) {
       if (derivedPayload == "v2_find") {
         v2_showFindList(senderID);
       }
@@ -302,45 +301,6 @@ function receivedMessage(event) {
       else if (derivedPayload.match(/(v2_BNY-)/g)) {
         callRrApi(senderID, derivedPayload.slice(3));
       }
-      else {
-        sendTextMessage(senderID, "Hello there!!!")
-      }
-    }
-    else {
-    console.log("normal message");
-    let apiai = apiaiApp.textRequest(messageText, {
-        sessionId: 'tabby_cat', // use any arbitrary id
-        contexts: [
-          {
-            name: "generic",
-            parameters: {
-            facebook_user_id: senderID
-        }
-      }
-      ]
-      });
-
-      apiai.on('response', (response) => {
-        // Got a response from api.ai. Let's POST to Facebook Messenger
-        let aiText = response.result.fulfillment.speech;
-        var messageData = {
-          recipient: {
-            id: senderID
-          },
-          message: {
-            text: aiText
-          }
-        };
-
-        callSendAPI(messageData);
-      });
-
-      apiai.on('error', (error) => {
-        console.log("Pikachu" + error);
-      });
-
-      apiai.end();
-    }
     }
     else {
     console.log("normal message");
@@ -859,7 +819,8 @@ console.log(itemList);
 }
 //Sending generic message with Favorite items
 function sendGenericMessageForFavoriteItems(recipientId, arrayHere) {
-  // sendTextMessage(recipientId, "Here’s what you’ve saved:");
+  console.log(arrayHere);
+  sendTextMessage(recipientId, "Here’s what you’ve saved:");
   var itemList = [];
 arrayHere.forEach(i=>{
    itemList.push(
