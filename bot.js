@@ -154,7 +154,7 @@ app.post('/ai', (req, res) => {
     findGender = req.body.result.parameters['user-gender'];
     findColor = req.body.result.parameters['color'];
     findProductName = req.body.result.parameters['product-name'];
-    findProductName.replace(" ", +);
+    findProductName.replace(" ", "+");
     var rr_array =[];
     var findMyStart = Math.floor((Math.random() * 30) + 1).toString();
     rr_array.length = 0;
