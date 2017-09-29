@@ -723,6 +723,7 @@ setTimeout(function() { sendTextMessage(recipientId, "Come back any time to star
 }
 
 function sendGenericMessage(recipientId, arrayHere) {
+  sendTextMessage(recipientId, "Here’s what I found:");
   var itemList = [];
 arrayHere.forEach(i=>{
    itemList.push(
@@ -770,6 +771,7 @@ console.log(itemList);
 }
 
 function sendGenericMessageForSearch(recipientId, arrayHere) {
+  sendTextMessage(recipientId, "Here’s what I found:");
   var itemList = [];
 arrayHere.forEach(i=>{
    itemList.push(
@@ -817,6 +819,7 @@ console.log(itemList);
 }
 //Sending generic message with Favorite items
 function sendGenericMessageForFavoriteItems(recipientId, arrayHere) {
+  sendTextMessage(senderID, "Here’s what you’ve saved:");
   var itemList = [];
 arrayHere.forEach(i=>{
    itemList.push(
