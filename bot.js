@@ -349,7 +349,7 @@ function receivedMessage(event) {
         v2_initialOptions(senderID);
       }
       else if (derivedPayload == "v2_tips") {
-        sendTextMessage(senderID, "Tips coming soon!");
+        sendTextMessage(senderID, "-Type keywords to find items: e.g. 'shoes’/‘Gucci'/'Show me suits'\n-Type ‘favorites’ to bring up the favorites list\n-Hit the Restart button to return to the main menu");
       }
       else if (derivedPayload.match(/(v2_BNY-)/g)) {
         callRrApi(senderID, derivedPayload.slice(3));
