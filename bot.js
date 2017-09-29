@@ -618,6 +618,7 @@ function v2_restartAnytime(recipientId){
     id: recipientId
   },
   message:{
+    text: "Help!",
     quick_replies:[
       {
         content_type:"text",
