@@ -284,7 +284,7 @@ function receivedMessage(event) {
   if (messageText) {
     // If we receive a text message, check to see if it matches a keyword
     // and send back the template example. Otherwise, just echo the text we received.
-    if(message.quick_reply["payload"]){
+    if(typeof (message.quick_reply["payload"]) != "undefined"){
       var derivedPayload = message.quick_reply["payload"];
       if (derivedPayload == "v2_find") {
         v2_showFindList(senderID);
