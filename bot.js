@@ -141,7 +141,7 @@ app.post('/ai', (req, res) => {
                     // return sendGenericMessageForApiAi(rr_array);
 
                     sendGenericMessage(GLOBAL_ID, rr_array);
-                    setTimeout(function() { v2_restartAnytime(GLOBAL_ID) }, 2000);
+                    setTimeout(function() { v2_restartAnytime(GLOBAL_ID) }, 4000);
               // The Description is:  "descriptive string"
             } else {
             console.log('Pavan api.ai, ERROR');
@@ -184,7 +184,7 @@ app.post('/ai', (req, res) => {
                   console.log(findProductName);
                         rr_array = body.placements[0].docs;
                         sendGenericMessageForSearch(GLOBAL_ID, rr_array);
-                        setTimeout(function() { v2_restartAnytime(GLOBAL_ID) }, 2000);
+                        setTimeout(function() { v2_restartAnytime(GLOBAL_ID) }, 4000);
               // The Description is:  "descriptive string"
             } else {
             console.log('Pavan api.ai, ERROR');
@@ -975,7 +975,7 @@ function callRrApi(sid, queryString){
                   rr_array = body.placements[0].recommendedProducts;
                   sendGenericMessage(sid, rr_array);
                 }
-                setTimeout(function() { v2_restartAnytime(sid) }, 2000);
+                setTimeout(function() { v2_restartAnytime(sid) }, 4000);
             // The Description is:  "descriptive string"
           } }else {
             sendTextMessage(sid, 'Pavan, ERROR');
@@ -1000,7 +1000,7 @@ function callRrApi(sid, queryString){
                   body = JSON.parse(body);
                         rr_array = body.placements[0].docs;
                         sendGenericMessageForSearch(sid, rr_array);
-                        setTimeout(function() { v2_restartAnytime(sid) }, 2000);
+                        setTimeout(function() { v2_restartAnytime(sid) }, 4000);
                   // The Description is:  "descriptive string"
                 } else {
                   sendTextMessage(sid, 'Pavan, ERROR');
