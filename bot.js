@@ -275,6 +275,7 @@ app.post('/ai', (req, res) => {
     findPrice.replace(" ", "+");
     var findGender = req.body.result.parameters['user-gender'];
     findGender = 'gender:\"' + findGender + '\"';
+    var arrayOne = [findGender, findBrand];
     var rr_array =[];
     rr_array.length = 0;
     console.log("nagma");
@@ -289,8 +290,7 @@ app.post('/ai', (req, res) => {
           query: findProductName,
           start: "0",
           rows: "5",
-          filter: findGender,
-          filter: findBrand
+          filter: arrayOne
           };
         request({
           uri: req_url,
