@@ -286,7 +286,7 @@ app.post('/ai', (req, res) => {
           sessionId= process.env.SESSION_ID,
           placements= process.env.PLACEMENTS_ID_FIND;
         var  requesting = req_url + "?apiKey=" + apiKey + "&apiClientKey=" + apiClientKey + "&userId=" + userId + "&sessionId=" + sessionId + "&placements=" + placements + "&lang=en&facet=&start=0&rows=5&query=" + findProductName + "&filter=" + findBrand + "&filter=" + findGender + "&filter=" + findcolor;
-          request(requesting, function (error, response, body) {
+          request(requesting, setTimeout(function (error, response, body) {
                 if (!error && response.statusCode == 200) {
                   //parsing the json response from RR cloud
                   body = JSON.parse(body);
@@ -299,7 +299,7 @@ app.post('/ai', (req, res) => {
             } else {
             console.log('Pavan api.ai, ERROR');
             }
-          });
+          }, 2000));
   }
 
 });
