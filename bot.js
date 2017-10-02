@@ -290,7 +290,7 @@ app.post('/ai', (req, res) => {
           query: findProductName,
           start: "0",
           rows: "5",
-          filter : 'gender:Women&filter=brand:Icons'
+          filter : findBrand
           };
         request({
           uri: req_url,
