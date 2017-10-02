@@ -289,13 +289,12 @@ app.post('/ai', (req, res) => {
           facet: "",
           query: findProductName,
           start: "0",
-          rows: "5",
-          filter : findBrand,
-          filter : findGender
+          rows: "5"
           };
         request({
           uri: req_url,
           qs: queryParameters,
+          multipart: [{filter: findBrand}, {filter : findGender}],
           headers: {
             'User-Agent': 'Mozilla/5.0 (Linux; Android 5.1.1; A1 Build/LMY47V) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/60.0.3112.116 Mobile Safari/537.36'
             },
