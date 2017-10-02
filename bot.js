@@ -268,7 +268,7 @@ app.post('/ai', (req, res) => {
     var findProductName = req.body.result.parameters['product-name'];
     findProductName.replace(" ", "+");
     var findcolor = req.body.result.parameters['color'];
-    findcolor.replace(" ", "+");
+    findcolor = 'color:\"' + findcolor + '\"';
     var findSize = req.body.result.parameters['size'];
     findSize.replace(" ", "+");
     var findPrice = req.body.result.parameters['unit-currency'];
@@ -289,7 +289,8 @@ app.post('/ai', (req, res) => {
           query: findProductName,
           start: "0",
           rows: "5",
-          filter: findBrand};
+          filter: findBrand,
+          filter: findcolor};
         request({
           uri: req_url,
           qs: queryParameters,
