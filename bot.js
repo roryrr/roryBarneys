@@ -279,29 +279,15 @@ app.post('/ai', (req, res) => {
     var rr_array =[];
     rr_array.length = 0;
     console.log("nagma");
+    var request = require('request');
     var req_url = process.env.FIND_URL;
-    var queryParameters = { apiKey: process.env.API_KEY,
-          apiClientKey: process.env.API_CLIENT_KEY,
-          userId: process.env.USER_ID,
-          sessionId: process.env.SESSION_ID,
-          placements: process.env.PLACEMENTS_ID_FIND,
-          lang: "en",
-          facet: "",
-          query: findProductName,
-          start: "0",
-          rows: "5",
-          filter: findGender,
-          filter: findBrand
-          };
-        request({
-          uri: req_url,
-          qs: queryParameters,
-          useQuerystring: true,
-          headers: {
-            'User-Agent': 'Mozilla/5.0 (Linux; Android 5.1.1; A1 Build/LMY47V) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/60.0.3112.116 Mobile Safari/537.36'
-            },
-          method: 'GET',
-          }, function (error, response, body) {
+    var apiKey= process.env.API_KEY,
+          apiClientKey= process.env.API_CLIENT_KEY,
+          userId= process.env.USER_ID,
+          sessionId= process.env.SESSION_ID,
+          placements= process.env.PLACEMENTS_ID_FIND;
+        var  requesting = req_url + "?apiKey=" + apiKey + "&apiClientKey=" + apiClientKey + "&userId=" + userId + "&sessionId=" + sessionId + "&placements=" + placements + "&lang=en&facet=&start=0&rows=5&query=" + findProductName + "&filter=" + findBrand + "&filter=" + findGender;
+          request(requesting, function (error, response, body) {
                 if (!error && response.statusCode == 200) {
                   //parsing the json response from RR cloud
                   body = JSON.parse(body);
