@@ -263,12 +263,6 @@ app.post('/ai', (req, res) => {
           });
   }
   else if (req.body.result.action === 'inspire-me') {
-    console.log("Akshay");
-    var arrayOne = [];
-    arrayOne = req.body.result.parameters;
-    arrayOne.forEach(i=>
-       console.log(i)
-    );
     var findBrand = req.body.result.parameters['brand'];
     findBrand = 'brand:\"' + findBrand + '\"';
     var findProductName = req.body.result.parameters['product-name'];
@@ -280,7 +274,7 @@ app.post('/ai', (req, res) => {
     var findPrice = req.body.result.parameters['unit-currency'];
     findPrice.replace(" ", "+");
     var findGender = req.body.result.parameters['user-gender'];
-    findGender.replace(" ", "+");
+    findGender = 'gender:\"' + findGender + '\"';
     var rr_array =[];
     rr_array.length = 0;
     console.log("nagma");
@@ -295,8 +289,8 @@ app.post('/ai', (req, res) => {
           query: findProductName,
           start: "0",
           rows: "5",
-          filter: findcolor,
-          // filter: findcolor
+          filter: findBrand,
+          filter: findGender
           };
         request({
           uri: req_url,
