@@ -267,7 +267,7 @@ app.post('/ai', (req, res) => {
     var arrayOne = [];
     arrayOne = req.body.result.parameters;
     arrayOne.forEach(i=>{
-       console.log(arrayOne[i]);
+       console.log(i);
     });
     var findBrand = req.body.result.parameters['brand'];
     findBrand = 'brand:\"' + findBrand + '\"';
