@@ -289,8 +289,8 @@ app.post('/ai', (req, res) => {
           query: findProductName,
           start: "0",
           rows: "5",
-          filter: findBrand,
-          filter: findGender
+          filter: findGender,
+          filter: findBrand
           };
         request({
           uri: req_url,
