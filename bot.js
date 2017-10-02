@@ -263,13 +263,13 @@ app.post('/ai', (req, res) => {
           });
   }
   else if (req.body.result.action === 'inspire-me') {
-    var findBrand = req.body.result.parameters[brand];
+    var findBrand = req.body.result.parameters["brand"];
     findBrand = 'brand:\"' + findBrand + '\"';
     var findProductName = req.body.result.parameters['product-name'];
     findProductName.replace(" ", "+");
-    var findcolor = req.body.result.parameters[color];
+    var findcolor = req.body.result.parameters["color"];
     findcolor = "color:" + findcolor;
-    var findSize = req.body.result.parameters[size];
+    var findSize = req.body.result.parameters["size"];
     findSize.replace(" ", "+");
     var findPrice = req.body.result.parameters['unit-currency'];
     findPrice.replace(" ", "+");
