@@ -268,7 +268,7 @@ app.post('/ai', (req, res) => {
     var findProductName = req.body.result.parameters['product-name'];
     findProductName.replace(" ", "+");
     var findcolor = req.body.result.parameters['color'];
-    findcolor = 'color:\"' + findcolor + '\"';
+    findcolor = "color:" + findcolor;
     console.log("Akshay %s", findcolor);
     var findSize = req.body.result.parameters['size'];
     findSize.replace(" ", "+");
