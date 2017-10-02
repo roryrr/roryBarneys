@@ -291,7 +291,7 @@ app.post('/ai', (req, res) => {
           start: "0",
           rows: "5",
           filter: findBrand,
-          filter: findcolor};
+          };
         request({
           uri: req_url,
           qs: queryParameters,
