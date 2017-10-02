@@ -290,7 +290,7 @@ app.post('/ai', (req, res) => {
           query: findProductName,
           start: "0",
           rows: "5",
-          filter: findBrand,
+          filter: findcolor,
           // filter: findcolor
           };
         request({
