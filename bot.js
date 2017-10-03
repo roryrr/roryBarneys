@@ -297,9 +297,14 @@ app.post('/ai', (req, res) => {
                   body = JSON.parse(body);
                   console.log("powerranger");
                   console.log(findProductName);
+                  if (body.placements[0].numFound == "0") {
+                    sendTextMessage(GLOBAL_ID,"Oops, looks like we don’t have anything that fits that description.")
+                  }
+                  else {
                         rr_array = body.placements[0].docs;
                         sendGenericMessageForSearch(GLOBAL_ID, rr_array);
                         setTimeout(function() { v2_restartAnytime(GLOBAL_ID) }, 7000);
+                      }
               // The Description is:  "descriptive string"
             } else {
             console.log('Pavan api.ai, ERROR');
