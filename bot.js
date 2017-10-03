@@ -268,7 +268,7 @@ app.post('/ai', (req, res) => {
     var findProductName = req.body.result.parameters['product-name'];
     findProductName.replace(" ", "+");
     var findcolor = req.body.result.parameters["color"];
-    findcolor = 'color:\"' + findcolor + '\"';
+    findcolor = 'color:\"' + findcolor.charAt(0).toUpperCase() + findcolor.slice(1) + '\"';
     // var findSize = req.body.result.parameters["size"];
     // findSize = 'size:\"' + findSize + '\"';
     // var findPrice = parseInt(req.body.result.parameters['unit-currency']) * 100;
@@ -286,7 +286,7 @@ app.post('/ai', (req, res) => {
           sessionId= process.env.SESSION_ID,
           placements= process.env.PLACEMENTS_ID_FIND;
         var  requesting = req_url + "?apiKey=" + apiKey + "&apiClientKey=" + apiClientKey + "&userId=" + userId + "&sessionId=" + sessionId + "&placements=" + placements + "&lang=en&facet=&start=0&rows=5&query=" + findProductName + "&filter=" + findBrand + "&filter=" + findGender + "&filter=" + findcolor;
-          var req = http.request(requesting, function (error, response, body) {
+          request(requesting, function (error, response, body) {
                 if (!error && response.statusCode == 200) {
                   //parsing the json response from RR cloud
                   body = JSON.parse(body);
@@ -300,21 +300,6 @@ app.post('/ai', (req, res) => {
             console.log('Pavan api.ai, ERROR');
             }
           });
-          req.on('socket', function (socket) {
-          socket.setTimeout(5000);
-          socket.on('timeout', function() {
-          req.abort();
-          });
-        });
-
-req.on('error', function(err) {
-    if (err.code === "ECONNRESET") {
-        console.log("Timeout occurs");
-        //specific error treatment
-    }
-    //other error treatment
-});
-
   }
 
 });
