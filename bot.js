@@ -270,7 +270,12 @@ app.post('/ai', (req, res) => {
     var findcolor = req.body.result.parameters["color"];
     findcolor = 'color:\"' + findcolor.charAt(0).toUpperCase() + findcolor.slice(1) + '\"';
     var findSize = req.body.result.parameters["user-size"];
+    if (parseInt(findSize)) {
+    findSize = 'size:\"' + findSize + '\"';
+    }
+    else {
     findSize = 'size:\"' + findSize.charAt(0) + '\"';
+    }
     // var findPrice = parseInt(req.body.result.parameters['unit-currency']) * 100;
     // findPrice = 'effectivePriceCents:\"' + findPrice + '\"';
     var findGender = req.body.result.parameters['user-gender'];
