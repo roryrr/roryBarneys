@@ -402,7 +402,7 @@ function receivedMessage(event) {
         callRrApi(senderID, derivedPayload.slice(3));
       }
       else if (derivedPayload == "v2_payStart") {
-        sendTextMessage(senderID, "Enter a text like 'Looking for shirt'");
+        sendTextMessage(senderID, "Enter a text like 'I am looking for shirt'");
       }
     }
     else {
