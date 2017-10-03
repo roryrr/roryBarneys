@@ -283,6 +283,7 @@ app.post('/ai', (req, res) => {
     var rr_array =[];
     rr_array.length = 0;
     console.log("nagma");
+    var request = require('request');
     var req_url = process.env.FIND_URL;
     var apiKey= process.env.API_KEY,
           apiClientKey= process.env.API_CLIENT_KEY,
