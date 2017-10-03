@@ -269,8 +269,8 @@ app.post('/ai', (req, res) => {
     findProductName.replace(" ", "+");
     var findcolor = req.body.result.parameters["color"];
     findcolor = 'color:\"' + findcolor.charAt(0).toUpperCase() + findcolor.slice(1) + '\"';
-    // var findSize = req.body.result.parameters["size"];
-    // findSize = 'size:\"' + findSize + '\"';
+    var findSize = req.body.result.parameters["size"];
+    findSize = 'size:\"' + findSize + '\"';
     // var findPrice = parseInt(req.body.result.parameters['unit-currency']) * 100;
     // findPrice = 'effectivePriceCents:\"' + findPrice + '\"';
     var findGender = req.body.result.parameters['user-gender'];
@@ -285,7 +285,7 @@ app.post('/ai', (req, res) => {
           userId= process.env.USER_ID,
           sessionId= process.env.SESSION_ID,
           placements= process.env.PLACEMENTS_ID_FIND;
-        var  requesting = req_url + "?apiKey=" + apiKey + "&apiClientKey=" + apiClientKey + "&userId=" + userId + "&sessionId=" + sessionId + "&placements=" + placements + "&lang=en&facet=&start=0&rows=5&query=" + findProductName + "&filter=" + findBrand + "&filter=" + findGender + "&filter=" + findcolor;
+        var  requesting = req_url + "?apiKey=" + apiKey + "&apiClientKey=" + apiClientKey + "&userId=" + userId + "&sessionId=" + sessionId + "&placements=" + placements + "&lang=en&facet=&start=0&rows=5&query=" + findProductName + "&filter=" + findBrand + "&filter=" + findGender + "&filter=" + findcolor + "&filter=" + findSize;
           request(requesting, function (error, response, body) {
                 if (!error && response.statusCode == 200) {
                   //parsing the json response from RR cloud
