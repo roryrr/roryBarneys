@@ -401,6 +401,9 @@ function receivedMessage(event) {
       else if (derivedPayload.match(/(v2_BNY-)/g)) {
         callRrApi(senderID, derivedPayload.slice(3));
       }
+      else if (derivedPayload == "v2_payStart") {
+        sendTextMessage(senderID, "Enter a text like 'Looking for shirt'");
+      }
     }
     else {
     console.log("normal message");
@@ -480,8 +483,7 @@ function receivedPostback(event) {
     setTimeout(function() { v2_restartAnytime(senderID) }, 7000);
   }
   else if (payload == 'v3_inspireMe') {
-    sendTextMessage(senderID, "Inspire me coming soon");
-    setTimeout(function() { v2_restartAnytime(senderID) }, 7000);
+    v3_payloadToMsg(senderID);
   }
   else if (payload.match(/(BNY-)/g)) {
     callRrApi(senderID, payload);
@@ -574,7 +576,6 @@ function v2_initialOptions(recipientId){
         content_type:"text",
         title:"Find it",
         payload:"v2_find",
-        image_url:"https://png.icons8.com/search/color/24"
       },
       {
         content_type:"text",
@@ -740,6 +741,27 @@ function v2_restartAnytime(recipientId){
         title:"Tips",
         payload:"v2_tips",
         image_url:"https://png.icons8.com/marker-filled/ios7/32"
+      }
+    ]
+  }
+};
+callSendAPI(messageData);
+}
+
+//Linking from INspire payload to text
+function v3_payloadToMsg(recipientId){
+  var messageData = {
+  recipient:{
+    id: recipientId
+  },
+  message:{
+    text: "Click below button to start:",
+    quick_replies:[
+      {
+        content_type:"text",
+        title:"payStart",
+        payload:"v2_payStart",
+        image_url:"https://png.icons8.com/go/color/48"
       }
     ]
   }
