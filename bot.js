@@ -759,7 +759,7 @@ function v3_payloadToMsg(recipientId){
     quick_replies:[
       {
         content_type:"text",
-        title:"payStart",
+        title:"for it",
         payload:"v2_payStart",
         image_url:"https://png.icons8.com/go/color/48"
       }
