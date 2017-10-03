@@ -581,7 +581,7 @@ function v2_initialOptions(recipientId){
         content_type:"text",
         title:"Find it",
         payload:"v2_find",
-        url:"https://png.icons8.com/search/color/24"
+        image_url:"https://png.icons8.com/search/color/24"
       },
       {
         content_type:"text",
