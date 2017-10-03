@@ -269,7 +269,7 @@ app.post('/ai', (req, res) => {
     findProductName.replace(" ", "+");
     var findcolor = req.body.result.parameters["color"];
     findcolor = 'color:\"' + findcolor.charAt(0).toUpperCase() + findcolor.slice(1) + '\"';
-    var findSize = req.body.result.parameters["size"];
+    var findSize = req.body.result.parameters["user-size"];
     findSize = 'size:\"' + findSize + '\"';
     // var findPrice = parseInt(req.body.result.parameters['unit-currency']) * 100;
     // findPrice = 'effectivePriceCents:\"' + findPrice + '\"';
