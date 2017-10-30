@@ -238,7 +238,7 @@ app.post('/ai', (req, res) => {
           lang: "en",
           facet: "",
           query: findBrand,
-          start: findMyStart,
+          start: 0,
           rows: "10"};
         request({
           uri: req_url,
