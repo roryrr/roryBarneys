@@ -154,11 +154,11 @@ app.post('/ai', (req, res) => {
     findGender = req.body.result.parameters['user-gender'];
     findColor = req.body.result.parameters['color'];
     findProductName = req.body.result.parameters['product-name'];
-    if(findProductName.includes(" ")){
-    findProductName.replace(" ", "+");
-  }
+  //   if(findProductName.includes(" ")){
+  //   findProductName.replace(" ", "+");
+  // }
     var rr_array =[];
-    var findMyStart = Math.floor((Math.random() * 30) + 1).toString();
+    // var findMyStart = Math.floor((Math.random() * 30) + 1).toString();
     rr_array.length = 0;
     console.log("nagma");
     var req_url = process.env.FIND_URL;
@@ -170,7 +170,7 @@ app.post('/ai', (req, res) => {
           lang: "en",
           facet: "",
           query: findProductName,
-          start: findMyStart,
+          start: 0,
           rows: "10"};
         request({
           uri: req_url,
