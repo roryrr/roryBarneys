@@ -1126,7 +1126,7 @@ function callRrApi(sid, queryString){
         var rr_array =[];
         rr_array.length = 0;
           request({
-          uri: "https://staging.richrelevance.com/rrserver/api/find/v1/dbeab3c977a08905?facet=&query="+queryString+"&lang=en&start=0&rows=5&placement=generic_page.rory_search&userId=ulichi&sessionId=mysession",
+          uri: "https://qa.richrelevance.com/rrserver/api/find/v1/dbeab3c977a08905?facet=&query="+queryString+"&lang=en&start=0&rows=5&placement=generic_page.rory_search&userId=ulichi&sessionId=mysession",
           headers: {
             'User-Agent': 'Mozilla/5.0 (Linux; Android 5.1.1; A1 Build/LMY47V) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/60.0.3112.116 Mobile Safari/537.36'
             },
