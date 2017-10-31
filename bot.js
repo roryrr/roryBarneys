@@ -153,7 +153,7 @@ app.post('/ai', (req, res) => {
     var findGender="", findColor="", findProductName="";
     findGender = req.body.result.parameters['user-gender'];
     findColor = req.body.result.parameters['color'];
-    findProductName = req.body.result.parameters['productName'];
+    findProductName = req.body.result.parameters['product-name'];
     findProductName.replace(" ", "+");
     var rr_array =[];
     // var findMyStart = Math.floor((Math.random() * 30) + 1).toString();
@@ -265,7 +265,7 @@ app.post('/ai', (req, res) => {
   else if (req.body.result.action === 'inspire-me') {
     var findBrand = req.body.result.parameters["brand"];
     findBrand = 'brand:\"' + findBrand + '\"';
-    var findProductName = req.body.result.parameters['productName'];
+    var findProductName = req.body.result.parameters['product-name'];
     findProductName.replace(" ", "+");
     var findcolor = req.body.result.parameters["color"];
     findcolor = 'color:\"' + findcolor.charAt(0).toUpperCase() + findcolor.slice(1) + '\"';
