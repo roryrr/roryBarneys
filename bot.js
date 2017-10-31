@@ -190,6 +190,7 @@ app.post('/ai', (req, res) => {
                         setTimeout(function() { v2_restartAnytime(GLOBAL_ID) }, 7000);
               // The Description is:  "descriptive string"
             } else {
+              console.log(error.message);
             console.log('Pavan api.ai, ERROR');
             }
           });
