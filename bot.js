@@ -153,10 +153,8 @@ app.post('/ai', (req, res) => {
     var findGender="", findColor="", findProductName="";
     findGender = req.body.result.parameters['user-gender'];
     findColor = req.body.result.parameters['color'];
-    findProductName = req.body.result.parameters['product-name'];
-  //   if(findProductName.includes(" ")){
-  //   findProductName.replace(" ", "+");
-  // }
+    findProductName = req.body.result.parameters['productName'];
+    findProductName.replace(" ", "+");
     var rr_array =[];
     // var findMyStart = Math.floor((Math.random() * 30) + 1).toString();
     rr_array.length = 0;
@@ -190,8 +188,6 @@ app.post('/ai', (req, res) => {
                         setTimeout(function() { v2_restartAnytime(GLOBAL_ID) }, 7000);
               // The Description is:  "descriptive string"
             } else {
-              body = JSON.parse(body);
-              console.log(body.message);
             console.log('Pavan api.ai, ERROR');
             }
           });
@@ -269,7 +265,7 @@ app.post('/ai', (req, res) => {
   else if (req.body.result.action === 'inspire-me') {
     var findBrand = req.body.result.parameters["brand"];
     findBrand = 'brand:\"' + findBrand + '\"';
-    var findProductName = req.body.result.parameters['product-name'];
+    var findProductName = req.body.result.parameters['productName'];
     findProductName.replace(" ", "+");
     var findcolor = req.body.result.parameters["color"];
     findcolor = 'color:\"' + findcolor.charAt(0).toUpperCase() + findcolor.slice(1) + '\"';
