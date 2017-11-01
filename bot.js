@@ -848,7 +848,7 @@
       console.log(arrayHere);
       var itemList = [];
     arrayHere.forEach(i=>{
-      if (i.isRecommendable == "true") {
+      if (i.isRecommendable == true) {
        itemList.push(
        {
         "title":i.name,
@@ -898,7 +898,7 @@
       sendTextMessage(recipientId, "Here’s what I found:");
       var itemList = [];
     arrayHere.forEach(i=>{
-      if (i.isRecommendable == "true") {
+      if (i.isRecommendable == true) {
        itemList.push(
        {
         "title":i.name,
@@ -947,7 +947,7 @@
       sendTextMessage(recipientId, "Here’s what you’ve saved:");
       var itemList = [];
     arrayHere.forEach(i=>{
-      if (i.isRecommendable == "true") {
+      if (i.isRecommendable == true) {
        itemList.push(
        {
         "title":i.name,
