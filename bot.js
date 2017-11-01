@@ -323,7 +323,6 @@
 
     // Incoming events handling (this handles both user text input and also text from payload that comes from FB api)
     function receivedMessage(event) {
-      if (event.sender.id !== '1826443647395614') {
       var senderID = event.sender.id;
       var recipientID = event.recipient.id;
       var timeOfMessage = event.timestamp;
@@ -416,10 +415,8 @@
         sendTextMessage(senderID, "Message with attachment received");
       }
     }
-    }
 
     function receivedPostback(event) {
-      if (event.sender.id !== '1826443647395614') {
       var senderID = event.sender.id;
       var recipientID = event.recipient.id;
       var timeOfPostback = event.timestamp;
@@ -483,7 +480,6 @@
       else if (payload.match(/(pairIt)/g)) {
         callRrApi(senderID, payload);
       }
-    }
     }
 
     //////////////////////////
