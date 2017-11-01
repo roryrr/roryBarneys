@@ -842,6 +842,7 @@
         }
 
     function sendGenericMessage(recipientId, arrayHere) {
+      console.log(recipientId);
       sendTextMessage(recipientId, "Here’s what I found:");
       console.log("fidget spinner");
       console.log(arrayHere);
@@ -871,6 +872,7 @@
        });
     });
     console.log("dabang");
+    console.log(recipientId);
       var messageData = {
         recipient: {
           id: recipientId
