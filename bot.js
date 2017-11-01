@@ -317,48 +317,6 @@ app.post('/ai', (req, res) => {
 
 });
 
-// //function to generate the payload for fb via api.ai
-// function sendGenericMessageForApiAi(arrayHere){
-//   var itemList = [];
-//   arrayHere.forEach(i=>{
-//      itemList.push(
-//      {
-//       "title":i.name,
-//       "subtitle":i.brand,
-//       "item_url":process.env.BNY_HOME + i.linkId,
-//       //manipulating the image using Cloudinary
-//       "image_url":cloudinary.url(i.imageId,{ type: 'fetch', height: 170, width: 170, crop: 'scale', quality: 100, fetch_format: 'jpg'}),
-//       "buttons" : [
-//           {
-//             "type": "postback",
-//             "title": "Try something similar",
-//             "payload": "similar"+i.id
-//           }, {
-//             "type": "postback",
-//             "title": "Add to favorites",
-//             "payload": "fav"+i.id
-//           }]
-//      });
-//   });
-//   console.log("api.ai dabang");
-//   console.log(itemList);
-//   var messageData = {
-//     "facebook": {
-//       "attachment": {
-//         "type": "template",
-//         "payload": {
-//           "template_type": "generic",
-//           "image_aspect_ratio": "horizontal",
-//           "elements": itemList
-//         }
-//       }
-//     }
-//   };
-//
-//   return messageData;
-//
-// }
-
 // Incoming events handling (this handles both user text input and also text from payload that comes from FB api)
 function receivedMessage(event) {
   var senderID = event.sender.id;
@@ -876,26 +834,6 @@ function sendAvailableOptionList(recipientId) {
     };
       callSendAPI(messageData);
     }
-//Goodbye response
-function sayGoodBye(recipientId){
-  var messageData = {
-    recipient: {
-      id: recipientId
-    },
-    message:{
-    attachment:{
-      type: "image",
-      payload: {
-        url: cloudinary.url("https://media1.giphy.com/media/aMeoYTJm7dwuQ/giphy.gif",{ type: 'fetch', height: 170, width: 170, crop: 'scale', quality: 50, fetch_format: 'auto'})
-      }
-    }
-  }
-};
-sendTextMessage(recipientId, "Here’s looking at you, kid.");
-callSendAPI(messageData);
-setTimeout(function() { sendTextMessage(recipientId, "Come back any time to start shopping!") }, 2500);
-
-}
 
 function sendGenericMessage(recipientId, arrayHere) {
   sendTextMessage(recipientId, "Here’s what I found:");
