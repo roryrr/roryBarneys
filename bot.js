@@ -69,7 +69,11 @@ app.post('/webhook', function (req, res) {
           receivedMessage(event);
         } else if (event.postback) {
           receivedPostback(event);
-        } else {
+        }
+        else if (event.sender.id == '1826443647395614') {
+          console.log("La la Land");
+        }
+        else {
           console.log("Webhook received unknown event: ", event);
         }
       });
