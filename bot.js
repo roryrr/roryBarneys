@@ -116,6 +116,9 @@ app.post('/ai', (req, res) => {
       }
     })
   }
+  else if (req.body.result.action === 'facebook-reply') {
+    console.log("fb fb fb");
+  }
   else if (req.body.result.action === 'site-wide-general-top') {
     var rr_array =[];
     rr_array.length = 0;
