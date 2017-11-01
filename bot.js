@@ -90,7 +90,7 @@
     /* Webhook for API.ai to get response from the 3rd party API */
     app.post('/ai', (req, res) => {
       console.log('*** Webhook for api.ai query ***');
-      console.log(req.body.result);
+      // console.log(req.body.result);
 
       if (req.body.result.action === 'weather') {
         console.log('*** weather ***');
@@ -100,7 +100,7 @@
         request.get(restUrl, (err, response, body) => {
           if (!err && response.statusCode == 200) {
             let json = JSON.parse(body);
-            console.log(json);
+            // console.log(json);
             let tempF = ~~(json.main.temp * 9/5 - 459.67);
             let tempC = ~~(json.main.temp - 273.15);
             let msg = 'The current condition in ' + json.name + ' is ' + json.weather[0].description + ' and the temperature is ' + tempF + ' ℉ (' +tempC+ ' ℃).'
@@ -867,7 +867,6 @@
        });
     });
     console.log("dabang");
-    console.log(itemList);
       var messageData = {
         recipient: {
           id: recipientId
@@ -915,7 +914,6 @@
        });
     });
     console.log("shahrukh");
-    console.log(itemList);
       var messageData = {
         recipient: {
           id: recipientId
@@ -936,7 +934,6 @@
     }
     //Sending generic message with Favorite items
     function sendGenericMessageForFavoriteItems(recipientId, arrayHere) {
-      console.log(arrayHere);
       sendTextMessage(recipientId, "Here’s what you’ve saved:");
       var itemList = [];
     arrayHere.forEach(i=>{
@@ -964,7 +961,6 @@
        });
     });
     console.log("dabang");
-    console.log(itemList);
       var messageData = {
         recipient: {
           id: recipientId
@@ -1049,7 +1045,6 @@
 
                 if (queryString.match(/(favorite)/g)) {
                   console.log("undertaker wwe");
-                  console.log(body);
                   rr_array = body.products;
                   sendGenericMessageForFavoriteItems(sid, rr_array);
                 }
@@ -1157,7 +1152,6 @@
                             if ((typeof body.pref_product.LIKE) == "object") {
                               rr_array_temp = "favorite" + body.pref_product.LIKE.join("|");
                               console.log("Rajinikanth");
-                              console.log(rr_array_temp);
                               callRrApi(sid, rr_array_temp);
                             }
                             else {
