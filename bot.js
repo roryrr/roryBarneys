@@ -144,7 +144,7 @@ app.post('/ai', (req, res) => {
                     // return sendGenericMessageForApiAi(rr_array);
 
                     sendGenericMessage(GLOBAL_ID, rr_array);
-                    setTimeout(function() { v2_restartAnytime(GLOBAL_ID) }, 7000);
+                    // setTimeout(function() { v2_restartAnytime(GLOBAL_ID) }, 7000);
               // The Description is:  "descriptive string"
             } else {
             console.log('Pavan api.ai, ERROR');
@@ -188,7 +188,7 @@ app.post('/ai', (req, res) => {
                   console.log(findProductName);
                         rr_array = body.placements[0].docs;
                         sendGenericMessageForSearch(GLOBAL_ID, rr_array);
-                        setTimeout(function() { v2_restartAnytime(GLOBAL_ID) }, 7000);
+                        // setTimeout(function() { v2_restartAnytime(GLOBAL_ID) }, 7000);
               // The Description is:  "descriptive string"
             } else {
             console.log('Pavan api.ai, ERROR');
@@ -258,7 +258,7 @@ app.post('/ai', (req, res) => {
                   console.log(findProductName);
                         rr_array = body.placements[0].docs;
                         sendGenericMessageForSearch(GLOBAL_ID, rr_array);
-                        setTimeout(function() { v2_restartAnytime(GLOBAL_ID) }, 7000);
+                        // setTimeout(function() { v2_restartAnytime(GLOBAL_ID) }, 7000);
               // The Description is:  "descriptive string"
             } else {
             console.log('Pavan api.ai, ERROR');
@@ -306,7 +306,7 @@ app.post('/ai', (req, res) => {
                   else{
                         rr_array = body.placements[0].docs;
                         sendGenericMessageForSearch(GLOBAL_ID, rr_array);
-                        setTimeout(function() { v2_restartAnytime(GLOBAL_ID) }, 7000);
+                        // setTimeout(function() { v2_restartAnytime(GLOBAL_ID) }, 7000);
                       }
               // The Description is:  "descriptive string"
             } else {
@@ -362,7 +362,7 @@ function receivedMessage(event) {
       }
       else if (derivedPayload == "v2_tips") {
         sendTextMessage(senderID, "-Type keywords to find items: e.g. 'shoes’/‘Gucci'/'Show me suits'\n-Type ‘favorites’ to bring up the favorites list\n-Hit the Restart button to return to the main menu");
-        setTimeout(function() { v2_restartAnytime(senderID) }, 7000);
+        // setTimeout(function() { v2_restartAnytime(senderID) }, 7000);
       }
       else if (derivedPayload.match(/(v2_BNY-)/g)) {
         callRrApi(senderID, derivedPayload.slice(3));
@@ -446,7 +446,7 @@ function receivedPostback(event) {
   }
   else if (payload == 'v3_tips') {
     sendTextMessage(senderID, "-Type keywords to find items: e.g. 'shoes’/‘Gucci'/'Show me suits'\n-Type ‘favorites’ to bring up the favorites list\n-Hit the Restart button to return to the main menu");
-    setTimeout(function() { v2_restartAnytime(senderID) }, 7000);
+    // setTimeout(function() { v2_restartAnytime(senderID) }, 7000);
   }
   else if (payload == 'v3_inspireMe') {
     v3_payloadToMsg(senderID);
@@ -983,7 +983,7 @@ console.log(itemList);
 function callRrApi(sid, queryString){
   var rr_array =[];
   rr_array.length = 0;
-  var mySt = Math.floor((Math.random() * 30) + 1).toString();
+  // var mySt = Math.floor((Math.random() * 30) + 1).toString();
   if(queryString == "default"){
     var req_url = process.env.STAGING_URL;
     var queryParameters = { apiKey: process.env.API_KEY,
@@ -996,7 +996,7 @@ function callRrApi(sid, queryString){
     var req_url = process.env.STAGING_URL;
     var queryParameters = { apiKey: process.env.API_KEY,
           apiClientKey: process.env.API_CLIENT_KEY,
-          st: mySt,
+          st: 0,
           count: '10',
           userId: process.env.USER_ID,
           sessionId: process.env.SESSION_ID,
@@ -1053,7 +1053,7 @@ function callRrApi(sid, queryString){
                   rr_array = body.placements[0].recommendedProducts;
                   sendGenericMessage(sid, rr_array);
                 }
-                setTimeout(function() { v2_restartAnytime(sid) }, 7000);
+                // setTimeout(function() { v2_restartAnytime(sid) }, 7000);
             // The Description is:  "descriptive string"
           } }else {
             sendTextMessage(sid, 'Pavan, ERROR');
@@ -1078,7 +1078,7 @@ function callRrApi(sid, queryString){
                   body = JSON.parse(body);
                         rr_array = body.placements[0].docs;
                         sendGenericMessageForSearch(sid, rr_array);
-                        setTimeout(function() { v2_restartAnytime(sid) }, 7000);
+                        // setTimeout(function() { v2_restartAnytime(sid) }, 7000);
                   // The Description is:  "descriptive string"
                 } else {
                   sendTextMessage(sid, 'Pavan, ERROR');
