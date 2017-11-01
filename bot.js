@@ -843,6 +843,8 @@
 
     function sendGenericMessage(recipientId, arrayHere) {
       sendTextMessage(recipientId, "Here’s what I found:");
+      console.log("fidget spinner");
+      console.log(arrayHere);
       var itemList = [];
     arrayHere.forEach(i=>{
        itemList.push(
