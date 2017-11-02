@@ -93,7 +93,7 @@
     /* Webhook for API.ai to get response from the 3rd party API */
     app.post('/ai', (req, res) => {
       console.log('*** Webhook for api.ai query ***');
-      // console.log(req.body.result);
+      console.log(req.body.result);
 
       if (req.body.result.action === 'weather') {
         console.log('*** weather ***');
@@ -846,7 +846,7 @@
       console.log(recipientId);
       sendTextMessage(recipientId, "Here’s what I found:");
       console.log("fidget spinner");
-      console.log(arrayHere);
+      // console.log(arrayHere);
       var itemList = [];
     arrayHere.forEach(i=>{
       if (i.isRecommendable == true) {
