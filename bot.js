@@ -170,7 +170,7 @@
         findColor = req.body.result.parameters['color'];
         findProductName = req.body.result.parameters['product-name'];
         findBrand = req.body.result.parameters['brand'];
-        findProductName.replace(" ", "+").concat(findGender.replace(" ", "+").concat(findColor.replace(" ", "+").concat(findBrand.replace(" ", "+"))));
+        var searchString = (findProductName ? findProductName : "") + (findGender ? findGender : "") + (findColor ? findColor : "") + (findBrand ? findBrand:")";
         var rr_array =[];
         // var findMyStart = Math.floor((Math.random() * 30) + 1).toString();
         rr_array.length = 0;
@@ -183,7 +183,7 @@
               placements: process.env.PLACEMENTS_ID_FIND,
               lang: "en",
               facet: "",
-              query: findProductName,
+              query: searchString,
               start: 0,
               rows: "10"};
             request({
