@@ -75,9 +75,6 @@
                 else {
                   console.log("Webhook received unknown event: ", event);
                 }
-            else {
-              console.log("I caught you!");
-            }
           });
         });
 
