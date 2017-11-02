@@ -1049,8 +1049,13 @@
         }
         })
         .catch(function(err){
-          console.log('Pavan api.ai, ERROR at favs');
-          console.log(err);
+          if (err.name == "StatusCodeError") {
+            console.log("into the error");
+          }
+          else {
+            console.log('Pavan api.ai, ERROR at favs');
+            console.log(err);
+          }
         });
       }
 
