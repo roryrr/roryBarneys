@@ -66,16 +66,18 @@
 
           // Iterate over each messaging event
           entry.messaging.forEach(function(event) {
-            if (event.message) {
-              receivedMessage(event);
-            } else if (event.postback) {
-              receivedPostback(event);
-            }
-            else if (event.sender.id == '1826443647395614') {
-              console.log("La la Land");
+            if (event.sender.id !== '1826443647395614') {
+                if (event.message) {
+                  receivedMessage(event);
+                } else if (event.postback) {
+                  receivedPostback(event);
+                }
+                else {
+                  console.log("Webhook received unknown event: ", event);
+                }
             }
             else {
-              console.log("Webhook received unknown event: ", event);
+              console.log("I caught you!");
             }
           });
         });
