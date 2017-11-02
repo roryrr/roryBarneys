@@ -894,7 +894,6 @@
       sendTextMessage(recipientId, "Here’s what I found:");
       var itemList = [];
     arrayHere.forEach(i=>{
-      if (i.isRecommendable == true) {
        itemList.push(
        {
         "title":i.name,
@@ -917,7 +916,6 @@
               "payload": "fav"+i.id
             }]
        });
-     }
     });
     console.log("shahrukh");
       var messageData = {
@@ -943,7 +941,6 @@
       sendTextMessage(recipientId, "Here’s what you’ve saved:");
       var itemList = [];
     arrayHere.forEach(i=>{
-      if (i.isRecommendable == true) {
        itemList.push(
        {
         "title":i.name,
@@ -966,7 +963,6 @@
               "payload": "removeFav"+i.id
             }]
        });
-     }
     });
     console.log("dabang");
       var messageData = {
