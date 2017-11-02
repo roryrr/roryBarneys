@@ -1051,6 +1051,23 @@
         .catch(function(err){
           if (err.name == "StatusCodeError") {
             console.log("into the error");
+            if(body.status == "error"){
+              console.log("nenu cheppala");
+            }
+            else {
+
+            if (queryString.match(/(favorite)/g)) {
+              console.log("undertaker wwe");
+              rr_array = body.products;
+              sendGenericMessageForFavoriteItems(sid, rr_array);
+            }
+            else {
+                  rr_array = body.placements[0].recommendedProducts;
+                  sendGenericMessage(sid, rr_array);
+                }
+                // setTimeout(function() { v2_restartAnytime(sid) }, 7000);
+            // The Description is:  "descriptive string"
+          }
           }
           else {
             console.log('Pavan api.ai, ERROR at favs');
