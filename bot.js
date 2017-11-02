@@ -138,6 +138,9 @@
               userId: process.env.USER_ID,
               sessionId: process.env.SESSION_ID,
               placements: process.env.PLACEMENTS_ID};
+        var options = {
+
+        };
           request({
           uri: req_url,
           qs: queryParameters,
@@ -162,11 +165,12 @@
       }
 
       else if (req.body.result.action === 'user-searches-products') {
-        var findGender="", findColor="", findProductName="";
+        var findGender="", findColor="", findProductName="", findBrand="";
         findGender = req.body.result.parameters['user-gender'];
         findColor = req.body.result.parameters['color'];
         findProductName = req.body.result.parameters['product-name'];
-        findProductName.replace(" ", "+");
+        findBrand = req.body.result.parameters['brand'];
+        findProductName.replace(" ", "+").concat(findGender.replace(" ", "+").concat(findColor.replace(" ", "+").concat(findBrand.replace(" ", "+"))));
         var rr_array =[];
         // var findMyStart = Math.floor((Math.random() * 30) + 1).toString();
         rr_array.length = 0;
