@@ -170,7 +170,7 @@
         findColor = req.body.result.parameters['color'];
         findProductName = req.body.result.parameters['product-name'];
         findBrand = req.body.result.parameters['brand'];
-        var searchString = (findProductName ? findProductName : "") + (findGender ? findGender : "") + (findColor ? findColor : "") + (findBrand ? findBrand:")";
+        var searchString = (findProductName ? findProductName : "") + (findGender ? findGender : "") + (findColor ? findColor : "") + (findBrand ? findBrand:"");
         var rr_array =[];
         // var findMyStart = Math.floor((Math.random() * 30) + 1).toString();
         rr_array.length = 0;
