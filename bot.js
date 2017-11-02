@@ -139,21 +139,29 @@
               sessionId: process.env.SESSION_ID,
               placements: process.env.PLACEMENTS_ID};
         var options = {
+
+        };
+          request({
           uri: req_url,
           qs: queryParameters,
           headers: {
             'User-Agent': 'Mozilla/5.0 (Linux; Android 5.1.1; A1 Build/LMY47V) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/60.0.3112.116 Mobile Safari/537.36'
             },
-          json: true
-        };
-        reqPromise(options)
-          .then(function(body){
-            rr_array = body.placements[0].recommendedProducts;
-            sendGenericMessage(GLOBAL_ID, rr_array);
-          })
-          .catch(function(err){
-            console.log('Pavan api.ai, ERROR');
-          });
+          method: 'GET',
+          }, function (error, response, body) {
+                if (!error && response.statusCode == 200) {
+                  //parsing the json response from RR cloud
+                  body = JSON.parse(body);
+                        rr_array = body.placements[0].recommendedProducts;
+                        // return sendGenericMessageForApiAi(rr_array);
+
+                        sendGenericMessage(GLOBAL_ID, rr_array);
+                        // setTimeout(function() { v2_restartAnytime(GLOBAL_ID) }, 7000);
+                  // The Description is:  "descriptive string"
+                } else {
+                console.log('Pavan api.ai, ERROR');
+                }
+              });
       }
 
       else if (req.body.result.action === 'user-searches-products') {
@@ -178,22 +186,27 @@
               query: searchString,
               start: 0,
               rows: "10"};
-        var options = {
-          uri: req_url,
-          qs: queryParameters,
-          headers: {
-            'User-Agent': 'Mozilla/5.0 (Linux; Android 5.1.1; A1 Build/LMY47V) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/60.0.3112.116 Mobile Safari/537.36'
-            },
-          json: true
-        };
-        reqPromise(options)
-          .then(function(body){
-            rr_array = body.placements[0].docs;
-            sendGenericMessageForSearch(GLOBAL_ID, rr_array);
-          })
-          .catch(function(err){
-            console.log('Pavan api.ai, ERROR');
-          });
+            request({
+              uri: req_url,
+              qs: queryParameters,
+              headers: {
+                'User-Agent': 'Mozilla/5.0 (Linux; Android 5.1.1; A1 Build/LMY47V) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/60.0.3112.116 Mobile Safari/537.36'
+                },
+              method: 'GET',
+              }, function (error, response, body) {
+                    if (!error && response.statusCode == 200) {
+                      //parsing the json response from RR cloud
+                      body = JSON.parse(body);
+                      console.log("powerranger");
+                      console.log(findProductName);
+                            rr_array = body.placements[0].docs;
+                            sendGenericMessageForSearch(GLOBAL_ID, rr_array);
+                            // setTimeout(function() { v2_restartAnytime(GLOBAL_ID) }, 7000);
+                  // The Description is:  "descriptive string"
+                } else {
+                console.log('Pavan api.ai, ERROR');
+                }
+              });
       }
       else if (req.body.result.action === 'showing-user-lists') {
         var rr_array;
@@ -201,27 +214,29 @@
         var queryParameters = { apiKey: process.env.BY_FAV_API_KEY,
               fields: process.env.BY_FAV_FIELDS,
               };
-        var options = {
-          uri: req_url,
-          qs: queryParameters,
-          headers: {
-            'User-Agent': 'Mozilla/5.0 (Linux; Android 5.1.1; A1 Build/LMY47V) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/60.0.3112.116 Mobile Safari/537.36'
-            },
-          json: true
-        };
-        reqPromise(options)
-          .then(function(body){
-            if ((typeof body.pref_product.LIKE) == "object") {
-              rr_array = "favorite" + body.pref_product.LIKE.join("|");
-              callRrApi(GLOBAL_ID, rr_array);
-            }
-            else {
-              sendTextMessage(GLOBAL_ID, "Oops! Looks like you don’t have anything saved.");
-            }
-          })
-          .catch(function(err){
-            console.log('Pavan api.ai, ERROR');
-          });
+            request({
+              uri: req_url,
+              qs: queryParameters,
+              headers: {
+                'User-Agent': 'Mozilla/5.0 (Linux; Android 5.1.1; A1 Build/LMY47V) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/60.0.3112.116 Mobile Safari/537.36'
+                },
+              method: 'GET',
+              }, function (error, response, body) {
+                    if (!error && response.statusCode == 200) {
+                      //parsing the json response from RR cloud
+                      body = JSON.parse(body);
+                      if ((typeof body.pref_product.LIKE) == "object") {
+                        rr_array = "favorite" + body.pref_product.LIKE.join("|");
+                        callRrApi(GLOBAL_ID, rr_array);
+                      }
+                      else {
+                        sendTextMessage(GLOBAL_ID, "Oops! Looks like you don’t have anything saved.");
+                    }
+                  // The Description is:  "descriptive string"
+                } else {
+                console.log('Pavan api.ai, ERROR');
+                }
+              });
       }
       else if (req.body.result.action === 'user-requests-brands') {
         var findBrand = req.body.result.parameters['brand'];
@@ -241,22 +256,27 @@
               query: findBrand,
               start: 0,
               rows: "10"};
-        var options = {
-          uri: req_url,
-          qs: queryParameters,
-          headers: {
-            'User-Agent': 'Mozilla/5.0 (Linux; Android 5.1.1; A1 Build/LMY47V) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/60.0.3112.116 Mobile Safari/537.36'
-            },
-          json: true
-        };
-        reqPromise(options)
-          .then(function(body){
-            rr_array = body.placements[0].docs;
-            sendGenericMessageForSearch(GLOBAL_ID, rr_array);
-          })
-          .catch(function(err){
-            console.log('Pavan api.ai, ERROR');
-          });
+            request({
+              uri: req_url,
+              qs: queryParameters,
+              headers: {
+                'User-Agent': 'Mozilla/5.0 (Linux; Android 5.1.1; A1 Build/LMY47V) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/60.0.3112.116 Mobile Safari/537.36'
+                },
+              method: 'GET',
+              }, function (error, response, body) {
+                    if (!error && response.statusCode == 200) {
+                      //parsing the json response from RR cloud
+                      body = JSON.parse(body);
+                      console.log("powerranger");
+                      console.log(findProductName);
+                            rr_array = body.placements[0].docs;
+                            sendGenericMessageForSearch(GLOBAL_ID, rr_array);
+                            // setTimeout(function() { v2_restartAnytime(GLOBAL_ID) }, 7000);
+                  // The Description is:  "descriptive string"
+                } else {
+                console.log('Pavan api.ai, ERROR');
+                }
+              });
       }
       else if (req.body.result.action === 'inspire-me') {
         var findBrand = req.body.result.parameters["brand"];
@@ -1020,61 +1040,63 @@
               placements: process.env.PLACEMENTS_ID_COMPLEMENTARY,
               productId: queryString.slice(6)};
       }
-      var options = {
+      request({
         uri: req_url,
         qs: queryParameters,
         headers: {
           'User-Agent': 'Mozilla/5.0 (Linux; Android 5.1.1; A1 Build/LMY47V) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/60.0.3112.116 Mobile Safari/537.36'
           },
-        json: true
-      };
-      reqPromise(options)
-        .then(function(body){
-          if(body.status == "error"){
-            console.log("nenu cheppala");
-          }
-          else {
+        method: 'GET',
+        }, function (error, response, body) {
+              if (!error && response.statusCode == 200) {
+                //parsing the json response from RR cloud
+                body = JSON.parse(body);
+                if(body.status == "error"){
+                  console.log("nenu cheppala");
+                }
+                else {
 
-          if (queryString.match(/(favorite)/g)) {
-            console.log("undertaker wwe");
-            rr_array = body.products;
-            sendGenericMessageForFavoriteItems(sid, rr_array);
-          }
-          else {
-                rr_array = body.placements[0].recommendedProducts;
-                sendGenericMessage(sid, rr_array);
+                if (queryString.match(/(favorite)/g)) {
+                  console.log("undertaker wwe");
+                  rr_array = body.products;
+                  sendGenericMessageForFavoriteItems(sid, rr_array);
+                }
+                else {
+                      rr_array = body.placements[0].recommendedProducts;
+                      sendGenericMessage(sid, rr_array);
+                    }
+                    // setTimeout(function() { v2_restartAnytime(sid) }, 7000);
+                // The Description is:  "descriptive string"
+              } }else {
+                sendTextMessage(sid, 'Pavan, ERROR');
               }
-              // setTimeout(function() { v2_restartAnytime(sid) }, 7000);
-          // The Description is:  "descriptive string"
-        }
-        })
-        .catch(function(err){
-          console.log('Pavan api.ai, ERROR at favs');
-          console.log(err);
-        });
-      }
+            });
+          }
 
           //Block that call Find api
 
           function callFindApi(sid, queryString){
             var rr_array =[];
             rr_array.length = 0;
-            var options = {
+              request({
               uri: "https://qa.richrelevance.com/rrserver/api/find/v1/dbeab3c977a08905?facet=&query="+queryString+"&lang=en&start=0&rows=5&placement=generic_page.rory_search&userId=ulichi&sessionId=mysession",
               headers: {
                 'User-Agent': 'Mozilla/5.0 (Linux; Android 5.1.1; A1 Build/LMY47V) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/60.0.3112.116 Mobile Safari/537.36'
                 },
-              json: true
-            };
-            reqPromise(options)
-              .then(function(body){
-                rr_array = body.placements[0].docs;
-                sendGenericMessageForSearch(sid, rr_array);
-              })
-              .catch(function(err){
-                console.log('Pavan api.ai, ERROR');
-              });
-            }
+              method: 'GET',
+              }, function (error, response, body) {
+                    if (!error && response.statusCode == 200) {
+                      //parsing the json response from RR cloud
+                      body = JSON.parse(body);
+                            rr_array = body.placements[0].docs;
+                            sendGenericMessageForSearch(sid, rr_array);
+                            // setTimeout(function() { v2_restartAnytime(sid) }, 7000);
+                      // The Description is:  "descriptive string"
+                    } else {
+                      sendTextMessage(sid, 'Pavan, ERROR');
+                    }
+                  });
+                }
 
           //Block that calls RR api(add to favorites)
           function callRrFavApi(sid, queryString){
@@ -1099,27 +1121,28 @@
                     targetType: process.env.BY_FAV_TARGETTYPE,
                     actionType: process.env.BY_FAV_ACTIONTYPE};
                   }
-              var options = {
-                uri: req_url,
-                qs: queryParameters,
-                headers: {
-                  'User-Agent': 'Mozilla/5.0 (Linux; Android 5.1.1; A1 Build/LMY47V) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/60.0.3112.116 Mobile Safari/537.36'
-                  },
-                json: true
-              };
-              reqPromise(options)
-                .then(function(body){
-                  if (queryString.match(/(removeFav)/g)) {
-                    sendTextMessage(sid, "Item removed from your list");
-                  }
-                  else {
-                  sendTextMessage(sid, "It's on the list");
-                  }
-                })
-                .catch(function(err){
-                  console.log('Pavan api.ai, ERROR');
-                });
-              }
+            request({
+              uri: req_url,
+              qs: queryParameters,
+              headers: {
+                'User-Agent': 'Mozilla/5.0 (Linux; Android 5.1.1; A1 Build/LMY47V) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/60.0.3112.116 Mobile Safari/537.36'
+                },
+              method: 'GET',
+              }, function (error, response, body) {
+                console.log("anushka inside function");
+                    if (!error && response.statusCode == 200) {
+                      if (queryString.match(/(removeFav)/g)) {
+                        sendTextMessage(sid, "Item removed from your list");
+                      }
+                      else {
+                      sendTextMessage(sid, "It's on the list");
+                    }
+                      // The Description is:  "descriptive string"
+                    } else {
+                      sendTextMessage(sid, 'Anushka, ERROR');
+                    }
+                  });
+                }
 
                 //Block that returns Favorite List
                 function returnFavList(sid){
