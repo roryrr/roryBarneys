@@ -1151,9 +1151,17 @@
                     json: true
                   };
                   reqPromise(options)
-                    .then(function(repos){
+                    .then(function(body){
                       console.log("promising really!");
-                      console.log(repos);
+                      // console.log(repos);
+                      if ((typeof body.pref_product.LIKE) == "object") {
+                         rr_array_temp = "favorite" + body.pref_product.LIKE.join("|");
+                         console.log("Rajinikanth");
+                         callRrApi(sid, rr_array_temp);
+                       }
+                       else {
+                         sendTextMessage(sid, "Oops! Looks like you don’t have anything saved.");
+                     }
                     })
                     .catch(function(err){
                       console.log("api call failed");
