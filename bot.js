@@ -97,11 +97,19 @@
         console.log('*** weather ***');
         let city = req.body.result.parameters['geo-city'];
         let restUrl = 'http://api.openweathermap.org/data/2.5/weather?APPID='+WEATHER_API_KEY+'&q='+city;
-
-        request.get(restUrl, (err, response, body) => {
-          if (!err && response.statusCode == 200) {
-            let json = JSON.parse(body);
-            // console.log(json);
+        var options = {
+          uri: restUrl,
+          qs: {
+            APPID: WEATHER_API_KEY,
+            q: city
+          },
+          headers: {
+            'User-Agent': 'Mozilla/5.0 (Linux; Android 5.1.1; A1 Build/LMY47V) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/60.0.3112.116 Mobile Safari/537.36'
+            },
+          json: true
+        };
+        reqPromise(options)
+          .then(function(json){
             let tempF = ~~(json.main.temp * 9/5 - 459.67);
             let tempC = ~~(json.main.temp - 273.15);
             let msg = 'The current condition in ' + json.name + ' is ' + json.weather[0].description + ' and the temperature is ' + tempF + ' ℉ (' +tempC+ ' ℃).'
@@ -110,17 +118,11 @@
               displayText: msg,
               source: 'weather'
             });
-          } else {
-            let errorMessage = 'I failed to look up the city name.';
-            return res.status(400).json({
-              status: {
-                code: 400,
-                errorType: errorMessage
-              }
-            });
-          }
-        })
-      }
+          })
+          .catch(function(err) {
+            console.log("Weather Api call failed");
+          });
+        }
       else if (req.body.result.action === 'facebook-reply') {
         console.log("fb fb fb");
       }
@@ -1165,6 +1167,7 @@
                     })
                     .catch(function(err){
                       console.log("api call failed");
+                      sendTextMessage(sid, "Please try again");
                     });
                   // request({
                   //   method: 'GET',
