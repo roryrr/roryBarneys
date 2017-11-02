@@ -1049,7 +1049,7 @@
         }
         })
         .catch(function(err){
-          console.log('Pavan api.ai, ERROR');
+          console.log('Pavan api.ai, ERROR at favs');
         });
       }
 
