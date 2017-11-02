@@ -66,16 +66,15 @@
 
           // Iterate over each messaging event
           entry.messaging.forEach(function(event) {
-            if (event.sender.id !== '1826443647395614') {
+            if (event.message.is_echo == false) {
                 if (event.message) {
                   receivedMessage(event);
-                } else if (event.postback) {
+                } }else if (event.postback) {
                   receivedPostback(event);
                 }
                 else {
                   console.log("Webhook received unknown event: ", event);
                 }
-            }
             else {
               console.log("I caught you!");
             }
