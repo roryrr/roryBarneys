@@ -11,6 +11,7 @@
     const bodyParser = require('body-parser');
     const request = require('request');
     const path = require('path');
+    var reqPromise = require('request-promise');
     var GLOBAL_ID;
 
     //apiai for NLP
@@ -1138,36 +1139,47 @@
                 //Block that returns Favorite List
                 function returnFavList(sid){
                   var rr_array_temp;
-                    var queryParameters = { apiKey: process.env.BY_FAV_API_KEY,
+                  var queryParameters = { apiKey: process.env.BY_FAV_API_KEY,
                           fields: process.env.BY_FAV_FIELDS,
                           };
-                  request({
+                  var options = {
                     uri: process.env.PROD_FAV_URL,
                     qs: queryParameters,
                     headers: {
                       'User-Agent': 'Mozilla/5.0 (Linux; Android 5.1.1; A1 Build/LMY47V) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/60.0.3112.116 Mobile Safari/537.36'
                       },
-                    method: 'GET',
-                    }, function (error, response, body) {
-                          if (!error && response.statusCode == 200) {
-                            body = JSON.parse(body);
-                            console.log("samantha4 inside function");
-                          //  console.log((typeof body.pref_product.LIKE));
-                            if ((typeof body.pref_product.LIKE) == "object") {
-                              rr_array_temp = "favorite" + body.pref_product.LIKE.join("|");
-                              console.log("Rajinikanth");
-                              callRrApi(sid, rr_array_temp);
-                            }
-                            else {
-                              sendTextMessage(sid, "Oops! Looks like you don’t have anything saved.");
-                          }
-                            } else {
-                            // console.log('Google log start golden');
-                            // console.log(body) // Print the google web page.
-                            // console.log('Google log end golden');
-                            sendTextMessage(sid, 'Anushka, ERROR');
-                          }
-                        });
+                    json: true
+                  };
+                  reqPromise(options)
+                    .then(function(repos){
+                      console.log("promising really!");
+                      console.log(repos);
+                    })
+                    .catch(function(err){
+                      console.log("api call failed");
+                    });
+                  // request({
+                  //   method: 'GET',
+                  //   }, function (error, response, body) {
+                  //         if (!error && response.statusCode == 200) {
+                  //           body = JSON.parse(body);
+                  //           console.log("samantha4 inside function");
+                  //         //  console.log((typeof body.pref_product.LIKE));
+                  //           if ((typeof body.pref_product.LIKE) == "object") {
+                  //             rr_array_temp = "favorite" + body.pref_product.LIKE.join("|");
+                  //             console.log("Rajinikanth");
+                  //             callRrApi(sid, rr_array_temp);
+                  //           }
+                  //           else {
+                  //             sendTextMessage(sid, "Oops! Looks like you don’t have anything saved.");
+                  //         }
+                  //           } else {
+                  //           // console.log('Google log start golden');
+                  //           // console.log(body) // Print the google web page.
+                  //           // console.log('Google log end golden');
+                  //           sendTextMessage(sid, 'Anushka, ERROR');
+                  //         }
+                  //       });
                       }
 
     function callSendAPI(messageData) {
