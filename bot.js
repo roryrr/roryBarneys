@@ -66,10 +66,14 @@
 
           // Iterate over each messaging event
           entry.messaging.forEach(function(event) {
-            if (event.message.is_echo == false) {
                 if (event.message) {
-                  receivedMessage(event);
-                } }else if (event.postback) {
+                  if (event.message.is_echo) {
+                    console.log("I caught you");
+                  }
+                  else {
+                      receivedMessage(event);
+                  }
+                }else if (event.postback) {
                   receivedPostback(event);
                 }
                 else {
