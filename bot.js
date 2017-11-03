@@ -213,6 +213,7 @@
         console.log('****List is coming soon****');
         console.log(req.body.result.contexts[0].parameters['product-name'] + " sultan");
         productCountStart += 10;
+        console.log("The product count start is %d", productCountStart);
 
         var findGender="", findColor="", findProductName="", findBrand="";
         findGender = req.body.result.contexts[0].parameters['user-gender'];
