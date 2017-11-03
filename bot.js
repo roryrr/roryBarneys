@@ -210,7 +210,7 @@
       }
       else if (req.body.result.action === 'user-searches-more-products') {
         console.log('****List is coming soon****');
-        req.body.result.contexts.forEach(i=>{
+        req.body.result.contexts[0].parameters.forEach(i=>{
             console.log("Charmendor");
         });
       }
