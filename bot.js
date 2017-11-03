@@ -848,38 +848,41 @@
 
     function sendGenericMessage(recipientId, arrayHere) {
       console.log(recipientId);
-      sendTextMessage(recipientId, "Here’s what I found:");
+
       console.log("fidget spinner");
       // console.log(arrayHere);
-      var itemList = [];
-    arrayHere.forEach(i=>{
-      if (i.isRecommendable == true) {
-       itemList.push(
-       {
-        "title":i.name,
-        "subtitle":i.brand,
-        "item_url":i.productURL,
-        //manipulating the image using Cloudinary
-        "image_url":cloudinary.url(i.imageURL,{ type: 'fetch', height: 500, width: 955, background: "white", crop: "pad", quality: 100, fetch_format: 'jpg'}),
-        "buttons" : [
-            {
-              "type": "postback",
-              "title": "More like this",
-              "payload": "similar"+i.id
-            }, {
-              "type": "postback",
-              "title": "Pair it with",
-              "payload": "pairIt"+i.id
-            }, {
-              "type": "postback",
-              "title": "Save it",
-              "payload": "fav"+i.id
-            }]
-       });
-     }
-    });
-    console.log("dabang");
-    console.log(recipientId);
+      if (arrayHere.length !== 0) {
+
+        sendTextMessage(recipientId, "Here’s what I found:");
+        var itemList = [];
+      arrayHere.forEach(i=>{
+        if (i.isRecommendable == true) {
+         itemList.push(
+         {
+          "title":i.name,
+          "subtitle":i.brand,
+          "item_url":i.productURL,
+          //manipulating the image using Cloudinary
+          "image_url":cloudinary.url(i.imageURL,{ type: 'fetch', height: 500, width: 955, background: "white", crop: "pad", quality: 100, fetch_format: 'jpg'}),
+          "buttons" : [
+              {
+                "type": "postback",
+                "title": "More like this",
+                "payload": "similar"+i.id
+              }, {
+                "type": "postback",
+                "title": "Pair it with",
+                "payload": "pairIt"+i.id
+              }, {
+                "type": "postback",
+                "title": "Save it",
+                "payload": "fav"+i.id
+              }]
+         });
+       }
+      });
+      console.log("dabang");
+      console.log(recipientId);
       var messageData = {
         recipient: {
           id: recipientId
@@ -897,53 +900,64 @@
       };
 
       callSendAPI(messageData);
+      }
+      else {
+        sendTextMessage(recipientId, "Oops, no items found. Try with a differnt search criteria.");
+      }
+
     }
 
     function sendGenericMessageForSearch(recipientId, arrayHere) {
-      sendTextMessage(recipientId, "Here’s what I found:");
-      var itemList = [];
-    arrayHere.forEach(i=>{
-       itemList.push(
-       {
-        "title":i.name,
-        "subtitle":i.brand,
-        "item_url":process.env.BNY_HOME + i.linkId,
-        //manipulating the image using Cloudinary
-        "image_url":cloudinary.url(i.imageId,{ type: 'fetch', height: 500, width: 955, background: "white", crop: "pad", quality: 100, fetch_format: 'jpg'}),
-        "buttons" : [
-            {
-              "type": "postback",
-              "title": "More like this",
-              "payload": "similar"+i.id
-            }, {
-              "type": "postback",
-              "title": "Pair it with",
-              "payload": "pairIt"+i.id
-            }, {
-              "type": "postback",
-              "title": "Save it",
-              "payload": "fav"+i.id
-            }]
-       });
-    });
-    console.log("shahrukh");
-      var messageData = {
-        recipient: {
-          id: recipientId
-        },
-        message: {
-          attachment: {
-            type: "template",
-            payload: {
-              template_type: "generic",
-              image_aspect_ratio: "horizontal",
-              elements: itemList
+      if (arrayHere.length !== 0) {
+        sendTextMessage(recipientId, "Here’s what I found:");
+        var itemList = [];
+      arrayHere.forEach(i=>{
+         itemList.push(
+         {
+          "title":i.name,
+          "subtitle":i.brand,
+          "item_url":process.env.BNY_HOME + i.linkId,
+          //manipulating the image using Cloudinary
+          "image_url":cloudinary.url(i.imageId,{ type: 'fetch', height: 500, width: 955, background: "white", crop: "pad", quality: 100, fetch_format: 'jpg'}),
+          "buttons" : [
+              {
+                "type": "postback",
+                "title": "More like this",
+                "payload": "similar"+i.id
+              }, {
+                "type": "postback",
+                "title": "Pair it with",
+                "payload": "pairIt"+i.id
+              }, {
+                "type": "postback",
+                "title": "Save it",
+                "payload": "fav"+i.id
+              }]
+         });
+      });
+      console.log("shahrukh");
+        var messageData = {
+          recipient: {
+            id: recipientId
+          },
+          message: {
+            attachment: {
+              type: "template",
+              payload: {
+                template_type: "generic",
+                image_aspect_ratio: "horizontal",
+                elements: itemList
+              }
             }
           }
-        }
-      };
+        };
 
-      callSendAPI(messageData);
+        callSendAPI(messageData);
+      }
+      else {
+        sendTextMessage(recipientId, "Oops, no items found. Try with a differnt search criteria.");
+      }
+
     }
     //Sending generic message with Favorite items
     function sendGenericMessageForFavoriteItems(recipientId, arrayHere) {
