@@ -210,9 +210,10 @@
       }
       else if (req.body.result.action === 'user-searches-more-products') {
         console.log('****List is coming soon****');
-        req.body.result.contexts[0].parameters.forEach(i=>{
-            console.log("Charmendor");
-        });
+        console.log(req.body.result.contexts[0].parameters[0]);
+        // .forEach(i=>{
+        //     console.log("Charmendor");
+        // });
       }
       else if (req.body.result.action === 'showing-user-lists') {
         var rr_array;
