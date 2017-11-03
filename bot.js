@@ -995,7 +995,7 @@
               {
                 "type": "postback",
                 "title": "See more items",
-                "payload": "similar"+i.id
+                "payload": "showMoreItems"
               }]
         }
       );
