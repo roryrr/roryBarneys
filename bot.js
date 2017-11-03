@@ -13,7 +13,7 @@
     const path = require('path');
     var reqPromise = require('request-promise');
     var GLOBAL_ID;
-
+    var productCountStart;
     //apiai for NLP
     const apiaiApp = require('apiai')(APIAI_TOKEN);
 
@@ -165,6 +165,7 @@
       }
 
       else if (req.body.result.action === 'user-searches-products') {
+        productCountStart = 0;
         var findGender="", findColor="", findProductName="", findBrand="";
         findGender = req.body.result.parameters['user-gender'];
         findColor = req.body.result.parameters['color'];
@@ -211,7 +212,7 @@
       else if (req.body.result.action === 'user-searches-more-products') {
         console.log('****List is coming soon****');
         console.log(req.body.result.contexts[0].parameters['product-name'] + " sultan");
-
+        productCountStart += 10;
 
         var findGender="", findColor="", findProductName="", findBrand="";
         findGender = req.body.result.contexts[0].parameters['user-gender'];
@@ -232,7 +233,7 @@
               lang: "en",
               facet: "",
               query: searchString,
-              start: 5,
+              start: productCountStart,
               rows: "10"};
             request({
               uri: req_url,
