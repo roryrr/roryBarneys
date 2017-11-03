@@ -987,6 +987,18 @@
               }]
          });
       });
+      arrayHere.push(
+        {
+          "title":"Rory",
+          "image_url":"https://res.cloudinary.com/goodsearch/image/upload/v1436553720/hi_resolution_merchant_logos/barneys-new-york_coupons.jpg",
+          "buttons" : [
+              {
+                "type": "postback",
+                "title": "See more items",
+                "payload": "similar"+i.id
+              }]
+        }
+      );
       console.log("shahrukh");
         var messageData = {
           recipient: {
