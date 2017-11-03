@@ -208,6 +208,9 @@
                 }
               });
       }
+      else if (req.body.result.action === 'user-searches-more-products') {
+        console.log('****List is coming soon****');
+      }
       else if (req.body.result.action === 'showing-user-lists') {
         var rr_array;
         var req_url = process.env.PROD_FAV_URL;
