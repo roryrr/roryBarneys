@@ -432,9 +432,6 @@
           else if (derivedPayload.match(/(v2_BNY-)/g)) {
             callRrApi(senderID, derivedPayload.slice(3));
           }
-          else if (derivedPayload == "v2_payStart") {
-            sendTextMessage(senderID, "Enter a text like 'I am looking for shirt'");
-          }
         }
         else {
         console.log("normal message");
@@ -548,7 +545,7 @@
         // setTimeout(function() { v2_restartAnytime(senderID) }, 7000);
       }
       else if (payload == 'v3_inspireMe') {
-        v3_payloadToMsg(senderID);
+        sendTextMessage(senderID, "Enter a text like 'I am looking for shirt'");
       }
       else if (payload.match(/(BNY-)/g)) {
         callRrApi(senderID, payload);
@@ -813,26 +810,6 @@
     callSendAPI(messageData);
     }
 
-    //Linking from INspire payload to text
-    function v3_payloadToMsg(recipientId){
-      var messageData = {
-      recipient:{
-        id: recipientId
-      },
-      message:{
-        text: "Click below button to start:",
-        quick_replies:[
-          {
-            content_type:"text",
-            title:"for it",
-            payload:"v2_payStart",
-            image_url:"https://png.icons8.com/go/color/48"
-          }
-        ]
-      }
-    };
-    callSendAPI(messageData);
-    }
     //sending basic menu
     function sendAvailableOptionList(recipientId) {
       var messageData = {
