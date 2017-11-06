@@ -624,7 +624,7 @@
             placements: process.env.PLACEMENTS_ID_FIND,
             lang: "en",
             query: pName,
-            facet: facet
+            facet: facet,
             start: 0,
             rows: "9"};
           request({
