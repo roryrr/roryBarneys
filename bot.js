@@ -173,8 +173,10 @@
         findBrand = req.body.result.parameters['brand'];
         var searchString = (findProductName ? findProductName : "") + (findGender ? findGender : "") + (findColor ? findColor : "") + (findBrand ? findBrand:"");
         var rr_array =[];
+        var facet_array = [];
         // var findMyStart = Math.floor((Math.random() * 30) + 1).toString();
         rr_array.length = 0;
+        facet_array.length = 0;
         console.log("nagma");
         var req_url = process.env.FIND_URL;
         var queryParameters = { apiKey: process.env.API_KEY,
@@ -201,6 +203,8 @@
                       console.log("powerranger");
                       console.log(findProductName);
                             rr_array = body.placements[0].docs;
+                            facet_array = body.placements[0].facets;
+                            console.log(facet_array);
                             sendGenericMessageForSearch(GLOBAL_ID, rr_array);
                             // setTimeout(function() { v2_restartAnytime(GLOBAL_ID) }, 7000);
                   // The Description is:  "descriptive string"
