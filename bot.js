@@ -783,6 +783,45 @@
     callSendAPI(messageData);
     }
 
+    //sending categories
+    function v2_sendFilters(recipientId){
+      var messageData = {
+      recipient:{
+        id: recipientId
+      },
+      message:{
+        text: "Choose a Filter:",
+        quick_replies:[
+          {
+            content_type:"text",
+            title:"Gender",
+            payload:"v2_BNY-women",
+            image_url:"https://png.icons8.com/female-profile/color/24"
+          },
+          {
+            content_type:"text",
+            title:"Color",
+            payload:"v2_BNY-men",
+            image_url:"https://png.icons8.com/user/color/24"
+          },
+          {
+            content_type:"text",
+            title:"Brand",
+            payload:"v2_BNY-womens-beauty",
+            image_url:"https://png.icons8.com/makeup/color/24"
+          },
+          {
+            content_type:"text",
+            title:"Size",
+            payload:"v2_BNY-kids",
+            image_url:"https://png.icons8.com/children/ios7/25"
+          }
+        ]
+      }
+    };
+    callSendAPI(messageData);
+    }
+
     //function to send restart button and tips
     function v2_restartAnytime(recipientId){
       var messageData = {
@@ -1030,6 +1069,7 @@
         };
 
         callSendAPI(messageData);
+        setTimeout(function() { v2_sendFilters(recipientId) }, 3000);
       }
       else {
         sendTextMessage(recipientId, "Oops, no items found. Try with a differnt search criteria.");
