@@ -166,11 +166,12 @@
 
       else if (req.body.result.action === 'user-searches-products') {
         productCountStart = 0;
-        var findGender="", findColor="", findProductName="", findBrand="";
+        var findGender="", findColor="", findProductName="", findBrand="", findSize="";
         findGender = req.body.result.parameters['user-gender'];
         findColor = req.body.result.parameters['color'];
         findProductName = req.body.result.parameters['product-name'];
         findBrand = req.body.result.parameters['brand'];
+        findSize = req.body.result.parameters['user-size'];
         var searchString = (findProductName ? findProductName : "") + (findGender ? findGender : "") + (findColor ? findColor : "") + (findBrand ? findBrand:"");
         var rr_array =[];
         var facet_array = [];
@@ -203,8 +204,8 @@
                       console.log(findProductName);
                             rr_array = body.placements[0].docs;
                             facet_array = body.placements[0].facets;
-                            console.log(body.placements[0].facets);
                             sendGenericMessageForSearch(GLOBAL_ID, rr_array);
+                            setTimeout(function() { v2_sendFilters(recipientId, findGender, findColor, findProductName, findBrand, findSize) }, 3000);
                             // setTimeout(function() { v2_restartAnytime(GLOBAL_ID) }, 7000);
                   // The Description is:  "descriptive string"
                 } else {
@@ -787,7 +788,7 @@
     }
 
     //sending categories
-    function v2_sendFilters(recipientId){
+    function v2_sendFilters(recipientId, g, c, p, b, s){
       var messageData = {
       recipient:{
         id: recipientId
@@ -798,25 +799,25 @@
           {
             content_type:"text",
             title:"Gender",
-            payload:"v2_BNY-women",
+            payload:"v2_filter" + p + "parameter" + g,
             image_url:"https://png.icons8.com/female-profile/color/24"
           },
           {
             content_type:"text",
             title:"Color",
-            payload:"v2_BNY-men",
+            payload:"v2_filter" + p + "parameter" + c,
             image_url:"https://png.icons8.com/user/color/24"
           },
           {
             content_type:"text",
             title:"Brand",
-            payload:"v2_BNY-womens-beauty",
+            payload:"v2_filter" + p + "parameter" + b,
             image_url:"https://png.icons8.com/makeup/color/24"
           },
           {
             content_type:"text",
             title:"Size",
-            payload:"v2_BNY-kids",
+            payload:"v2_filter" + p + "parameter" + s,
             image_url:"https://png.icons8.com/children/ios7/25"
           }
         ]
@@ -1072,7 +1073,6 @@
         };
 
         callSendAPI(messageData);
-        setTimeout(function() { v2_sendFilters(recipientId) }, 3000);
       }
       else {
         sendTextMessage(recipientId, "Oops, no items found. Try with a differnt search criteria.");
