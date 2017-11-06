@@ -436,9 +436,10 @@
           else if (derivedPayload.match(/(v2_BNY-)/g)) {
             callRrApi(senderID, derivedPayload.slice(3));
           }
-          else if (derivedPayload.match(/(v2_filter_s)/g)) {
-            sendTextMessage(senderID, derivedPayload);
-          }
+        }
+        else if(message.quick_reply && (message.quick_reply["payload"]).match(/(v2filter_)/g)){
+          var derivedPayload = message.quick_reply["payload"];
+          sendTextMessage(senderID, derivedPayload);
         }
         else {
         console.log("normal message");
@@ -802,25 +803,25 @@
           {
             content_type:"text",
             title:"Gender",
-            payload:"v2_filter_g" + pName,
+            payload:"v2filter_g" + pName,
             image_url:"https://png.icons8.com/female-profile/color/24"
           },
           {
             content_type:"text",
             title:"Color",
-            payload:"v2_filter_c" + pName,
+            payload:"v2filter_c" + pName,
             image_url:"https://png.icons8.com/user/color/24"
           },
           {
             content_type:"text",
             title:"Brand",
-            payload:"v2_filter_b" + pName,
+            payload:"v2filter_b" + pName,
             image_url:"https://png.icons8.com/makeup/color/24"
           },
           {
             content_type:"text",
             title:"Size",
-            payload:"v2_filter_s" + pName,
+            payload:"v2filter_s" + pName,
             image_url:"https://png.icons8.com/children/ios7/25"
           }
         ]
