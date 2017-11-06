@@ -600,7 +600,54 @@
     //Facet filtering function
     function facetFilter(sid, pLoad){
       var facetAll = pLoad.charAt(9);
-      sendTextMessage(sid, facetAll);
+      var pName = pLoad.slice(10);
+      var facet;
+      if(facetAll == 'g'){
+        facet = 'gender';
+      }
+      else if (facetAll == 'c') {
+        facet = 'color';
+      }
+      else if (facetAll == 'b') {
+        facet = 'brand';
+      }
+      else if (facetAll == 's') {
+        facet = 'size';
+      }
+
+
+      var req_url = process.env.FIND_URL;
+      var queryParameters = { apiKey: process.env.API_KEY,
+            apiClientKey: process.env.API_CLIENT_KEY,
+            userId: process.env.USER_ID,
+            sessionId: process.env.SESSION_ID,
+            placements: process.env.PLACEMENTS_ID_FIND,
+            lang: "en",
+            query: pName,
+            facet: facet
+            start: 0,
+            rows: "9"};
+          request({
+            uri: req_url,
+            qs: queryParameters,
+            headers: {
+              'User-Agent': 'Mozilla/5.0 (Linux; Android 5.1.1; A1 Build/LMY47V) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/60.0.3112.116 Mobile Safari/537.36'
+              },
+            method: 'GET',
+            }, function (error, response, body) {
+                  if (!error && response.statusCode == 200) {
+                    //parsing the json response from RR cloud
+                    body = JSON.parse(body);
+                    console.log("powerranger");
+                    var facet_array = body.placements[0].facets[0].values[0];
+                    console.log(facet_array);
+                          // setTimeout(function() { v2_restartAnytime(GLOBAL_ID) }, 7000);
+                // The Description is:  "descriptive string"
+              } else {
+              console.log('Pavan api.ai, ERROR');
+              }
+            });
+
 
     }
     function sendLoginOption(recipientId){
