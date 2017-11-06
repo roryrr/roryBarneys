@@ -204,7 +204,7 @@
                       console.log(findProductName);
                             rr_array = body.placements[0].docs;
                             facet_array = body.placements[0].facets;
-                            console.log(facet_array);
+                            console.log(body.placements[0].facets);
                             sendGenericMessageForSearch(GLOBAL_ID, rr_array);
                             // setTimeout(function() { v2_restartAnytime(GLOBAL_ID) }, 7000);
                   // The Description is:  "descriptive string"
