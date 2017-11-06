@@ -437,7 +437,7 @@
             callRrApi(senderID, derivedPayload.slice(3));
           }
           else if (derivedPayload.match(/(v2_filter_s)/g)) {
-            console.log(derivedPayload);
+            sendTextMessage(senderID, derivedPayload);
           }
         }
         else {
