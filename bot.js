@@ -436,6 +436,9 @@
           else if (derivedPayload.match(/(v2_BNY-)/g)) {
             callRrApi(senderID, derivedPayload.slice(3));
           }
+          else if (payload.match(/(v2_filter_s)/g)) {
+            console.log(payload);
+          }
         }
         else {
         console.log("normal message");
@@ -553,9 +556,6 @@
       }
       else if (payload.match(/(BNY-)/g)) {
         callRrApi(senderID, payload);
-      }
-      else if (payload.match(/(v2_filter_s)/g)) {
-        console.log(payload);
       }
       else if (payload == 'guest') {
         sendAvailableOptionList(senderID);
