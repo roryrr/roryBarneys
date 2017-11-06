@@ -968,7 +968,7 @@
          {
           "title":i.name,
           "subtitle":i.brand,
-          "item_url":process.env.BNY_HOME + i.linkId,
+          "item_url":i.linkId,
           //manipulating the image using Cloudinary
           "image_url":cloudinary.url(i.imageId,{ type: 'fetch', height: 500, width: 955, background: "white", crop: "pad", quality: 100, fetch_format: 'jpg'}),
           "buttons" : [
