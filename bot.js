@@ -1082,8 +1082,7 @@
           }
         };
 
-        callSendAPI(messageData);
-        v2_sendFilters(recipientId);
+        callSendAPI(messageData).then(v2_sendFilters(recipientId));
       }
       else {
         sendTextMessage(recipientId, "Oops, no items found. Try with a differnt search criteria.");
