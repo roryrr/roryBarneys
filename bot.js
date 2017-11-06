@@ -783,46 +783,6 @@
     callSendAPI(messageData);
     }
 
-
-    //sending filters
-    function v2_sendFilters(recipientId){
-      var messageData = {
-      recipient:{
-        id: recipientId
-      },
-      message:{
-        text: "Choose a filter:",
-        quick_replies:[
-          {
-            content_type:"text",
-            title:"Brand",
-            payload:"filter-brand",
-            image_url:"https://png.icons8.com/female-profile/color/24"
-          },
-          {
-            content_type:"text",
-            title:"Color",
-            payload:"filter-color",
-            image_url:"https://png.icons8.com/user/color/24"
-          },
-          {
-            content_type:"text",
-            title:"Size",
-            payload:"filter-size",
-            image_url:"https://png.icons8.com/makeup/color/24"
-          },
-          {
-            content_type:"text",
-            title:"Gender",
-            payload:"filter-gender",
-            image_url:"https://png.icons8.com/children/ios7/25"
-          }
-        ]
-      }
-    };
-    callSendAPI(messageData);
-    }
-
     //function to send restart button and tips
     function v2_restartAnytime(recipientId){
       var messageData = {
@@ -985,19 +945,6 @@
          });
        }
       });
-      itemList.push(
-        {
-          "title":"Rory",
-          "item_url": process.env.BNY_HOME,
-          "image_url":"https://res.cloudinary.com/goodsearch/image/upload/v1436553720/hi_resolution_merchant_logos/barneys-new-york_coupons.jpg",
-          "buttons" : [
-              {
-                "type": "postback",
-                "title": "See more items",
-                "payload": "showMoreItem"
-              }]
-        }
-      );
       console.log("dabang");
       console.log(recipientId);
       var messageData = {
