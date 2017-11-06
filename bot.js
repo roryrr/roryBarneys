@@ -185,7 +185,6 @@
               sessionId: process.env.SESSION_ID,
               placements: process.env.PLACEMENTS_ID_FIND,
               lang: "en",
-              facet: "",
               query: searchString,
               start: 0,
               rows: "9"};
