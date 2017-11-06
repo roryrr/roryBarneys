@@ -670,6 +670,7 @@
           id: recipientId
         },
         message: {
+          text: "",
           quick_replies: itemList
         }
       };
