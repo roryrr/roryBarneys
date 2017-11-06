@@ -640,7 +640,7 @@
                     body = JSON.parse(body);
                     console.log("powerranger");
                     var facet_array = body.placements[0].facets[0].values;
-                    sendFacetOptions(sid, facet_array.slice(1,11));
+                    sendFacetOptions(sid, facet_array.slice(0,11));
                     console.log(facet_array);
                           // setTimeout(function() { v2_restartAnytime(GLOBAL_ID) }, 7000);
                 // The Description is:  "descriptive string"
@@ -670,7 +670,6 @@
           id: recipientId
         },
         message: {
-          text: "hiii",
           quick_replies: itemList
         }
       };
@@ -886,26 +885,22 @@
           {
             content_type:"text",
             title:"Gender",
-            payload:"v2filter_g" + pName,
-            image_url:"https://png.icons8.com/female-profile/color/24"
+            payload:"v2filter_g" + pName
           },
           {
             content_type:"text",
             title:"Color",
-            payload:"v2filter_c" + pName,
-            image_url:"https://png.icons8.com/user/color/24"
+            payload:"v2filter_c" + pName
           },
           {
             content_type:"text",
             title:"Brand",
-            payload:"v2filter_b" + pName,
-            image_url:"https://png.icons8.com/makeup/color/24"
+            payload:"v2filter_b" + pName
           },
           {
             content_type:"text",
             title:"Size",
-            payload:"v2filter_s" + pName,
-            image_url:"https://png.icons8.com/children/ios7/25"
+            payload:"v2filter_s" + pName
           }
         ]
       }
