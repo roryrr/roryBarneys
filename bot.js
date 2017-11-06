@@ -1082,7 +1082,7 @@
           }
         };
 
-        callSendAPI(messageData);
+        callSendAPI(messageData).then(v2_sendFilters(recipientId));
       }
       else {
         sendTextMessage(recipientId, "Oops, no items found. Try with a differnt search criteria.");
