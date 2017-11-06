@@ -1082,7 +1082,7 @@
           }
         };
 
-        callSendAPI(messageData).then(v2_sendFilters(recipientId));
+        callSendAPI(messageData);
       }
       else {
         sendTextMessage(recipientId, "Oops, no items found. Try with a differnt search criteria.");
@@ -1344,26 +1344,28 @@
                       }
 
     function callSendAPI(messageData) {
-      request({
+      var options = {
         uri: 'https://graph.facebook.com/v2.6/me/messages',
         qs: { access_token: process.env.PAGE_ACCESS_TOKEN },
         method: 'POST',
-        json: messageData
-
-      }, function (error, response, body) {
-        if (!error && response.statusCode == 200) {
+        body: {
+          json: messageData
+        }
+      };
+      reqPromise(options)
+        .then(function(body){
           var recipientId = body.recipient_id;
           var messageId = body.message_id;
 
           console.log("Successfully sent generic message with id %s to recipient %s",
             messageId, recipientId);
-        } else {
+        })
+        .catch(function(error){
           console.error("Unable to send message.");
           // console.error(response);
           console.log("the seperator");
           console.error(error);
-        }
-      });
+        });
     }
 
     // Set Express to listen out for HTTP requests
