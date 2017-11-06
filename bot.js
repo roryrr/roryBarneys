@@ -1350,7 +1350,8 @@
         method: 'POST',
         body: {
           json: messageData
-        }
+        },
+        json: true
       };
       reqPromise(options)
         .then(function(body){
