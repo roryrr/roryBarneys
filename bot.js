@@ -1357,15 +1357,17 @@
         .then(function(body){
           var recipientId = body.recipient_id;
           var messageId = body.message_id;
-
-          console.log("Successfully sent generic message with id %s to recipient %s",
-            messageId, recipientId);
+          //
+          // console.log("Successfully sent generic message with id %s to recipient %s",
+          //   messageId, recipientId);
+          console.log("walking dead");
+          console.log(body);
         })
         .catch(function(error){
           console.error("Unable to send message.");
           // console.error(response);
           console.log("the seperator");
-          // console.error(error);
+          console.error(error);
         });
     }
 
