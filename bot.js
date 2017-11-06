@@ -439,7 +439,7 @@
         }
         else if(message.quick_reply && (message.quick_reply["payload"]).match(/(v2filter_)/g)){
           var derivedPayload = message.quick_reply["payload"];
-          sendTextMessage(senderID, derivedPayload);
+          facetFilter(senderID, derivedPayload);
         }
         else {
         console.log("normal message");
@@ -597,7 +597,12 @@
       callSendAPI(messageData);
     }
 
+    //Facet filtering function
+    function facetFilter(sid, pLoad){
+      var facetAll = pLoad.charAt(9);
+      sendTextMessage(sid, facetAll);
 
+    }
     function sendLoginOption(recipientId){
       var messageData = {
         recipient: {
