@@ -1083,6 +1083,7 @@
         };
 
         callSendAPI(messageData);
+        setTimeout(function() { v2_sendFilters(recipientId) }, 3000);
       }
       else {
         sendTextMessage(recipientId, "Oops, no items found. Try with a differnt search criteria.");
@@ -1354,7 +1355,6 @@
         .then(function(body){
           var recipientId = body.recipient_id;
           var messageId = body.message_id;
-          v2_sendFilters(recipientId);
           console.log("Successfully sent generic message with id %s to recipient %s",
             messageId, recipientId);
           console.log("walking dead");
