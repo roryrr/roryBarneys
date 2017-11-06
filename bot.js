@@ -205,7 +205,7 @@
                             rr_array = body.placements[0].docs;
                             facet_array = body.placements[0].facets;
                             sendGenericMessageForSearch(GLOBAL_ID, rr_array);
-                            setTimeout(function() { v2_sendFilters(recipientId, findGender, findColor, findProductName, findBrand, findSize) }, 3000);
+                            setTimeout(function() { v2_sendFilters(GLOBAL_ID, findGender, findColor, findProductName, findBrand, findSize) }, 3000);
                             // setTimeout(function() { v2_restartAnytime(GLOBAL_ID) }, 7000);
                   // The Description is:  "descriptive string"
                 } else {
