@@ -554,7 +554,7 @@
       else if (payload.match(/(BNY-)/g)) {
         callRrApi(senderID, payload);
       }
-      else if (payload.match(/(v2_filter_s)/g) {
+      else if (payload.match(/(v2_filter_s)/g)) {
         console.log(payload);
       }
       else if (payload == 'guest') {
