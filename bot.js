@@ -670,7 +670,7 @@
           id: recipientId
         },
         message: {
-          text: "",
+          text: "Please select an option",
           quick_replies: itemList
         }
       };
