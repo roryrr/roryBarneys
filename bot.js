@@ -436,8 +436,8 @@
           else if (derivedPayload.match(/(v2_BNY-)/g)) {
             callRrApi(senderID, derivedPayload.slice(3));
           }
-          else if (payload.match(/(v2_filter_s)/g)) {
-            console.log(payload);
+          else if (derivedPayload.match(/(v2_filter_s)/g)) {
+            console.log(derivedPayload);
           }
         }
         else {
