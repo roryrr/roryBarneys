@@ -493,6 +493,41 @@
       if(payload == 'start'){
       v2_initialOptions(senderID);
       }
+      else if (payload == 'showMoreItem') {
+        console.log("show more item message");
+        let apiai = apiaiApp.textRequest("see more items", {
+            sessionId: 'tabby_cat', // use any arbitrary id
+            contexts: [
+              {
+                name: "generic",
+                parameters: {
+                facebook_user_id: senderID
+            }
+          }
+          ]
+          });
+
+          apiai.on('response', (response) => {
+            // Got a response from api.ai. Let's POST to Facebook Messenger
+            let aiText = response.result.fulfillment.speech;
+            var messageData = {
+              recipient: {
+                id: senderID
+              },
+              message: {
+                text: aiText
+              }
+            };
+
+            callSendAPI(messageData);
+          });
+
+          apiai.on('error', (error) => {
+            console.log("Pikachu" + error);
+          });
+
+          apiai.end();
+      }
       else if (payload == 'browse') {
         sendCategoryOptions(senderID);
       }
