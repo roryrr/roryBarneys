@@ -205,7 +205,7 @@
                             rr_array = body.placements[0].docs;
                             facet_array = body.placements[0].facets;
                             sendGenericMessageForSearch(GLOBAL_ID, rr_array);
-                            setTimeout(function() { v2_sendFilters(GLOBAL_ID, findGender, findColor, findProductName, findBrand, findSize) }, 3000);
+                            setTimeout(function() { v2_sendFilters(GLOBAL_ID, findProductName) }, 3000);
                             // setTimeout(function() { v2_restartAnytime(GLOBAL_ID) }, 7000);
                   // The Description is:  "descriptive string"
                 } else {
@@ -554,6 +554,9 @@
       else if (payload.match(/(BNY-)/g)) {
         callRrApi(senderID, payload);
       }
+      else if (payload.match(/(v2_filter_s)/g) {
+        console.log(payload);
+      }
       else if (payload == 'guest') {
         sendAvailableOptionList(senderID);
       }
@@ -788,7 +791,7 @@
     }
 
     //sending categories
-    function v2_sendFilters(recipientId, g, c, p, b, s){
+    function v2_sendFilters(recipientId, pName){
       var messageData = {
       recipient:{
         id: recipientId
@@ -799,25 +802,25 @@
           {
             content_type:"text",
             title:"Gender",
-            payload:"v2_filter" + p + "parameter" + g,
+            payload:"v2_filter_g" + pName,
             image_url:"https://png.icons8.com/female-profile/color/24"
           },
           {
             content_type:"text",
             title:"Color",
-            payload:"v2_filter" + p + "parameter" + c,
+            payload:"v2_filter_c" + pName,
             image_url:"https://png.icons8.com/user/color/24"
           },
           {
             content_type:"text",
             title:"Brand",
-            payload:"v2_filter" + p + "parameter" + b,
+            payload:"v2_filter_b" + pName,
             image_url:"https://png.icons8.com/makeup/color/24"
           },
           {
             content_type:"text",
             title:"Size",
-            payload:"v2_filter" + p + "parameter" + s,
+            payload:"v2_filter_s" + pName,
             image_url:"https://png.icons8.com/children/ios7/25"
           }
         ]
