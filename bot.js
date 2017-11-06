@@ -1348,10 +1348,7 @@
         uri: 'https://graph.facebook.com/v2.6/me/messages',
         qs: { access_token: process.env.PAGE_ACCESS_TOKEN },
         method: 'POST',
-        body: {
-          json: messageData
-        },
-        json: true
+        json: messageData
       };
       reqPromise(options)
         .then(function(body){
