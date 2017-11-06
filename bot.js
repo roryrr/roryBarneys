@@ -1365,7 +1365,7 @@
           console.error("Unable to send message.");
           // console.error(response);
           console.log("the seperator");
-          console.error(error);
+          // console.error(error);
         });
     }
 
