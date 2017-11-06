@@ -1082,7 +1082,7 @@
           }
         };
 
-        callSendAPI(messageData).then(v2_sendFilters(recipientId));
+        callSendAPI(messageData);
       }
       else {
         sendTextMessage(recipientId, "Oops, no items found. Try with a differnt search criteria.");
@@ -1354,9 +1354,9 @@
         .then(function(body){
           var recipientId = body.recipient_id;
           var messageId = body.message_id;
-          //
-          // console.log("Successfully sent generic message with id %s to recipient %s",
-          //   messageId, recipientId);
+          v2_sendFilters(recipientId);
+          console.log("Successfully sent generic message with id %s to recipient %s",
+            messageId, recipientId);
           console.log("walking dead");
           console.log(body);
         })
