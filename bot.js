@@ -986,10 +986,12 @@
                 "payload": "fav"+i.id
               }]
          });
-      })
-      .push(
+      });
+      itemList.push(
         {
           "title":"Rory",
+          "subtitle": "hello",
+          "item_url": process.env.BNY_HOME,
           "image_url":"https://res.cloudinary.com/goodsearch/image/upload/v1436553720/hi_resolution_merchant_logos/barneys-new-york_coupons.jpg",
           "buttons" : [
               {
