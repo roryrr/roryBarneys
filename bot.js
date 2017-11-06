@@ -639,7 +639,8 @@
                     //parsing the json response from RR cloud
                     body = JSON.parse(body);
                     console.log("powerranger");
-                    var facet_array = body.placements[0].facets[0].values[0];
+                    var facet_array = body.placements[0].facets[0].values;
+                    sendFacetOptions(sid, facet_array.slice(1,11));
                     console.log(facet_array);
                           // setTimeout(function() { v2_restartAnytime(GLOBAL_ID) }, 7000);
                 // The Description is:  "descriptive string"
@@ -649,6 +650,36 @@
             });
 
 
+    }
+
+    function sendFacetOptions(recipientId, arrayHere){
+      if (arrayHere.length !== 0) {
+      var itemList = [];
+      arrayHere.forEach(i=>{
+         itemList.push({
+             content_type:"text",
+             title: i.value,
+             payload: i.value
+           });
+      });
+      console.log("dabang");
+      console.log(recipientId);
+
+      var messageData = {
+        recipient: {
+          id: recipientId
+        },
+        message: {
+          text: "hiii",
+          quick_replies: itemList
+        }
+      };
+
+      callSendAPI(messageData);
+      }
+      else {
+        sendTextMessage(recipientId, "Oops, no items found. Try with a differnt search criteria.");
+      }
     }
     function sendLoginOption(recipientId){
       var messageData = {
