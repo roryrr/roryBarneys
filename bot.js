@@ -186,7 +186,7 @@
               facet: "",
               query: searchString,
               start: 0,
-              rows: "10"};
+              rows: "9"};
             request({
               uri: req_url,
               qs: queryParameters,
@@ -212,7 +212,7 @@
       else if (req.body.result.action === 'user-searches-more-products') {
         console.log('****List is coming soon****');
         console.log(req.body.result.contexts[0].parameters['product-name'] + " sultan");
-        productCountStart += 10;
+        productCountStart += 9;
         console.log("The product count start is %d", productCountStart);
 
         var findGender="", findColor="", findProductName="", findBrand="";
@@ -235,7 +235,7 @@
               facet: "",
               query: searchString,
               start: productCountStart,
-              rows: "10"};
+              rows: "9"};
             request({
               uri: req_url,
               qs: queryParameters,
@@ -307,7 +307,7 @@
               facet: "",
               query: findBrand,
               start: 0,
-              rows: "10"};
+              rows: "9"};
             request({
               uri: req_url,
               qs: queryParameters,
@@ -1090,7 +1090,7 @@
         var queryParameters = { apiKey: process.env.API_KEY,
               apiClientKey: process.env.API_CLIENT_KEY,
               st: 0,
-              count: '10',
+              count: '9',
               userId: process.env.USER_ID,
               sessionId: process.env.SESSION_ID,
               placements: process.env.PLACEMENTS_ID_CAT,
