@@ -447,6 +447,9 @@
           var derivedPayload = message.quick_reply["payload"];
           facetFilter(senderID, derivedPayload);
         }
+        else if (message.quick_reply && (message.quick_reply["payload"] == "sendFilters")) {
+          v2_sendFilters();
+        }
         else {
         console.log("normal message");
         let apiai = apiaiApp.textRequest(messageText, {
