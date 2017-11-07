@@ -210,7 +210,7 @@
                   //parsing the json response from RR cloud
                   body = JSON.parse(body);
                   console.log("powerranger");
-                  console.log(findProductName);
+                  console.log(GLOBAL_PRODUCT_NAME);
                   if (body.placements[0].numFound == "0") {
                     sendTextMessage(GLOBAL_ID, "Oops, looks like we don’t have anything that fits that description.")
                   }
@@ -218,7 +218,7 @@
                         rr_array = body.placements[0].docs;
                         facet_array = body.placements[0].facets;
                         sendGenericMessageForSearch(GLOBAL_ID, rr_array);
-                        setTimeout(function() { v2_sendFilters(GLOBAL_ID, findProductName) }, 3000);
+                        setTimeout(function() { v2_sendFilters(GLOBAL_ID, GLOBAL_PRODUCT_NAME) }, 3000);
                         // setTimeout(function() { v2_restartAnytime(GLOBAL_ID) }, 7000);
                       }
               // The Description is:  "descriptive string"
