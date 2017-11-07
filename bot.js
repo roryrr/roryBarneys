@@ -125,9 +125,6 @@
             console.log("Weather Api call failed");
           });
         }
-      else if (req.body.result.action === 'facebook-reply') {
-        console.log("fb fb fb");
-      }
       else if (req.body.result.action === 'site-wide-general-top') {
         var rr_array =[];
         rr_array.length = 0;
@@ -255,6 +252,7 @@
                       console.log(findProductName);
                             rr_array = body.placements[0].docs;
                             sendGenericMessageForSearch(GLOBAL_ID, rr_array);
+                            setTimeout(function() { v2_sendFilters(GLOBAL_ID, findProductName) }, 3000);
                             // setTimeout(function() { v2_restartAnytime(GLOBAL_ID) }, 7000);
                   // The Description is:  "descriptive string"
                 } else {
