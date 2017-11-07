@@ -328,7 +328,7 @@
                   //parsing the json response from RR cloud
                   body = JSON.parse(body);
                   console.log("powerranger");
-                  console.log(findProductName);
+                  console.log(GLOBAL_PRODUCT_NAME);
                   if (body.placements[0].numFound == "0") {
                     sendTextMessage(GLOBAL_ID, "Oops, looks like we don’t have anything that fits that description.")
                   }
