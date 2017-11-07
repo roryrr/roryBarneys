@@ -204,10 +204,8 @@
                       console.log(findProductName);
                             rr_array = body.placements[0].docs;
                             facet_array = body.placements[0].facets;
-                            {
+
                             sendGenericMessageForSearch(GLOBAL_ID, rr_array);
-                          }
-                            v2_sendFilters(GLOBAL_ID, findProductName);
                             // setTimeout(function() { v2_restartAnytime(GLOBAL_ID) }, 7000);
                   // The Description is:  "descriptive string"
                 } else {
@@ -1168,7 +1166,7 @@
       else {
         sendTextMessage(recipientId, "Oops, no items found. Try with a differnt search criteria.");
       }
-
+      v2_sendFilters(recipientId, "shirt");
     }
     //Sending generic message with Favorite items
     function sendGenericMessageForFavoriteItems(recipientId, arrayHere) {
