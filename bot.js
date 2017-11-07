@@ -760,7 +760,7 @@
                     body = JSON.parse(body);
                     console.log("powerranger");
                     var facet_array = body.placements[0].facets[0].values;
-                    sendFacetOptions(sid, facet_array.slice(0,9), pName);
+                    sendFacetOptions(sid, facet_array.slice(0,8), pName, facet);
                     console.log(facet_array);
                           // setTimeout(function() { v2_restartAnytime(GLOBAL_ID) }, 7000);
                 // The Description is:  "descriptive string"
@@ -772,10 +772,15 @@
 
     }
 
-    function sendFacetOptions(recipientId, arrayHere, pName){
+    function sendFacetOptions(recipientId, arrayHere, pName, facet){
       if (arrayHere.length !== 0) {
       var itemList = [];
-      itemList.push({
+      itemList.push(
+        {
+          content_type:"text",
+          title: "any" + facet,
+          payload: "any" + facet
+        },{
           content_type:"text",
           title: "back",
           payload: "sendFilters"+pName
