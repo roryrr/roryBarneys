@@ -310,6 +310,21 @@
         console.log(GLOBAL_PRODUCT_COLOR);
         console.log(GLOBAL_PRODUCT_SIZE);
         console.log(GLOBAL_PRODUCT_GENDER);
+        if (req.body.result.contexts[0].parameters['reset-filter']) {
+          if (req.body.result.contexts[0].parameters['reset-filter'] == "any brand") {
+            GLOBAL_PRODUCT_BRAND="";
+          }
+          else if(req.body.result.contexts[0].parameters['reset-filter'] == "any color") {
+            GLOBAL_PRODUCT_COLOR="";
+          }
+          else if(req.body.result.contexts[0].parameters['reset-filter'] == "any gender") {
+            GLOBAL_PRODUCT_GENDER="";
+          }
+          else if(req.body.result.contexts[0].parameters['reset-filter'] == "any size") {
+            GLOBAL_PRODUCT_SIZE="";
+          }
+
+        }
         if (req.body.result.contexts[0].parameters['product-name']) {
             GLOBAL_PRODUCT_NAME = req.body.result.contexts[0].parameters['product-name'];
         }
@@ -560,21 +575,6 @@
         else if (message.quick_reply && (message.quick_reply["payload"]).match(/(sendFilters)/g)) {
           var derivedPayload = message.quick_reply["payload"];
           v2_sendFilters(senderID, derivedPayload.slice(11));
-        }
-        else if (message.quick_reply && (message.quick_reply["payload"]).match(/(any)/g)) {
-          var derivedPayload = message.quick_reply["payload"].slice(3);
-          if (derivedPayload == "gender") {
-            GLOBAL_PRODUCT_GENDER = "";
-          }
-          else if (derivedPayload == "color") {
-            GLOBAL_PRODUCT_COLOR = "";
-          }
-          else if (derivedPayload == "brand") {
-            GLOBAL_PRODUCT_BRAND = "";
-          }
-          else if (derivedPayload == "size") {
-            GLOBAL_PRODUCT_SIZE = "";
-          }
         }
         else {
         console.log("normal message");
