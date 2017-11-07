@@ -447,8 +447,9 @@
           var derivedPayload = message.quick_reply["payload"];
           facetFilter(senderID, derivedPayload);
         }
-        else if (message.quick_reply && (message.quick_reply["payload"] == "sendFilters")) {
-          v2_sendFilters();
+        else if (message.quick_reply && (message.quick_reply["payload"]).match(/(sendFilters)/g)) {
+          var derivedPayload = message.quick_reply["payload"];
+          v2_sendFilters(senderID, derivedPayload.slice(11));
         }
         else {
         console.log("normal message");
@@ -649,7 +650,7 @@
                     body = JSON.parse(body);
                     console.log("powerranger");
                     var facet_array = body.placements[0].facets[0].values;
-                    sendFacetOptions(sid, facet_array.slice(0,9));
+                    sendFacetOptions(sid, facet_array.slice(0,9), pName);
                     console.log(facet_array);
                           // setTimeout(function() { v2_restartAnytime(GLOBAL_ID) }, 7000);
                 // The Description is:  "descriptive string"
@@ -661,13 +662,13 @@
 
     }
 
-    function sendFacetOptions(recipientId, arrayHere){
+    function sendFacetOptions(recipientId, arrayHere, pName){
       if (arrayHere.length !== 0) {
       var itemList = [];
       itemList.push({
           content_type:"text",
           title: "back",
-          payload: "sendFilters"
+          payload: "sendFilters"+pName
         });
       arrayHere.forEach(i=>{
          itemList.push({
