@@ -13,6 +13,7 @@
     const path = require('path');
     var reqPromise = require('request-promise');
     var GLOBAL_ID;
+    var GLOBAL_PRODUCT_NAME, GLOBAL_PRODUCT_BRAND, GLOBAL_PRODUCT_GENDER, GLOBAL_PRODUCT_COLOR, GLOBAL_PRODUCT_SIZE;
     var productCountStart;
     //apiai for NLP
     const apiaiApp = require('apiai')(APIAI_TOKEN);
@@ -163,13 +164,21 @@
 
       else if (req.body.result.action === 'user-searches-products') {
         productCountStart = 0;
-        var findGender="", findColor="", findProductName="", findBrand="", findSize="";
-        findGender = req.body.result.parameters['user-gender'];
-        findColor = req.body.result.parameters['color'];
-        findProductName = req.body.result.parameters['product-name'];
-        findBrand = req.body.result.parameters['brand'];
-        findSize = req.body.result.parameters['user-size'];
-        var searchString = (findProductName ? findProductName : "") + (findGender ? findGender : "") + (findColor ? findColor : "") + (findBrand ? findBrand:"");
+        var GLOBAL_PRODUCT_GENDER="", GLOBAL_PRODUCT_COLOR="", GLOBAL_PRODUCT_NAME="", GLOBAL_PRODUCT_BRAND="", GLOBAL_PRODUCT_SIZE="";
+        GLOBAL_PRODUCT_GENDER = req.body.result.parameters['user-gender'];
+        GLOBAL_PRODUCT_COLOR = req.body.result.parameters['color'];
+        GLOBAL_PRODUCT_BRAND = req.body.result.parameters['brand'];
+        GLOBAL_PRODUCT_SIZE = req.body.result.parameters['user-size'];
+        if (req.body.result.parameters['product-name']) {
+            GLOBAL_PRODUCT_NAME = req.body.result.parameters['product-name'];
+        }
+        else {
+          GLOBAL_PRODUCT_NAME = 'shirt';
+        }
+        GLOBAL_PRODUCT_BRAND = 'brand:'+GLOBAL_PRODUCT_BRAND;
+        GLOBAL_PRODUCT_SIZE = 'size:'+GLOBAL_PRODUCT_SIZE;
+        GLOBAL_PRODUCT_GENDER = "gender:"+GLOBAL_PRODUCT_GENDER;
+        GLOBAL_PRODUCT_COLOR = "color:"+GLOBAL_PRODUCT_COLOR;
         var rr_array =[];
         var facet_array = [];
         // var findMyStart = Math.floor((Math.random() * 30) + 1).toString();
@@ -177,38 +186,60 @@
         facet_array.length = 0;
         console.log("nagma");
         var req_url = process.env.FIND_URL;
-        var queryParameters = { apiKey: process.env.API_KEY,
-              apiClientKey: process.env.API_CLIENT_KEY,
-              userId: process.env.USER_ID,
-              sessionId: process.env.SESSION_ID,
-              placements: process.env.PLACEMENTS_ID_FIND,
-              lang: "en",
-              query: searchString,
-              start: 0,
-              rows: "9"};
-            request({
-              uri: req_url,
-              qs: queryParameters,
-              headers: {
-                'User-Agent': 'Mozilla/5.0 (Linux; Android 5.1.1; A1 Build/LMY47V) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/60.0.3112.116 Mobile Safari/537.36'
-                },
-              method: 'GET',
-              }, function (error, response, body) {
-                    if (!error && response.statusCode == 200) {
-                      //parsing the json response from RR cloud
-                      body = JSON.parse(body);
-                      console.log("powerranger");
-                      console.log(findProductName);
-                            rr_array = body.placements[0].docs;
-                            facet_array = body.placements[0].facets;
-                            sendGenericMessageForSearch(GLOBAL_ID, rr_array);
-                            setTimeout(function() { v2_sendFilters(GLOBAL_ID, findProductName) }, 3000);
-                            // setTimeout(function() { v2_restartAnytime(GLOBAL_ID) }, 7000);
-                  // The Description is:  "descriptive string"
-                } else {
-                console.log('Pavan api.ai, ERROR');
-                }
-              });
+        var apiKey= process.env.API_KEY,
+              apiClientKey= process.env.API_CLIENT_KEY,
+              userId= process.env.USER_ID,
+              sessionId= process.env.SESSION_ID,
+              placements= process.env.PLACEMENTS_ID_FIND,
+              lang= "en",
+              query= GLOBAL_PRODUCT_NAME,
+              start= 0,
+              rows= "9";
+        var  requesting = req_url + "?apiKey=" + apiKey + "&apiClientKey=" + apiClientKey + "&userId=" + userId + "&sessionId=" + sessionId + "&placements=" + placements + "&lang=en&start=0&rows=9&query=" + query + "&filter=" + GLOBAL_PRODUCT_BRAND + "&filter=" + GLOBAL_PRODUCT_GENDER + "&filter=" + GLOBAL_PRODUCT_COLOR + "&filter=" + GLOBAL_PRODUCT_SIZE;
+          request(requesting, function (error, response, body) {
+                if (!error && response.statusCode == 200) {
+                  //parsing the json response from RR cloud
+                  body = JSON.parse(body);
+                  console.log("powerranger");
+                  console.log(findProductName);
+                  if (body.placements[0].numFound == "0") {
+                    sendTextMessage(GLOBAL_ID, "Oops, looks like we don’t have anything that fits that description.")
+                  }
+                  else{
+                        rr_array = body.placements[0].docs;
+                        facet_array = body.placements[0].facets;
+                        sendGenericMessageForSearch(GLOBAL_ID, rr_array);
+                        setTimeout(function() { v2_sendFilters(GLOBAL_ID, findProductName) }, 3000);
+                        // setTimeout(function() { v2_restartAnytime(GLOBAL_ID) }, 7000);
+                      }
+              // The Description is:  "descriptive string"
+            } else {
+            console.log('Pavan api.ai, ERROR');
+            }
+          });
+            // request({
+            //   uri: req_url,
+            //   qs: queryParameters,
+            //   headers: {
+            //     'User-Agent': 'Mozilla/5.0 (Linux; Android 5.1.1; A1 Build/LMY47V) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/60.0.3112.116 Mobile Safari/537.36'
+            //     },
+            //   method: 'GET',
+            //   }, function (error, response, body) {
+            //         if (!error && response.statusCode == 200) {
+            //           //parsing the json response from RR cloud
+            //           body = JSON.parse(body);
+            //           console.log("powerranger");
+            //           console.log(findProductName);
+            //                 rr_array = body.placements[0].docs;
+            //                 facet_array = body.placements[0].facets;
+            //                 sendGenericMessageForSearch(GLOBAL_ID, rr_array);
+            //                 setTimeout(function() { v2_sendFilters(GLOBAL_ID, findProductName) }, 3000);
+            //                 // setTimeout(function() { v2_restartAnytime(GLOBAL_ID) }, 7000);
+            //       // The Description is:  "descriptive string"
+            //     } else {
+            //     console.log('Pavan api.ai, ERROR');
+            //     }
+            //   });
       }
       else if (req.body.result.action === 'user-searches-more-products') {
         console.log('****List is coming soon****');
