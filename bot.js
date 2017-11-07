@@ -205,7 +205,7 @@
                             rr_array = body.placements[0].docs;
                             facet_array = body.placements[0].facets;
                             sendGenericMessageForSearch(GLOBAL_ID, rr_array);
-                            setTimeout(function() { v2_sendFilters(GLOBAL_ID, findProductName) }, 3000);
+                            v2_sendFilters(GLOBAL_ID, findProductName);
                             // setTimeout(function() { v2_restartAnytime(GLOBAL_ID) }, 7000);
                   // The Description is:  "descriptive string"
                 } else {
@@ -264,6 +264,12 @@
 
 
       }
+
+
+      else if (req.body.result.action === 'user-filters-products') {
+        console.log('****Filter is coming soon****');
+      }
+
       else if (req.body.result.action === 'showing-user-lists') {
         var rr_array;
         var req_url = process.env.PROD_FAV_URL;
