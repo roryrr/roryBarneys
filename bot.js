@@ -778,12 +778,12 @@
       itemList.push(
         {
           content_type:"text",
-          title: "any" + facet,
-          payload: "any" + facet
-        },{
-          content_type:"text",
           title: "back",
           payload: "sendFilters"+pName
+        },{
+          content_type:"text",
+          title: "any " + facet,
+          payload: "any" + facet
         });
       arrayHere.forEach(i=>{
          itemList.push({
