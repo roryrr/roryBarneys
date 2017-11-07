@@ -164,7 +164,7 @@
 
       else if (req.body.result.action === 'user-searches-products') {
         productCountStart = 0;
-        var GLOBAL_PRODUCT_GENDER="", GLOBAL_PRODUCT_COLOR="", GLOBAL_PRODUCT_NAME="", GLOBAL_PRODUCT_BRAND="", GLOBAL_PRODUCT_SIZE="";
+        GLOBAL_PRODUCT_GENDER="", GLOBAL_PRODUCT_COLOR="", GLOBAL_PRODUCT_NAME="", GLOBAL_PRODUCT_BRAND="", GLOBAL_PRODUCT_SIZE="";
         GLOBAL_PRODUCT_GENDER = req.body.result.parameters['user-gender'];
         GLOBAL_PRODUCT_COLOR = req.body.result.parameters['color'].capitalize();
         GLOBAL_PRODUCT_BRAND = req.body.result.parameters['brand'];
