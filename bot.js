@@ -301,7 +301,7 @@
         GLOBAL_PRODUCT_COLOR = req.body.result.contexts[0].parameters['color'];
         GLOBAL_PRODUCT_BRAND = req.body.result.contexts[0].parameters['brand'];
         GLOBAL_PRODUCT_SIZE = req.body.result.contexts[0].parameters['user-size'];
-        if (req.body.result.parameters['product-name']) {
+        if (req.body.result.contexts[0].parameters['product-name']) {
             GLOBAL_PRODUCT_NAME = req.body.result.contexts[0].parameters['product-name'];
         }
         else {
