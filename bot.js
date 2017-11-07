@@ -196,6 +196,7 @@
               start= 0,
               rows= "9";
         var  requesting = req_url + "?apiKey=" + apiKey + "&apiClientKey=" + apiClientKey + "&userId=" + userId + "&sessionId=" + sessionId + "&placements=" + placements + "&lang=en&start=0&rows=9&query=" + query + "&filter=" + GLOBAL_PRODUCT_BRAND + "&filter=" + GLOBAL_PRODUCT_GENDER + "&filter=" + GLOBAL_PRODUCT_COLOR + "&filter=" + GLOBAL_PRODUCT_SIZE;
+        console.log(requesting);
           request(requesting, function (error, response, body) {
                 if (!error && response.statusCode == 200) {
                   //parsing the json response from RR cloud
