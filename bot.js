@@ -315,14 +315,26 @@
         if (req.body.result.contexts[0].parameters['brand']) {
             GLOBAL_PRODUCT_BRAND = 'brand:\"'+req.body.result.contexts[0].parameters['brand']+'\"';
         }
+        else {
+          GLOBAL_PRODUCT_BRAND = 'brand:\"'+GLOBAL_PRODUCT_BRAND+'\"';
+        }
         if (req.body.result.contexts[0].parameters['user-size']) {
             GLOBAL_PRODUCT_SIZE = 'size:\"'+req.body.result.contexts[0].parameters['user-size']+'\"';
+        }
+        else {
+          GLOBAL_PRODUCT_SIZE = 'size:\"'+GLOBAL_PRODUCT_SIZE+'\"';
         }
         if (req.body.result.contexts[0].parameters['user-gender']) {
             GLOBAL_PRODUCT_GENDER = 'gender:\"'+req.body.result.contexts[0].parameters['user-gender']+'\"';
         }
+        else {
+          GLOBAL_PRODUCT_GENDER = 'gender:\"'+GLOBAL_PRODUCT_GENDER+'\"';
+        }
         if (req.body.result.contexts[0].parameters['color']) {
-            GLOBAL_PRODUCT_BRAND = 'color:\"'+req.body.result.contexts[0].parameters['color']+'\"';
+            GLOBAL_PRODUCT_COLOR = 'color:\"'+req.body.result.contexts[0].parameters['color']+'\"';
+        }
+        else {
+          GLOBAL_PRODUCT_COLOR = 'color:\"'+GLOBAL_PRODUCT_COLOR+'\"';
         }
         var req_url = process.env.FIND_URL;
         var apiKey= process.env.API_KEY,
