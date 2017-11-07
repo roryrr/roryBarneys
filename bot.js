@@ -561,6 +561,21 @@
           var derivedPayload = message.quick_reply["payload"];
           v2_sendFilters(senderID, derivedPayload.slice(11));
         }
+        else if (message.quick_reply && (message.quick_reply["payload"]).match(/(any)/g)) {
+          var derivedPayload = message.quick_reply["payload"].slice(3);
+          if (derivedPayload == "gender") {
+            GLOBAL_PRODUCT_GENDER = "";
+          }
+          else if (derivedPayload == "color") {
+            GLOBAL_PRODUCT_COLOR = "";
+          }
+          else if (derivedPayload == "brand") {
+            GLOBAL_PRODUCT_BRAND = "";
+          }
+          else if (derivedPayload == "size") {
+            GLOBAL_PRODUCT_SIZE = "";
+          }
+        }
         else {
         console.log("normal message");
         let apiai = apiaiApp.textRequest(messageText, {
