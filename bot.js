@@ -310,6 +310,7 @@
         console.log(GLOBAL_PRODUCT_COLOR);
         console.log(GLOBAL_PRODUCT_SIZE);
         console.log(GLOBAL_PRODUCT_GENDER);
+        facet_array.length = 0;
         if (req.body.result.contexts[0].parameters['reset-filter']) {
           if (req.body.result.contexts[0].parameters['reset-filter'] == "any brand") {
             GLOBAL_PRODUCT_BRAND="";
@@ -750,7 +751,7 @@
         facet = 'size';
       }
 
-
+      facet_array.length = 0;
       var req_url = process.env.FIND_URL;
       var queryParameters = { apiKey: process.env.API_KEY,
             apiClientKey: process.env.API_CLIENT_KEY,
