@@ -175,10 +175,10 @@
         else {
           GLOBAL_PRODUCT_NAME = 'shirt';
         }
-        GLOBAL_PRODUCT_BRAND = 'brand:'+GLOBAL_PRODUCT_BRAND;
-        GLOBAL_PRODUCT_SIZE = 'size:'+GLOBAL_PRODUCT_SIZE;
-        GLOBAL_PRODUCT_GENDER = "gender:"+GLOBAL_PRODUCT_GENDER;
-        GLOBAL_PRODUCT_COLOR = "color:"+GLOBAL_PRODUCT_COLOR;
+        GLOBAL_PRODUCT_BRAND = 'brand:\"'+GLOBAL_PRODUCT_BRAND+'\"';
+        GLOBAL_PRODUCT_SIZE = 'size:\"'+GLOBAL_PRODUCT_SIZE+'\"';
+        GLOBAL_PRODUCT_GENDER = 'gender:\"'+GLOBAL_PRODUCT_GENDER+'\"';
+        GLOBAL_PRODUCT_COLOR = 'color:\"'+GLOBAL_PRODUCT_COLOR+'\"';
         var rr_array =[];
         var facet_array = [];
         // var findMyStart = Math.floor((Math.random() * 30) + 1).toString();
@@ -307,10 +307,10 @@
         else {
           GLOBAL_PRODUCT_NAME = 'shirt';
         }
-        GLOBAL_PRODUCT_BRAND = 'brand:'+GLOBAL_PRODUCT_BRAND;
-        GLOBAL_PRODUCT_SIZE = 'size:'+GLOBAL_PRODUCT_SIZE;
-        GLOBAL_PRODUCT_GENDER = "gender:"+GLOBAL_PRODUCT_GENDER;
-        GLOBAL_PRODUCT_COLOR = "color:"+GLOBAL_PRODUCT_COLOR;
+        GLOBAL_PRODUCT_BRAND = 'brand:\"'+GLOBAL_PRODUCT_BRAND+'\"';
+        GLOBAL_PRODUCT_SIZE = 'size:\"'+GLOBAL_PRODUCT_SIZE+'\"';
+        GLOBAL_PRODUCT_GENDER = 'gender:\"'+GLOBAL_PRODUCT_GENDER+'\"';
+        GLOBAL_PRODUCT_COLOR = 'color:\"'+GLOBAL_PRODUCT_COLOR+'\"';
 
         var req_url = process.env.FIND_URL;
         var apiKey= process.env.API_KEY,
