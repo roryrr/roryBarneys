@@ -1036,6 +1036,11 @@
         quick_replies:[
           {
             content_type:"text",
+            title:"Reset filters",
+            payload:"resetFilter"
+          },
+          {
+            content_type:"text",
             title:"Gender",
             payload:"v2filter_g" + pName
           },
