@@ -15,6 +15,7 @@
     var GLOBAL_ID;
     var GLOBAL_PRODUCT_NAME, GLOBAL_PRODUCT_BRAND, GLOBAL_PRODUCT_GENDER, GLOBAL_PRODUCT_COLOR, GLOBAL_PRODUCT_SIZE;
     var productCountStart;
+    var facet_array = [];
     //apiai for NLP
     const apiaiApp = require('apiai')(APIAI_TOKEN);
 
@@ -188,7 +189,6 @@
             GLOBAL_PRODUCT_COLOR = 'color:\"'+(req.body.result.parameters['color'].capitalize())+'\"';
         }
         var rr_array =[];
-        var facet_array = [];
         // var findMyStart = Math.floor((Math.random() * 30) + 1).toString();
         rr_array.length = 0;
         facet_array.length = 0;
@@ -774,7 +774,7 @@
                     //parsing the json response from RR cloud
                     body = JSON.parse(body);
                     console.log("powerranger");
-                    var facet_array = body.placements[0].facets[0].values;
+                    facet_array = body.placements[0].facets[0].values;
                     sendFacetOptions(sid, facet_array.slice(0,8), pName, facet);
                     console.log(facet_array);
                           // setTimeout(function() { v2_restartAnytime(GLOBAL_ID) }, 7000);
