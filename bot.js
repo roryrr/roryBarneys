@@ -306,7 +306,10 @@
 
       else if (req.body.result.action === 'user-filters-products') {
         console.log('****Filter is coming soon****');
-        console.log(req.body.result.contexts[0].parameters);
+        console.log(GLOBAL_PRODUCT_BRAND);
+        console.log(GLOBAL_PRODUCT_COLOR);
+        console.log(GLOBAL_PRODUCT_SIZE);
+        console.log(GLOBAL_PRODUCT_GENDER);
         if (req.body.result.contexts[0].parameters['product-name']) {
             GLOBAL_PRODUCT_NAME = req.body.result.contexts[0].parameters['product-name'];
         }
