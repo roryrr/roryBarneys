@@ -1036,8 +1036,8 @@
         quick_replies:[
           {
             content_type:"text",
-            title:"Reset filters",
-            payload:"resetFilter"
+            title:"Restart",
+            payload:"v2_restart"
           },
           {
             content_type:"text",
