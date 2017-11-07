@@ -646,7 +646,7 @@
                     body = JSON.parse(body);
                     console.log("powerranger");
                     var facet_array = body.placements[0].facets[0].values;
-                    sendFacetOptions(sid, facet_array.slice(0,11));
+                    sendFacetOptions(sid, facet_array.slice(0,9));
                     console.log(facet_array);
                           // setTimeout(function() { v2_restartAnytime(GLOBAL_ID) }, 7000);
                 // The Description is:  "descriptive string"
@@ -661,6 +661,11 @@
     function sendFacetOptions(recipientId, arrayHere){
       if (arrayHere.length !== 0) {
       var itemList = [];
+      itemList.push({
+          content_type:"text",
+          title: "back",
+          payload: "sendFilters"
+        });
       arrayHere.forEach(i=>{
          itemList.push({
              content_type:"text",
@@ -668,6 +673,11 @@
              payload: i.value
            });
       });
+      itemList.push({
+          content_type:"text",
+          title: "more",
+          payload: "moreFilterOptions"
+        });
       console.log("dabang");
       console.log(recipientId);
 
