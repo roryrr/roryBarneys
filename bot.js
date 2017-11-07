@@ -175,10 +175,18 @@
         else {
           GLOBAL_PRODUCT_NAME = 'shirt';
         }
-        GLOBAL_PRODUCT_BRAND = 'brand:\"'+GLOBAL_PRODUCT_BRAND+'\"';
-        GLOBAL_PRODUCT_SIZE = 'size:\"'+GLOBAL_PRODUCT_SIZE+'\"';
-        GLOBAL_PRODUCT_GENDER = 'gender:\"'+GLOBAL_PRODUCT_GENDER+'\"';
-        GLOBAL_PRODUCT_COLOR = 'color:\"'+GLOBAL_PRODUCT_COLOR+'\"';
+        if (req.body.result.parameters['brand']) {
+            GLOBAL_PRODUCT_BRAND = 'brand:\"'+req.body.result.parameters['brand']+'\"';
+        }
+        if (req.body.result.parameters['user-size']) {
+            GLOBAL_PRODUCT_SIZE = 'size:\"'+req.body.result.parameters['user-size']+'\"';
+        }
+        if (req.body.result.parameters['user-gender']) {
+            GLOBAL_PRODUCT_GENDER = 'gender:\"'+req.body.result.parameters['user-gender']+'\"';
+        }
+        if (req.body.result.parameters['color']) {
+            GLOBAL_PRODUCT_COLOR = 'color:\"'+req.body.result.parameters['color']+'\"';
+        }
         var rr_array =[];
         var facet_array = [];
         // var findMyStart = Math.floor((Math.random() * 30) + 1).toString();
@@ -298,21 +306,24 @@
 
       else if (req.body.result.action === 'user-filters-products') {
         console.log('****Filter is coming soon****');
-        GLOBAL_PRODUCT_GENDER = req.body.result.contexts[0].parameters['user-gender'];
-        GLOBAL_PRODUCT_COLOR = req.body.result.contexts[0].parameters['color'];
-        GLOBAL_PRODUCT_BRAND = req.body.result.contexts[0].parameters['brand'];
-        GLOBAL_PRODUCT_SIZE = req.body.result.contexts[0].parameters['user-size'];
         if (req.body.result.contexts[0].parameters['product-name']) {
             GLOBAL_PRODUCT_NAME = req.body.result.contexts[0].parameters['product-name'];
         }
         else {
           GLOBAL_PRODUCT_NAME = 'shirt';
         }
-        GLOBAL_PRODUCT_BRAND = 'brand:\"'+GLOBAL_PRODUCT_BRAND+'\"';
-        GLOBAL_PRODUCT_SIZE = 'size:\"'+GLOBAL_PRODUCT_SIZE+'\"';
-        GLOBAL_PRODUCT_GENDER = 'gender:\"'+GLOBAL_PRODUCT_GENDER+'\"';
-        GLOBAL_PRODUCT_COLOR = 'color:\"'+GLOBAL_PRODUCT_COLOR+'\"';
-
+        if (req.body.result.contexts[0].parameters['brand']) {
+            GLOBAL_PRODUCT_BRAND = 'brand:\"'+req.body.result.contexts[0].parameters['brand']+'\"';
+        }
+        if (req.body.result.contexts[0].parameters['user-size']) {
+            GLOBAL_PRODUCT_SIZE = 'size:\"'+req.body.result.contexts[0].parameters['user-size']+'\"';
+        }
+        if (req.body.result.contexts[0].parameters['user-gender']) {
+            GLOBAL_PRODUCT_GENDER = 'gender:\"'+req.body.result.contexts[0].parameters['user-gender']+'\"';
+        }
+        if (req.body.result.contexts[0].parameters['color']) {
+            GLOBAL_PRODUCT_BRAND = 'color:\"'+req.body.result.contexts[0].parameters['color']+'\"';
+        }
         var req_url = process.env.FIND_URL;
         var apiKey= process.env.API_KEY,
               apiClientKey= process.env.API_CLIENT_KEY,
