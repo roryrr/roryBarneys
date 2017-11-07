@@ -166,7 +166,7 @@
         productCountStart = 0;
         var GLOBAL_PRODUCT_GENDER="", GLOBAL_PRODUCT_COLOR="", GLOBAL_PRODUCT_NAME="", GLOBAL_PRODUCT_BRAND="", GLOBAL_PRODUCT_SIZE="";
         GLOBAL_PRODUCT_GENDER = req.body.result.parameters['user-gender'];
-        GLOBAL_PRODUCT_COLOR = req.body.result.parameters['color'];
+        GLOBAL_PRODUCT_COLOR = req.body.result.parameters['color'].capitalize();
         GLOBAL_PRODUCT_BRAND = req.body.result.parameters['brand'];
         GLOBAL_PRODUCT_SIZE = req.body.result.parameters['user-size'];
         if (req.body.result.parameters['product-name']) {
@@ -185,7 +185,7 @@
             GLOBAL_PRODUCT_GENDER = 'gender:\"'+req.body.result.parameters['user-gender']+'\"';
         }
         if (req.body.result.parameters['color']) {
-            GLOBAL_PRODUCT_COLOR = 'color:\"'+req.body.result.parameters['color']+'\"';
+            GLOBAL_PRODUCT_COLOR = 'color:\"'+(req.body.result.parameters['color'].capitalize())+'\"';
         }
         var rr_array =[];
         var facet_array = [];
@@ -331,10 +331,10 @@
           GLOBAL_PRODUCT_GENDER?(GLOBAL_PRODUCT_GENDER='gender:\"'+GLOBAL_PRODUCT_GENDER+'\"'):(GLOBAL_PRODUCT_GENDER=GLOBAL_PRODUCT_GENDER);
         }
         if (req.body.result.contexts[0].parameters['color']) {
-            GLOBAL_PRODUCT_COLOR = 'color:\"'+req.body.result.contexts[0].parameters['color']+'\"';
+            GLOBAL_PRODUCT_COLOR = 'color:\"'+(req.body.result.contexts[0].parameters['color'].capitalize())+'\"';
         }
         else {
-          GLOBAL_PRODUCT_COLOR?(GLOBAL_PRODUCT_COLOR='color:\"'+GLOBAL_PRODUCT_COLOR+'\"'):(GLOBAL_PRODUCT_COLOR=GLOBAL_PRODUCT_COLOR);
+          GLOBAL_PRODUCT_COLOR?(GLOBAL_PRODUCT_COLOR='color:\"'+GLOBAL_PRODUCT_COLOR.capitalize()+'\"'):(GLOBAL_PRODUCT_COLOR=GLOBAL_PRODUCT_COLOR);
         }
         var req_url = process.env.FIND_URL;
         var apiKey= process.env.API_KEY,
@@ -492,6 +492,11 @@
       }
 
     });
+
+
+    String.prototype.capitalize = function() {
+        return this.charAt(0).toUpperCase() + this.slice(1);
+    }
 
     // Incoming events handling (this handles both user text input and also text from payload that comes from FB api)
     function receivedMessage(event) {
