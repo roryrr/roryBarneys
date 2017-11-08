@@ -14,7 +14,7 @@
     var reqPromise = require('request-promise');
     var GLOBAL_ID;
     var GLOBAL_PRODUCT_NAME, GLOBAL_PRODUCT_BRAND, GLOBAL_PRODUCT_GENDER, GLOBAL_PRODUCT_COLOR, GLOBAL_PRODUCT_SIZE;
-    var GLOBAL_PRODUCT_COLOR_COUNT=0;
+    var GLOBAL_PRODUCT_COLOR_COUNT;
     var productCountStart;
     var facet_array = [];
     //apiai for NLP
@@ -580,12 +580,6 @@
           var derivedPayload = message.quick_reply["payload"];
           v2_sendFilters(senderID, derivedPayload.slice(11));
         }
-        else if (message.quick_reply && (message.quick_reply["payload"]).match(/(moreFilt_)/g)) {
-          var derivedPayload = message.quick_reply["payload"];
-          GLOBAL_PRODUCT_COLOR_COUNT += 8;
-          console.log("GLOBAL_PRODUCT_COLOR_COUNT=" + GLOBAL_PRODUCT_COLOR_COUNT);
-          facetFilter(senderID, derivedPayload);
-        }
         else {
         console.log("normal message");
         let apiai = apiaiApp.textRequest(messageText, {
@@ -745,6 +739,7 @@
     //Facet filtering function
     function facetFilter(sid, pLoad){
       var facetAll = pLoad.charAt(9);
+      var pName = pLoad.slice(10);
       var facet;
       if(facetAll == 'g'){
         facet = 'gender';
@@ -766,7 +761,7 @@
             sessionId= process.env.SESSION_ID,
             placements= process.env.PLACEMENTS_ID_FIND,
             lang= "en",
-            query= GLOBAL_PRODUCT_NAME,
+            query= pName,
             facet= facet,
             start= 0,
             rows= "9";
@@ -777,7 +772,7 @@
             body = JSON.parse(body);
             console.log("powerranger");
             facet_array = body.placements[0].facets[0].values;
-            sendFacetOptions(sid, facet_array.slice(GLOBAL_PRODUCT_COLOR_COUNT,8), query, facet);
+            sendFacetOptions(sid, facet_array.slice(0,8), pName, facet);
                   // setTimeout(function() { v2_restartAnytime(GLOBAL_ID) }, 7000);
         // The Description is:  "descriptive string"
         } else {
@@ -806,11 +801,14 @@
              payload: i.value
            });
       });
-      itemList.push({
-          content_type:"text",
-          title: "more",
-          payload: "moreFilt_"+facet
-        });
+      if (facet !== "gender") {
+        itemList.push({
+            content_type:"text",
+            title: "more",
+            payload: "moreFilterOptions"+facet
+          });
+      }
+
       console.log("dabang");
       console.log(recipientId);
 
