@@ -14,7 +14,7 @@
     var reqPromise = require('request-promise');
     var GLOBAL_ID;
     var GLOBAL_PRODUCT_NAME, GLOBAL_PRODUCT_BRAND, GLOBAL_PRODUCT_GENDER, GLOBAL_PRODUCT_COLOR, GLOBAL_PRODUCT_SIZE;
-    var GLOBAL_PRODUCT_COLOR_COUNT;
+    var GLOBAL_PRODUCT_COLOR_COUNT = 0;
     var productCountStart;
     var facet_array = [];
     //apiai for NLP
