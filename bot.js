@@ -776,7 +776,7 @@
             body = JSON.parse(body);
             console.log("powerranger");
             facet_array = body.placements[0].facets[0].values;
-            sendFacetOptions(sid, facet_array.slice(GLOBAL_PRODUCT_COLOR_COUNT,8), pName, facet);
+            sendFacetOptions(sid, facet_array.slice(GLOBAL_PRODUCT_COLOR_COUNT,8), query, facet);
                   // setTimeout(function() { v2_restartAnytime(GLOBAL_ID) }, 7000);
         // The Description is:  "descriptive string"
         } else {
