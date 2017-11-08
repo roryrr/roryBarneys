@@ -812,8 +812,8 @@
       if (facet !== "gender") {
         itemList.push({
             content_type:"text",
-            title: "more "+ facet + " s",
-            payload: "more "+ facet + " s"
+            title: "more "+ facet + "s",
+            payload: "more "+ facet + "s"
           });
       }
 
