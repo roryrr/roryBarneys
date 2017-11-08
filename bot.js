@@ -191,7 +191,6 @@
         var rr_array =[];
         // var findMyStart = Math.floor((Math.random() * 30) + 1).toString();
         rr_array.length = 0;
-        facet_array.length = 0;
         console.log("nagma");
         var req_url = process.env.FIND_URL;
         var apiKey= process.env.API_KEY,
@@ -216,7 +215,6 @@
                   }
                   else{
                         rr_array = body.placements[0].docs;
-                        facet_array = body.placements[0].facets;
                         sendGenericMessageForSearch(GLOBAL_ID, rr_array);
                         setTimeout(function() { v2_sendFilters(GLOBAL_ID, GLOBAL_PRODUCT_NAME) }, 3000);
                         // setTimeout(function() { v2_restartAnytime(GLOBAL_ID) }, 7000);
@@ -310,7 +308,6 @@
         console.log(GLOBAL_PRODUCT_COLOR);
         console.log(GLOBAL_PRODUCT_SIZE);
         console.log(GLOBAL_PRODUCT_GENDER);
-        facet_array.length = 0;
         if (req.body.result.contexts[0].parameters['reset-filter']) {
           if (req.body.result.contexts[0].parameters['reset-filter'] == "any brand") {
             GLOBAL_PRODUCT_BRAND="";
@@ -379,7 +376,6 @@
                   }
                   else{
                         rr_array = body.placements[0].docs;
-                        facet_array = body.placements[0].facets;
                         sendGenericMessageForSearch(GLOBAL_ID, rr_array);
                         setTimeout(function() { v2_sendFilters(GLOBAL_ID, GLOBAL_PRODUCT_NAME) }, 3000);
                         // setTimeout(function() { v2_restartAnytime(GLOBAL_ID) }, 7000);
@@ -755,7 +751,7 @@
       else if (facetAll == 's') {
         facet = 'size';
       }
-
+      facet_array.length = 0;
       var req_url = process.env.FIND_URL;
       var apiKey= process.env.API_KEY,
             apiClientKey= process.env.API_CLIENT_KEY,
