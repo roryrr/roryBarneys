@@ -558,9 +558,9 @@
           else if (derivedPayload == "v2_youChoose") {
             callRrApi(senderID, "default");
           }
-          else if (derivedPayload == "v2_restart") {
-            GLOBAL_PRODUCT_GENDER="", GLOBAL_PRODUCT_COLOR="", GLOBAL_PRODUCT_NAME="", GLOBAL_PRODUCT_BRAND="", GLOBAL_PRODUCT_SIZE="";
-            v2_initialOptions(senderID);
+          else if (derivedPayload == "v2_resetFilters") {
+            GLOBAL_PRODUCT_GENDER="", GLOBAL_PRODUCT_COLOR="", GLOBAL_PRODUCT_BRAND="", GLOBAL_PRODUCT_SIZE="";
+            v2_sendFilters(senderID, GLOBAL_PRODUCT_NAME);
           }
           else if (derivedPayload == "v2_tips") {
             sendTextMessage(senderID, "-Type keywords to find items: e.g. 'shoes’/‘Gucci'/'Show me suits'\n-Type ‘favorites’ to bring up the favorites list\n-Hit the Restart button to return to the main menu");
@@ -1027,8 +1027,8 @@
         quick_replies:[
           {
             content_type:"text",
-            title:"Restart",
-            payload:"v2_restart"
+            title:"Reset Filters",
+            payload:"v2_resetFilters"
           },
           {
             content_type:"text",
