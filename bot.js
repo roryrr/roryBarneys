@@ -14,7 +14,7 @@
     var reqPromise = require('request-promise');
     var GLOBAL_ID;
     var GLOBAL_PRODUCT_NAME, GLOBAL_PRODUCT_BRAND, GLOBAL_PRODUCT_GENDER, GLOBAL_PRODUCT_COLOR, GLOBAL_PRODUCT_SIZE;
-    var GLOBAL_PRODUCT_COLOR_COUNT = 0;
+    var GLOBAL_PRODUCT_COLOR_COUNT;
     var productCountStart;
     var facet_array = [];
     //apiai for NLP
@@ -309,92 +309,89 @@
         console.log(GLOBAL_PRODUCT_COLOR);
         console.log(GLOBAL_PRODUCT_SIZE);
         console.log(GLOBAL_PRODUCT_GENDER);
-        if (req.body.result.contexts[0].parameters['more-filter-options']) {
-            if (req.body.result.contexts[0].parameters['more-filter-options'] = "more colors") {
-                GLOBAL_PRODUCT_COLOR_COUNT += 8;
-                  facetFilter(GLOBAL_ID, "dddddddd_"+req.body.result.contexts[0].parameters['more-filter-options'].charAt(5));
-            }
+        if (req.body.result.contexts[0].parameters['reset-filter']) {
+          if (req.body.result.contexts[0].parameters['reset-filter'] == "any brand") {
+            GLOBAL_PRODUCT_BRAND="";
+          }
+          else if(req.body.result.contexts[0].parameters['reset-filter'] == "any color") {
+            GLOBAL_PRODUCT_COLOR="";
+          }
+          else if(req.body.result.contexts[0].parameters['reset-filter'] == "any gender") {
+            GLOBAL_PRODUCT_GENDER="";
+          }
+          else if(req.body.result.contexts[0].parameters['reset-filter'] == "any size") {
+            GLOBAL_PRODUCT_SIZE="";
+          }
+
+        }
+        // if (req.body.result.contexts[0].parameters['more-filter-options']) {
+        //     if (req.body.result.contexts[0].parameters['more-filter-options'] = "more color") {
+        //         GLOBAL_PRODUCT_COLOR_COUNT += 8;
+        //           facetFilter(GLOBAL_ID, "");
+        //     }
+        // }
+        if (req.body.result.contexts[0].parameters['product-name']) {
+            GLOBAL_PRODUCT_NAME = req.body.result.contexts[0].parameters['product-name'];
         }
         else {
-          if (req.body.result.contexts[0].parameters['reset-filter']) {
-            if (req.body.result.contexts[0].parameters['reset-filter'] == "any brand") {
-              GLOBAL_PRODUCT_BRAND="";
-            }
-            else if(req.body.result.contexts[0].parameters['reset-filter'] == "any color") {
-              GLOBAL_PRODUCT_COLOR="";
-            }
-            else if(req.body.result.contexts[0].parameters['reset-filter'] == "any gender") {
-              GLOBAL_PRODUCT_GENDER="";
-            }
-            else if(req.body.result.contexts[0].parameters['reset-filter'] == "any size") {
-              GLOBAL_PRODUCT_SIZE="";
-            }
-
-          }
-          if (req.body.result.contexts[0].parameters['product-name']) {
-              GLOBAL_PRODUCT_NAME = req.body.result.contexts[0].parameters['product-name'];
-          }
-          else {
-            GLOBAL_PRODUCT_NAME = 'shirt';
-          }
-          if (req.body.result.contexts[0].parameters['brand']) {
-              GLOBAL_PRODUCT_BRAND = 'brand:\"'+req.body.result.contexts[0].parameters['brand']+'\"';
-          }
-          else {
-            GLOBAL_PRODUCT_BRAND=GLOBAL_PRODUCT_BRAND;
-          }
-          if (req.body.result.contexts[0].parameters['user-size']) {
-              GLOBAL_PRODUCT_SIZE = 'size:\"'+req.body.result.contexts[0].parameters['user-size']+'\"';
-          }
-          else {
-            GLOBAL_PRODUCT_SIZE=GLOBAL_PRODUCT_SIZE;
-          }
-          if (req.body.result.contexts[0].parameters['user-gender']) {
-              GLOBAL_PRODUCT_GENDER = 'gender:\"'+req.body.result.contexts[0].parameters['user-gender']+'\"';
-          }
-          else {
-            GLOBAL_PRODUCT_GENDER=GLOBAL_PRODUCT_GENDER;
-          }
-          if (req.body.result.contexts[0].parameters['color']) {
-              GLOBAL_PRODUCT_COLOR = 'color:\"'+(req.body.result.contexts[0].parameters['color'].capitalize())+'\"';
-          }
-          else {
-            GLOBAL_PRODUCT_COLOR=GLOBAL_PRODUCT_COLOR;
-          }
-          var req_url = process.env.FIND_URL;
-          var apiKey= process.env.API_KEY,
-                apiClientKey= process.env.API_CLIENT_KEY,
-                userId= process.env.USER_ID,
-                sessionId= process.env.SESSION_ID,
-                placements= process.env.PLACEMENTS_ID_FIND,
-                lang= "en",
-                query= GLOBAL_PRODUCT_NAME,
-                start= 0,
-                rows= "9";
-          var  requesting = req_url + "?apiKey=" + apiKey + "&apiClientKey=" + apiClientKey + "&userId=" + userId + "&sessionId=" + sessionId + "&placements=" + placements + "&lang=en&start=0&rows=9&query=" + query + "&filter=" + GLOBAL_PRODUCT_BRAND + "&filter=" + GLOBAL_PRODUCT_GENDER + "&filter=" + GLOBAL_PRODUCT_COLOR + "&filter=" + GLOBAL_PRODUCT_SIZE;
-            request(requesting, function (error, response, body) {
-                  if (!error && response.statusCode == 200) {
-                    //parsing the json response from RR cloud
-                    body = JSON.parse(body);
-                    console.log("powerranger");
-                    console.log(GLOBAL_PRODUCT_NAME);
-                    console.log(requesting);
-                    if (body.placements[0].numFound == "0") {
-                      sendTextMessage(GLOBAL_ID, "Oops, looks like we don’t have anything that fits that description.")
-                    }
-                    else{
-                          rr_array = body.placements[0].docs;
-                          sendGenericMessageForSearch(GLOBAL_ID, rr_array);
-                          setTimeout(function() { v2_sendFilters(GLOBAL_ID, GLOBAL_PRODUCT_NAME) }, 3000);
-                          // setTimeout(function() { v2_restartAnytime(GLOBAL_ID) }, 7000);
-                        }
-                // The Description is:  "descriptive string"
-              } else {
-              console.log('Pavan api.ai, ERROR');
-              }
-            });
+          GLOBAL_PRODUCT_NAME = 'shirt';
         }
-
+        if (req.body.result.contexts[0].parameters['brand']) {
+            GLOBAL_PRODUCT_BRAND = 'brand:\"'+req.body.result.contexts[0].parameters['brand']+'\"';
+        }
+        else {
+          GLOBAL_PRODUCT_BRAND=GLOBAL_PRODUCT_BRAND;
+        }
+        if (req.body.result.contexts[0].parameters['user-size']) {
+            GLOBAL_PRODUCT_SIZE = 'size:\"'+req.body.result.contexts[0].parameters['user-size']+'\"';
+        }
+        else {
+          GLOBAL_PRODUCT_SIZE=GLOBAL_PRODUCT_SIZE;
+        }
+        if (req.body.result.contexts[0].parameters['user-gender']) {
+            GLOBAL_PRODUCT_GENDER = 'gender:\"'+req.body.result.contexts[0].parameters['user-gender']+'\"';
+        }
+        else {
+          GLOBAL_PRODUCT_GENDER=GLOBAL_PRODUCT_GENDER;
+        }
+        if (req.body.result.contexts[0].parameters['color']) {
+            GLOBAL_PRODUCT_COLOR = 'color:\"'+(req.body.result.contexts[0].parameters['color'].capitalize())+'\"';
+        }
+        else {
+          GLOBAL_PRODUCT_COLOR=GLOBAL_PRODUCT_COLOR;
+        }
+        var req_url = process.env.FIND_URL;
+        var apiKey= process.env.API_KEY,
+              apiClientKey= process.env.API_CLIENT_KEY,
+              userId= process.env.USER_ID,
+              sessionId= process.env.SESSION_ID,
+              placements= process.env.PLACEMENTS_ID_FIND,
+              lang= "en",
+              query= GLOBAL_PRODUCT_NAME,
+              start= 0,
+              rows= "9";
+        var  requesting = req_url + "?apiKey=" + apiKey + "&apiClientKey=" + apiClientKey + "&userId=" + userId + "&sessionId=" + sessionId + "&placements=" + placements + "&lang=en&start=0&rows=9&query=" + query + "&filter=" + GLOBAL_PRODUCT_BRAND + "&filter=" + GLOBAL_PRODUCT_GENDER + "&filter=" + GLOBAL_PRODUCT_COLOR + "&filter=" + GLOBAL_PRODUCT_SIZE;
+          request(requesting, function (error, response, body) {
+                if (!error && response.statusCode == 200) {
+                  //parsing the json response from RR cloud
+                  body = JSON.parse(body);
+                  console.log("powerranger");
+                  console.log(GLOBAL_PRODUCT_NAME);
+                  console.log(requesting);
+                  if (body.placements[0].numFound == "0") {
+                    sendTextMessage(GLOBAL_ID, "Oops, looks like we don’t have anything that fits that description.")
+                  }
+                  else{
+                        rr_array = body.placements[0].docs;
+                        sendGenericMessageForSearch(GLOBAL_ID, rr_array);
+                        setTimeout(function() { v2_sendFilters(GLOBAL_ID, GLOBAL_PRODUCT_NAME) }, 3000);
+                        // setTimeout(function() { v2_restartAnytime(GLOBAL_ID) }, 7000);
+                      }
+              // The Description is:  "descriptive string"
+            } else {
+            console.log('Pavan api.ai, ERROR');
+            }
+          });
       }
 
       else if (req.body.result.action === 'showing-user-lists') {
@@ -748,6 +745,7 @@
     //Facet filtering function
     function facetFilter(sid, pLoad){
       var facetAll = pLoad.charAt(9);
+      var pName = pLoad.slice(10);
       var facet;
       if(facetAll == 'g'){
         facet = 'gender';
@@ -769,7 +767,7 @@
             sessionId= process.env.SESSION_ID,
             placements= process.env.PLACEMENTS_ID_FIND,
             lang= "en",
-            query= GLOBAL_PRODUCT_NAME,
+            query= pName,
             facet= facet,
             start= 0,
             rows= "9";
@@ -780,7 +778,7 @@
             body = JSON.parse(body);
             console.log("powerranger");
             facet_array = body.placements[0].facets[0].values;
-            sendFacetOptions(sid, facet_array.slice(GLOBAL_PRODUCT_COLOR_COUNT,8), GLOBAL_PRODUCT_NAME, facet);
+            sendFacetOptions(sid, facet_array.slice(0,8), pName, facet);
                   // setTimeout(function() { v2_restartAnytime(GLOBAL_ID) }, 7000);
         // The Description is:  "descriptive string"
         } else {
@@ -812,8 +810,8 @@
       if (facet !== "gender") {
         itemList.push({
             content_type:"text",
-            title: "more "+ facet + "s",
-            payload: "more "+ facet + "s"
+            title: "more "+ facet + " s",
+            payload: "more "+ facet + " s"
           });
       }
 
