@@ -562,6 +562,10 @@
             GLOBAL_PRODUCT_GENDER="", GLOBAL_PRODUCT_COLOR="", GLOBAL_PRODUCT_BRAND="", GLOBAL_PRODUCT_SIZE="";
             v2_sendFilters(senderID, GLOBAL_PRODUCT_NAME);
           }
+          else if (derivedPayload == "v2_restart") {
+            GLOBAL_PRODUCT_GENDER="", GLOBAL_PRODUCT_COLOR="", GLOBAL_PRODUCT_BRAND="", GLOBAL_PRODUCT_SIZE="", GLOBAL_PRODUCT_NAME="";
+            v2_initialOptions(senderID);
+          }
           else if (derivedPayload == "v2_tips") {
             sendTextMessage(senderID, "-Type keywords to find items: e.g. 'shoes’/‘Gucci'/'Show me suits'\n-Type ‘favorites’ to bring up the favorites list\n-Hit the Restart button to return to the main menu");
             // setTimeout(function() { v2_restartAnytime(senderID) }, 7000);
@@ -864,7 +868,7 @@
         id: recipientId
       },
       message:{
-        text: "Hey! What would you like to do?",
+        text: "Hey! What would you like to do? You can choose an option from below or type in a text like 'I am looking for shoes'",
         quick_replies:[
           {
             content_type:"text",
@@ -1023,7 +1027,7 @@
         id: recipientId
       },
       message:{
-        text: "Choose a Filter:",
+        text: "Choose an option:",
         quick_replies:[
           {
             content_type:"text",
@@ -1049,6 +1053,11 @@
             content_type:"text",
             title:"Size",
             payload:"v2filter_s" + pName
+          },
+          {
+            content_type:"text",
+            title:"New Search",
+            payload:"v2_restart"
           }
         ]
       }
