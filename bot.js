@@ -324,6 +324,13 @@
           }
 
         }
+        if (req.body.result.contexts[0].parameters['more-filter-options']) {
+            if (req.body.result.contexts[0].parameters['more-filter-options'] = "more color") {
+                GLOBAL_PRODUCT_COLOR_COUNT += 8;
+                  facetFilter(GLOBAL_ID, "dddddddd_"+req.body.result.contexts[0].parameters['more-filter-options'].charAt(5));
+                  break;
+            }
+        }
         if (req.body.result.contexts[0].parameters['product-name']) {
             GLOBAL_PRODUCT_NAME = req.body.result.contexts[0].parameters['product-name'];
         }
@@ -804,8 +811,8 @@
       if (facet !== "gender") {
         itemList.push({
             content_type:"text",
-            title: "more",
-            payload: "moreFilterOptions"+facet
+            title: "more "+ facet + " s",
+            payload: "more "+ facet + " s"
           });
       }
 
