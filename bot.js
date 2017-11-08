@@ -557,7 +557,7 @@
           else if (derivedPayload == "v2_resetFilters") {
             GLOBAL_PRODUCT_GENDER="", GLOBAL_PRODUCT_COLOR="", GLOBAL_PRODUCT_BRAND="", GLOBAL_PRODUCT_SIZE="";
             sendTextMessage(senderID, "filters removed");
-            v2_sendFilters(senderID, GLOBAL_PRODUCT_NAME);
+            setTimeout(function(){v2_sendFilters(senderID, GLOBAL_PRODUCT_NAME)}, 1000);
           }
           else if (derivedPayload == "v2_restart") {
             GLOBAL_PRODUCT_GENDER="", GLOBAL_PRODUCT_COLOR="", GLOBAL_PRODUCT_BRAND="", GLOBAL_PRODUCT_SIZE="", GLOBAL_PRODUCT_NAME="";
