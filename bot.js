@@ -778,7 +778,7 @@
         }
     });
 
-
+}
     function sendFacetOptions(recipientId, arrayHere, pName, facet){
       if (arrayHere.length !== 0) {
       var itemList = [];
