@@ -583,6 +583,7 @@
         else if (message.quick_reply && (message.quick_reply["payload"]).match(/(moreFilt_)/g)) {
           var derivedPayload = message.quick_reply["payload"];
           GLOBAL_PRODUCT_COLOR_COUNT += 8;
+          console.log("GLOBAL_PRODUCT_COLOR_COUNT="+GLOBAL_PRODUCT_COLOR_COUNT);
           facetFilter(senderID, derivedPayload);
         }
         else {
