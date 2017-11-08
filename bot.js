@@ -310,7 +310,7 @@
         console.log(GLOBAL_PRODUCT_SIZE);
         console.log(GLOBAL_PRODUCT_GENDER);
         if (req.body.result.contexts[0].parameters['more-filter-options']) {
-            if (req.body.result.contexts[0].parameters['more-filter-options'] = "more color") {
+            if (req.body.result.contexts[0].parameters['more-filter-options'] = "more colors") {
                 GLOBAL_PRODUCT_COLOR_COUNT += 8;
                   facetFilter(GLOBAL_ID, "dddddddd_"+req.body.result.contexts[0].parameters['more-filter-options'].charAt(5));
             }
