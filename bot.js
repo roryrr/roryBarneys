@@ -271,7 +271,7 @@
           console.log('****More on Filters is coming soon****');
           if (req.body.result.contexts[0].parameters['more-filter-options'] == "more colors") {
             GLOBAL_PRODUCT_COLOR_COUNT += 8;
-            facetFilter(GLOBAL_ID, "v2filter_c");
+            facetFilter(GLOBAL_ID, "jjjjjjjj_c");
           }
       }
 
