@@ -267,7 +267,9 @@
             }
           });
       }
-
+      else if (req.body.result.action === 'user-requests-more-filter-options') {
+          console.log('****More on Filters is coming soon****');
+      }
 
       else if (req.body.result.action === 'user-filters-products') {
         console.log('****Filter is coming soon****');
