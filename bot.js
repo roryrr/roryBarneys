@@ -698,7 +698,13 @@
             body = JSON.parse(body);
             console.log("powerranger tori");
             facet_array = body.placements[0].facets[0].values;
-            sendFacetOptions(sid, facet_array.slice(facetStart,facetStart+8), pName, facet);
+            if (facet_array.length == 1) {
+                sendFacetOptions(sid, facet_array.slice(0,8), pName, facet);
+            }
+            else {
+                sendFacetOptions(sid, facet_array.slice(facetStart,facetStart+8), pName, facet);
+            }
+
                   // setTimeout(function() { v2_restartAnytime(GLOBAL_ID) }, 7000);
         // The Description is:  "descriptive string"
         } else {
