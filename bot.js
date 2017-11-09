@@ -14,7 +14,7 @@
     var reqPromise = require('request-promise');
     var GLOBAL_ID;
     var GLOBAL_PRODUCT_NAME, GLOBAL_PRODUCT_BRAND, GLOBAL_PRODUCT_GENDER, GLOBAL_PRODUCT_COLOR, GLOBAL_PRODUCT_SIZE;
-    var GLOBAL_PRODUCT_COLOR_COUNT =0;
+    var GLOBAL_PRODUCT_COLOR_COUNT;
     var productCountStart;
     var facet_array = [];
     //apiai for NLP
@@ -165,6 +165,7 @@
       }
 
       else if (req.body.result.action === 'user-searches-products') {
+        GLOBAL_PRODUCT_COLOR_COUNT = 0;
         productCountStart = 0;
         GLOBAL_PRODUCT_GENDER="", GLOBAL_PRODUCT_COLOR="", GLOBAL_PRODUCT_NAME="", GLOBAL_PRODUCT_BRAND="", GLOBAL_PRODUCT_SIZE="";
         GLOBAL_PRODUCT_GENDER = req.body.result.parameters['user-gender'];
