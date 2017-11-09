@@ -225,81 +225,47 @@
             console.log('Pavan api.ai, ERROR');
             }
           });
-            // request({
-            //   uri: req_url,
-            //   qs: queryParameters,
-            //   headers: {
-            //     'User-Agent': 'Mozilla/5.0 (Linux; Android 5.1.1; A1 Build/LMY47V) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/60.0.3112.116 Mobile Safari/537.36'
-            //     },
-            //   method: 'GET',
-            //   }, function (error, response, body) {
-            //         if (!error && response.statusCode == 200) {
-            //           //parsing the json response from RR cloud
-            //           body = JSON.parse(body);
-            //           console.log("powerranger");
-            //           console.log(findProductName);
-            //                 rr_array = body.placements[0].docs;
-            //                 facet_array = body.placements[0].facets;
-            //                 sendGenericMessageForSearch(GLOBAL_ID, rr_array);
-            //                 setTimeout(function() { v2_sendFilters(GLOBAL_ID, findProductName) }, 3000);
-            //                 // setTimeout(function() { v2_restartAnytime(GLOBAL_ID) }, 7000);
-            //       // The Description is:  "descriptive string"
-            //     } else {
-            //     console.log('Pavan api.ai, ERROR');
-            //     }
-            //   });
       }
       else if (req.body.result.action === 'user-searches-more-products') {
         console.log('****List is coming soon****');
         console.log(req.body.result.contexts[0].parameters['product-name'] + " sultan");
         productCountStart += 9;
         console.log("The product count start is %d", productCountStart);
-
-        var findGender="", findColor="", findProductName="", findBrand="";
-        findGender = req.body.result.contexts[0].parameters['user-gender'];
-        findColor = req.body.result.contexts[0].parameters['color'];
-        findProductName = req.body.result.contexts[0].parameters['product-name'];
-        findBrand = req.body.result.contexts[0].parameters['brand'];
-        var searchString = (findProductName ? findProductName : "") + (findGender ? findGender : "") + (findColor ? findColor : "") + (findBrand ? findBrand:"");
         var rr_array =[];
-        // var findMyStart = Math.floor((Math.random() * 30) + 1).toString();
         rr_array.length = 0;
         console.log("nagma");
         var req_url = process.env.FIND_URL;
-        var queryParameters = { apiKey: process.env.API_KEY,
-              apiClientKey: process.env.API_CLIENT_KEY,
-              userId: process.env.USER_ID,
-              sessionId: process.env.SESSION_ID,
-              placements: process.env.PLACEMENTS_ID_FIND,
-              lang: "en",
-              facet: "",
-              query: searchString,
-              start: productCountStart,
-              rows: "9"};
-            request({
-              uri: req_url,
-              qs: queryParameters,
-              headers: {
-                'User-Agent': 'Mozilla/5.0 (Linux; Android 5.1.1; A1 Build/LMY47V) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/60.0.3112.116 Mobile Safari/537.36'
-                },
-              method: 'GET',
-              }, function (error, response, body) {
-                    if (!error && response.statusCode == 200) {
-                      //parsing the json response from RR cloud
-                      body = JSON.parse(body);
-                      console.log("powerranger");
-                      console.log(findProductName);
-                            rr_array = body.placements[0].docs;
-                            sendGenericMessageForSearch(GLOBAL_ID, rr_array);
-                            setTimeout(function() { v2_sendFilters(GLOBAL_ID, findProductName) }, 3000);
-                            // setTimeout(function() { v2_restartAnytime(GLOBAL_ID) }, 7000);
-                  // The Description is:  "descriptive string"
-                } else {
-                console.log('Pavan api.ai, ERROR');
-                }
-              });
-
-
+        var apiKey= process.env.API_KEY,
+              apiClientKey= process.env.API_CLIENT_KEY,
+              userId= process.env.USER_ID,
+              sessionId= process.env.SESSION_ID,
+              placements= process.env.PLACEMENTS_ID_FIND,
+              lang= "en",
+              query= GLOBAL_PRODUCT_NAME,
+              start= productCountStart,
+              rows= "9";
+        var  requesting = req_url + "?apiKey=" + apiKey + "&apiClientKey=" + apiClientKey + "&userId=" + userId + "&sessionId=" + sessionId + "&placements=" + placements + "&lang=en&" + "start=" + start + "&rows=9&query=" + query + "&filter=" + GLOBAL_PRODUCT_BRAND + "&filter=" + GLOBAL_PRODUCT_GENDER + "&filter=" + GLOBAL_PRODUCT_COLOR + "&filter=" + GLOBAL_PRODUCT_SIZE;
+        console.log(requesting);
+          request(requesting, function (error, response, body) {
+                if (!error && response.statusCode == 200) {
+                  //parsing the json response from RR cloud
+                  body = JSON.parse(body);
+                  console.log("powerranger");
+                  console.log(GLOBAL_PRODUCT_NAME);
+                  if (body.placements[0].numFound == "0") {
+                    sendTextMessage(GLOBAL_ID, "Oops, looks like we don’t have anything that fits that description.")
+                  }
+                  else{
+                        rr_array = body.placements[0].docs;
+                        sendGenericMessageForSearch(GLOBAL_ID, rr_array);
+                        setTimeout(function() { v2_sendFilters(GLOBAL_ID, GLOBAL_PRODUCT_NAME) }, 3000);
+                        // setTimeout(function() { v2_restartAnytime(GLOBAL_ID) }, 7000);
+                      }
+              // The Description is:  "descriptive string"
+            } else {
+            console.log('Pavan api.ai, ERROR');
+            }
+          });
       }
 
 
@@ -324,12 +290,6 @@
           }
 
         }
-        // if (req.body.result.contexts[0].parameters['more-filter-options']) {
-        //     if (req.body.result.contexts[0].parameters['more-filter-options'] = "more color") {
-        //         GLOBAL_PRODUCT_COLOR_COUNT += 8;
-        //           facetFilter(GLOBAL_ID, "");
-        //     }
-        // }
         if (req.body.result.contexts[0].parameters['product-name']) {
             GLOBAL_PRODUCT_NAME = req.body.result.contexts[0].parameters['product-name'];
         }
@@ -418,95 +378,6 @@
                       else {
                         sendTextMessage(GLOBAL_ID, "Oops! Looks like you don’t have anything saved.");
                     }
-                  // The Description is:  "descriptive string"
-                } else {
-                console.log('Pavan api.ai, ERROR');
-                }
-              });
-      }
-      else if (req.body.result.action === 'user-requests-brands') {
-        var findBrand = req.body.result.parameters['brand'];
-        findBrand.replace(" ", "+")
-        var rr_array =[];
-        var findMyStart = Math.floor((Math.random() * 30) + 1).toString();
-        rr_array.length = 0;
-        console.log("nagma");
-        var req_url = process.env.FIND_URL;
-        var queryParameters = { apiKey: process.env.API_KEY,
-              apiClientKey: process.env.API_CLIENT_KEY,
-              userId: process.env.USER_ID,
-              sessionId: process.env.SESSION_ID,
-              placements: process.env.PLACEMENTS_ID_FIND,
-              lang: "en",
-              facet: "",
-              query: findBrand,
-              start: 0,
-              rows: "9"};
-            request({
-              uri: req_url,
-              qs: queryParameters,
-              headers: {
-                'User-Agent': 'Mozilla/5.0 (Linux; Android 5.1.1; A1 Build/LMY47V) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/60.0.3112.116 Mobile Safari/537.36'
-                },
-              method: 'GET',
-              }, function (error, response, body) {
-                    if (!error && response.statusCode == 200) {
-                      //parsing the json response from RR cloud
-                      body = JSON.parse(body);
-                      console.log("powerranger");
-                      console.log(findProductName);
-                            rr_array = body.placements[0].docs;
-                            sendGenericMessageForSearch(GLOBAL_ID, rr_array);
-                            // setTimeout(function() { v2_restartAnytime(GLOBAL_ID) }, 7000);
-                  // The Description is:  "descriptive string"
-                } else {
-                console.log('Pavan api.ai, ERROR');
-                }
-              });
-      }
-      else if (req.body.result.action === 'inspire-me') {
-        var findBrand = req.body.result.parameters["brand"];
-        findBrand = 'brand:\"' + findBrand + '\"';
-        var findProductName = req.body.result.parameters['product-name'];
-        findProductName.replace(" ", "+");
-        var findcolor = req.body.result.parameters["color"];
-        findcolor = 'color:\"' + findcolor.charAt(0).toUpperCase() + findcolor.slice(1) + '\"';
-        var findSize = req.body.result.parameters["user-size"];
-        if (parseInt(findSize)) {
-        findSize = 'size:\"' + findSize + '\"';
-        }
-        else {
-        findSize = 'size:\"' + findSize.charAt(0) + '\"';
-        }
-        // var findPrice = parseInt(req.body.result.parameters['unit-currency']) * 100;
-        // findPrice = 'effectivePriceCents:\"' + findPrice + '\"';
-        var findGender = req.body.result.parameters['user-gender'];
-        findGender = 'gender:\"' + findGender + '\"';
-        var rr_array =[];
-        rr_array.length = 0;
-        console.log("nagma");
-        // var request = require('request');
-        var req_url = process.env.FIND_URL;
-        var apiKey= process.env.API_KEY,
-              apiClientKey= process.env.API_CLIENT_KEY,
-              userId= process.env.USER_ID,
-              sessionId= process.env.SESSION_ID,
-              placements= process.env.PLACEMENTS_ID_FIND;
-            var  requesting = req_url + "?apiKey=" + apiKey + "&apiClientKey=" + apiClientKey + "&userId=" + userId + "&sessionId=" + sessionId + "&placements=" + placements + "&lang=en&facet=&start=0&rows=5&query=" + findProductName + "&filter=" + findBrand + "&filter=" + findGender + "&filter=" + findcolor + "&filter=" + findSize;
-              request(requesting, function (error, response, body) {
-                    if (!error && response.statusCode == 200) {
-                      //parsing the json response from RR cloud
-                      body = JSON.parse(body);
-                      console.log("powerranger");
-                      console.log(findProductName);
-                      if (body.placements[0].numFound == "0") {
-                        sendTextMessage(GLOBAL_ID, "Oops, looks like we don’t have anything that fits that description.")
-                      }
-                      else{
-                            rr_array = body.placements[0].docs;
-                            sendGenericMessageForSearch(GLOBAL_ID, rr_array);
-                            // setTimeout(function() { v2_restartAnytime(GLOBAL_ID) }, 7000);
-                          }
                   // The Description is:  "descriptive string"
                 } else {
                 console.log('Pavan api.ai, ERROR');
