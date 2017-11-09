@@ -687,7 +687,7 @@
             lang= "en",
             query= pName,
             facet= facet,
-            start= facetStart,
+            start= 0,
             rows= "9";
       var  requesting = req_url + "?apiKey=" + apiKey + "&apiClientKey=" + apiClientKey + "&userId=" + userId + "&sessionId=" + sessionId + "&placements=" + placements + "&lang=en&"+ "start=" + start + "&rows=9&query=" + query + "&filter=" + GLOBAL_PRODUCT_BRAND + "&filter=" + GLOBAL_PRODUCT_GENDER + "&filter=" + GLOBAL_PRODUCT_COLOR + "&filter=" + GLOBAL_PRODUCT_SIZE + "&facet=" + facet;
       console.log(requesting);
@@ -697,7 +697,7 @@
             body = JSON.parse(body);
             console.log("powerranger");
             facet_array = body.placements[0].facets[0].values;
-            sendFacetOptions(sid, facet_array.slice(0,8), pName, facet);
+            sendFacetOptions(sid, facet_array.slice(facetStart,8), pName, facet);
                   // setTimeout(function() { v2_restartAnytime(GLOBAL_ID) }, 7000);
         // The Description is:  "descriptive string"
         } else {
