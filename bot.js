@@ -269,6 +269,10 @@
       }
       else if (req.body.result.action === 'user-requests-more-filter-options') {
           console.log('****More on Filters is coming soon****');
+          if (req.body.result.contexts[0].parameters['more-filter-options'] == "more colors") {
+            GLOBAL_PRODUCT_COLOR_COUNT += 8;
+            facetFilter(GLOBAL_ID, "v2filter_c"+);
+          }
       }
 
       else if (req.body.result.action === 'user-filters-products') {
@@ -653,19 +657,23 @@
     //Facet filtering function
     function facetFilter(sid, pLoad){
       var facetAll = pLoad.charAt(9);
-      var pName = pLoad.slice(10);
-      var facet;
+      var pName = GLOBAL_PRODUCT_NAME;
+      var facet, facetStart;
       if(facetAll == 'g'){
         facet = 'gender';
+        facetStart = 0;
       }
       else if (facetAll == 'c') {
         facet = 'color';
+        facetStart = GLOBAL_PRODUCT_COLOR_COUNT;
       }
       else if (facetAll == 'b') {
         facet = 'brand';
+        facetStart = 0;
       }
       else if (facetAll == 's') {
         facet = 'size';
+        facetStart = 0;
       }
       facet_array.length = 0;
       var req_url = process.env.FIND_URL;
@@ -677,9 +685,9 @@
             lang= "en",
             query= pName,
             facet= facet,
-            start= 0,
+            start= facetStart,
             rows= "9";
-      var  requesting = req_url + "?apiKey=" + apiKey + "&apiClientKey=" + apiClientKey + "&userId=" + userId + "&sessionId=" + sessionId + "&placements=" + placements + "&lang=en&start=0&rows=9&query=" + query + "&filter=" + GLOBAL_PRODUCT_BRAND + "&filter=" + GLOBAL_PRODUCT_GENDER + "&filter=" + GLOBAL_PRODUCT_COLOR + "&filter=" + GLOBAL_PRODUCT_SIZE + "&facet=" + facet;
+      var  requesting = req_url + "?apiKey=" + apiKey + "&apiClientKey=" + apiClientKey + "&userId=" + userId + "&sessionId=" + sessionId + "&placements=" + placements + "&lang=en&"+ "start=" + start + "&rows=9&query=" + query + "&filter=" + GLOBAL_PRODUCT_BRAND + "&filter=" + GLOBAL_PRODUCT_GENDER + "&filter=" + GLOBAL_PRODUCT_COLOR + "&filter=" + GLOBAL_PRODUCT_SIZE + "&facet=" + facet;
         request(requesting, function (error, response, body) {
           if (!error && response.statusCode == 200) {
             //parsing the json response from RR cloud
