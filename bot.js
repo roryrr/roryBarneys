@@ -434,8 +434,42 @@
           }
           else if (derivedPayload == "v2_resetFilters") {
             GLOBAL_PRODUCT_GENDER="", GLOBAL_PRODUCT_COLOR="", GLOBAL_PRODUCT_BRAND="", GLOBAL_PRODUCT_SIZE="";
-            sendTextMessage(senderID, "filters removed");
-            setTimeout(function(){v2_sendFilters(senderID, GLOBAL_PRODUCT_NAME)}, 1000);
+            var rr_array =[];
+            // var findMyStart = Math.floor((Math.random() * 30) + 1).toString();
+            rr_array.length = 0;
+            console.log("nagma");
+            var req_url = process.env.FIND_URL;
+            var apiKey= process.env.API_KEY,
+                  apiClientKey= process.env.API_CLIENT_KEY,
+                  userId= process.env.USER_ID,
+                  sessionId= process.env.SESSION_ID,
+                  placements= process.env.PLACEMENTS_ID_FIND,
+                  lang= "en",
+                  query= GLOBAL_PRODUCT_NAME,
+                  start= 0,
+                  rows= "9";
+            var  requesting = req_url + "?apiKey=" + apiKey + "&apiClientKey=" + apiClientKey + "&userId=" + userId + "&sessionId=" + sessionId + "&placements=" + placements + "&lang=en&start=0&rows=9&query=" + query + "&filter=" + GLOBAL_PRODUCT_BRAND + "&filter=" + GLOBAL_PRODUCT_GENDER + "&filter=" + GLOBAL_PRODUCT_COLOR + "&filter=" + GLOBAL_PRODUCT_SIZE;
+            console.log(requesting);
+              request(requesting, function (error, response, body) {
+                    if (!error && response.statusCode == 200) {
+                      //parsing the json response from RR cloud
+                      body = JSON.parse(body);
+                      console.log("powerranger");
+                      console.log(GLOBAL_PRODUCT_NAME);
+                      if (body.placements[0].numFound == "0") {
+                        sendTextMessage(GLOBAL_ID, "Oops, looks like we don’t have anything that fits that description.")
+                      }
+                      else{
+                            rr_array = body.placements[0].docs;
+                            sendGenericMessageForSearch(GLOBAL_ID, rr_array);
+                            setTimeout(function() { v2_sendFilters(GLOBAL_ID, GLOBAL_PRODUCT_NAME) }, 3000);
+                            // setTimeout(function() { v2_restartAnytime(GLOBAL_ID) }, 7000);
+                          }
+                  // The Description is:  "descriptive string"
+                } else {
+                console.log('Pavan api.ai, ERROR');
+                }
+              });
           }
           else if (derivedPayload == "v2_restart") {
             GLOBAL_PRODUCT_GENDER="", GLOBAL_PRODUCT_COLOR="", GLOBAL_PRODUCT_BRAND="", GLOBAL_PRODUCT_SIZE="", GLOBAL_PRODUCT_NAME="";
