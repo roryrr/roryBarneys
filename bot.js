@@ -272,6 +272,7 @@
           console.log('****More on Filters is coming soon****');
           if (req.body.result.contexts[0].parameters['more-filter-options'] == "more colors") {
             GLOBAL_PRODUCT_COLOR_COUNT += 8;
+            console.log("Mystic preist");
             facetFilter(GLOBAL_ID, "jjjjjjjj_c");
           }
       }
@@ -695,7 +696,7 @@
           if (!error && response.statusCode == 200) {
             //parsing the json response from RR cloud
             body = JSON.parse(body);
-            console.log("powerranger");
+            console.log("powerranger tori");
             facet_array = body.placements[0].facets[0].values;
             sendFacetOptions(sid, facet_array.slice(facetStart,8), pName, facet);
                   // setTimeout(function() { v2_restartAnytime(GLOBAL_ID) }, 7000);
