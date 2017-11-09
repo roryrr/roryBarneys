@@ -713,11 +713,27 @@
            });
       });
       if (facet !== "gender") {
-        itemList.push({
-            content_type:"text",
-            title: "more "+ facet + " s",
-            payload: "more "+ facet + " s"
-          });
+        if (facet == "color" && !GLOBAL_PRODUCT_COLOR) {
+          itemList.push({
+              content_type:"text",
+              title: "more "+ facet + "s",
+              payload: "more "+ facet + "s"
+            });
+        }
+        else if (facet == "brand" && !GLOBAL_PRODUCT_BRAND) {
+          itemList.push({
+              content_type:"text",
+              title: "more "+ facet + "s",
+              payload: "more "+ facet + "s"
+            });
+        }
+        else if (facet == "size" && !GLOBAL_PRODUCT_SIZE) {
+          itemList.push({
+              content_type:"text",
+              title: "more "+ facet + "s",
+              payload: "more "+ facet + "s"
+            });
+        }
       }
 
       console.log("dabang");
