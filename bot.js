@@ -492,6 +492,7 @@
         else if(message.quick_reply && (message.quick_reply["payload"]).match(/(v2filter_)/g)){
           var derivedPayload = message.quick_reply["payload"];
           facetFilter(senderID, derivedPayload);
+          console.log("message and payload for filter");
         }
         else if (message.quick_reply && (message.quick_reply["payload"]).match(/(sendFilters)/g)) {
           var derivedPayload = message.quick_reply["payload"];
