@@ -495,6 +495,7 @@
         }
         else {
         console.log("normal message");
+        console.log("api.ai invoked" + messageText);
         let apiai = apiaiApp.textRequest(messageText, {
             sessionId: 'tabby_cat', // use any arbitrary id
             contexts: [
