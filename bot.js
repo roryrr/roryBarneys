@@ -767,7 +767,7 @@
       callSendAPI(messageData);
       }
       else {
-        sendTextMessage(recipientId, "Oops, no items found. Try with a differnt search criteria.");
+        sendTextMessage(recipientId, "Oops, no items found. Try with a differnt search criteria. here!");
       }
     }
     function sendLoginOption(recipientId){
