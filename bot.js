@@ -816,6 +816,7 @@
       recipient:{
         id: recipientId
       },
+      sender_action: "mark_seen",
       message:{
         text: "Hey! What would you like to do? You can choose an option from below or type in a text like 'I am looking for shoes'",
         quick_replies:[
