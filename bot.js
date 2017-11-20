@@ -543,7 +543,7 @@
         } else if (messageAttachments) {
           sendTextMessage(senderID, "Message with attachment received");
         }
-      }, 2000);
+      }, 1000);
     }
     function receivedPostback(event) {
       var senderID = event.sender.id;
@@ -646,7 +646,7 @@
         else if (payload.match(/(pairIt)/g)) {
           callRrApi(senderID, payload);
         }
-      }, 2000);
+      }, 1000);
 }
     //////////////////////////
     // Sending helpers
