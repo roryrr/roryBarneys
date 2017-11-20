@@ -1558,7 +1558,7 @@
         recipient: {
           id: recipientId
         },
-        sender_action: "mark_seen"
+        sender_action: "typing_on"
       };
       callSendAPI(messageData);
     }
