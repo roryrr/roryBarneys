@@ -543,7 +543,7 @@
         } else if (messageAttachments) {
           sendTextMessage(senderID, "Message with attachment received");
         }
-      }, 1000);
+      }, 2000);
     }
     function receivedPostback(event) {
       var senderID = event.sender.id;
@@ -646,7 +646,7 @@
         else if (payload.match(/(pairIt)/g)) {
           callRrApi(senderID, payload);
         }
-      }, 1000);
+      }, 2000);
 }
     //////////////////////////
     // Sending helpers
@@ -1558,7 +1558,7 @@
         recipient: {
           id: recipientId
         },
-        sender_action: "mark_seen"
+        sender_action: "typing_on"
       };
       callSendAPI(messageData);
     }
