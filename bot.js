@@ -69,7 +69,6 @@
 
           // Iterate over each messaging event
           entry.messaging.forEach(function(event) {
-            seenMessage(event.sender.id);
                 if (event.message) {
                   if (event.message.is_echo) {
                     console.log("I caught you");
@@ -408,6 +407,7 @@
       var timeOfMessage = event.timestamp;
       var message = event.message;
       GLOBAL_ID = senderID;
+      seenMessage(senderID);
       console.log("Received message for urmila user %d and page %d at %d with message:",
         senderID, recipientID, timeOfMessage);
       console.log(JSON.stringify(message));
@@ -520,6 +520,7 @@
             // Got a response from api.ai. Let's POST to Facebook Messenger
             let aiText = response.result.fulfillment.speech;
             var messageData = {
+              messaging_type: 'RESPONSE',
               recipient: {
                 id: senderID
               },
@@ -546,7 +547,7 @@
       var senderID = event.sender.id;
       var recipientID = event.recipient.id;
       var timeOfPostback = event.timestamp;
-
+      seenMessage(senderID);
       // The 'payload' param is a developer-defined field which is set in a postback
       // button for Structured Messages.
       var payload = event.postback.payload;
@@ -577,6 +578,7 @@
             // Got a response from api.ai. Let's POST to Facebook Messenger
             let aiText = response.result.fulfillment.speech;
             var messageData = {
+              messaging_type: 'RESPONSE',
               recipient: {
                 id: senderID
               },
@@ -647,6 +649,7 @@
     //////////////////////////
     function sendTextMessage(recipientId, messageText) {
       var messageData = {
+        messaging_type: 'RESPONSE',
         recipient: {
           id: recipientId
         },
@@ -762,6 +765,7 @@
       console.log(recipientId);
 
       var messageData = {
+        messaging_type: 'RESPONSE',
         recipient: {
           id: recipientId
         },
@@ -779,6 +783,7 @@
     }
     function sendLoginOption(recipientId){
       var messageData = {
+        messaging_type: 'RESPONSE',
         recipient: {
           id: recipientId
         },
@@ -815,6 +820,7 @@
     //Quick replies on start
     function v2_initialOptions(recipientId){
       var messageData = {
+      messaging_type: 'RESPONSE',
       recipient:{
         id: recipientId
       },
@@ -849,6 +855,7 @@
     //Quick replies on Just looking option
     function v2_justLooking(recipientId){
       var messageData = {
+      messaging_type: 'RESPONSE',
       recipient:{
         id: recipientId
       },
@@ -880,6 +887,7 @@
     //when the user chooses to search products
     function v2_showFindList(recipientId) {
       var messageData = {
+      messaging_type: 'RESPONSE',
       recipient:{
         id: recipientId
       },
@@ -932,6 +940,7 @@
     //sending categories
     function v2_sendCategories(recipientId){
       var messageData = {
+      messaging_type: 'RESPONSE',
       recipient:{
         id: recipientId
       },
@@ -978,6 +987,7 @@
     //sending categories
     function v2_sendFilters(recipientId, pName){
       var messageData = {
+      messaging_type: 'RESPONSE',
       recipient:{
         id: recipientId
       },
@@ -1024,6 +1034,7 @@
     //function to send restart button and tips
     function v2_restartAnytime(recipientId){
       var messageData = {
+      messaging_type: 'RESPONSE',
       recipient:{
         id: recipientId
       },
@@ -1052,6 +1063,7 @@
     //sending basic menu
     function sendAvailableOptionList(recipientId) {
       var messageData = {
+        messaging_type: 'RESPONSE',
         recipient: {
           id: recipientId
         },
@@ -1092,6 +1104,7 @@
       //Sending categories options
       function sendCategoryOptions(recipientId) {
         var messageData = {
+          messaging_type: 'RESPONSE',
           recipient: {
             id: recipientId
           },
@@ -1189,6 +1202,7 @@
       console.log("dabang");
       console.log(recipientId);
       var messageData = {
+        messaging_type: 'RESPONSE',
         recipient: {
           id: recipientId
         },
@@ -1255,6 +1269,7 @@
       );
       console.log("shahrukh");
         var messageData = {
+          messaging_type: 'RESPONSE',
           recipient: {
             id: recipientId
           },
@@ -1307,6 +1322,7 @@
     });
     console.log("dabang");
       var messageData = {
+        messaging_type: 'RESPONSE',
         recipient: {
           id: recipientId
         },
@@ -1534,6 +1550,7 @@
     function seenMessage(recipientId){
       console.log("Seen messageData");
       var messageData = {
+        messaging_type: 'RESPONSE',
         recipient: {
           id: recipientId
         },
@@ -1563,7 +1580,7 @@
           console.error("Unable to send message.");
           // console.error(response);
           console.log("the seperator");
-          console.error(error);
+          console.log(error);
         }
       });
     }
