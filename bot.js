@@ -816,30 +816,7 @@
       recipient:{
         id: recipientId
       },
-      sender_action: "mark_seen",
-      message:{
-        text: "Hey! What would you like to do? You can choose an option from below or type in a text like 'I am looking for shoes'",
-        quick_replies:[
-          {
-            content_type:"text",
-            title:"Find it",
-            payload:"v2_find",
-            image_url:"https://png.icons8.com/search/color/24"
-          },
-          {
-            content_type:"text",
-            title:"Just looking",
-            payload:"v2_discover",
-            image_url:"https://png.icons8.com/internet/dusk/24"
-          },
-          {
-            content_type:"text",
-            title:"See favorites",
-            payload:"v2_favorites",
-            image_url:"https://png.icons8.com/love/color/24"
-          }
-        ]
-      }
+      sender_action: "mark_seen"
     };
     callSendAPI(messageData);
     }
