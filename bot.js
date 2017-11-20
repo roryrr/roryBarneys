@@ -70,6 +70,7 @@
           // Iterate over each messaging event
           entry.messaging.forEach(function(event) {
                 if (event.message) {
+                  seenMessage();
                   if (event.message.is_echo) {
                     console.log("I caught you");
                   }
@@ -526,7 +527,7 @@
                 text: aiText
               }
             };
-            seenMessage();
+            // seenMessage();
             // callSendAPI(messageData);
           });
 
@@ -583,7 +584,7 @@
                 text: aiText
               }
             };
-            seenMessage();
+            // seenMessage();
             // callSendAPI(messageData);
           });
 
@@ -653,7 +654,7 @@
           text: messageText
         }
       };
-      seenMessage();
+      // seenMessage();
       // callSendAPI(messageData);
     }
 
@@ -769,7 +770,7 @@
           quick_replies: itemList
         }
       };
-      seenMessage();
+      // seenMessage();
       // callSendAPI(messageData);
       }
       else {
@@ -808,7 +809,7 @@
           }
         }
       };
-      seenMessage();
+      // seenMessage();
         // callSendAPI(messageData);
     }
     //Quick replies on start
@@ -841,7 +842,7 @@
         ]
       }
     };
-    seenMessage();
+    // seenMessage();
     // callSendAPI(messageData);
     }
 
@@ -873,7 +874,7 @@
         ]
       }
     };
-    seenMessage();
+    // seenMessage();
     // callSendAPI(messageData);
     }
     //when the user chooses to search products
@@ -924,7 +925,7 @@
         ]
       }
     };
-    seenMessage();
+    // seenMessage();
     // callSendAPI(messageData);
     }
 
@@ -970,7 +971,7 @@
         ]
       }
     };
-    seenMessage();
+    // seenMessage();
     // callSendAPI(messageData);
     }
 
@@ -1016,7 +1017,7 @@
         ]
       }
     };
-    seenMessage();
+    // seenMessage();
     // callSendAPI(messageData);
     }
 
@@ -1044,7 +1045,7 @@
         ]
       }
     };
-    seenMessage();
+    // seenMessage();
     // callSendAPI(messageData);
     }
 
@@ -1084,7 +1085,7 @@
           }
         }
       };
-      seenMessage();
+      // seenMessage();
         // callSendAPI(messageData);
       }
 
@@ -1146,7 +1147,7 @@
             }
           }
         };
-        seenMessage();
+        // seenMessage();
           // callSendAPI(messageData);
         }
 
@@ -1202,7 +1203,7 @@
           }
         }
       };
-      seenMessage();
+      // seenMessage();
       // callSendAPI(messageData);
       }
       else {
@@ -1268,7 +1269,7 @@
             }
           }
         };
-        seenMessage();
+        // seenMessage();
         // callSendAPI(messageData);
       }
       else {
@@ -1320,7 +1321,7 @@
           }
         }
       };
-      seenMessage();
+      // seenMessage();
       // callSendAPI(messageData);
     }
     //block that makes a call to RR api
