@@ -169,7 +169,7 @@
         productCountStart = 0;
         GLOBAL_PRODUCT_GENDER="", GLOBAL_PRODUCT_COLOR="", GLOBAL_PRODUCT_NAME="", GLOBAL_PRODUCT_BRAND="", GLOBAL_PRODUCT_SIZE="";
         GLOBAL_PRODUCT_GENDER = req.body.result.parameters['user-gender'];
-        GLOBAL_PRODUCT_COLOR = req.body.result.parameters['color'].capitalize();
+        GLOBAL_PRODUCT_COLOR = req.body.result.parameters['product-color'].capitalize();
         GLOBAL_PRODUCT_BRAND = req.body.result.parameters['brand'];
         GLOBAL_PRODUCT_SIZE = req.body.result.parameters['user-size'];
         if (req.body.result.parameters['product-name']) {
@@ -187,8 +187,8 @@
         if (req.body.result.parameters['user-gender']) {
             GLOBAL_PRODUCT_GENDER = 'gender:\"'+req.body.result.parameters['user-gender']+'\"';
         }
-        if (req.body.result.parameters['color']) {
-            GLOBAL_PRODUCT_COLOR = 'color:\"'+(req.body.result.parameters['color'].capitalize())+'\"';
+        if (req.body.result.parameters['product-color']) {
+            GLOBAL_PRODUCT_COLOR = 'color:\"'+(req.body.result.parameters['product-color'].capitalize())+'\"';
         }
         var rr_array =[];
         // var findMyStart = Math.floor((Math.random() * 30) + 1).toString();
@@ -322,8 +322,8 @@
         else {
           GLOBAL_PRODUCT_GENDER=GLOBAL_PRODUCT_GENDER;
         }
-        if (req.body.result.contexts[0].parameters['color']) {
-            GLOBAL_PRODUCT_COLOR = 'color:\"'+(req.body.result.contexts[0].parameters['color'].capitalize())+'\"';
+        if (req.body.result.contexts[0].parameters['product-color']) {
+            GLOBAL_PRODUCT_COLOR = 'color:\"'+(req.body.result.contexts[0].parameters['product-color'].capitalize())+'\"';
         }
         else {
           GLOBAL_PRODUCT_COLOR=GLOBAL_PRODUCT_COLOR;
