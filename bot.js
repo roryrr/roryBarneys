@@ -1531,6 +1531,7 @@
                       }
 
     function seenMessage(){
+      console.log("Seen messageData");
       var messageData = {
         recipient: {
           id: GLOBAL_ID
