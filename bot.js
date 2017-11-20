@@ -838,8 +838,7 @@
             image_url:"https://png.icons8.com/love/color/24"
           }
         ]
-      },
-      sender_action: "mark_seen"
+      }
     };
     callSendAPI(messageData);
     }
