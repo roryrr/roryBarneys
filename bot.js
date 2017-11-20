@@ -69,8 +69,8 @@
 
           // Iterate over each messaging event
           entry.messaging.forEach(function(event) {
+            seenMessage(event.sender.id);
                 if (event.message) {
-                  seenMessage();
                   if (event.message.is_echo) {
                     console.log("I caught you");
                   }
@@ -1531,11 +1531,11 @@
                   //       });
                       }
 
-    function seenMessage(){
+    function seenMessage(recipientId){
       console.log("Seen messageData");
       var messageData = {
         recipient: {
-          id: GLOBAL_ID
+          id: recipientId
         },
         sender_action: "mark_seen"
       };
