@@ -418,130 +418,132 @@
 
       var messageText = message.text;
       var messageAttachments = message.attachments;
-      if (messageText) {
-        // If we receive a text message, check to see if it matches a keyword
-        // and send back the template example. Otherwise, just echo the text we received.
-        if(message.quick_reply && (message.quick_reply["payload"]).match(/(v2_)/g)){
-          var derivedPayload = message.quick_reply["payload"];
-          if (derivedPayload == "v2_find") {
-            v2_showFindList(senderID);
-          }
-          else if (derivedPayload == "v2_favorites") {
-            returnFavList(senderID);
-          }
-          else if (derivedPayload == "v2_discover") {
-            v2_justLooking(senderID);
-          }
-          else if (derivedPayload == "v2_category") {
-            v2_sendCategories(senderID);
-          }
-          else if (derivedPayload == "v2_brand") {
-            sendTextMessage(senderID, "Type in a brand you're looking for");
-          }
-          else if (derivedPayload == "v2_youChoose") {
-            callRrApi(senderID, "default");
-          }
-          else if (derivedPayload == "v2_resetFilters") {
-            GLOBAL_PRODUCT_GENDER="", GLOBAL_PRODUCT_COLOR="", GLOBAL_PRODUCT_BRAND="", GLOBAL_PRODUCT_SIZE="";
-            var rr_array =[];
-            // var findMyStart = Math.floor((Math.random() * 30) + 1).toString();
-            rr_array.length = 0;
-            console.log("nagma");
-            var req_url = process.env.FIND_URL;
-            var apiKey= process.env.API_KEY,
-                  apiClientKey= process.env.API_CLIENT_KEY,
-                  userId= process.env.USER_ID,
-                  sessionId= process.env.SESSION_ID,
-                  placements= process.env.PLACEMENTS_ID_FIND,
-                  lang= "en",
-                  query= GLOBAL_PRODUCT_NAME,
-                  start= 0,
-                  rows= "9";
-            var  requesting = req_url + "?apiKey=" + apiKey + "&apiClientKey=" + apiClientKey + "&userId=" + userId + "&sessionId=" + sessionId + "&placements=" + placements + "&lang=en&start=0&rows=9&query=" + query + "&filter=" + GLOBAL_PRODUCT_BRAND + "&filter=" + GLOBAL_PRODUCT_GENDER + "&filter=" + GLOBAL_PRODUCT_COLOR + "&filter=" + GLOBAL_PRODUCT_SIZE;
-            console.log(requesting);
-              request(requesting, function (error, response, body) {
-                    if (!error && response.statusCode == 200) {
-                      //parsing the json response from RR cloud
-                      body = JSON.parse(body);
-                      console.log("powerranger");
-                      console.log(GLOBAL_PRODUCT_NAME);
-                      if (body.placements[0].numFound == "0") {
-                        sendTextMessage(GLOBAL_ID, "Oops, looks like we don’t have anything that fits that description.")
-                      }
-                      else{
-                            rr_array = body.placements[0].docs;
-                            sendGenericMessageForSearch(GLOBAL_ID, rr_array);
-                            setTimeout(function() { v2_sendFilters(GLOBAL_ID, GLOBAL_PRODUCT_NAME) }, 3000);
-                            // setTimeout(function() { v2_restartAnytime(GLOBAL_ID) }, 7000);
-                          }
-                  // The Description is:  "descriptive string"
-                } else {
-                console.log('Pavan api.ai, ERROR 6');
-                }
-              });
-          }
-          else if (derivedPayload == "v2_restart") {
-            GLOBAL_PRODUCT_GENDER="", GLOBAL_PRODUCT_COLOR="", GLOBAL_PRODUCT_BRAND="", GLOBAL_PRODUCT_SIZE="", GLOBAL_PRODUCT_NAME="";
-            v2_initialOptions(senderID);
-          }
-          else if (derivedPayload == "v2_tips") {
-            sendTextMessage(senderID, "-Type keywords to find items: e.g. 'shoes’/‘Gucci'/'Show me suits'\n-Type ‘favorites’ to bring up the favorites list\n-Hit the Restart button to return to the main menu");
-            // setTimeout(function() { v2_restartAnytime(senderID) }, 7000);
-          }
-          else if (derivedPayload.match(/(v2_BNY-)/g)) {
-            callRrApi(senderID, derivedPayload.slice(3));
-          }
-        }
-        else if(message.quick_reply && (message.quick_reply["payload"]).match(/(v2filter_)/g)){
-          var derivedPayload = message.quick_reply["payload"];
-          facetFilter(senderID, derivedPayload);
-          console.log("message and payload for filter");
-        }
-        else if (message.quick_reply && (message.quick_reply["payload"]).match(/(sendFilters)/g)) {
-          var derivedPayload = message.quick_reply["payload"];
-          v2_sendFilters(senderID, derivedPayload.slice(11));
-        }
-        else {
-        console.log("normal message");
-        console.log("api.ai invoked" + messageText);
-        let apiai = apiaiApp.textRequest(messageText, {
-            sessionId: 'tabby_cat', // use any arbitrary id
-            contexts: [
-              {
-                name: "generic",
-                parameters: {
-                facebook_user_id: senderID
+      setTimeout(function() {
+        if (messageText) {
+          // If we receive a text message, check to see if it matches a keyword
+          // and send back the template example. Otherwise, just echo the text we received.
+          if(message.quick_reply && (message.quick_reply["payload"]).match(/(v2_)/g)){
+            var derivedPayload = message.quick_reply["payload"];
+            if (derivedPayload == "v2_find") {
+              v2_showFindList(senderID);
+            }
+            else if (derivedPayload == "v2_favorites") {
+              returnFavList(senderID);
+            }
+            else if (derivedPayload == "v2_discover") {
+              v2_justLooking(senderID);
+            }
+            else if (derivedPayload == "v2_category") {
+              v2_sendCategories(senderID);
+            }
+            else if (derivedPayload == "v2_brand") {
+              sendTextMessage(senderID, "Type in a brand you're looking for");
+            }
+            else if (derivedPayload == "v2_youChoose") {
+              callRrApi(senderID, "default");
+            }
+            else if (derivedPayload == "v2_resetFilters") {
+              GLOBAL_PRODUCT_GENDER="", GLOBAL_PRODUCT_COLOR="", GLOBAL_PRODUCT_BRAND="", GLOBAL_PRODUCT_SIZE="";
+              var rr_array =[];
+              // var findMyStart = Math.floor((Math.random() * 30) + 1).toString();
+              rr_array.length = 0;
+              console.log("nagma");
+              var req_url = process.env.FIND_URL;
+              var apiKey= process.env.API_KEY,
+                    apiClientKey= process.env.API_CLIENT_KEY,
+                    userId= process.env.USER_ID,
+                    sessionId= process.env.SESSION_ID,
+                    placements= process.env.PLACEMENTS_ID_FIND,
+                    lang= "en",
+                    query= GLOBAL_PRODUCT_NAME,
+                    start= 0,
+                    rows= "9";
+              var  requesting = req_url + "?apiKey=" + apiKey + "&apiClientKey=" + apiClientKey + "&userId=" + userId + "&sessionId=" + sessionId + "&placements=" + placements + "&lang=en&start=0&rows=9&query=" + query + "&filter=" + GLOBAL_PRODUCT_BRAND + "&filter=" + GLOBAL_PRODUCT_GENDER + "&filter=" + GLOBAL_PRODUCT_COLOR + "&filter=" + GLOBAL_PRODUCT_SIZE;
+              console.log(requesting);
+                request(requesting, function (error, response, body) {
+                      if (!error && response.statusCode == 200) {
+                        //parsing the json response from RR cloud
+                        body = JSON.parse(body);
+                        console.log("powerranger");
+                        console.log(GLOBAL_PRODUCT_NAME);
+                        if (body.placements[0].numFound == "0") {
+                          sendTextMessage(GLOBAL_ID, "Oops, looks like we don’t have anything that fits that description.")
+                        }
+                        else{
+                              rr_array = body.placements[0].docs;
+                              sendGenericMessageForSearch(GLOBAL_ID, rr_array);
+                              setTimeout(function() { v2_sendFilters(GLOBAL_ID, GLOBAL_PRODUCT_NAME) }, 3000);
+                              // setTimeout(function() { v2_restartAnytime(GLOBAL_ID) }, 7000);
+                            }
+                    // The Description is:  "descriptive string"
+                  } else {
+                  console.log('Pavan api.ai, ERROR 6');
+                  }
+                });
+            }
+            else if (derivedPayload == "v2_restart") {
+              GLOBAL_PRODUCT_GENDER="", GLOBAL_PRODUCT_COLOR="", GLOBAL_PRODUCT_BRAND="", GLOBAL_PRODUCT_SIZE="", GLOBAL_PRODUCT_NAME="";
+              v2_initialOptions(senderID);
+            }
+            else if (derivedPayload == "v2_tips") {
+              sendTextMessage(senderID, "-Type keywords to find items: e.g. 'shoes’/‘Gucci'/'Show me suits'\n-Type ‘favorites’ to bring up the favorites list\n-Hit the Restart button to return to the main menu");
+              // setTimeout(function() { v2_restartAnytime(senderID) }, 7000);
+            }
+            else if (derivedPayload.match(/(v2_BNY-)/g)) {
+              callRrApi(senderID, derivedPayload.slice(3));
             }
           }
-          ]
-          });
-
-          apiai.on('response', (response) => {
-            // Got a response from api.ai. Let's POST to Facebook Messenger
-            let aiText = response.result.fulfillment.speech;
-            var messageData = {
-              messaging_type: 'RESPONSE',
-              recipient: {
-                id: senderID
-              },
-              message: {
-                text: aiText
+          else if(message.quick_reply && (message.quick_reply["payload"]).match(/(v2filter_)/g)){
+            var derivedPayload = message.quick_reply["payload"];
+            facetFilter(senderID, derivedPayload);
+            console.log("message and payload for filter");
+          }
+          else if (message.quick_reply && (message.quick_reply["payload"]).match(/(sendFilters)/g)) {
+            var derivedPayload = message.quick_reply["payload"];
+            v2_sendFilters(senderID, derivedPayload.slice(11));
+          }
+          else {
+          console.log("normal message");
+          console.log("api.ai invoked" + messageText);
+          let apiai = apiaiApp.textRequest(messageText, {
+              sessionId: 'tabby_cat', // use any arbitrary id
+              contexts: [
+                {
+                  name: "generic",
+                  parameters: {
+                  facebook_user_id: senderID
               }
-            };
-            // seenMessage();
-            callSendAPI(messageData);
-          });
+            }
+            ]
+            });
 
-          apiai.on('error', (error) => {
-            console.log("Pikachu" + error);
-          });
+            apiai.on('response', (response) => {
+              // Got a response from api.ai. Let's POST to Facebook Messenger
+              let aiText = response.result.fulfillment.speech;
+              var messageData = {
+                messaging_type: 'RESPONSE',
+                recipient: {
+                  id: senderID
+                },
+                message: {
+                  text: aiText
+                }
+              };
+              // seenMessage();
+              callSendAPI(messageData);
+            });
 
-          apiai.end();
+            apiai.on('error', (error) => {
+              console.log("Pikachu" + error);
+            });
+
+            apiai.end();
+          }
+          // callFindApi(senderID, messageText);
+        } else if (messageAttachments) {
+          sendTextMessage(senderID, "Message with attachment received");
         }
-        // callFindApi(senderID, messageText);
-      } else if (messageAttachments) {
-        sendTextMessage(senderID, "Message with attachment received");
-      }
+      }, 2000);
     }
     function receivedPostback(event) {
       var senderID = event.sender.id;
@@ -557,92 +559,94 @@
 
       // When a postback is called, we'll send a message back to the sender to
       // let them know it was successful
-      if(payload == 'start'){
-      v2_initialOptions(senderID);
-      }
-      else if (payload == 'showMoreItem') {
-        console.log("show more item message");
-        let apiai = apiaiApp.textRequest("see more items", {
-            sessionId: 'tabby_cat', // use any arbitrary id
-            contexts: [
-              {
-                name: "generic",
-                parameters: {
-                facebook_user_id: senderID
-            }
-          }
-          ]
-          });
-
-          apiai.on('response', (response) => {
-            // Got a response from api.ai. Let's POST to Facebook Messenger
-            let aiText = response.result.fulfillment.speech;
-            var messageData = {
-              messaging_type: 'RESPONSE',
-              recipient: {
-                id: senderID
-              },
-              message: {
-                text: aiText
+      setTimeout(function() {
+        if(payload == 'start'){
+        v2_initialOptions(senderID);
+        }
+        else if (payload == 'showMoreItem') {
+          console.log("show more item message");
+          let apiai = apiaiApp.textRequest("see more items", {
+              sessionId: 'tabby_cat', // use any arbitrary id
+              contexts: [
+                {
+                  name: "generic",
+                  parameters: {
+                  facebook_user_id: senderID
               }
-            };
-            // seenMessage();
-            callSendAPI(messageData);
-          });
+            }
+            ]
+            });
 
-          apiai.on('error', (error) => {
-            console.log("Pikachu" + error);
-          });
+            apiai.on('response', (response) => {
+              // Got a response from api.ai. Let's POST to Facebook Messenger
+              let aiText = response.result.fulfillment.speech;
+              var messageData = {
+                messaging_type: 'RESPONSE',
+                recipient: {
+                  id: senderID
+                },
+                message: {
+                  text: aiText
+                }
+              };
+              // seenMessage();
+              callSendAPI(messageData);
+            });
 
-          apiai.end();
-      }
-      else if (payload == 'browse') {
-        sendCategoryOptions(senderID);
-      }
-      else if (payload == 'bye') {
-        sayGoodBye(senderID);
-      }
-      else if (payload == 'v3_findIt') {
-        v2_showFindList(senderID);
-      }
-      else if (payload == 'v3_justLooking') {
-        v2_justLooking(senderID);
-      }
-      else if (payload == "v3_favorites") {
-        returnFavList(senderID);
-      }
-      else if (payload == 'v3_tips') {
-        sendTextMessage(senderID, "-Type keywords to find items: e.g. 'shoes’/‘Gucci'/'Show me suits'\n-Type ‘favorites’ to bring up the favorites list\n-Hit the Restart button to return to the main menu");
-        // setTimeout(function() { v2_restartAnytime(senderID) }, 7000);
-      }
-      else if (payload == 'v3_inspireMe') {
-        sendTextMessage(senderID, "Enter a text like 'I am looking for shirt'");
-      }
-      else if (payload.match(/(BNY-)/g)) {
-        callRrApi(senderID, payload);
-      }
-      else if (payload == 'guest') {
-        sendAvailableOptionList(senderID);
-      }
-      else if (payload.match(/(similar)/g)) {
-        callRrApi(senderID, payload);
-      }
-      else if (payload.match(/(fav)/g)) {
-        console.log("Anushka %s", payload);
-        callRrFavApi(senderID, payload);
-      }
-      else if (payload == 'fvList') {
-        returnFavList(senderID);
-      }
-      else if (payload == 'v2_find') {
-        v2_showFindList(senderID);
-      }
-      else if (payload.match(/(removeFav)/g)) {
-        callRrFavApi(senderID, payload);
-      }
-      else if (payload.match(/(pairIt)/g)) {
-        callRrApi(senderID, payload);
-      }
+            apiai.on('error', (error) => {
+              console.log("Pikachu" + error);
+            });
+
+            apiai.end();
+        }
+        else if (payload == 'browse') {
+          sendCategoryOptions(senderID);
+        }
+        else if (payload == 'bye') {
+          sayGoodBye(senderID);
+        }
+        else if (payload == 'v3_findIt') {
+          v2_showFindList(senderID);
+        }
+        else if (payload == 'v3_justLooking') {
+          v2_justLooking(senderID);
+        }
+        else if (payload == "v3_favorites") {
+          returnFavList(senderID);
+        }
+        else if (payload == 'v3_tips') {
+          sendTextMessage(senderID, "-Type keywords to find items: e.g. 'shoes’/‘Gucci'/'Show me suits'\n-Type ‘favorites’ to bring up the favorites list\n-Hit the Restart button to return to the main menu");
+          // setTimeout(function() { v2_restartAnytime(senderID) }, 7000);
+        }
+        else if (payload == 'v3_inspireMe') {
+          sendTextMessage(senderID, "Enter a text like 'I am looking for shirt'");
+        }
+        else if (payload.match(/(BNY-)/g)) {
+          callRrApi(senderID, payload);
+        }
+        else if (payload == 'guest') {
+          sendAvailableOptionList(senderID);
+        }
+        else if (payload.match(/(similar)/g)) {
+          callRrApi(senderID, payload);
+        }
+        else if (payload.match(/(fav)/g)) {
+          console.log("Anushka %s", payload);
+          callRrFavApi(senderID, payload);
+        }
+        else if (payload == 'fvList') {
+          returnFavList(senderID);
+        }
+        else if (payload == 'v2_find') {
+          v2_showFindList(senderID);
+        }
+        else if (payload.match(/(removeFav)/g)) {
+          callRrFavApi(senderID, payload);
+        }
+        else if (payload.match(/(pairIt)/g)) {
+          callRrApi(senderID, payload);
+        }
+      }, 2000);
 }
     //////////////////////////
     // Sending helpers
