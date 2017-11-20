@@ -528,7 +528,7 @@
               }
             };
             // seenMessage();
-            // callSendAPI(messageData);
+            callSendAPI(messageData);
           });
 
           apiai.on('error', (error) => {
@@ -585,7 +585,7 @@
               }
             };
             // seenMessage();
-            // callSendAPI(messageData);
+            callSendAPI(messageData);
           });
 
           apiai.on('error', (error) => {
@@ -655,7 +655,7 @@
         }
       };
       // seenMessage();
-      // callSendAPI(messageData);
+      callSendAPI(messageData);
     }
 
     //Facet filtering function
@@ -771,7 +771,7 @@
         }
       };
       // seenMessage();
-      // callSendAPI(messageData);
+      callSendAPI(messageData);
       }
       else {
         sendTextMessage(recipientId, "Oops, no items found. Try with a differnt search criteria. here!");
@@ -810,7 +810,7 @@
         }
       };
       // seenMessage();
-        // callSendAPI(messageData);
+        callSendAPI(messageData);
     }
     //Quick replies on start
     function v2_initialOptions(recipientId){
@@ -843,7 +843,7 @@
       }
     };
     // seenMessage();
-    // callSendAPI(messageData);
+    callSendAPI(messageData);
     }
 
     //Quick replies on Just looking option
@@ -875,7 +875,7 @@
       }
     };
     // seenMessage();
-    // callSendAPI(messageData);
+    callSendAPI(messageData);
     }
     //when the user chooses to search products
     function v2_showFindList(recipientId) {
@@ -926,7 +926,7 @@
       }
     };
     // seenMessage();
-    // callSendAPI(messageData);
+    callSendAPI(messageData);
     }
 
     //sending categories
@@ -972,7 +972,7 @@
       }
     };
     // seenMessage();
-    // callSendAPI(messageData);
+    callSendAPI(messageData);
     }
 
     //sending categories
@@ -1018,7 +1018,7 @@
       }
     };
     // seenMessage();
-    // callSendAPI(messageData);
+    callSendAPI(messageData);
     }
 
     //function to send restart button and tips
@@ -1046,7 +1046,7 @@
       }
     };
     // seenMessage();
-    // callSendAPI(messageData);
+    callSendAPI(messageData);
     }
 
     //sending basic menu
@@ -1086,7 +1086,7 @@
         }
       };
       // seenMessage();
-        // callSendAPI(messageData);
+        callSendAPI(messageData);
       }
 
       //Sending categories options
@@ -1148,7 +1148,7 @@
           }
         };
         // seenMessage();
-          // callSendAPI(messageData);
+          callSendAPI(messageData);
         }
 
     function sendGenericMessage(recipientId, arrayHere) {
@@ -1204,7 +1204,7 @@
         }
       };
       // seenMessage();
-      // callSendAPI(messageData);
+      callSendAPI(messageData);
       }
       else {
         sendTextMessage(recipientId, "Oops, no items found. Try with a differnt search criteria.");
@@ -1270,7 +1270,7 @@
           }
         };
         // seenMessage();
-        // callSendAPI(messageData);
+        callSendAPI(messageData);
       }
       else {
         sendTextMessage(recipientId, "Oops, no items found. Try with a differnt search criteria.");
@@ -1322,7 +1322,7 @@
         }
       };
       // seenMessage();
-      // callSendAPI(messageData);
+      callSendAPI(messageData);
     }
     //block that makes a call to RR api
     function callRrApi(sid, queryString){
