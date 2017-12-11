@@ -131,7 +131,7 @@
       else if (req.body.result.action === 'site-wide-general-top') {
         var rr_array =[];
         rr_array.length = 0;
-        console.log("nagma");
+
         var req_url = process.env.STAGING_URL;
         var queryParameters = { apiKey: process.env.API_KEY,
               apiClientKey: process.env.API_CLIENT_KEY,
@@ -159,7 +159,7 @@
                         // setTimeout(function() { v2_restartAnytime(GLOBAL_ID) }, 7000);
                   // The Description is:  "descriptive string"
                 } else {
-                console.log('Pavan api.ai, ERROR 1');
+                console.log(' api.ai, ERROR 1');
                 }
               });
       }
@@ -193,7 +193,7 @@
         var rr_array =[];
         // var findMyStart = Math.floor((Math.random() * 30) + 1).toString();
         rr_array.length = 0;
-        console.log("nagma");
+
         var req_url = process.env.FIND_URL;
         var apiKey= process.env.API_KEY,
               apiClientKey= process.env.API_CLIENT_KEY,
@@ -210,7 +210,7 @@
                 if (!error && response.statusCode == 200) {
                   //parsing the json response from RR cloud
                   body = JSON.parse(body);
-                  console.log("powerranger");
+
                   console.log(GLOBAL_PRODUCT_NAME);
                   if (body.placements[0].numFound == "0") {
                     sendTextMessage(GLOBAL_ID, "Oops, looks like we don’t have anything that fits that description.")
@@ -223,18 +223,18 @@
                       }
               // The Description is:  "descriptive string"
             } else {
-            console.log('Pavan api.ai, ERROR 2');
+            console.log(' api.ai, ERROR 2');
             }
           });
       }
       else if (req.body.result.action === 'user-searches-more-products') {
         console.log('****List is coming soon****');
-        console.log(req.body.result.contexts[0].parameters['product-name'] + " sultan");
+        console.log(req.body.result.contexts[0].parameters['product-name']);
         productCountStart += 9;
         console.log("The product count start is %d", productCountStart);
         var rr_array =[];
         rr_array.length = 0;
-        console.log("nagma");
+
         var req_url = process.env.FIND_URL;
         var apiKey= process.env.API_KEY,
               apiClientKey= process.env.API_CLIENT_KEY,
@@ -251,7 +251,7 @@
                 if (!error && response.statusCode == 200) {
                   //parsing the json response from RR cloud
                   body = JSON.parse(body);
-                  console.log("powerranger");
+
                   console.log(GLOBAL_PRODUCT_NAME);
                   if (body.placements[0].numFound == "0") {
                     sendTextMessage(GLOBAL_ID, "Oops, looks like we don’t have anything that fits that description.")
@@ -264,7 +264,7 @@
                       }
               // The Description is:  "descriptive string"
             } else {
-            console.log('Pavan api.ai, ERROR 3');
+            console.log(' api.ai, ERROR 3');
             }
           });
       }
@@ -272,7 +272,7 @@
           console.log('****More on Filters is coming soon****');
           if (req.body.result.contexts[0].parameters['more-filter-options'] == "more colors") {
             GLOBAL_PRODUCT_COLOR_COUNT += 8;
-            console.log("Mystic preist");
+
             facetFilter(GLOBAL_ID, "jjjjjjjj_c");
           }
       }
@@ -343,7 +343,7 @@
                 if (!error && response.statusCode == 200) {
                   //parsing the json response from RR cloud
                   body = JSON.parse(body);
-                  console.log("powerranger");
+
                   console.log(GLOBAL_PRODUCT_NAME);
                   console.log(requesting);
                   if (body.placements[0].numFound == "0") {
@@ -357,7 +357,7 @@
                       }
               // The Description is:  "descriptive string"
             } else {
-            console.log('Pavan api.ai, ERROR 4');
+            console.log(' api.ai, ERROR 4');
             }
           });
       }
@@ -388,7 +388,7 @@
                     }
                   // The Description is:  "descriptive string"
                 } else {
-                console.log('Pavan api.ai, ERROR 5');
+                console.log(' api.ai, ERROR 5');
                 }
               });
       }
@@ -408,7 +408,7 @@
       var message = event.message;
       GLOBAL_ID = senderID;
       seenMessage(senderID);
-      console.log("Received message for urmila user %d and page %d at %d with message:",
+      console.log("Received message for user %d and page %d at %d with message:",
         senderID, recipientID, timeOfMessage);
       console.log(JSON.stringify(message));
       function dummyForReturn(){
@@ -447,7 +447,7 @@
               var rr_array =[];
               // var findMyStart = Math.floor((Math.random() * 30) + 1).toString();
               rr_array.length = 0;
-              console.log("nagma");
+
               var req_url = process.env.FIND_URL;
               var apiKey= process.env.API_KEY,
                     apiClientKey= process.env.API_CLIENT_KEY,
@@ -464,7 +464,7 @@
                       if (!error && response.statusCode == 200) {
                         //parsing the json response from RR cloud
                         body = JSON.parse(body);
-                        console.log("powerranger");
+
                         console.log(GLOBAL_PRODUCT_NAME);
                         if (body.placements[0].numFound == "0") {
                           sendTextMessage(GLOBAL_ID, "Oops, looks like we don’t have anything that fits that description.")
@@ -477,7 +477,7 @@
                             }
                     // The Description is:  "descriptive string"
                   } else {
-                  console.log('Pavan api.ai, ERROR 6');
+                  console.log(' api.ai, ERROR 6');
                   }
                 });
             }
@@ -534,7 +534,7 @@
             });
 
             apiai.on('error', (error) => {
-              console.log("Pikachu" + error);
+              console.log(error);
             });
 
             apiai.end();
@@ -554,7 +554,7 @@
       // button for Structured Messages.
       var payload = event.postback.payload;
 
-      console.log("Received postback talpa for user %d and page %d with payload '%s' " +
+      console.log("Received postback for user %d and page %d with payload '%s' " +
         "at %d", senderID, recipientID, payload, timeOfPostback);
 
       // When a postback is called, we'll send a message back to the sender to
@@ -594,7 +594,7 @@
             });
 
             apiai.on('error', (error) => {
-              console.log("Pikachu" + error);
+              console.log(error);
             });
 
             apiai.end();
@@ -631,7 +631,7 @@
           callRrApi(senderID, payload);
         }
         else if (payload.match(/(fav)/g)) {
-          console.log("Anushka %s", payload);
+          console.log("%s", payload);
           callRrFavApi(senderID, payload);
         }
         else if (payload == 'fvList') {
@@ -704,7 +704,7 @@
           if (!error && response.statusCode == 200) {
             //parsing the json response from RR cloud
             body = JSON.parse(body);
-            console.log("powerranger tori");
+
             facet_array = body.placements[0].facets[0].values;
             if (facet_array.length == 1) {
                 sendFacetOptions(sid, facet_array.slice(0,8), pName, facet);
@@ -716,7 +716,7 @@
                   // setTimeout(function() { v2_restartAnytime(GLOBAL_ID) }, 7000);
         // The Description is:  "descriptive string"
         } else {
-            console.log('Pavan api.ai, ERROR 7');
+            console.log(' api.ai, ERROR 7');
         }
     });
 
@@ -765,7 +765,7 @@
         }
       }
 
-      console.log("dabang");
+
       console.log(recipientId);
 
       var messageData = {
@@ -1171,7 +1171,7 @@
     function sendGenericMessage(recipientId, arrayHere) {
       console.log(recipientId);
 
-      console.log("fidget spinner");
+
       // console.log(arrayHere);
       if (arrayHere.length !== 0) {
 
@@ -1203,7 +1203,7 @@
          });
        }
       });
-      console.log("dabang");
+
       console.log(recipientId);
       var messageData = {
         messaging_type: 'RESPONSE',
@@ -1271,7 +1271,7 @@
               }]
         }
       );
-      console.log("shahrukh");
+
         var messageData = {
           messaging_type: 'RESPONSE',
           recipient: {
@@ -1324,7 +1324,7 @@
             }]
        });
     });
-    console.log("dabang");
+
       var messageData = {
         messaging_type: 'RESPONSE',
         recipient: {
@@ -1404,12 +1404,12 @@
                 //parsing the json response from RR cloud
                 body = JSON.parse(body);
                 if(body.status == "error"){
-                  console.log("nenu cheppala");
+
                 }
                 else {
 
                 if (queryString.match(/(favorite)/g)) {
-                  console.log("undertaker wwe");
+
                   rr_array = body.products;
                   sendGenericMessageForFavoriteItems(sid, rr_array);
                 }
@@ -1420,7 +1420,7 @@
                     // setTimeout(function() { v2_restartAnytime(sid) }, 7000);
                 // The Description is:  "descriptive string"
               } }else {
-                sendTextMessage(sid, 'Pavan, ERROR');
+                sendTextMessage(sid, 'ERROR');
               }
             });
           }
@@ -1445,14 +1445,14 @@
                             // setTimeout(function() { v2_restartAnytime(sid) }, 7000);
                       // The Description is:  "descriptive string"
                     } else {
-                      sendTextMessage(sid, 'Pavan, ERROR');
+                      sendTextMessage(sid, 'ERROR');
                     }
                   });
                 }
 
           //Block that calls RR api(add to favorites)
           function callRrFavApi(sid, queryString){
-            console.log("Favorite anushka called");
+            console.log("Favorite called");
             if (queryString.match(/(removeFav)/g)) {
               console.log("rr remove fav");
               var req_url = process.env.PROD_URL;
@@ -1464,7 +1464,7 @@
                     actionType: process.env.BY_FAV_ACTIONTYPE_NEUTRAL};
             }
             else {
-              console.log("jindabad");
+
               var req_url = process.env.PROD_URL;
               var queryParameters = { apiKey: process.env.BY_FAV_API_KEY,
                     u: process.env.USER_ID,
@@ -1481,7 +1481,7 @@
                 },
               method: 'GET',
               }, function (error, response, body) {
-                console.log("anushka inside function");
+                console.log(" inside function");
                     if (!error && response.statusCode == 200) {
                       if (queryString.match(/(removeFav)/g)) {
                         sendTextMessage(sid, "Item removed from your list");
@@ -1491,7 +1491,7 @@
                     }
                       // The Description is:  "descriptive string"
                     } else {
-                      sendTextMessage(sid, 'Anushka, ERROR');
+                      sendTextMessage(sid, 'ERROR');
                     }
                   });
                 }
@@ -1516,7 +1516,7 @@
                       // console.log(repos);
                       if ((typeof body.pref_product.LIKE) == "object") {
                          rr_array_temp = "favorite" + body.pref_product.LIKE.join("|");
-                         console.log("Rajinikanth");
+
                          callRrApi(sid, rr_array_temp);
                        }
                        else {
@@ -1532,7 +1532,7 @@
                   //   }, function (error, response, body) {
                   //         if (!error && response.statusCode == 200) {
                   //           body = JSON.parse(body);
-                  //           console.log("samantha4 inside function");
+
                   //         //  console.log((typeof body.pref_product.LIKE));
                   //           if ((typeof body.pref_product.LIKE) == "object") {
                   //             rr_array_temp = "favorite" + body.pref_product.LIKE.join("|");
@@ -1546,7 +1546,7 @@
                   //           // console.log('Google log start golden');
                   //           // console.log(body) // Print the google web page.
                   //           // console.log('Google log end golden');
-                  //           sendTextMessage(sid, 'Anushka, ERROR');
+
                   //         }
                   //       });
                       }
